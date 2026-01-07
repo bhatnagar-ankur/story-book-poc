@@ -1,0 +1,19 @@
+<div class="storybook-input-wrapper">
+    @if (label) {
+        <label>{{ label }}</label>
+    }
+      <input
+        type="text"
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        (input)="onInputChange($event)"
+        [ngClass]="classes"
+      />
+
+      @if (error) {
+  <span class="storybook-input-error">
+    {{ errorMessage }}
+  </span>
+}
+    </div>

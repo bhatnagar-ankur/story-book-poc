@@ -1,0 +1,66 @@
+.storybook-alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* ===== ICON ===== */
+.storybook-alert-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: white;
+}
+
+/* ===== CLOSE ICON ===== */
+.storybook-alert-close-icon{
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== TITLE ===== */
+.storybook-alert-title {
+    font-weight: 700;
+    line-height: normal;
+    margin-right: 0.5rem;
+}
+
+/* ===== VARIANTS (BACKGROUND) ===== */
+.storybook-alert--default {
+    background-color: #8bc0fd;
+}
+
+.storybook-alert--subtle {
+    background-color: #7bdb91;
+}
+
+/* ===== TYPES (TEXT + ICON COLOR) ===== */
+.storybook-alert--info {
+    color: #000000;
+}
+
+.storybook-alert--success {
+    color: #000000;
+}
+
+.storybook-alert--warning {
+    background-color: #ffc107;
+    color: #000000;
+}
+
+.storybook-alert--error {
+    background-color: rgb(229, 62, 62);
+    color: #ffffff;
+}

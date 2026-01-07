@@ -1,0 +1,16 @@
+<div class="storybook-alert" [ngClass]="[
+        'storybook-alert--' + variant,
+        'storybook-alert--' + type
+      ]" role="alert">
+    <img [src]="iconPath" class="storybook-alert-icon" alt="{{ type }} icon" />
+    @if (title) {
+    <strong class="storybook-alert-title">
+        {{ title }}
+    </strong>
+    }
+
+    <span class="storybook-alert-message">
+        {{ message }}
+    </span>
+    <app-close-button class="storybook-alert-close-icon"></app-close-button>
+</div>

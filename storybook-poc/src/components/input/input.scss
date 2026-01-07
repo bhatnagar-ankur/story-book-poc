@@ -1,0 +1,33 @@
+.storybook-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.storybook-input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.storybook-input:focus {
+  border-color: #555ab9;
+}
+
+.storybook-input--error {
+  border-color: #dc3545;
+}
+
+.storybook-input--disabled {
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+}
+
+.storybook-input-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+}

@@ -1,0 +1,17 @@
+<nav class="breadcrumb">
+  @for (item of items; track item; let last = $last)
+  {
+    <span class="breadcrumb-item" [class.active]="last">
+      {{ item }}
+    </span>
+    @if (!last) {
+      @if (separator === 'triangle') {
+        <span class="breadcrumb-separator triangle"></span>
+      } @else {
+        <span class="breadcrumb-separator">
+          {{ separator }}
+        </span>
+      }
+    }
+  }
+</nav>

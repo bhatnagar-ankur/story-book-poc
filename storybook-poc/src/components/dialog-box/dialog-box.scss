@@ -1,0 +1,74 @@
+/* ----- Backdrop ----- */
+.dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* ----- Dialog Container ----- */
+.dialog {
+    width: 20rem;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.08);
+
+    animation: dialog-enter 160ms ease-out;
+}
+
+/* ----- Header ----- */
+.dialog-header {
+    display: flex;
+    padding: 1rem 1.5rem;
+    position: relative;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ----- Body ----- */
+.dialog-body {
+    padding: 0.5rem 1.5rem;
+    flex: 1 1 0%;
+}
+
+.dialog-message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+/* ----- Footer ----- */
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+}
+
+/* ----- Animation ----- */
+@keyframes dialog-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
