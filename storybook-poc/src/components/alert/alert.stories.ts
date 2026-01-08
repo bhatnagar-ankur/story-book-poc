@@ -8,15 +8,17 @@ const meta: Meta<Alert> = {
   component: Alert,
   tags: ['autodocs'],
   argTypes: {
-    type: {
-      control: 'select',
-      options: ['success', 'info', 'warning', 'error'],
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'subtle', 'warning', 'error'],
-    },
-  },
+  type: { control: 'inline-radio', options: ['success','info','warning','error'] },
+  showIcon: { control: 'boolean' },
+  isClosable: { control: 'boolean' },
+  autoClose: { control: 'boolean' },
+  autoCloseDelay: { control: 'number' },
+  size: { control: 'inline-radio', options:['sm','md','lg'] },
+  backgroundColor: { control: 'color' },
+  textColor: { control: 'color' },
+  rounded: { control: 'inline-radio', options:['none','md','lg','pill'] },
+  elevation: { control: 'inline-radio', options: [0, 1, 2] },
+  animation: { control: 'select', options:['fade','slide','scale'] },}
 };
 //#endregion
 
@@ -31,7 +33,6 @@ export const Default: Story = {
     title: 'Info',
     message: 'This is a default alert',
     type: 'info',
-    variant: 'default',
   },
 };
 
@@ -41,7 +42,6 @@ export const Subtle: Story = {
     title: 'Success',
     message: 'This is a success alert',
     type: 'success',
-    variant: 'subtle',
   },
 };
 
@@ -51,7 +51,6 @@ export const Warning: Story = {
     title: 'This is Warning alert!',
     message: 'This will issue warning for your browser.',
     type: 'warning',
-    variant: 'warning',
   },
 };
 
@@ -61,7 +60,15 @@ export const Error: Story = {
     title: 'This is a Error alert!',
     message: 'This may cause drawback for your browser.',
     type: 'error',
-    variant: 'error',
   },
+};
+
+/** Auto Close Alert Story */
+export const AutoClose: Story = {
+  args: {
+    message: 'This will disappear',
+    autoClose: true,
+    autoCloseDelay: 3000
+  }
 };
 //#endregion

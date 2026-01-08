@@ -1,16 +1,42 @@
-<div class="storybook-alert" [ngClass]="[
-        'storybook-alert--' + variant,
-        'storybook-alert--' + type
-      ]" role="alert">
-    <img [src]="iconPath" class="storybook-alert-icon" alt="{{ type }} icon" />
-    @if (title) {
-    <strong class="storybook-alert-title">
-        {{ title }}
-    </strong>
-    }
+@if(isVisible()) {
+<div
+[class.hide]="!isVisible()"
+  class="storybook-alert"
+  role="alert"
+  aria-live="assertive"
+  [ngClass]="[
+    'storybook-alert--' + type,
+    'storybook-size-' + size,
+    'storybook-rounded-' + rounded,
+    'storybook-shadow-' + elevation,
+    'storybook-anim-' + animation
+  ]"
+  [style.background-color]="backgroundColor"
+  [style.color]="textColor">
 
-    <span class="storybook-alert-message">
-        {{ message }}
-    </span>
-    <app-close-button class="storybook-alert-close-icon"></app-close-button>
+  @if(showIcon) {
+  <img
+       [src]="iconPath" 
+       class="storybook-alert-icon"
+       alt="{{ type }} icon" />
+  }
+
+  @if (title) {
+    <strong class="storybook-alert-title">
+      {{ title }}
+    </strong>
+  }
+
+  <span class="storybook-alert-message">
+    {{ message }}
+  </span>
+
+  @if(isClosable) {
+  <app-close-button
+          class="storybook-alert-close-icon"
+          aria-label="Close alert"
+          (click)="close()">
+  </app-close-button>
+}
 </div>
+}

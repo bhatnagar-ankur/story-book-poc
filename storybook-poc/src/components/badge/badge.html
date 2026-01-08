@@ -1,6 +1,37 @@
-<span class="badge" [ngClass]="[
+@if (show) {
+<span
+  class="badge"
+  role="status"
+  [attr.aria-label]="ariaLabel"
+  [ngClass]="[
     'badge--' + color,
-    'badge--' + appearance
-  ]">
-  <ng-content></ng-content>
+    'badge--' + appearance,
+    'badge-size--' + size,
+    'badge-shape--' + shape,
+    'badge-anim--' + animation,
+    isClickable ? 'badge--clickable' : '',
+    disabled ? 'badge--disabled' : ''
+  ]"
+  [style.background-color]="backgroundColor"
+  [style.color]="textColor"
+  [style.border-color]="borderColor"
+  (click)="handleClick()"
+  [attr.tabindex]="isClickable && !disabled ? 0 : -1"
+>
+  @if(icon && iconPosition === 'start') {
+    <img class="badge__icon" [src]="icon" alt="" aria-hidden="true" />
+  }
+
+  @if(label) {
+    <span class="badge__label">{{ label }}</span>
+  }
+
+  @if(!label === null) {
+    <ng-content></ng-content>
+  }
+
+  @if(icon && iconPosition === 'end') {
+    <img class="badge__icon" [src]="icon" alt="" aria-hidden="true" />
+  }
 </span>
+}

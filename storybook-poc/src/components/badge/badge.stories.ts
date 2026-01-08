@@ -1,8 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Badge } from './badge';
-
-/* -----STATIC DATA ----- */
-const COLORS = ['gray', 'green', 'red', 'orange', 'purple', 'teal'] as const;
+import { Badge, BadgeConfig } from './badge';
 
 //#region Story Metadata
 /* ----- Story Metadata ----- */
@@ -11,12 +8,28 @@ const meta: Meta<Badge> = {
   component: Badge,
   tags: ['autodocs'],
   argTypes: {
-    color: { control: 'select', options: COLORS },
-    appearance: { control: 'select', options: ['solid', 'subtle', 'outline'] },
+    appearance: { control:'select',options:['solid','subtle','outline'] },
+    badges: { control: 'object' },   // 👈 now works like ITEMS
+    size: { control:'select',options:['sm','md','lg'] },
+    shape: { control:'inline-radio',options:['rounded','pill','square'] },
+    icon: { control:'text' },
+    iconPosition: { control:'select',options:['start','end'] },
+    show: { control:'boolean' },
+    isClickable: { control:'boolean' },
+    disabled: { control:'boolean' },
+    backgroundColor: { control:'color' },
+    textColor: { control:'color' },
+    borderColor: { control:'color' },
+    animation: { control:'select',options:['none','pop','pulse','fade'] },
+    onClick: { action:'clicked badge' },
   },
   args: {
-    color: 'gray',
-    appearance: 'solid',
+    appearance:'solid',
+    size:'md',
+    shape:'rounded',
+    show:true,
+    isClickable:true,
+    icon:'/icons/success.svg',
   },
 };
 //#endregion
@@ -24,61 +37,72 @@ const meta: Meta<Badge> = {
 /* ----- Story Type ----- */
 export default meta;
 type Story = StoryObj<Badge>;
-
-//#region Reusable Renderer
-/* ----- Reusable Renderer ----- */
-const renderBadges = (args: any) => ({
-  props: {
-    ...args,
-    colors: COLORS,
-  },
-  template: `
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      @for (color of colors; track color) {
-        <app-badge
-          [color]="color"
-          [appearance]="appearance"
-        >
-          {{ color.toUpperCase() }}
-        </app-badge>
-      }
-    </div>
-  `,
-});
-//#endregion
-
 //#region Story Definitions
-/* ----- Default Story ----- */
+/* ----- SINGLE BADGE ----- */
 export const Default: Story = {
   args: {
-    color: 'green',
-    appearance: 'solid',
+    color:'green',
+    label:'New',
+  },
+};
+
+/* ----- MULTIPLE (just like Breadcrumb ITEMS) ----- */
+export const SolidBadges: Story = {
+  args: {
+    badges: [
+      { color:'green', label:'New' },
+      { color:'red', label:'Hot' },
+      { color:'teal', label:'Live' },
+    ] satisfies BadgeConfig[]
   },
   render: (args) => ({
     props: args,
     template: `
-      <app-badge [color]="color" [appearance]="appearance">
-        {{ color.toUpperCase() }}
-      </app-badge>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        @for (b of badges; track b) {
+          <app-badge
+            [color]="b.color"
+            [label]="b.label"
+            [icon]="b.icon"
+            [show]="b.show ?? show"
+            [appearance]="appearance"
+            [size]="size"
+            [shape]="shape"
+            [iconPosition]="iconPosition"
+            [isClickable]="isClickable"
+            [disabled]="disabled"
+            [backgroundColor]="backgroundColor"
+            [textColor]="textColor"
+            [borderColor]="borderColor"
+            [animation]="animation"
+          ></app-badge>
+        }
+      </div>
     `,
   }),
 };
-
-/* ----- Solid Badges Story ----- */
-export const SolidBadges: Story = {
-  args: { appearance: 'solid' },
-  render: (args) => renderBadges(args),
-};
-
 /* ----- Subtle Badges Story ----- */
 export const SubtleBadges: Story = {
-  args: { appearance: 'subtle' },
-  render: (args) => renderBadges(args),
+  args: {
+    appearance:'subtle',
+    badges: [
+      { color:'purple', label:'Beta' },
+      { color:'orange', label:'Try' },
+      { color:'green', label:'Live' },
+    ],
+  },
+  render: SolidBadges.render,
 };
-
 /* ----- Outline Badges Story ----- */
 export const OutlineBadges: Story = {
-  args: { appearance: 'outline' },
-  render: (args) => renderBadges(args),
+  args: {
+    appearance:'outline',
+    badges: [
+      { color:'gray', label:'Draft' },
+      { color:'red', label:'Alert' },
+      { color:'teal', label:'Sync' },
+    ],
+  },
+  render: SolidBadges.render,
 };
 //#endregion
