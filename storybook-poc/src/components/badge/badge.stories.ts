@@ -9,7 +9,7 @@ const meta: Meta<Badge> = {
   tags: ['autodocs'],
   argTypes: {
     appearance: { control:'select',options:['solid','subtle','outline'] },
-    badges: { control: 'object' },   // 👈 now works like ITEMS
+    badges: { control: 'object' },
     size: { control:'select',options:['sm','md','lg'] },
     shape: { control:'inline-radio',options:['rounded','pill','square'] },
     icon: { control:'text' },

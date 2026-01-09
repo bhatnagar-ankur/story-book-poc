@@ -2,8 +2,6 @@
 .storybook-button {
   display: inline-block;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
   font-weight: 700;
   line-height: 1;
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -49,3 +47,11 @@
   padding: 12px 24px;
   font-size: 16px;
 }
+
+/* Shapes */
+.storybook-button--rounded{border-radius:6px;}
+.storybook-button--pill{border-radius:999px;}
+.storybook-button--square{border-radius:3px;}
+
+/* Disabled */
+.storybook-button--disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}

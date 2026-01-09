@@ -18,12 +18,18 @@ const meta: Meta<ButtonComponent> = {
       control: 'select',
       options: ['small', 'medium', 'large'],
     },
+    shape: { control:'inline-radio',options:['rounded','pill','square'] },
+    backgroundColor: { control:'color' },
+    textColor: { control:'color' },
+    borderColor: { control:'color' },
+    disabled: { control:'boolean' },
     onClick: { action: 'clicked' },
   },
 
   args: {
     variant: 'primary',
     size: 'medium',
+    shape: 'rounded',
     onClick: fn(),
   },
 
@@ -33,6 +39,11 @@ const meta: Meta<ButtonComponent> = {
       <storybook-button
         [variant]="variant"
         [size]="size"
+        [shape]="shape"
+        [backgroundColor]="backgroundColor"
+        [textColor]="textColor"
+        [borderColor]="borderColor"
+        [disabled]="disabled"
         (onClick)="onClick($event)"
       >
         Button
