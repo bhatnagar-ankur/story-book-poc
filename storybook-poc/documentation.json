@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "BadgeConfig",
-            "id": "interface-BadgeConfig-d9611ad47354071c9c1e36cbb5bd6ffc937518967595363e62a9569b7070001f8912764e92aa21ea5fb220d9ade5cbd23a41a1ea27fda7b0e38ae63010c13b93",
+            "id": "interface-BadgeConfig-4b1fd82585d8350dc3cebf8ead98e13978971fcc69a951c5a869f1fcfacefd9d57c7791281c19e111ca9421361223fc937e143882700239b4bc747bb89a99cce",
             "file": "src/components/badge/badge.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\ntype BadgeColor = 'gray' | 'green' | 'red' | 'orange' | 'purple' | 'teal';\r\ntype BadgeAppearance = 'solid' | 'subtle' | 'outline';\r\ntype BadgeSize = 'sm' | 'md' | 'lg';\r\ntype BadgeShape = 'rounded' | 'pill' | 'square';\r\ntype IconPosition = 'start' | 'end';\r\ntype AnimationType = 'none' | 'pop' | 'pulse' | 'fade';\r\nexport interface BadgeConfig {\r\n  color: string;\r\n  label?: string;\r\n  icon?: string;\r\n  show?: boolean;\r\n}\r\n@Component({\r\n  selector: 'app-badge',\r\n  imports: [CommonModule],\r\n  templateUrl: './badge.html',\r\n  styleUrl: './badge.scss',\r\n})\r\nexport class Badge {\r\n  @Input() color: BadgeColor = 'gray';\r\n  @Input() appearance: BadgeAppearance = 'solid';\r\n  @Input() label?: string;\r\n\r\n  @Input() size: BadgeSize = 'md';\r\n  @Input() shape: BadgeShape = 'rounded';\r\n\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: IconPosition = 'start';\r\n  @Input() badges?: BadgeConfig[];\r\n\r\n  @Input() show = true;\r\n  @Input() isClickable = false;\r\n  @Input() disabled = false;\r\n\r\n  @Input() backgroundColor?: string;\r\n  @Input() textColor?: string;\r\n  @Input() borderColor?: string;\r\n\r\n  @Input() animation: AnimationType = 'none';\r\n\r\n  @Output() onClick = new EventEmitter<void>();\r\n\r\n  public get ariaLabel() {\r\n    const parts = [];\r\n    if (this.label) parts.push(this.label);\r\n    return parts.join(' ') || 'badge';\r\n  }\r\n\r\n  public handleClick(): void {\r\n    if (this.isClickable && !this.disabled) {\r\n      this.onClick.emit();\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n//#region Types\r\n/* ----- Badge Types ----- */\r\ntype BadgeColor = 'gray' | 'green' | 'red' | 'orange' | 'purple' | 'teal';\r\ntype BadgeAppearance = 'solid' | 'subtle' | 'outline';\r\ntype BadgeSize = 'sm' | 'md' | 'lg';\r\ntype BadgeShape = 'rounded' | 'pill' | 'square';\r\ntype IconPosition = 'start' | 'end';\r\ntype AnimationType = 'none' | 'pop' | 'pulse' | 'fade';\r\n//#endregion\r\n\r\n//#region Badge Config Interface\r\n/* ----- Badge Config Interface ----- */\r\nexport interface BadgeConfig {\r\n  color: string;\r\n  label?: string;\r\n  icon?: string;\r\n  show?: boolean;\r\n}\r\n//#endregion\r\n@Component({\r\n  selector: 'app-badge',\r\n  imports: [CommonModule],\r\n  templateUrl: './badge.html',\r\n  styleUrl: './badge.scss',\r\n})\r\nexport class Badge {\r\n  //#region Inputs and Outputs\r\n  /* ----- Inputs and Outputs ----- */\r\n  @Input() color: BadgeColor = 'gray';\r\n  @Input() appearance: BadgeAppearance = 'solid';\r\n  @Input() label?: string;\r\n  @Input() size: BadgeSize = 'md';\r\n  @Input() shape: BadgeShape = 'rounded';\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: IconPosition = 'start';\r\n  @Input() badges?: BadgeConfig[];\r\n  @Input() show = true;\r\n  @Input() isClickable = false;\r\n  @Input() disabled = false;\r\n  @Input() backgroundColor?: string;\r\n  @Input() textColor?: string;\r\n  @Input() borderColor?: string;\r\n  @Input() animation: AnimationType = 'none';\r\n  @Output() onClick = new EventEmitter<void>();\r\n  //#endregion\r\n\r\n  //#region Methods\r\n  /** Compute ARIA label for accessibility */\r\n  public get ariaLabel() {\r\n    const parts = [];\r\n    if (this.label) parts.push(this.label);\r\n    return parts.join(' ') || 'badge';\r\n  }\r\n\r\n  /** Handle badge click event */\r\n  public handleClick(): void {\r\n    if (this.isClickable && !this.disabled) {\r\n      this.onClick.emit();\r\n    }\r\n  }\r\n  //#endregion\r\n}\r\n",
             "properties": [
                 {
                     "name": "color",
@@ -18,7 +18,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 11
+                    "line": 17
                 },
                 {
                     "name": "icon",
@@ -28,7 +28,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 13
+                    "line": 19
                 },
                 {
                     "name": "label",
@@ -38,7 +38,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 12
+                    "line": 18
                 },
                 {
                     "name": "show",
@@ -48,7 +48,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 14
+                    "line": 20
                 }
             ],
             "indexSignatures": [],
@@ -536,7 +536,7 @@
         },
         {
             "name": "Badge",
-            "id": "component-Badge-d9611ad47354071c9c1e36cbb5bd6ffc937518967595363e62a9569b7070001f8912764e92aa21ea5fb220d9ade5cbd23a41a1ea27fda7b0e38ae63010c13b93",
+            "id": "component-Badge-4b1fd82585d8350dc3cebf8ead98e13978971fcc69a951c5a869f1fcfacefd9d57c7791281c19e111ca9421361223fc937e143882700239b4bc747bb89a99cce",
             "file": "src/components/badge/badge.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -557,7 +557,7 @@
                     "defaultValue": "'none'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 42,
+                    "line": 46,
                     "type": "AnimationType",
                     "decorators": []
                 },
@@ -566,7 +566,7 @@
                     "defaultValue": "'solid'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 33,
                     "type": "BadgeAppearance",
                     "decorators": []
                 },
@@ -574,7 +574,7 @@
                     "name": "backgroundColor",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 43,
                     "type": "string",
                     "decorators": []
                 },
@@ -582,7 +582,7 @@
                     "name": "badges",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 39,
                     "type": "BadgeConfig[]",
                     "decorators": []
                 },
@@ -590,7 +590,7 @@
                     "name": "borderColor",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 45,
                     "type": "string",
                     "decorators": []
                 },
@@ -599,7 +599,7 @@
                     "defaultValue": "'gray'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 32,
                     "type": "BadgeColor",
                     "decorators": []
                 },
@@ -608,7 +608,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 42,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -616,7 +616,7 @@
                     "name": "icon",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 30,
+                    "line": 37,
                     "type": "string",
                     "decorators": []
                 },
@@ -625,7 +625,7 @@
                     "defaultValue": "'start'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 38,
                     "type": "IconPosition",
                     "decorators": []
                 },
@@ -634,7 +634,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
+                    "line": 41,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -642,7 +642,7 @@
                     "name": "label",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 34,
                     "type": "string",
                     "decorators": []
                 },
@@ -651,7 +651,7 @@
                     "defaultValue": "'rounded'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
+                    "line": 36,
                     "type": "BadgeShape",
                     "decorators": []
                 },
@@ -660,7 +660,7 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -669,7 +669,7 @@
                     "defaultValue": "'md'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 35,
                     "type": "BadgeSize",
                     "decorators": []
                 },
@@ -677,7 +677,7 @@
                     "name": "textColor",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 44,
                     "type": "string",
                     "decorators": []
                 }
@@ -688,7 +688,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 47,
                     "type": "EventEmitter"
                 }
             ],
@@ -700,9 +700,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\nHandle badge click event",
+                    "description": "<p>Handle badge click event</p>\n",
                     "modifierKind": [
                         125
                     ]
@@ -722,7 +724,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\ntype BadgeColor = 'gray' | 'green' | 'red' | 'orange' | 'purple' | 'teal';\r\ntype BadgeAppearance = 'solid' | 'subtle' | 'outline';\r\ntype BadgeSize = 'sm' | 'md' | 'lg';\r\ntype BadgeShape = 'rounded' | 'pill' | 'square';\r\ntype IconPosition = 'start' | 'end';\r\ntype AnimationType = 'none' | 'pop' | 'pulse' | 'fade';\r\nexport interface BadgeConfig {\r\n  color: string;\r\n  label?: string;\r\n  icon?: string;\r\n  show?: boolean;\r\n}\r\n@Component({\r\n  selector: 'app-badge',\r\n  imports: [CommonModule],\r\n  templateUrl: './badge.html',\r\n  styleUrl: './badge.scss',\r\n})\r\nexport class Badge {\r\n  @Input() color: BadgeColor = 'gray';\r\n  @Input() appearance: BadgeAppearance = 'solid';\r\n  @Input() label?: string;\r\n\r\n  @Input() size: BadgeSize = 'md';\r\n  @Input() shape: BadgeShape = 'rounded';\r\n\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: IconPosition = 'start';\r\n  @Input() badges?: BadgeConfig[];\r\n\r\n  @Input() show = true;\r\n  @Input() isClickable = false;\r\n  @Input() disabled = false;\r\n\r\n  @Input() backgroundColor?: string;\r\n  @Input() textColor?: string;\r\n  @Input() borderColor?: string;\r\n\r\n  @Input() animation: AnimationType = 'none';\r\n\r\n  @Output() onClick = new EventEmitter<void>();\r\n\r\n  public get ariaLabel() {\r\n    const parts = [];\r\n    if (this.label) parts.push(this.label);\r\n    return parts.join(' ') || 'badge';\r\n  }\r\n\r\n  public handleClick(): void {\r\n    if (this.isClickable && !this.disabled) {\r\n      this.onClick.emit();\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n//#region Types\r\n/* ----- Badge Types ----- */\r\ntype BadgeColor = 'gray' | 'green' | 'red' | 'orange' | 'purple' | 'teal';\r\ntype BadgeAppearance = 'solid' | 'subtle' | 'outline';\r\ntype BadgeSize = 'sm' | 'md' | 'lg';\r\ntype BadgeShape = 'rounded' | 'pill' | 'square';\r\ntype IconPosition = 'start' | 'end';\r\ntype AnimationType = 'none' | 'pop' | 'pulse' | 'fade';\r\n//#endregion\r\n\r\n//#region Badge Config Interface\r\n/* ----- Badge Config Interface ----- */\r\nexport interface BadgeConfig {\r\n  color: string;\r\n  label?: string;\r\n  icon?: string;\r\n  show?: boolean;\r\n}\r\n//#endregion\r\n@Component({\r\n  selector: 'app-badge',\r\n  imports: [CommonModule],\r\n  templateUrl: './badge.html',\r\n  styleUrl: './badge.scss',\r\n})\r\nexport class Badge {\r\n  //#region Inputs and Outputs\r\n  /* ----- Inputs and Outputs ----- */\r\n  @Input() color: BadgeColor = 'gray';\r\n  @Input() appearance: BadgeAppearance = 'solid';\r\n  @Input() label?: string;\r\n  @Input() size: BadgeSize = 'md';\r\n  @Input() shape: BadgeShape = 'rounded';\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: IconPosition = 'start';\r\n  @Input() badges?: BadgeConfig[];\r\n  @Input() show = true;\r\n  @Input() isClickable = false;\r\n  @Input() disabled = false;\r\n  @Input() backgroundColor?: string;\r\n  @Input() textColor?: string;\r\n  @Input() borderColor?: string;\r\n  @Input() animation: AnimationType = 'none';\r\n  @Output() onClick = new EventEmitter<void>();\r\n  //#endregion\r\n\r\n  //#region Methods\r\n  /** Compute ARIA label for accessibility */\r\n  public get ariaLabel() {\r\n    const parts = [];\r\n    if (this.label) parts.push(this.label);\r\n    return parts.join(' ') || 'badge';\r\n  }\r\n\r\n  /** Handle badge click event */\r\n  public handleClick(): void {\r\n    if (this.isClickable && !this.disabled) {\r\n      this.onClick.emit();\r\n    }\r\n  }\r\n  //#endregion\r\n}\r\n",
             "styleUrl": "./badge.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -735,7 +737,9 @@
                         "name": "ariaLabel",
                         "type": "",
                         "returnType": "",
-                        "line": 46
+                        "line": 52,
+                        "rawdescription": "\nCompute ARIA label for accessibility",
+                        "description": "<p>Compute ARIA label for accessibility</p>\n"
                     }
                 }
             },
@@ -743,7 +747,7 @@
         },
         {
             "name": "Breadcrumb",
-            "id": "component-Breadcrumb-2c00e5a82ee5d7bc550d54deb46f1c82308304443a553ef3f92f37430c1876c1b743795a48ec067a32d4523dea031883f0b30aeade0dde0c1091e23a9861d0a9",
+            "id": "component-Breadcrumb-51982f492f396fa14fb90b1d74bb9d29edec15eaa9a5df5904fb2900be7a190d21940dfe1285bf796f920b098585f29e6735f501e7c6d52b38964a59ec2d0009",
             "file": "src/components/breadcrumb/breadcrumb.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -760,12 +764,30 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "activeLast",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
                     "name": "items",
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
-                    "type": "string[]",
+                    "line": 14,
+                    "type": "Array<string | literal type>",
+                    "decorators": []
+                },
+                {
+                    "name": "maxItems",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "number | null",
                     "decorators": []
                 },
                 {
@@ -773,30 +795,119 @@
                     "defaultValue": "'/'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
-                    "type": "\"/\" | \">\" | \">>\" | \"triangle\"",
+                    "line": 15,
+                    "type": "\"/\" | \">\" | \">>\" | \"triangle\" | \"none\"",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "\"sm\" | \"md\" | \"lg\"",
+                    "decorators": []
+                },
+                {
+                    "name": "truncate",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "boolean",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "outputsClass": [
+                {
+                    "name": "expand",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "itemClick",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "expanded",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onExpand",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nExpand collapsed crumbs",
+                    "description": "<p>Expand collapsed crumbs</p>\n"
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": false,
-            "imports": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-breadcrumb',\r\n  imports: [],\r\n  templateUrl: './breadcrumb.html',\r\n  styleUrl: './breadcrumb.scss',\r\n})\r\nexport class Breadcrumb {\r\n  //#region Inputs\r\n  /* ----- Inputs ----- */\r\n  @Input() items: string[] = [];\r\n  @Input() separator: '/' | '>' | '>>' | 'triangle' = '/';\r\n  //#endregion\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-breadcrumb',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './breadcrumb.html',\r\n  styleUrl: './breadcrumb.scss',\r\n})\r\nexport class Breadcrumb {\r\n  //#region Inputs\r\n  /* ----- Inputs ----- */\r\n  @Input() items:  Array<string | { label: string; url?: string; icon?: string }> = [];\r\n  @Input() separator: '/' | '>' | '>>' | 'triangle' | 'none' = '/';\r\n  @Input() size: 'sm' | 'md' | 'lg' = 'md';\r\n  @Input() maxItems: number | null = null;\r\n  @Input() activeLast: boolean = false;\r\n  @Input() truncate: boolean = false;\r\n  \r\n\r\n  @Output() itemClick = new EventEmitter<string>();\r\n  @Output() expand = new EventEmitter<void>();\r\n  //#endregion\r\n  expanded = false;\r\n   /** Normalize string items to objects */\r\n  get normalizedItems() {\r\n    return this.items.map((item) =>\r\n      typeof item === 'string' ? { label: item } : item\r\n    );\r\n  }\r\n\r\n  /** Items visible before expansion */\r\n  get visibleItems() {\r\n    const arr = this.normalizedItems;\r\n    if (!this.maxItems || this.expanded || arr.length <= this.maxItems) {\r\n      return arr;\r\n    }\r\n    return [arr[0], { label: '…' }, arr[arr.length - 1]];\r\n  }\r\n\r\n  /** Expand collapsed crumbs */\r\n  onExpand() {\r\n    this.expanded = true;\r\n    this.expand.emit();\r\n  }\r\n}\r\n",
             "styleUrl": "./breadcrumb.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"breadcrumb\">\r\n  @for (item of items; track item; let last = $last)\r\n  {\r\n    <span class=\"breadcrumb-item\" [class.active]=\"last\">\r\n      {{ item }}\r\n    </span>\r\n    @if (!last) {\r\n      @if (separator === 'triangle') {\r\n        <span class=\"breadcrumb-separator triangle\"></span>\r\n      } @else {\r\n        <span class=\"breadcrumb-separator\">\r\n          {{ separator }}\r\n        </span>\r\n      }\r\n    }\r\n  }\r\n</nav>"
+            "accessors": {
+                "normalizedItems": {
+                    "name": "normalizedItems",
+                    "getSignature": {
+                        "name": "normalizedItems",
+                        "type": "",
+                        "returnType": "",
+                        "line": 27,
+                        "rawdescription": "\nNormalize string items to objects",
+                        "description": "<p>Normalize string items to objects</p>\n"
+                    }
+                },
+                "visibleItems": {
+                    "name": "visibleItems",
+                    "getSignature": {
+                        "name": "visibleItems",
+                        "type": "",
+                        "returnType": "",
+                        "line": 34,
+                        "rawdescription": "\nItems visible before expansion",
+                        "description": "<p>Items visible before expansion</p>\n"
+                    }
+                }
+            },
+            "templateData": "<nav\r\n  class=\"breadcrumb\"\r\n  aria-label=\"breadcrumb\"\r\n  [ngClass]=\"size\"\r\n>\r\n  @for (item of visibleItems; track item.label; let last = $last) {\r\n    \r\n    @if (item.label === '…' && !expanded) {\r\n      <span\r\n        class=\"breadcrumb-item expand\"\r\n        role=\"button\"\r\n        (click)=\"onExpand()\"\r\n      >\r\n        …\r\n      </span>\r\n    } @else {\r\n      <span\r\n        class=\"breadcrumb-item\"\r\n        [class.active]=\"last\"\r\n        [class.clickable]=\"!last || activeLast\"\r\n        [class.truncate]=\"truncate\"\r\n        tabindex=\"0\"\r\n        (click)=\"!last || activeLast ? itemClick.emit(item.label) : null\"\r\n        [attr.aria-current]=\"last ? 'page' : null\"\r\n      >\r\n        {{ item.label }}\r\n      </span>\r\n    }\r\n\r\n    @if (!last && separator !== 'none') {\r\n      @if (separator !== 'triangle') {\r\n        <span class=\"breadcrumb-separator\" aria-hidden=\"true\">\r\n          {{ separator }}\r\n        </span>\r\n      } @else {\r\n        <span class=\"breadcrumb-separator triangle\" aria-hidden=\"true\"></span>\r\n      }\r\n    }\r\n\r\n  }\r\n</nav>"
         },
         {
             "name": "ButtonComponent",
@@ -1776,8 +1887,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "Badge",
-                "coveragePercent": 0,
-                "coverageCount": "0/18",
+                "coveragePercent": 5,
+                "coverageCount": "1/18",
                 "status": "low"
             },
             {
@@ -1854,8 +1965,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "Breadcrumb",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
                 "status": "low"
             },
             {

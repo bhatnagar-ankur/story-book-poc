@@ -1,20 +1,24 @@
-/*----- MAIN CONTAINER -----*/
 .breadcrumb {
   display: flex;
   align-items: center;
-  justify-content: center; 
-  gap: 12px;
-
-  font-size: 14px;
+  gap: 8px;
   color: #374151;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.sm { font-size: 12px; gap: 6px; }
+  &.md { font-size: 14px; gap: 10px; }
+  &.lg { font-size: 16px; gap: 14px; }
 }
 
 .breadcrumb-item {
-  color: #374151;
   cursor: pointer;
+  color: #374151;
 }
 
-.breadcrumb-item:hover {
+.breadcrumb-item.clickable:hover {
   text-decoration: underline;
 }
 
@@ -22,6 +26,18 @@
   font-weight: 600;
   cursor: default;
   text-decoration: none;
+}
+
+.breadcrumb-item.truncate {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumb-item.expand {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .breadcrumb-separator {

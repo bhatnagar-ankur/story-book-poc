@@ -1,16 +1,39 @@
-<nav class="breadcrumb">
-  @for (item of items; track item; let last = $last)
-  {
-    <span class="breadcrumb-item" [class.active]="last">
-      {{ item }}
-    </span>
-    @if (!last) {
-      @if (separator === 'triangle') {
-        <span class="breadcrumb-separator triangle"></span>
-      } @else {
-        <span class="breadcrumb-separator">
+<nav
+  class="breadcrumb"
+  aria-label="breadcrumb"
+  [ngClass]="size"
+>
+  @for (item of visibleItems; track item.label; let last = $last) {
+    
+    @if (item.label === '…' && !expanded) {
+      <span
+        class="breadcrumb-item expand"
+        role="button"
+        (click)="onExpand()"
+      >
+        …
+      </span>
+    } @else {
+      <span
+        class="breadcrumb-item"
+        [class.active]="last"
+        [class.clickable]="!last || activeLast"
+        [class.truncate]="truncate"
+        tabindex="0"
+        (click)="!last || activeLast ? itemClick.emit(item.label) : null"
+        [attr.aria-current]="last ? 'page' : null"
+      >
+        {{ item.label }}
+      </span>
+    }
+
+    @if (!last && separator !== 'none') {
+      @if (separator !== 'triangle') {
+        <span class="breadcrumb-separator" aria-hidden="true">
           {{ separator }}
         </span>
+      } @else {
+        <span class="breadcrumb-separator triangle" aria-hidden="true"></span>
       }
     }
   }

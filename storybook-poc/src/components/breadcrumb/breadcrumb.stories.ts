@@ -7,6 +7,7 @@ const meta: Meta<Breadcrumb> = {
   title: 'Example/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs'],
+  render: (args) => ({ props: args }),
 };
 //#endregion
 
@@ -51,6 +52,23 @@ export const Triangle: Story = {
   args: {
     items: ITEMS,
     separator: 'triangle',
+  },
+};
+
+/* ----- Maximum Items Story ----- */
+export const MaxItems: Story = {
+  args: {
+    items: ['Home', 'Products', 'Shoes', 'Men', 'Boots'],
+    maxItems: 3,
+    separator: '/',
+  },
+};
+
+/* ----- Truncate Story ----- */
+export const Truncate: Story = {
+  args: {
+    items: ['A very long breadcrumb', 'Another long name', 'End'],
+    truncate: true,
   },
 };
 //#endregion
