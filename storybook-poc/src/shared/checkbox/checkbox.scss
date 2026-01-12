@@ -1,0 +1,50 @@
+$checkbox-black: #212529;
+$checkbox-color: #FFFFFF;
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-family: "Myriad Pro";
+    position: relative;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.checkbox-container .checkbox-input {
+    appearance: none;
+    margin: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid $checkbox-black;
+    border-radius: 3px;
+    background-color: $checkbox-color;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.checkbox-container .checkbox-input:checked+.checkmark {
+    background: url('/assets/icons/check.svg') no-repeat center;
+    background-size: 18px 18px;
+    border-color: transparent;
+}
+
+.checkbox-container .checkbox-input:indeterminate+.checkmark {
+    background: url('/assets/icons/partial.svg') no-repeat center;
+    background-color: $checkbox-black;
+    background-size: 18px 18px;
+}
+
+.label-text {
+    font-size: 14px;
+    color: $checkbox-black;
+}

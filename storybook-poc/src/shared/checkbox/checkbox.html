@@ -1,0 +1,8 @@
+<label class="checkbox-container">
+    <input class="checkbox-input" type="checkbox" [checked]="checked" [indeterminate]="indeterminate" />
+    <span class="checkmark"></span>
+
+    @if(label) {
+    <span class="label-text">{{ label }}</span>
+    }
+</label>
