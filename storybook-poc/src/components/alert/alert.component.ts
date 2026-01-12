@@ -69,7 +69,7 @@ export class Alert {
   //#region Methods
   /** Get the icon path based on alert type */
   public get iconPath(): string {
-    return `/icons/${this.type}.svg`;
+    return `assets/icons/${this.type}.svg`;
   }
 
   /** Start the auto-close timer */

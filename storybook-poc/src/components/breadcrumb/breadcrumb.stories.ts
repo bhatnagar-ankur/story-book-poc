@@ -58,7 +58,7 @@ export const Triangle: Story = {
 /* ----- Maximum Items Story ----- */
 export const MaxItems: Story = {
   args: {
-    items: ['Home', 'Products', 'Shoes', 'Men', 'Boots'],
+    items: ['Home', 'Products', 'Shoes', 'Men', 'Boots', 'Current', 'Details'],
     maxItems: 3,
     separator: '/',
   },

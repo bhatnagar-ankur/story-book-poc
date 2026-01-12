@@ -68,9 +68,9 @@
 .badge--disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}
 
 /* Animations */
-.badge-anim--pop{animation:pop .25s ease!important;}
-.badge-anim--pulse{animation:pulse .8s infinite ease-in-out!important;}
-.badge-anim--fade{animation:fade .3s ease!important;}
+.badge-anim--pop{animation:pop .25s ease;}
+.badge-anim--pulse{animation:pulse .8s infinite ease-in-out;}
+.badge-anim--fade{animation:fade .3s ease;}
 
 @keyframes pop{from{transform:scale(.8);}to{transform:scale(1);}}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}

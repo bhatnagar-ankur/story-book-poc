@@ -7,9 +7,11 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/addon-a11y",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    '@storybook/addon-essentials',
+    'storybook-addon-pseudo-states',
   ],
   "framework": "@storybook/angular",
-  staticDirs: ["../src/stories/assets"],
+  staticDirs: ["../src/assets"],
 };
 export default config;

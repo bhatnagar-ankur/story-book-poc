@@ -32,10 +32,27 @@ export class Breadcrumb {
   /** Items visible before expansion */
   public get visibleItems() {
     const arr = this.normalizedItems;
+
+    // If no max or expanded or total <= max, show all
     if (!this.maxItems || this.expanded || arr.length <= this.maxItems) {
       return arr;
     }
-    return [arr[0], { label: '…' }, arr[arr.length - 1]];
+
+    const visible = [];
+
+    // Always take first item
+    visible.push(arr[0]);
+
+    // Number of middle items to show minus ends
+    const remainingSlots = this.maxItems - 2; 
+    // Take next N items from the start
+    const middle = arr.slice(1, 1 + remainingSlots);
+    visible.push(...middle);
+    // Add ellipsis
+    visible.push({ label: '…' });
+    // Add last item
+    visible.push(arr[arr.length - 1]);
+    return visible;
   }
 
   /** Expand collapsed crumbs */

@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 //#region Types
 /* ----- Button Types ----- */
@@ -11,7 +14,7 @@ type ButtonShape = 'rounded' | 'square' | 'pill';
 @Component({
   selector: 'storybook-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatCardModule,MatFormFieldModule,MatInputModule],
   templateUrl: './button.html',
   styleUrls: ['./button.css'],
 })

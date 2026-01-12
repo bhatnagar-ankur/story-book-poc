@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Alert } from '../components/alert/alert.component';
+import { Badge } from '../components/badge/badge';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,Alert,Badge],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
