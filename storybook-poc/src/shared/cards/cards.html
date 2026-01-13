@@ -1,0 +1,85 @@
+<div class="card" [ngClass]="variant">
+
+  @if (variant === 'promo') {
+    <div class="promo-left">
+      <img [src]="image" alt="" />
+    </div>
+
+    <div class="promo-right">
+      <h2>{{ title }}</h2>
+      <p>{{ description }}</p>
+      <a class="cta">LEARN MORE</a>
+    </div>
+  }
+
+  @else if (variant === 'product') {
+    <div class="product-image">
+      @if (tag) {
+        <span class="tag">{{ tag }}</span>
+      }
+
+      <img [src]="image" alt="" />
+
+      <span class="nav-arrow left"></span>
+      <span class="nav-arrow right"></span>
+
+      <div class="image-progress"></div>
+    </div>
+
+    @if (colors.length > 0) {
+      <div class="swatch-row">
+        @for (c of colors; track c) {
+          <div class="swatch">
+            <img [src]="c" />
+          </div>
+        }
+      </div>
+    }
+
+    <div class="product-info">
+      <div class="product-title-row">
+        <h3>{{ title }}</h3>
+        <span class="wishlist"></span>
+      </div>
+
+      <p>{{ description }}</p>
+
+      <div class="price-row">
+        <span class="price">₹{{ price }}</span>
+        @if (strikePrice) {
+          <span class="strike">₹{{ strikePrice }}</span>
+        }
+        <span class="offer">{{ offer }}</span>
+      </div>
+
+      @if (moreOffers) {
+        <div class="extra-offers">+{{ moreOffers }} Offers</div>
+      }
+    </div>
+  }
+
+  @else if (variant === 'stats') {
+    <div class="stats-left">
+      <img [src]="image" />
+    </div>
+
+    <div class="stats-divider"></div>
+
+    <div class="stats-right">
+      <h3>{{ title }}</h3>
+
+      <div class="stats-row">
+        <span>Completed</span>
+        <span>{{ completed }}</span>
+      </div>
+
+      <div class="stats-row">
+        <span>Incomplete</span>
+        <span>{{ incomplete }}</span>
+      </div>
+
+      <div class="stats-cta">UPDATE DETAILS</div>
+    </div>
+  }
+
+</div>
