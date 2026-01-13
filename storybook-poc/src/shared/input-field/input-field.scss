@@ -1,0 +1,96 @@
+$field-border: #6C757D;
+$field-disabled-color: #6C757D;
+$field-active: #183650;
+$field-disabled: #F4F4F4;
+$field-error: #CC3629;
+$input-background: #FFFFFF;
+$readonly-color: #212529;
+$field-disabled-border:#D9D9D9;
+
+.field-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+/* Input box */
+.field-input {
+    width: 508px;
+    padding: 14px 14px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1.5px solid $field-border;
+    outline: none;
+    background: $input-background;
+    transition: all 0.2s ease;
+}
+
+/* Label */
+.field-label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: $field-border;
+    background: $input-background;
+    padding: 0 4px;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+/* Star */
+.field-label span {
+    color: $field-error;
+}
+
+/* FLOATING UP */
+.field-wrapper.focused .field-label {
+    top: 0px;
+    font-size: 11px;
+}
+
+/* FOCUS STATES */
+.field-wrapper.focused .field-input {
+    border-color: $field-active;
+}
+
+/* DISABLED */
+.field-wrapper.disabled .field-input {
+    background: $field-disabled;
+    border-color: $field-disabled-border;
+    color: $field-disabled-color;
+    cursor: not-allowed;
+}
+
+.field-wrapper.disabled .field-label {
+    background: $field-disabled;
+}
+
+/* READONLY */
+.field-wrapper.readonly .field-input {
+    background: $input-background;
+    color: $readonly-color;
+    border: none;
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
+    cursor: default;
+}
+
+/* ERROR */
+.field-wrapper.error .field-input {
+    border-color: $field-error;
+}
+
+.field-wrapper.error.focused .field-input {
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
+}
+
+/* ERROR TEXT */
+.error-text {
+    font-size: 14px;
+    color: $field-error;
+    margin: 0 16px ;
+}

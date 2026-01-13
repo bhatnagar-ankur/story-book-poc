@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Buttons } from './buttons';
 
 const meta: Meta<Buttons> = {
-    title: 'Shared/Button',
+    title: 'Design System/Button',
     component: Buttons,
     tags: ['autodocs'],
     argTypes: {

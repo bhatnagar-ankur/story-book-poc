@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { RadioButton } from './radio-button';
 
 const meta: Meta<RadioButton> = {
-  title: 'Shared/Radio',
+  title: 'Design System/Radio',
   component: RadioButton,
   tags: ['autodocs'],
   argTypes: {

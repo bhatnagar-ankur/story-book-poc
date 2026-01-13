@@ -1,0 +1,59 @@
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { FormsModule } from '@angular/forms';
+import { InputField } from './input-field';
+
+const meta: Meta<InputField> = {
+  title: 'Design System/Input Field',
+  component: InputField,
+  tags: ['autodocs'],
+  decorators: [
+    moduleMetadata({
+      imports: [FormsModule],
+    }),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<InputField>;
+
+export const Default: Story = {
+  args: {
+    label: 'Country',
+    required: true,
+  },
+};
+
+export const WithValue: Story = {
+  args: {
+    label: 'Country',
+    value: 'India',
+    required: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Country',
+    value: 'India',
+    disabled: true,
+    required: true,
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    label: 'Country',
+    value: 'India',
+    required: true,
+    readonly: true,
+  },
+};
+
+export const ErrorState: Story = {
+  args: {
+    label: 'Country',
+    value: 'India',
+    error: 'Error message goes here',
+    required: true,
+  },
+};

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Checkbox } from './checkbox';
 
 const meta: Meta<Checkbox> = {
-    title: 'Shared/Checkbox',
+    title: 'Design System/Checkbox',
     component: Checkbox,
     tags: ['autodocs'],
     argTypes: {

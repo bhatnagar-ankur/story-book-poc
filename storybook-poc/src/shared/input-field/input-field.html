@@ -1,0 +1,21 @@
+<div class="field-wrapper" [ngClass]="{
+        disabled: disabled,
+        error: !!error,
+        readonly: readonly,
+        focused: isFocused || value
+     }">
+
+    <label class="field-label">
+        {{ label }}
+        @if(required){
+        <span>*</span>
+        }
+    </label>
+
+    <input class="field-input" [(ngModel)]="value" [placeholder]="placeholder" [disabled]="disabled"
+        [readonly]="readonly" [required]="required" (focus)="isFocused = true" (blur)="isFocused = false" />
+
+    @if(error){
+    <p class="error-text">{{ error }}</p>
+    }
+</div>

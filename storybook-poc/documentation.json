@@ -1691,6 +1691,129 @@
             "templateData": "<div class=\"storybook-input-wrapper\">\r\n    @if (label) {\r\n        <label>{{ label }}</label>\r\n    }\r\n      <input\r\n        type=\"text\"\r\n        [value]=\"value\"\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        (input)=\"onInputChange($event)\"\r\n        [ngClass]=\"classes\"\r\n      />\r\n\r\n      @if (error) {\r\n  <span class=\"storybook-input-error\">\r\n    {{ errorMessage }}\r\n  </span>\r\n}\r\n    </div>"
         },
         {
+            "name": "InputField",
+            "id": "component-InputField-e8b2a9e95162e4b7f84a27063df301d4177c32885fd88611ad8600926a64e650e9be589d7dd4151013c3101fd5ee54b531ddeaf177217db2347753de7bc8308a",
+            "file": "src/shared/input-field/input-field.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-input-field",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./input-field.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "readonly",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "required",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isFocused",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'app-input-field',\r\n  imports: [\r\n    CommonModule,\r\n    FormsModule\r\n  ],\r\n  templateUrl: './input-field.html',\r\n  styleUrl: './input-field.scss',\r\n})\r\nexport class InputField {\r\n  @Input() label = '';\r\n  @Input() placeholder = '';\r\n  @Input() value = '';\r\n  @Input() disabled = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() readonly = false;\r\n\r\n  isFocused = false;\r\n}\r\n",
+            "styleUrl": "./input-field.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"field-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isFocused || value\r\n     }\">\r\n\r\n    <label class=\"field-label\">\r\n        {{ label }}\r\n        @if(required){\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <input class=\"field-input\" [(ngModel)]=\"value\" [placeholder]=\"placeholder\" [disabled]=\"disabled\" [readonly]=\"readonly\"\r\n        [required]=\"required\" (focus)=\"isFocused = true\" (blur)=\"isFocused = false\" />\r\n\r\n    @if(error){\r\n    <p class=\"error-text\">{{ error }}</p>\r\n    }\r\n</div>"
+        },
+        {
             "name": "PageComponent",
             "id": "component-PageComponent-33bd8ebd4a68986f135eaa91072518e55a4ebdd44a5e8a3dd044d37dd556bc7bfbf4a95cfddc4f397a3d622d03135cc56aa871cf7bfbb8ec47821c7b915e4801",
             "file": "src/components/page/page.component.ts",
@@ -1805,7 +1928,7 @@
         },
         {
             "name": "RadioButton",
-            "id": "component-RadioButton-9bd48f3ebcbefbb45cbd70d816763510ecc6174c7178ad8fd7d86487a3d1655d2f0f83825fecb40c2001574572378b95bd7305c35a62c6eff0bd54cd58c2a1ac",
+            "id": "component-RadioButton-03bdc5752a64971cc2c852437b51cedce2b10019b33801fe58ce6c390c7576a7c815c3d6c25ee1aeb77f5c5a6a257be9af122f43ef6fdc0fc245dd37314c119f",
             "file": "src/shared/radio-button/radio-button.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1825,7 +1948,9 @@
                     "name": "label",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "rawdescription": "\nInput of label(optional)",
+                    "description": "<p>Input of label(optional)</p>\n",
+                    "line": 13,
                     "type": "string",
                     "decorators": []
                 },
@@ -1834,7 +1959,9 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "rawdescription": "\nInput for Selected value",
+                    "description": "<p>Input for Selected value</p>\n",
+                    "line": 11,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -1851,13 +1978,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-radio-button',\r\n  imports: [],\r\n  templateUrl: './radio-button.html',\r\n  styleUrl: './radio-button.scss',\r\n})\r\nexport class RadioButton {\r\n  @Input() selected = false;\r\n  @Input() label?: string;\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-radio-button',\r\n  imports: [],\r\n  templateUrl: './radio-button.html',\r\n  styleUrl: './radio-button.scss',\r\n})\r\nexport class RadioButton {\r\n  /**Input for Selected value */\r\n  @Input() selected = false;\r\n  /**Input of label(optional) */\r\n  @Input() label?: string;\r\n}\r\n",
             "styleUrl": "./radio-button.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<label class=\"radio-container\">\r\n  <input\r\n    class=\"radio-input\"\r\n    type=\"radio\"\r\n    [checked]=\"selected\"\r\n  />\r\n  <span class=\"radio-mark\"></span>\r\n\r\n  @if(label) {\r\n    <span class=\"label-text\">{{ label }}</span>\r\n  }\r\n</label>\r\n"
+            "templateData": "<label class=\"radio-container\">\r\n    <input class=\"radio-input\" type=\"radio\" name=\"hi\" [checked]=\"selected\" />\r\n    <span class=\"radio-mark\"></span>\r\n\r\n    @if(label) {\r\n    <span class=\"label-text\">{{ label }}</span>\r\n    }\r\n</label>"
         }
     ],
     "modules": [],
@@ -2127,7 +2254,7 @@
         "children": []
     },
     "coverage": {
-        "count": 13,
+        "count": 15,
         "status": "low",
         "files": [
             {
@@ -2367,13 +2494,22 @@
                 "status": "low"
             },
             {
+                "filePath": "src/shared/input-field/input-field.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputField",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
                 "filePath": "src/shared/radio-button/radio-button.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "RadioButton",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
+                "coveragePercent": 66,
+                "coverageCount": "2/3",
+                "status": "good"
             }
         ]
     }
