@@ -1,0 +1,91 @@
+$toast-bg: #FFFFFF;
+$progress: #5BC2E7;
+$success: #4CBB17;
+$warning: #FF9E1B;
+$error: #CC3629;
+
+.toast {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background: $toast-bg;
+    width: 360px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    position: relative;
+    color: #212529;
+}
+
+.side {
+    width: 18px;
+    border-radius: 4px 0 0 4px;
+    flex-shrink: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 302px;
+    padding: 8px 8px 8px 0;
+    gap: 8px;
+}
+
+.content .content-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.content p {
+    display: flex;
+    margin: 0;
+    font-size: 14px;
+    gap: 9px;
+}
+
+/* Close button */
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+/* --- VARIANTS --- */
+.progress {
+    border-color: $progress;
+}
+
+.progress .side {
+    background: $progress;
+}
+
+.success {
+    border-color: $success;
+}
+
+.success .side {
+    background: $success;
+}
+
+.warning {
+    border-color: $warning;
+}
+
+.warning .side {
+    background: $warning;
+}
+
+.error {
+    border-color: $error;
+}
+
+.error .side {
+    background: $error;
+}
