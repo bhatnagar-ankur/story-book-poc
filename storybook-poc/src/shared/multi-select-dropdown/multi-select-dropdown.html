@@ -1,0 +1,61 @@
+<div class="ms-wrapper" [ngClass]="{
+        disabled: disabled,
+        error: !!error,
+        readonly: readonly,
+        focused: isOpen || selected.length > 0
+     }" (click)="toggleDropdown()">
+
+    <label class="ms-label">
+        {{ label }}
+        @if (required) {
+        <span>*</span>
+        }
+    </label>
+
+    <div class="ms-control">
+        <div class="selected-list">
+            @if(selected.length === 0 && focused) {
+            <span class="placeholder">{{ placeholder }}</span>
+            }
+            @if(selected.length === 1) {
+            <span class="single-value">{{ selected[0] }}</span>
+            }
+            @if (selected.length > 1) {
+            @for (item of selected | slice:0:2; track item) {
+            <div class="selected-item">
+                {{ item }}
+                <img src="/assets/icons/close-button.svg" />
+            </div>
+            }
+
+            @if (selected.length > 2) {
+            <div class="selected-item extra">
+                +{{ selected.length - 2 }}
+            </div>
+            }
+            }
+        </div>
+
+
+        <div class="arrow" [ngClass]="{open: isOpen}">
+            <img src="/assets/icons/dropdown.svg">
+        </div>
+    </div>
+</div>
+@if (error) {
+<p class="error-text">{{ error }}</p>
+}
+@if (isOpen && !disabled && !readonly) {
+<div class="dropdown">
+    @for (opt of options; track opt) {
+    <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
+        [ngClass]="{checked: selected.includes(opt)}">
+
+        <input type="checkbox" [checked]="selected.includes(opt)" />
+        <span>{{ opt }}</span>
+    </div>
+    } @empty {
+    <div class="no-options">No results found</div>
+    }
+</div>
+}
