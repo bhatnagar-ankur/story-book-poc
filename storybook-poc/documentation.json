@@ -1157,6 +1157,71 @@
             "templateData": "<button class=\"button-main-container\" [ngClass]=\"buttonType\" [disabled]=\"disabled\">\r\n    @if(icon) {\r\n    <span class=\"icon\" [style]=\"{'mask-image': 'url(' + icon + ')'}\"></span>\r\n    }\r\n    {{ label }}\r\n</button>"
         },
         {
+            "name": "Checkbox",
+            "id": "component-Checkbox-2c9728b37ca6b586f266ce25db487437a519fb061f4b04fcf924748e6fd77fc9104200cf78fcf6f56a124fab822076f85ee530520bb48122cce3b84c514385e7",
+            "file": "src/shared/checkbox/checkbox.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-checkbox",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./checkbox.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "indeterminate",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-checkbox',\r\n  imports: [],\r\n  templateUrl: './checkbox.html',\r\n  styleUrl: './checkbox.scss',\r\n})\r\nexport class Checkbox {\r\n  /* Enabling or disabling the checkbox */\r\n  @Input() checked = false;\r\n  /* Enabling or disabling partial status */\r\n  @Input() indeterminate = false;\r\n  /* Label for the checkbox (optional) */\r\n  @Input() label?: string;\r\n}\r\n",
+            "styleUrl": "./checkbox.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label class=\"checkbox-container\">\r\n    <input class=\"checkbox-input\" type=\"checkbox\" [checked]=\"checked\" [indeterminate]=\"indeterminate\" />\r\n    <span class=\"checkmark\"></span>\r\n\r\n    @if(label) {\r\n    <span class=\"label-text\">{{ label }}</span>\r\n    }\r\n</label>"
+        },
+        {
             "name": "CloseButton",
             "id": "component-CloseButton-16ef3f2753a86c219af0b8c52d1f28161478a3431c041807fb54c42453c2667627da77c5899291af400dd6db4d407160ea6de5a643b41b09537481761cbe5387",
             "file": "src/components/close-button/close-button.ts",
@@ -1737,6 +1802,62 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "RadioButton",
+            "id": "component-RadioButton-9bd48f3ebcbefbb45cbd70d816763510ecc6174c7178ad8fd7d86487a3d1655d2f0f83825fecb40c2001574572378b95bd7305c35a62c6eff0bd54cd58c2a1ac",
+            "file": "src/shared/radio-button/radio-button.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-radio-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./radio-button.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-radio-button',\r\n  imports: [],\r\n  templateUrl: './radio-button.html',\r\n  styleUrl: './radio-button.scss',\r\n})\r\nexport class RadioButton {\r\n  @Input() selected = false;\r\n  @Input() label?: string;\r\n}\r\n",
+            "styleUrl": "./radio-button.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label class=\"radio-container\">\r\n  <input\r\n    class=\"radio-input\"\r\n    type=\"radio\"\r\n    [checked]=\"selected\"\r\n  />\r\n  <span class=\"radio-mark\"></span>\r\n\r\n  @if(label) {\r\n    <span class=\"label-text\">{{ label }}</span>\r\n  }\r\n</label>\r\n"
         }
     ],
     "modules": [],
@@ -2006,7 +2127,7 @@
         "children": []
     },
     "coverage": {
-        "count": 15,
+        "count": 13,
         "status": "low",
         "files": [
             {
@@ -2235,6 +2356,24 @@
                 "coveragePercent": 80,
                 "coverageCount": "4/5",
                 "status": "very-good"
+            },
+            {
+                "filePath": "src/shared/checkbox/checkbox.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Checkbox",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/radio-button/radio-button.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RadioButton",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
             }
         ]
     }

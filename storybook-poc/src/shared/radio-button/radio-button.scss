@@ -1,0 +1,55 @@
+/* COLORS */
+$base-color: #212529;
+$radio-size: 18px;
+$background-color: #fff;
+
+/* MAIN CONTAINER */
+.radio-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    pointer-events: none;
+
+    /* HIDE REAL INPUT */
+    .radio-input {
+        appearance: none;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    /* UNSELECTED CIRCLE */
+    .radio-mark {
+        width: $radio-size;
+        height: $radio-size;
+        border-radius: 50%;
+        border: 2px solid $base-color;
+        background: $background-color;
+        box-sizing: border-box;
+        display: inline-block;
+        position: relative;
+        transition: border-color 0.15s ease;
+    }
+
+    .radio-input,
+    .radio-mark {
+        pointer-events: auto;
+    }
+
+    /* SELECTED */
+    .radio-input:checked+.radio-mark::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: $base-color;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+    }
+}
