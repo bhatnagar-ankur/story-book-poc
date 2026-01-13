@@ -1815,7 +1815,7 @@
         },
         {
             "name": "MultiSelectDropdown",
-            "id": "component-MultiSelectDropdown-32c404cfe6bf6eb5c0065dc1980251625e29f632ae61b69c58561c91f3058b612e8d24a4b1f822477c0e5d5439713092604dad115d281b8459415aa22654b2cc",
+            "id": "component-MultiSelectDropdown-f69f34a732d660183f526234b1346dd5eea0d528e84f1dc868e41741fc24515d7b2bcfbef884d73fe7cb764693a84626aa0c0b27587ceae133056ba37f9e66cd",
             "file": "src/shared/multi-select-dropdown/multi-select-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1868,6 +1868,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "placeholder",
+                    "defaultValue": "'Select Items'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "readonly",
                     "defaultValue": "false",
                     "deprecated": false,
@@ -1878,16 +1887,36 @@
                 },
                 {
                     "name": "required",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 16,
                     "type": "boolean",
                     "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string[]",
+                    "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "focused",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
                 {
                     "name": "isOpen",
                     "defaultValue": "false",
@@ -1897,18 +1926,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
-                },
-                {
-                    "name": "selected",
-                    "defaultValue": "[]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string[]",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 18
+                    "line": 20
                 }
             ],
             "methodsClass": [
@@ -1918,7 +1936,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 23,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1935,7 +1953,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1965,13 +1983,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n\r\n  selected: string[] = [];\r\n  isOpen = false;\r\n\r\n  toggleDropdown() {\r\n    if (!this.disabled && !this.readonly) this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  @Input() placeholder = 'Select Items';\r\n\r\n  isOpen = false;\r\n  focused = false;  \r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen; \r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n}\r\n",
             "styleUrl": "./multi-select-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"ms-wrapper\"\r\n     [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\"\r\n     (click)=\"toggleDropdown()\">\r\n\r\n  <label class=\"ms-label\">\r\n    {{ label }} <span *ngIf=\"required\">*</span>\r\n  </label>\r\n\r\n  <div class=\"ms-control\">\r\n    <div class=\"selected-list\">\r\n      <ng-container *ngFor=\"let item of selected | slice:0:2\">\r\n        <span class=\"tag\">{{ item }} ✕</span>\r\n      </ng-container>\r\n\r\n      <span *ngIf=\"selected.length > 2\" class=\"tag extra\">\r\n        +{{ selected.length - 2 }}\r\n      </span>\r\n    </div>\r\n\r\n    <div class=\"arrow\" [ngClass]=\"{open: isOpen}\">⌄</div>\r\n  </div>\r\n\r\n  <p class=\"error-text\" *ngIf=\"error\">{{ error }}</p>\r\n</div>\r\n\r\n<!-- DROPDOWN -->\r\n<div class=\"dropdown\" *ngIf=\"isOpen && !disabled && !readonly\">\r\n  <div class=\"option\"\r\n       *ngFor=\"let opt of options\"\r\n       (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n       [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n    <input type=\"checkbox\" [checked]=\"selected.includes(opt)\" />\r\n    <span>{{ opt }}</span>\r\n  </div>\r\n</div>\r\n"
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\" (click)=\"toggleDropdown()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && focused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\">\r\n                {{ item }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n\r\n        <div class=\"arrow\" [ngClass]=\"{open: isOpen}\">\r\n            <img src=\"/assets/icons/dropdown.svg\">\r\n        </div>\r\n    </div>\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n    <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n        <input type=\"checkbox\" [checked]=\"selected.includes(opt)\" />\r\n        <span>{{ opt }}</span>\r\n    </div>\r\n    } @empty {\r\n    <div class=\"no-options\">No results found</div>\r\n    }\r\n</div>\r\n}"
         },
         {
             "name": "PageComponent",
@@ -2668,7 +2686,7 @@
                 "linktype": "component",
                 "name": "MultiSelectDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {

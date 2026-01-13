@@ -2,9 +2,11 @@ $field-disabled-color: #6C757D;
 $field-active: #183650;
 $field-disabled: #F4F4F4;
 $field-error: #CC3629;
-$input-background: #FFFFFF;
+$input-background: #FFF;
 $readonly-color: #212529;
 $field-disabled-border: #D9D9D9;
+$option-badge: #007DBA;
+$option-hover: #00A3E0;
 
 .ms-wrapper {
     display: flex;
@@ -40,8 +42,6 @@ $field-disabled-border: #D9D9D9;
         flex: 1 0 0;
         border-radius: 4px;
         border: 1px solid rgba(24, 54, 80, 0.45);
-        background: #fff;
-        color: #3F4443;
         font-size: 16px;
 
         .selected-list {
@@ -51,16 +51,15 @@ $field-disabled-border: #D9D9D9;
 
             .placeholder {
                 font-size: 16px;
-                color: #6C757D;
+                color: $field-disabled-color;
                 opacity: .8;
             }
 
             .single-value {
                 font-size: 16px;
-                color: #3F4443;
+                color: $field-disabled-color;
                 padding-left: 4px;
             }
-
 
             .selected-item {
                 display: flex;
@@ -69,15 +68,15 @@ $field-disabled-border: #D9D9D9;
                 gap: 4px;
                 font-size: 16px;
                 border-radius: 21px;
-                border: 1px solid #D9D9D9;
-                background: #F4F4F4;
+                border: 1px solid $field-disabled-border;
+                background: $field-disabled;
                 color: $field-disabled-color;
 
                 &.extra {
                     height: 18px;
                     padding: 0 4px;
-                    color: #FFF;
-                    background: #007DBA;
+                    color: $input-background;
+                    background: $option-badge;
                 }
             }
         }
@@ -99,38 +98,52 @@ $field-disabled-border: #D9D9D9;
     margin: 0 16px;
 }
 
-/* STATES */
 .ms-wrapper.focused .ms-control {
     border-color: $field-active;
-    background-color: #FFF;
+    background-color: $input-background;
 }
 
 .ms-wrapper.focused .ms-label {
     top: -2px;
     font-size: 14px;
-    color: #6C757D;
+    color: $field-disabled-color;
 }
 
 /* DROPDOWN */
 .dropdown {
     margin-top: 2px;
-    border-radius: 0 0 6px 6px;
-    border: 1px solid rgba(24, 54, 80, 0.45);
-    background: #fff;
+    border-radius: 6px;
+    border: 1px solid $field-active;
+    width: 509px;
+    background: $input-background;
     max-height: 220px;
     overflow-y: auto;
 }
 
 .option {
     display: flex;
+    height: 48px;
+    padding: 0 16px;
     align-items: center;
-    gap: 6px;
-    padding: 10px;
-    cursor: pointer;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 6px 6px 0 0;
+    border-bottom: 1px solid rgba(24, 54, 80, 0.45);
+    background: $input-background;
+    color: $readonly-color;
+    cursor: url('/assets/icons/hand-cursor.svg') 4 0, pointer;
+}
 
-    .option:hover {
-        background-color: #1976d2;
-    }
+.multi-select-checkbox {
+    accent-color: $field-active;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: $option-hover;
+    border-radius: 6px;
 }
 
 .ms-wrapper.disabled .ms-control {
@@ -145,7 +158,7 @@ $field-disabled-border: #D9D9D9;
 }
 
 .ms-wrapper.readonly .ms-control {
-    background: #FFF;
+    background: $input-background;
     box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
     border: none;
 

@@ -22,7 +22,7 @@
             }
             @if (selected.length > 1) {
             @for (item of selected | slice:0:2; track item) {
-            <div class="selected-item">
+            <div class="selected-item" (click)="removeSelected(item); $event.stopPropagation()">
                 {{ item }}
                 <img src="/assets/icons/close-button.svg" />
             </div>
@@ -51,7 +51,7 @@
     <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
         [ngClass]="{checked: selected.includes(opt)}">
 
-        <input type="checkbox" [checked]="selected.includes(opt)" />
+        <app-checkbox [checked]="selected.includes(opt)" [label]="''"></app-checkbox>
         <span>{{ opt }}</span>
     </div>
     } @empty {
