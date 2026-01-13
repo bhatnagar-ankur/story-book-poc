@@ -1,0 +1,28 @@
+<div class="single-select-wrapper" (click)="toggleDropdown()">
+  <app-input-field
+    [label]="label"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [required]="required"
+    [error]="error"
+    [value]="selected || ''"
+  ></app-input-field>
+
+  <img class="dropdown-icon" src="assets/icons/dropdown.svg" [ngClass]="{open: isOpen}" />
+</div>
+
+@if (isOpen && !disabled && !readonly) {
+  <div class="dropdown">
+    @for (opt of options; track opt) {
+      <div
+        class="option"
+        (click)="select(opt); $event.stopPropagation()"
+        [ngClass]="{selected: selected === opt}"
+      >
+        <span>{{ opt }}</span>
+      </div>
+    } @empty {
+      <div class="no-options">No results found</div>
+    }
+  </div>
+}

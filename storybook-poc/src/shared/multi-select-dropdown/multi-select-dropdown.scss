@@ -143,7 +143,7 @@ $option-hover: #00A3E0;
 
 .option:hover {
     background-color: $option-hover;
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .ms-wrapper.disabled .ms-control {
