@@ -13,7 +13,6 @@ html {
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
     ),
-    typography: Roboto,
     density: 0,
   ));
 }
@@ -37,8 +36,9 @@ body {
 }
 /* You can add global styles to this file, and also import other style files */
 html, body {
-  font-family: 'Myriad Pro', Arial, sans-serif;
+  font-family: 'Myriad Pro', 'Montserrat', 'IBM Plex Sans', Arial, sans-serif;
 }
+
 
 @font-face {
   font-family: 'Myriad Pro';
@@ -80,4 +80,34 @@ html, body {
   src: url('/assets/fonts/myriad-pro/MyriadPro-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/static/Montserrat-Regular.ttf') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/static/Montserrat-Medium.ttf') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/static/Montserrat-Bold.ttf') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-Regular.ttf') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-Medium.ttf') format('woff2');
+  font-weight: 500;
 }

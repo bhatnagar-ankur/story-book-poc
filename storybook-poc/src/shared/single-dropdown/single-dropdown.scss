@@ -19,7 +19,6 @@ $option-hover: #00A3E0;
     transition: transform 0.2s;
     pointer-events: none;
   }
-
   .dropdown-icon.open {
     transform: translateY(-50%) rotate(180deg);
   }
@@ -45,6 +44,7 @@ $option-hover: #00A3E0;
 
 .option:hover {
   background-color: $option-hover;
+  color:$input-background;
 }
 
 .option.selected {
@@ -58,8 +58,3 @@ $option-hover: #00A3E0;
   color: $field-disabled-color;
 }
 
-.error-text {
-  color: $field-error;
-  font-size: 14px;
-  margin-top: 6px;
-}

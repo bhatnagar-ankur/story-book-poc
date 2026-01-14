@@ -23,37 +23,39 @@ export default meta;
 
 type Story = StoryObj<DialogBox>;
 
-const baseArgs = {
-    title: 'Modal Title',
-    message:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the',
-};
-
 /* ---- ONE STORY PER VARIANT ---- */
 export const Default: Story = {
     args: {
-        ...baseArgs,
+        title: 'Modal Title',
+        message:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the',
         variant: 'default',
     },
 };
 
 export const Error: Story = {
     args: {
-        ...baseArgs,
+        title: 'Error',
+        message:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the',
         variant: 'error',
     },
 };
 
 export const Information: Story = {
     args: {
-        ...baseArgs,
+        title: 'Information',
+        message:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the',
         variant: 'information',
     },
 };
 
 export const Warning: Story = {
     args: {
-        ...baseArgs,
+        title: 'Warning',
+        message:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the',
         variant: 'warning',
     },
 };

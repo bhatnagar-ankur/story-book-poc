@@ -26,15 +26,15 @@ export const Product: Story = {
     variant: 'product',
     tag: 'Bestseller',
     title: 'TOMMY HILFIGER',
-    description: 'Cropped Regular Blue...',
+    description: 'Cropped Regular Blue Sh...',
     price: 9375,
     strikePrice: 12500,
     offer: '20% OFF',
     image: '/assets/icons/product.png',
     colors: [
       '/assets/icons/product.png',
-      '/assets/icons/product.png',
-      '/assets/icons/product.png'
+      '/assets/icons/promo.svg',
+      '/assets/icons/stats.svg'
     ],
     moreOffers: 3
   }

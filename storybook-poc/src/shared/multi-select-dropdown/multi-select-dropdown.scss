@@ -116,8 +116,6 @@ $option-hover: #00A3E0;
     border: 1px solid $field-active;
     width: 509px;
     background: $input-background;
-    max-height: 220px;
-    overflow-y: auto;
 }
 
 .option {
@@ -143,6 +141,7 @@ $option-hover: #00A3E0;
 
 .option:hover {
     background-color: $option-hover;
+    color: $input-background;
     border-radius: 0;
 }
 

@@ -1157,6 +1157,216 @@
             "templateData": "<button class=\"button-main-container\" [ngClass]=\"buttonType\" [disabled]=\"disabled\">\r\n    @if(icon) {\r\n    <span class=\"icon\" [style]=\"{'mask-image': 'url(' + icon + ')'}\"></span>\r\n    }\r\n    {{ label }}\r\n</button>"
         },
         {
+            "name": "Cards",
+            "id": "component-Cards-9dac00ff3052f2d5e4af3b6b7dd7242b1f99cefd722dd647a2d203d6e44d1b0a74ff8c8b9819920073499b389ec28e88dfe56e274fcf3196fdf94095457a5fec",
+            "file": "src/shared/cards/cards.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-cards",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./cards.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "colors",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string[]",
+                    "decorators": []
+                },
+                {
+                    "name": "completed",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "description",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "image",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "incomplete",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "moreOffers",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "offer",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "price",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "strikePrice",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "tag",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'promo'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"promo\" | \"product\" | \"stats\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "showHover",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "showSwatches",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "wishlist",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "toggleSwatches",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleWishlist",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "Buttons"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Buttons } from '../buttons/buttons';\r\n\r\n@Component({\r\n  selector: 'app-cards',\r\n  imports: [CommonModule, Buttons],\r\n  templateUrl: './cards.html',\r\n  styleUrl: './cards.scss',\r\n})\r\nexport class Cards {\r\n  @Input() variant: 'promo' | 'product' | 'stats' = 'promo';\r\n  @Input() title = '';\r\n  @Input() description = '';\r\n  @Input() image = '';\r\n  @Input() tag = ''; \r\n  @Input() price = 0;\r\n  @Input() strikePrice = 0;\r\n  @Input() colors: string[] = [];\r\n  @Input() moreOffers = 0;\r\n  @Input() offer = '';\r\n  @Input() completed = '';\r\n  @Input() incomplete = '';\r\n\r\n  showHover = false;\r\n  showSwatches = false;\r\n  wishlist = false;\r\n\r\n  toggleWishlist() {\r\n    this.wishlist = !this.wishlist;\r\n  }\r\n\r\n  toggleSwatches() {\r\n    this.showSwatches = !this.showSwatches;\r\n  }\r\n}\r\n",
+            "styleUrl": "./cards.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"card\" [ngClass]=\"variant\">\r\n\r\n  @if (variant === 'promo') {\r\n  <div class=\"promo-left\">\r\n    <img [src]=\"image\" alt=\"\" />\r\n  </div>\r\n\r\n  <div class=\"promo-right\">\r\n    <h2>{{ title }}</h2>\r\n    <div class=\"promo-divider\"></div>\r\n    <p>{{ description }}</p>\r\n    <app-buttons class=\"cta\" label=\"LEARN MORE\" buttonType=\"text\" size=\"medium\">\r\n    </app-buttons>\r\n\r\n  </div>\r\n  }\r\n\r\n  @else if (variant === 'product') {\r\n  <div class=\"product-image\" (mouseover)=\"showHover = true\" (mouseleave)=\"showHover = false\">\r\n    <div class=\"image-progress\"></div>\r\n    @if (tag) {\r\n    <span class=\"tag\">{{ tag }}</span>\r\n    }\r\n\r\n    <img [src]=\"image\" alt=\"\" />\r\n\r\n    @if (showHover) {\r\n    <span class=\"nav-arrow left\"></span>\r\n    <span class=\"nav-arrow right\"></span>\r\n    }\r\n  </div>\r\n\r\n  <div class=\"color-link\" (click)=\"toggleSwatches()\">\r\n    <a>{{ colors.length }} Colours</a>\r\n  </div>\r\n\r\n  @if (showSwatches) {\r\n  <div class=\"swatch-row\">\r\n    @for (c of colors; track c) {\r\n    <div class=\"swatch\">\r\n      <img [src]=\"c\">\r\n    </div>\r\n    }\r\n  </div>\r\n  }\r\n\r\n  <div class=\"product-info\">\r\n    <div class=\"product-title-row\">\r\n      <h3>{{ title }}</h3>\r\n\r\n      <span class=\"wishlist\" [ngClass]=\"{ active: wishlist }\" (click)=\"toggleWishlist()\"></span>\r\n    </div>\r\n\r\n    <p>{{ description }}</p>\r\n\r\n    <div class=\"price-row\">\r\n      <span class=\"price\">₹{{ price }}</span>\r\n      @if (strikePrice) {\r\n      <span class=\"strike\">₹{{ strikePrice }}</span>\r\n      }\r\n      <span class=\"offer\">{{ offer }}</span>\r\n    </div>\r\n\r\n    @if (moreOffers) {\r\n    <div class=\"extra-offers\">+{{ moreOffers }} Offers</div>\r\n    }\r\n  </div>\r\n\r\n  }\r\n\r\n  @else if (variant === 'stats') {\r\n  <div class=\"stats-left\">\r\n    <img [src]=\"image\" />\r\n  </div>\r\n\r\n  <div class=\"stats-divider\"></div>\r\n\r\n  <div class=\"stats-right\">\r\n    <h3>{{ title }}</h3>\r\n\r\n    <div class=\"stats-row\">\r\n      <span>Completed</span>\r\n      <span>{{ completed }}</span>\r\n    </div>\r\n\r\n    <div class=\"stats-row\">\r\n      <span>Incomplete</span>\r\n      <span>{{ incomplete }}</span>\r\n    </div>\r\n\r\n    <app-buttons class=\"stats-cta\" label=\"UPDATE DETAILS\" buttonType=\"text\" size=\"medium\">\r\n    </app-buttons>\r\n  </div>\r\n  }\r\n</div>"
+        },
+        {
             "name": "Checkbox",
             "id": "component-Checkbox-2c9728b37ca6b586f266ce25db487437a519fb061f4b04fcf924748e6fd77fc9104200cf78fcf6f56a124fab822076f85ee530520bb48122cce3b84c514385e7",
             "file": "src/shared/checkbox/checkbox.ts",
@@ -1436,6 +1646,130 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<storybook-button variant=\"danger\" (click)=\"openDialog()\">\r\n  Delete\r\n</storybook-button>\r\n\r\n@if (isOpen) {\r\n<div class=\"dialog-backdrop\">\r\n  <div class=\"dialog\">\r\n\r\n    <div class=\"dialog-header\">\r\n      <h3 class=\"dialog-title\">{{title}}</h3>\r\n    </div>\r\n\r\n    <div class=\"dialog-body\">\r\n      <p class=\"dialog-message\">\r\n        {{message}} </p>\r\n    </div>\r\n\r\n    <div class=\"dialog-footer\">\r\n      <storybook-button variant=\"secondary\" (click)=\"closeDialog()\">\r\n        Cancel\r\n      </storybook-button>\r\n\r\n      <storybook-button variant=\"danger\" (click)=\"confirmDelete()\">\r\n        Delete\r\n      </storybook-button>\r\n    </div>\r\n  </div>\r\n</div>\r\n}"
+        },
+        {
+            "name": "DialogBox",
+            "id": "component-DialogBox-4916a7a4ddb95ee4dac6e67a7c10749451c6c49023c4658b7e136c5ed7f94fa9d1dcd32c4889aa5db7ebca06ed9f1aa78ae99f4ce4cf38cf83d2d1a6885237b1-1",
+            "file": "src/shared/dialog-box/dialog-box.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dialog-box",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./dialog-box.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"default\" | \"medium\" | \"large\"",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"default\" | \"error\" | \"information\" | \"warning\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "cancel",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "confirm",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "closeCancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "closeConfirm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "Buttons"
+                },
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\nimport { Buttons } from '../buttons/buttons';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-dialog-box',\r\n  imports: [Buttons, CommonModule],\r\n  templateUrl: './dialog-box.html',\r\n  styleUrl: './dialog-box.scss',\r\n})\r\nexport class DialogBox {\r\n  @Input() variant: 'default' | 'error' | 'information' | 'warning' = 'default';\r\n  @Input() size: 'default' | 'medium' | 'large' = 'default';\r\n  @Input() title: string = '';\r\n  @Input() message: string = '';\r\n\r\n  @Output() cancel = new EventEmitter<void>();\r\n  @Output() confirm = new EventEmitter<void>();\r\n\r\n  closeCancel() {\r\n    this.cancel.emit();\r\n  }\r\n\r\n  closeConfirm() {\r\n    this.confirm.emit();\r\n  }\r\n}\r\n",
+            "styleUrl": "./dialog-box.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "DialogBox-1",
+            "templateData": "<div class=\"dialog\" [ngClass]=\"[variant, size]\">\r\n    <div class=\"header\">\r\n        <span class=\"icon\"></span>\r\n        <h2>{{ title }}</h2>\r\n        <button class=\"close-btn\" (click)=\"closeCancel()\">\r\n            <img src=\"./assets/icons/close.svg\" class=\"close-img\" />\r\n        </button>\r\n    </div>\r\n\r\n    <div class=\"body\">\r\n        <p>{{ message }}</p>\r\n    </div>\r\n\r\n    <div class=\"footer\">\r\n        <app-buttons label=\"CANCEL\" buttonType=\"text\" (click)=\"closeCancel()\"></app-buttons>\r\n        <app-buttons label=\"Okay\" buttonType=\"primary\" (click)=\"closeConfirm()\"></app-buttons>\r\n    </div>\r\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -1815,7 +2149,7 @@
         },
         {
             "name": "MultiSelectDropdown",
-            "id": "component-MultiSelectDropdown-f69f34a732d660183f526234b1346dd5eea0d528e84f1dc868e41741fc24515d7b2bcfbef884d73fe7cb764693a84626aa0c0b27587ceae133056ba37f9e66cd",
+            "id": "component-MultiSelectDropdown-394d3573811d0922dc7ea0dcb3e81feb20fc7480d15cd44b2a52bbf1b278fc6ffbdb44d5e8e316095f3ec5c75d1ac72048f3aa609bd79fa8e0d99cecd594e05c",
             "file": "src/shared/multi-select-dropdown/multi-select-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1836,7 +2170,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 14,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1845,7 +2179,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 },
@@ -1854,7 +2188,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 },
@@ -1863,7 +2197,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 13,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -1872,7 +2206,7 @@
                     "defaultValue": "'Select Items'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -1881,7 +2215,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1890,7 +2224,7 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1899,7 +2233,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 18,
                     "type": "string[]",
                     "decorators": []
                 }
@@ -1915,7 +2249,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 22
                 },
                 {
                     "name": "isOpen",
@@ -1926,17 +2260,45 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 21
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "removeSelected",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "toggleDropdown",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1953,7 +2315,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1978,18 +2340,21 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "Checkbox"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  @Input() placeholder = 'Select Items';\r\n\r\n  isOpen = false;\r\n  focused = false;  \r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen; \r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  @Input() placeholder = 'Select Items';\r\n\r\n  isOpen = false;\r\n  focused = false;\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen;\r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n\r\n}\r\n",
             "styleUrl": "./multi-select-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\" (click)=\"toggleDropdown()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && focused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\">\r\n                {{ item }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n\r\n        <div class=\"arrow\" [ngClass]=\"{open: isOpen}\">\r\n            <img src=\"/assets/icons/dropdown.svg\">\r\n        </div>\r\n    </div>\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n    <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n        <input type=\"checkbox\" [checked]=\"selected.includes(opt)\" />\r\n        <span>{{ opt }}</span>\r\n    </div>\r\n    } @empty {\r\n    <div class=\"no-options\">No results found</div>\r\n    }\r\n</div>\r\n}"
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\" (click)=\"toggleDropdown()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && focused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\" (click)=\"removeSelected(item); $event.stopPropagation()\">\r\n                {{ item }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n\r\n        <div class=\"arrow\" [ngClass]=\"{open: isOpen}\">\r\n            <img src=\"/assets/icons/dropdown.svg\">\r\n        </div>\r\n    </div>\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n    <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n        <app-checkbox [checked]=\"selected.includes(opt)\" [label]=\"''\"></app-checkbox>\r\n        <span>{{ opt }}</span>\r\n    </div>\r\n    } @empty {\r\n    <div class=\"no-options\">No results found</div>\r\n    }\r\n</div>\r\n}"
         },
         {
             "name": "PageComponent",
@@ -2163,6 +2528,342 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<label class=\"radio-container\">\r\n    <input class=\"radio-input\" type=\"radio\" name=\"hi\" [checked]=\"selected\" />\r\n    <span class=\"radio-mark\"></span>\r\n\r\n    @if(label) {\r\n    <span class=\"label-text\">{{ label }}</span>\r\n    }\r\n</label>"
+        },
+        {
+            "name": "SingleDropdown",
+            "id": "component-SingleDropdown-81fb57f0c535e690ff43b2b9e8842883a834cfb8f39d691aeca61ed928df50bf129ef97a867bb7488be5e255e13b94dd9e4670db999296e820bcfb241bafefed",
+            "file": "src/shared/single-dropdown/single-dropdown.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-single-dropdown",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./single-dropdown.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string[]",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'Select Item'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "readonly",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "required",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "select",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleDropdown",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "InputField"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { InputField } from '../input-field/input-field';\r\n\r\n@Component({\r\n  selector: 'app-single-dropdown',\r\n  imports: [CommonModule, InputField],\r\n  templateUrl: './single-dropdown.html',\r\n  styleUrl: './single-dropdown.scss',\r\n})\r\nexport class SingleDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() selected: string | null = null;\r\n  @Input() placeholder = 'Select Item';\r\n\r\n  isOpen = false;\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  select(item: string) {\r\n    this.selected = item;\r\n    this.isOpen = false;\r\n  }\r\n}\r\n",
+            "styleUrl": "./single-dropdown.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"single-select-wrapper\">\r\n  <div class=\"input-area\" (click)=\"toggleDropdown()\">\r\n    <app-input-field\r\n      [label]=\"label\"\r\n      [disabled]=\"disabled\"\r\n      [readonly]=\"readonly\"\r\n      [required]=\"required\"\r\n      [error]=\"error\"\r\n      [value]=\"selected || ''\">\r\n    </app-input-field>\r\n\r\n    <img\r\n      class=\"dropdown-icon\"\r\n      src=\"assets/icons/dropdown.svg\"\r\n      [ngClass]=\"{ open: isOpen }\"\r\n    />\r\n  </div>\r\n</div>\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n  <div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n      <div\r\n        class=\"option\"\r\n        (click)=\"select(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{selected: selected === opt}\"\r\n      >\r\n        <span>{{ opt }}</span>\r\n      </div>\r\n    } @empty {\r\n      <div class=\"no-options\">No results found</div>\r\n    }\r\n  </div>\r\n}\r\n"
+        },
+        {
+            "name": "Toast",
+            "id": "component-Toast-4185e64f2d62155fbd2eeaa474112c0db5f00012a54477a5dc450b4c6718bc9d88919716057225a2d01db7e70303e62541701c9a4f79f8bc012a41a258a8327a",
+            "file": "src/shared/toast/toast.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-toast",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./toast.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "subTitle",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'progress'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "\"progress\" | \"success\" | \"warning\" | \"error\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "close",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-toast',\r\n  imports: [CommonModule],\r\n  templateUrl: './toast.html',\r\n  styleUrl: './toast.scss',\r\n})\r\nexport class Toast {\r\n  @Input() variant: 'progress' | 'success' | 'warning' | 'error' = 'progress';\r\n  @Input() title = '';\r\n  @Input() message = '';\r\n  @Input() subTitle = '';\r\n  @Output() close = new EventEmitter<void>();\r\n}\r\n",
+            "styleUrl": "./toast.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"toast\" [ngClass]=\"variant\">\r\n    <div class=\"side\"></div>\r\n\r\n    <div class=\"content\">\r\n        <strong class=\"content-title\">{{ title }}</strong>\r\n        <p><strong class=\"content-subtitle\">{{ subTitle }}</strong> {{ message }}</p>\r\n    </div>\r\n\r\n    <button class=\"close-btn\">\r\n        <img src=\"/assets/icons/close-button.svg\" />\r\n    </button>\r\n</div>"
+        },
+        {
+            "name": "Toggle",
+            "id": "component-Toggle-2e9af497ba23dd8c2c4e9dbd513c4a30c28f504616c68e86d577896484f991942f528cc252ec710e10412429e5dc1726388b4c0fafeff6c76b0fe3398aea4582",
+            "file": "src/shared/toggle/toggle.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-toggle",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./toggle.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "changed",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onToggle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-toggle',\r\n  imports: [],\r\n  templateUrl: './toggle.html',\r\n  styleUrl: './toggle.scss',\r\n})\r\nexport class Toggle {\r\n  @Input() checked = false;\r\n  @Input() disabled = false;\r\n\r\n  @Output() changed = new EventEmitter<boolean>();\r\n\r\n  onToggle() {\r\n    if (this.disabled) return;\r\n    this.checked = !this.checked;\r\n    this.changed.emit(this.checked);\r\n  }\r\n}\r\n",
+            "styleUrl": "./toggle.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label class=\"toggle-wrapper\">\r\n  <input\r\n    type=\"checkbox\"\r\n    class=\"toggle-input\"\r\n    [checked]=\"checked\"\r\n    [disabled]=\"disabled\"\r\n    (change)=\"onToggle()\"\r\n  />\r\n  <span class=\"toggle-slider\"></span>\r\n</label>\r\n"
         }
     ],
     "modules": [],
@@ -2432,7 +3133,7 @@
         "children": []
     },
     "coverage": {
-        "count": 15,
+        "count": 12,
         "status": "low",
         "files": [
             {
@@ -2663,12 +3364,30 @@
                 "status": "very-good"
             },
             {
+                "filePath": "src/shared/cards/cards.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Cards",
+                "coveragePercent": 0,
+                "coverageCount": "0/18",
+                "status": "low"
+            },
+            {
                 "filePath": "src/shared/checkbox/checkbox.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "Checkbox",
                 "coveragePercent": 0,
                 "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/dialog-box/dialog-box.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DialogBox",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -2686,7 +3405,7 @@
                 "linktype": "component",
                 "name": "MultiSelectDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
@@ -2697,6 +3416,33 @@
                 "coveragePercent": 66,
                 "coverageCount": "2/3",
                 "status": "good"
+            },
+            {
+                "filePath": "src/shared/single-dropdown/single-dropdown.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SingleDropdown",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/toast/toast.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Toast",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/toggle/toggle.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Toggle",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
             }
         ]
     }

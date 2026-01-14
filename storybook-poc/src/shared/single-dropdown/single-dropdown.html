@@ -1,14 +1,20 @@
-<div class="single-select-wrapper" (click)="toggleDropdown()">
-  <app-input-field
-    [label]="label"
-    [disabled]="disabled"
-    [readonly]="readonly"
-    [required]="required"
-    [error]="error"
-    [value]="selected || ''"
-  ></app-input-field>
+<div class="single-select-wrapper">
+  <div class="input-area" (click)="toggleDropdown()">
+    <app-input-field
+      [label]="label"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [required]="required"
+      [error]="error"
+      [value]="selected || ''">
+    </app-input-field>
 
-  <img class="dropdown-icon" src="assets/icons/dropdown.svg" [ngClass]="{open: isOpen}" />
+    <img
+      class="dropdown-icon"
+      src="assets/icons/dropdown.svg"
+      [ngClass]="{ open: isOpen }"
+    />
+  </div>
 </div>
 
 @if (isOpen && !disabled && !readonly) {
