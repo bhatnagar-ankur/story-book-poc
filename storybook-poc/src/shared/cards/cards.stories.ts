@@ -16,7 +16,7 @@ export const Promo: Story = {
   args: {
     variant: 'promo',
     title: 'Key Account Management',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet dolore magna aliqua.',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '/assets/icons/promo.svg'
   }
 };

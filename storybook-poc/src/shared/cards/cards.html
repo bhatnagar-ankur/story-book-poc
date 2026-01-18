@@ -6,10 +6,10 @@
   </div>
 
   <div class="promo-right">
-    <h2>{{ title }}</h2>
+    <h2 class="promo-title">{{ title }}</h2>
     <div class="promo-divider"></div>
     <p>{{ description }}</p>
-    <app-buttons class="cta" label="LEARN MORE" buttonType="text" size="medium">
+    <app-buttons class="cta" label="LEARN MORE" buttonType="text" size="medium" icon="assets/icons/dropdown.svg" iconPosition="right">
     </app-buttons>
 
   </div>
@@ -17,7 +17,9 @@
 
   @else if (variant === 'product') {
   <div class="product-image" (mouseover)="showHover = true" (mouseleave)="showHover = false">
-    <div class="image-progress"></div>
+    <div class="image-progress-bar">
+      <div class="image-progress-fill"></div>
+    </div>
     @if (tag) {
     <span class="tag">{{ tag }}</span>
     }
@@ -79,16 +81,16 @@
     <h3>{{ title }}</h3>
 
     <div class="stats-row">
-      <span>Completed</span>
-      <span>{{ completed }}</span>
+      <span class="completed">Completed</span>
+      <span class="completed-content">{{ completed }}</span>
     </div>
 
     <div class="stats-row">
-      <span>Incomplete</span>
-      <span>{{ incomplete }}</span>
+      <span class="completed">Incomplete</span>
+      <span class="completed-content">{{ incomplete }}</span>
     </div>
 
-    <app-buttons class="stats-cta" label="UPDATE DETAILS" buttonType="text" size="medium">
+    <app-buttons class="stats-cta" label="UPDATE DETAILS" buttonType="text" size="medium" icon="assets/icons/dropdown.svg" iconPosition="right">
     </app-buttons>
   </div>
   }

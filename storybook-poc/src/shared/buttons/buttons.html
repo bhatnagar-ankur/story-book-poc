@@ -1,6 +1,22 @@
-<button class="button-main-container" [ngClass]="buttonType" [disabled]="disabled">
-    @if(icon) {
-    <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}"></span>
-    }
-    {{ label }}
+<button
+  class="button-main-container"
+  [ngClass]="buttonType"
+  [disabled]="disabled">
+
+  @if (icon && iconPosition === 'left') {
+    <span
+      class="icon"
+      [style]="{'mask-image': 'url(' + icon + ')'}">
+    </span>
+  }
+
+  {{ label }}
+
+  @if (icon && iconPosition === 'right') {
+    <span
+      class="icon"
+      [style]="{'mask-image': 'url(' + icon + ')'}">
+    </span>
+  }
+
 </button>

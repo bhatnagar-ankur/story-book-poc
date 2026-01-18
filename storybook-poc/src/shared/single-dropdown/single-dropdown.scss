@@ -1,55 +1,130 @@
 $field-disabled-color: #6c757d;
 $field-active: #183650;
 $field-disabled: #f4f4f4;
-$input-background: #FFF;
 $field-error: #cc3629;
-$option-hover: #00A3E0;
+$input-background: #fff;
+$readonly-color: #212529;
+$field-disabled-border: #d9d9d9;
+$option-hover: #00a3e0;
 
-.single-select-wrapper {
-  position: relative;
+.ms-wrapper {
+  display: flex;
   width: 509px;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
 
-  .dropdown-icon {
+  .ms-label {
     position: absolute;
-    right: -4px;
     top: 50%;
-    width: 18px;
-    height: 18px;
+    left: 12px;
     transform: translateY(-50%);
-    transition: transform 0.2s;
-    pointer-events: none;
+    font-size: 16px;
+    padding: 0 4px;
+    color: $field-disabled-color;
+    transition: all 0.2s;
+    background-color: $input-background;
+
+    span {
+      color: $field-error;
+    }
   }
-  .dropdown-icon.open {
-    transform: translateY(-50%) rotate(180deg);
+
+  .ms-control {
+    display: flex;
+    height: 48px;
+    padding: 0 16px;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    border-radius: 4px;
+    border: 1px solid rgba(24, 54, 80, 0.45);
+
+    .selected-list {
+      display: flex;
+      align-items: center;
+
+      .placeholder {
+        font-size: 16px;
+        color: $field-disabled-color;
+        opacity: 0.8;
+      }
+
+      .single-value {
+        font-size: 16px;
+        color: $readonly-color;
+      }
+    }
+
+    .arrow {
+      margin-left: auto;
+      transition: transform 0.2s;
+
+      &.open {
+        transform: rotate(180deg);
+      }
+    }
   }
 }
 
+/* Floating label */
+.ms-wrapper.focused .ms-label {
+  top: -2px;
+  font-size: 14px;
+}
+
+.ms-wrapper.focused .ms-control {
+  border-color: $field-active;
+}
+
+/* States */
+.ms-wrapper.disabled .ms-control {
+  background: $field-disabled;
+  border: 1px solid $field-disabled-border;
+  cursor: not-allowed;
+}
+
+.ms-wrapper.readonly .ms-control {
+  background: $input-background;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.ms-wrapper.error .ms-control {
+  border: 1px solid $field-error;
+}
+
+.error-text {
+  font-size: 14px;
+  color: $field-error;
+  margin: 0 16px;
+}
+
+/* Dropdown */
 .dropdown {
   margin-top: 2px;
   border-radius: 6px;
   border: 1px solid $field-active;
-  width: fit-content;
+  width: 509px;
   background: $input-background;
 }
 
 .option {
-  display: flex;
   height: 48px;
   padding: 0 16px;
+  display: flex;
   align-items: center;
-  width: 509px;
   cursor: url('/assets/icons/hand-cursor.svg') 4 0, pointer;
-  border-bottom: 1px solid $field-active;
+  border-bottom: 1px solid rgba(24, 54, 80, 0.45);
 }
 
 .option:hover {
   background-color: $option-hover;
-  color:$input-background;
+  color: $input-background;
 }
 
 .option.selected {
   font-weight: 600;
-  width: 509px;
 }
 
 .no-options {
@@ -57,4 +132,3 @@ $option-hover: #00A3E0;
   font-size: 14px;
   color: $field-disabled-color;
 }
-

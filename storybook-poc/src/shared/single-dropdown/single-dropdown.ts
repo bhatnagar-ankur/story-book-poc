@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { InputField } from '../input-field/input-field';
 
 @Component({
   selector: 'app-single-dropdown',
-  imports: [CommonModule, InputField],
+  imports: [CommonModule],
   templateUrl: './single-dropdown.html',
   styleUrl: './single-dropdown.scss',
 })
@@ -19,14 +18,18 @@ export class SingleDropdown {
   @Input() placeholder = 'Select Item';
 
   isOpen = false;
+  focused = false; 
 
   toggleDropdown() {
     if (this.disabled || this.readonly) return;
+
     this.isOpen = !this.isOpen;
+    this.focused = this.isOpen; 
   }
 
   select(item: string) {
     this.selected = item;
     this.isOpen = false;
+    this.focused = true; 
   }
 }

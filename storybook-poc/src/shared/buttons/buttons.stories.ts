@@ -8,6 +8,10 @@ const meta: Meta<Buttons> = {
     argTypes: {
         label: { control: 'text' },
         disabled: { control: 'boolean' },
+        iconPosition: {
+        control: { type: 'radio' },
+        options: ['left', 'right'],
+    },
     },
     parameters: {
         pseudo: { hover: false, focus: false, active: false },

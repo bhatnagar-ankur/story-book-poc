@@ -34,7 +34,7 @@ $primary-background: #F4F4F4;
 $button-sizes: (
     primary: 127px,
     secondary: 127px,
-    text: 134px,
+    text: auto,
     iconic: 101px,
     long: 508px
 );
@@ -48,10 +48,11 @@ $button-sizes: (
     border: none;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: var(--btn-justify, center);
     align-items: center;
     gap: 10px;
-    color: $primary-color;
+    color: var(--btn-color,$primary-color);
+    transition: all 400ms ease-out;
 
     @each $name, $size in $button-sizes {
         &.#{$name} {
@@ -63,6 +64,7 @@ $button-sizes: (
 
 .primary {
     @extend %base-filled;
+    border: 1px solid transparent;
 
     &:hover:not(:disabled) {
         border: 1px solid $primary-border-color;
@@ -96,6 +98,7 @@ $button-sizes: (
     text-transform: uppercase;
     white-space: nowrap;
     text-overflow: ellipsis;
+    line-height: 1;
 
     &:hover:not(:disabled) {
         color: $iconic-color;
@@ -108,10 +111,11 @@ $button-sizes: (
 }
 
 .icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     background-color: currentColor;
+    transform: rotate(var(--icon-rotate, 0deg));
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
@@ -131,6 +135,7 @@ $button-sizes: (
 
     &:disabled {
         color: $disabled-color;
+        cursor: not-allowed;
     }
 }
 

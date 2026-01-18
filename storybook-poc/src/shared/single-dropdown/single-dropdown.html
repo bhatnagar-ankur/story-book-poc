@@ -1,21 +1,40 @@
-<div class="single-select-wrapper">
-  <div class="input-area" (click)="toggleDropdown()">
-    <app-input-field
-      [label]="label"
-      [disabled]="disabled"
-      [readonly]="readonly"
-      [required]="required"
-      [error]="error"
-      [value]="selected || ''">
-    </app-input-field>
+<div
+  class="ms-wrapper"
+  [ngClass]="{
+    disabled: disabled,
+    error: !!error,
+    readonly: readonly,
+    focused: isOpen || !!selected
+  }"
+  (click)="toggleDropdown()"
+>
+  <label class="ms-label">
+    {{ label }}
+    @if (required) {
+      <span>*</span>
+    }
+  </label>
 
-    <img
-      class="dropdown-icon"
-      src="assets/icons/dropdown.svg"
-      [ngClass]="{ open: isOpen }"
-    />
+  <div class="ms-control">
+    <div class="selected-list">
+      @if (!selected && focused) {
+        <span class="placeholder">{{ placeholder }}</span>
+      }
+
+      @if (selected) {
+        <span class="single-value">{{ selected }}</span>
+      }
+    </div>
+
+    <div class="arrow" [ngClass]="{ open: isOpen }">
+      <img src="/assets/icons/dropdown.svg" />
+    </div>
   </div>
 </div>
+
+@if (error) {
+  <p class="error-text">{{ error }}</p>
+}
 
 @if (isOpen && !disabled && !readonly) {
   <div class="dropdown">
@@ -23,7 +42,7 @@
       <div
         class="option"
         (click)="select(opt); $event.stopPropagation()"
-        [ngClass]="{selected: selected === opt}"
+        [ngClass]="{ selected: selected === opt }"
       >
         <span>{{ opt }}</span>
       </div>

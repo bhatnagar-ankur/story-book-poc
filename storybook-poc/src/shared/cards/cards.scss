@@ -19,7 +19,7 @@ $stats-row: #6C757D;
     height: 249px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: $card-bg;
 }
 
@@ -27,7 +27,7 @@ $stats-row: #6C757D;
     width: 50%;
     height: 249px;
     background-color: $promo-left;
-    border-top-right-radius: 100px;
+    border-top-right-radius: 110px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,44 +45,36 @@ $stats-row: #6C757D;
     padding: 32px 28px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 6px;
+    gap: 12px;
 }
 
-.promo-right h2 {
+.promo-title {
     margin: 0;
     font-weight: 700;
     font-size: 18px;
     color: $promo-color;
     font-family: 'Montserrat';
+    line-height: 100%;
 }
 
 .promo-right p {
     font-size: 14px;
     font-weight: 400;
     color: $promo-color;
+    line-height: 1.2;
 }
 
-.promo-right .promo-divider {
-  background-color: $promo-divider;
-  width: 20px;
-  height: 2px;
+.promo-divider {
+    width: 24px;
+    border-top: 2px solid $promo-divider;
+    align-self: flex-start;
 }
+
 
 .promo-right app-buttons.cta {
-    display: inline-flex;
-    align-items: center;
-    color: $promo-btn;
-}
-
-.promo-right app-buttons.cta::after {
-    content: "";
-    width: 14px;
-    height: 14px;
-    mask: url('../../assets/icons/dropdown.svg') center/contain no-repeat;
-    -webkit-mask: url('../../assets/icons/dropdown.svg') center/contain no-repeat;
-    background-color: currentColor;
-    transform: rotate(-90deg);
+    --btn-color: $promo-btn;
+    --icon-rotate: -90deg;
+    --btn-justify: flex-start;
 }
 
 .promo-right app-buttons.cta:hover {
@@ -161,14 +153,24 @@ $stats-row: #6C757D;
     right: 10px;
 }
 
-.image-progress {
+.image-progress-bar {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: $promo-hover;
-    width: 25%;
+    bottom: 4px;
+    left: 2px;
+    right: 2px;
+    height: 4px;
+    background-color: $stats-divider;
     border-radius: 4px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.image-progress-fill {
+    height: 100%;
+    width: 25%;
+    background-color: $promo-hover;
+    border-radius: 4px;
+    transition: width 0.3s ease;
 }
 
 .swatch-row {
@@ -283,11 +285,13 @@ $stats-row: #6C757D;
 .color-link {
     display: flex;
     width: 196px;
-    height: 33px;
+    height: 26px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    align-content: center;
     color: $prod-link;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 .color-link a {
@@ -304,6 +308,7 @@ $stats-row: #6C757D;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-top: 4px;
 }
 
 .nav-arrow {
@@ -372,6 +377,7 @@ $stats-row: #6C757D;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 12x;
     padding-left: 0;
 }
 
@@ -395,30 +401,25 @@ $stats-row: #6C757D;
 
 .stats-row {
     display: flex;
-    font-size: 14px;
-    color: $stats-row;
-    justify-content: space-between;
-    margin: 2px 0;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 12px; 
+    font-size: 14px;                     
 }
 
-.stats-row span {
-    font-weight: 600;
+.completed{
+color: $stats-row;
+}
+
+.completed-content{
+color: $promo-divider;
 }
 
 .stats-right app-buttons.stats-cta {
-    display: inline-flex;
-    align-items: center;
-    color: $promo-btn;
-}
-
-.stats-right app-buttons.stats-cta::after {
-    content: "";
-    width: 14px;
-    height: 14px;
-    mask: url('../../assets/icons/dropdown.svg') center/contain no-repeat;
-    -webkit-mask: url('../../assets/icons/dropdown.svg') center/contain no-repeat;
-    background-color: currentColor;
-    transform: rotate(-90deg);
+    margin-top: 8px;
+    --btn-color: $promo-btn;
+    --icon-rotate: -90deg;
+    --btn-justify: flex-start;
 }
 
 .stats-right app-buttons.stats-cta:hover {

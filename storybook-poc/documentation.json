@@ -1071,7 +1071,7 @@
         },
         {
             "name": "Buttons",
-            "id": "component-Buttons-ef48dead840b325dde85b513473a5b96fa5f0e331f18c37ae9fe4ce0b49d0ed2e0c2afab149956c131d0e062cdd81afafaa160b2f9b73de9a916dd573c5a1e82",
+            "id": "component-Buttons-975f399bd77a1c8a1e7a88259b019a280ea9fda86089e1d8c161447859b85790a16bbaff075c33b4c1030e5c08933a12a42db6df2da39592684810cf2c2c9d06",
             "file": "src/shared/buttons/buttons.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1120,6 +1120,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "iconPosition",
+                    "defaultValue": "'left'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "\"left\" | \"right\"",
+                    "decorators": []
+                },
+                {
                     "name": "label",
                     "defaultValue": "''",
                     "deprecated": false,
@@ -1148,13 +1157,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  /**\r\n   * Label name to display\r\n   */\r\n  @Input() label: string = '';\r\n  /**\r\n   * Selecting the type of button\r\n   */\r\n  @Input() buttonType: 'primary' | 'secondary' | 'text' | 'iconic' | 'long' = 'primary';\r\n  /**\r\n   * Enabling or disabling the button\r\n   */\r\n  @Input() disabled: boolean = false;\r\n  /**\r\n   * Displaying the icon(optional)\r\n   */\r\n  @Input() icon?: string;\r\n}\r\n",
+            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  /**\r\n   * Label name to display\r\n   */\r\n  @Input() label: string = '';\r\n  /**\r\n   * Selecting the type of button\r\n   */\r\n  @Input() buttonType: 'primary' | 'secondary' | 'text' | 'iconic' | 'long' = 'primary';\r\n  /**\r\n   * Enabling or disabling the button\r\n   */\r\n  @Input() disabled: boolean = false;\r\n  /**\r\n   * Displaying the icon(optional)\r\n   */\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n}\r\n",
             "styleUrl": "./buttons.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<button class=\"button-main-container\" [ngClass]=\"buttonType\" [disabled]=\"disabled\">\r\n    @if(icon) {\r\n    <span class=\"icon\" [style]=\"{'mask-image': 'url(' + icon + ')'}\"></span>\r\n    }\r\n    {{ label }}\r\n</button>"
+            "templateData": "<button\r\n  class=\"button-main-container\"\r\n  [ngClass]=\"buttonType\"\r\n  [disabled]=\"disabled\">\r\n\r\n  @if (icon && iconPosition === 'left') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n  {{ label }}\r\n\r\n  @if (icon && iconPosition === 'right') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n</button>\r\n"
         },
         {
             "name": "Cards",
@@ -1364,7 +1373,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"card\" [ngClass]=\"variant\">\r\n\r\n  @if (variant === 'promo') {\r\n  <div class=\"promo-left\">\r\n    <img [src]=\"image\" alt=\"\" />\r\n  </div>\r\n\r\n  <div class=\"promo-right\">\r\n    <h2>{{ title }}</h2>\r\n    <div class=\"promo-divider\"></div>\r\n    <p>{{ description }}</p>\r\n    <app-buttons class=\"cta\" label=\"LEARN MORE\" buttonType=\"text\" size=\"medium\">\r\n    </app-buttons>\r\n\r\n  </div>\r\n  }\r\n\r\n  @else if (variant === 'product') {\r\n  <div class=\"product-image\" (mouseover)=\"showHover = true\" (mouseleave)=\"showHover = false\">\r\n    <div class=\"image-progress\"></div>\r\n    @if (tag) {\r\n    <span class=\"tag\">{{ tag }}</span>\r\n    }\r\n\r\n    <img [src]=\"image\" alt=\"\" />\r\n\r\n    @if (showHover) {\r\n    <span class=\"nav-arrow left\"></span>\r\n    <span class=\"nav-arrow right\"></span>\r\n    }\r\n  </div>\r\n\r\n  <div class=\"color-link\" (click)=\"toggleSwatches()\">\r\n    <a>{{ colors.length }} Colours</a>\r\n  </div>\r\n\r\n  @if (showSwatches) {\r\n  <div class=\"swatch-row\">\r\n    @for (c of colors; track c) {\r\n    <div class=\"swatch\">\r\n      <img [src]=\"c\">\r\n    </div>\r\n    }\r\n  </div>\r\n  }\r\n\r\n  <div class=\"product-info\">\r\n    <div class=\"product-title-row\">\r\n      <h3>{{ title }}</h3>\r\n\r\n      <span class=\"wishlist\" [ngClass]=\"{ active: wishlist }\" (click)=\"toggleWishlist()\"></span>\r\n    </div>\r\n\r\n    <p>{{ description }}</p>\r\n\r\n    <div class=\"price-row\">\r\n      <span class=\"price\">₹{{ price }}</span>\r\n      @if (strikePrice) {\r\n      <span class=\"strike\">₹{{ strikePrice }}</span>\r\n      }\r\n      <span class=\"offer\">{{ offer }}</span>\r\n    </div>\r\n\r\n    @if (moreOffers) {\r\n    <div class=\"extra-offers\">+{{ moreOffers }} Offers</div>\r\n    }\r\n  </div>\r\n\r\n  }\r\n\r\n  @else if (variant === 'stats') {\r\n  <div class=\"stats-left\">\r\n    <img [src]=\"image\" />\r\n  </div>\r\n\r\n  <div class=\"stats-divider\"></div>\r\n\r\n  <div class=\"stats-right\">\r\n    <h3>{{ title }}</h3>\r\n\r\n    <div class=\"stats-row\">\r\n      <span>Completed</span>\r\n      <span>{{ completed }}</span>\r\n    </div>\r\n\r\n    <div class=\"stats-row\">\r\n      <span>Incomplete</span>\r\n      <span>{{ incomplete }}</span>\r\n    </div>\r\n\r\n    <app-buttons class=\"stats-cta\" label=\"UPDATE DETAILS\" buttonType=\"text\" size=\"medium\">\r\n    </app-buttons>\r\n  </div>\r\n  }\r\n</div>"
+            "templateData": "<div class=\"card\" [ngClass]=\"variant\">\r\n\r\n  @if (variant === 'promo') {\r\n  <div class=\"promo-left\">\r\n    <img [src]=\"image\" alt=\"\" />\r\n  </div>\r\n\r\n  <div class=\"promo-right\">\r\n    <h2 class=\"promo-title\">{{ title }}</h2>\r\n    <div class=\"promo-divider\"></div>\r\n    <p>{{ description }}</p>\r\n    <app-buttons class=\"cta\" label=\"LEARN MORE\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n\r\n  </div>\r\n  }\r\n\r\n  @else if (variant === 'product') {\r\n  <div class=\"product-image\" (mouseover)=\"showHover = true\" (mouseleave)=\"showHover = false\">\r\n    <div class=\"image-progress-bar\">\r\n      <div class=\"image-progress-fill\"></div>\r\n    </div>\r\n    @if (tag) {\r\n    <span class=\"tag\">{{ tag }}</span>\r\n    }\r\n\r\n    <img [src]=\"image\" alt=\"\" />\r\n\r\n    @if (showHover) {\r\n    <span class=\"nav-arrow left\"></span>\r\n    <span class=\"nav-arrow right\"></span>\r\n    }\r\n  </div>\r\n\r\n  <div class=\"color-link\" (click)=\"toggleSwatches()\">\r\n    <a>{{ colors.length }} Colours</a>\r\n  </div>\r\n\r\n  @if (showSwatches) {\r\n  <div class=\"swatch-row\">\r\n    @for (c of colors; track c) {\r\n    <div class=\"swatch\">\r\n      <img [src]=\"c\">\r\n    </div>\r\n    }\r\n  </div>\r\n  }\r\n\r\n  <div class=\"product-info\">\r\n    <div class=\"product-title-row\">\r\n      <h3>{{ title }}</h3>\r\n\r\n      <span class=\"wishlist\" [ngClass]=\"{ active: wishlist }\" (click)=\"toggleWishlist()\"></span>\r\n    </div>\r\n\r\n    <p>{{ description }}</p>\r\n\r\n    <div class=\"price-row\">\r\n      <span class=\"price\">₹{{ price }}</span>\r\n      @if (strikePrice) {\r\n      <span class=\"strike\">₹{{ strikePrice }}</span>\r\n      }\r\n      <span class=\"offer\">{{ offer }}</span>\r\n    </div>\r\n\r\n    @if (moreOffers) {\r\n    <div class=\"extra-offers\">+{{ moreOffers }} Offers</div>\r\n    }\r\n  </div>\r\n\r\n  }\r\n\r\n  @else if (variant === 'stats') {\r\n  <div class=\"stats-left\">\r\n    <img [src]=\"image\" />\r\n  </div>\r\n\r\n  <div class=\"stats-divider\"></div>\r\n\r\n  <div class=\"stats-right\">\r\n    <h3>{{ title }}</h3>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Completed</span>\r\n      <span class=\"completed-content\">{{ completed }}</span>\r\n    </div>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Incomplete</span>\r\n      <span class=\"completed-content\">{{ incomplete }}</span>\r\n    </div>\r\n\r\n    <app-buttons class=\"stats-cta\" label=\"UPDATE DETAILS\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n  </div>\r\n  }\r\n</div>"
         },
         {
             "name": "Checkbox",
@@ -2531,7 +2540,7 @@
         },
         {
             "name": "SingleDropdown",
-            "id": "component-SingleDropdown-81fb57f0c535e690ff43b2b9e8842883a834cfb8f39d691aeca61ed928df50bf129ef97a867bb7488be5e255e13b94dd9e4670db999296e820bcfb241bafefed",
+            "id": "component-SingleDropdown-158250bdde37d9e94576e25c867a81f21cb25b49db0254068b020b76224050bc3bd1e405c4526a6415d17f880ff49f7bbc3de00eaf572cad566f7b7466098c8d",
             "file": "src/shared/single-dropdown/single-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2552,7 +2561,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 13,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2561,7 +2570,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -2570,7 +2579,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 },
@@ -2579,7 +2588,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 12,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -2588,7 +2597,7 @@
                     "defaultValue": "'Select Item'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -2597,7 +2606,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 14,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2606,7 +2615,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2615,13 +2624,24 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 17,
                     "type": "string | null",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "focused",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
                 {
                     "name": "isOpen",
                     "defaultValue": "false",
@@ -2631,7 +2651,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 20
                 }
             ],
             "methodsClass": [
@@ -2648,7 +2668,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2683,21 +2703,18 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
-                },
-                {
-                    "name": "InputField"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { InputField } from '../input-field/input-field';\r\n\r\n@Component({\r\n  selector: 'app-single-dropdown',\r\n  imports: [CommonModule, InputField],\r\n  templateUrl: './single-dropdown.html',\r\n  styleUrl: './single-dropdown.scss',\r\n})\r\nexport class SingleDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() selected: string | null = null;\r\n  @Input() placeholder = 'Select Item';\r\n\r\n  isOpen = false;\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  select(item: string) {\r\n    this.selected = item;\r\n    this.isOpen = false;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-single-dropdown',\r\n  imports: [CommonModule],\r\n  templateUrl: './single-dropdown.html',\r\n  styleUrl: './single-dropdown.scss',\r\n})\r\nexport class SingleDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() selected: string | null = null;\r\n  @Input() placeholder = 'Select Item';\r\n\r\n  isOpen = false;\r\n  focused = false; \r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen; \r\n  }\r\n\r\n  select(item: string) {\r\n    this.selected = item;\r\n    this.isOpen = false;\r\n    this.focused = true; \r\n  }\r\n}\r\n",
             "styleUrl": "./single-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"single-select-wrapper\">\r\n  <div class=\"input-area\" (click)=\"toggleDropdown()\">\r\n    <app-input-field\r\n      [label]=\"label\"\r\n      [disabled]=\"disabled\"\r\n      [readonly]=\"readonly\"\r\n      [required]=\"required\"\r\n      [error]=\"error\"\r\n      [value]=\"selected || ''\">\r\n    </app-input-field>\r\n\r\n    <img\r\n      class=\"dropdown-icon\"\r\n      src=\"assets/icons/dropdown.svg\"\r\n      [ngClass]=\"{ open: isOpen }\"\r\n    />\r\n  </div>\r\n</div>\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n  <div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n      <div\r\n        class=\"option\"\r\n        (click)=\"select(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{selected: selected === opt}\"\r\n      >\r\n        <span>{{ opt }}</span>\r\n      </div>\r\n    } @empty {\r\n      <div class=\"no-options\">No results found</div>\r\n    }\r\n  </div>\r\n}\r\n"
+            "templateData": "<div\r\n  class=\"ms-wrapper\"\r\n  [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!selected\r\n  }\"\r\n  (click)=\"toggleDropdown()\"\r\n>\r\n  <label class=\"ms-label\">\r\n    {{ label }}\r\n    @if (required) {\r\n      <span>*</span>\r\n    }\r\n  </label>\r\n\r\n  <div class=\"ms-control\">\r\n    <div class=\"selected-list\">\r\n      @if (!selected && focused) {\r\n        <span class=\"placeholder\">{{ placeholder }}</span>\r\n      }\r\n\r\n      @if (selected) {\r\n        <span class=\"single-value\">{{ selected }}</span>\r\n      }\r\n    </div>\r\n\r\n    <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n      <img src=\"/assets/icons/dropdown.svg\" />\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n@if (error) {\r\n  <p class=\"error-text\">{{ error }}</p>\r\n}\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n  <div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n      <div\r\n        class=\"option\"\r\n        (click)=\"select(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{ selected: selected === opt }\"\r\n      >\r\n        <span>{{ opt }}</span>\r\n      </div>\r\n    } @empty {\r\n      <div class=\"no-options\">No results found</div>\r\n    }\r\n  </div>\r\n}\r\n"
         },
         {
             "name": "Toast",
@@ -3359,9 +3376,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "Buttons",
-                "coveragePercent": 80,
-                "coverageCount": "4/5",
-                "status": "very-good"
+                "coveragePercent": 66,
+                "coverageCount": "4/6",
+                "status": "good"
             },
             {
                 "filePath": "src/shared/cards/cards.ts",
@@ -3423,7 +3440,7 @@
                 "linktype": "component",
                 "name": "SingleDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {

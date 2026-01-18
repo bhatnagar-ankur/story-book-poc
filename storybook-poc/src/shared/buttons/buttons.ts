@@ -24,4 +24,5 @@ export class Buttons {
    * Displaying the icon(optional)
    */
   @Input() icon?: string;
+  @Input() iconPosition: 'left' | 'right' = 'left';
 }
