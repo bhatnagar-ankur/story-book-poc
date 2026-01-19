@@ -51,13 +51,14 @@ $button-sizes: (
     justify-content: var(--btn-justify, center);
     align-items: center;
     gap: 10px;
-    color: var(--btn-color,$primary-color);
+    color: var(--btn-color, $primary-color);
     transition: all 400ms ease-out;
+    overflow-wrap: break-word;
 
     @each $name, $size in $button-sizes {
         &.#{$name} {
             width: $size;
-            height: 38px;
+            height: auto;
         }
     }
 }
@@ -94,14 +95,14 @@ $button-sizes: (
 
 .text {
     background: transparent;
-    color: $secondary-color;
+    color: var(--btn-color, $secondary-color);
     text-transform: uppercase;
     white-space: nowrap;
     text-overflow: ellipsis;
     line-height: 1;
 
     &:hover:not(:disabled) {
-        color: $iconic-color;
+        color: var(--btn-hover-color, $iconic-color);
     }
 
     &:disabled {

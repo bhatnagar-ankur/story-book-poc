@@ -21,7 +21,10 @@ export class Cards {
   @Input() offer = '';
   @Input() completed = '';
   @Input() incomplete = '';
-
+  @Input() currentImage = '';
+  @Input() currentIndex = 0;
+  @Input() progressWidth = 0;
+  progressClass = 'progress-1';
   showHover = false;
   showSwatches = false;
   wishlist = false;
@@ -33,4 +36,49 @@ export class Cards {
   toggleSwatches() {
     this.showSwatches = !this.showSwatches;
   }
+  ngOnInit() {
+  if (this.variant === 'product') {
+    this.currentImage = this.image;
+    this.updateProgress();
+  }
+}
+selectImage(index: number) {
+  this.currentIndex = index;
+  this.currentImage = this.colors[index];
+  this.updateProgress();
+}
+updateProgress() {
+  const total = this.colors.length || 1;
+  this.progressWidth = ((this.currentIndex + 1) / total) * 100;
+}
+prevImage(event: Event) {
+  event.stopPropagation();
+
+  if (!this.colors.length) return;
+
+  this.currentIndex =
+    this.currentIndex === 0
+      ? this.colors.length - 1
+      : this.currentIndex - 1;
+
+  this.updateImage();
+}
+
+nextImage(event: Event) {
+  event.stopPropagation();
+
+  if (!this.colors.length) return;
+
+  this.currentIndex =
+    this.currentIndex === this.colors.length - 1
+      ? 0
+      : this.currentIndex + 1;
+
+  this.updateImage();
+}
+updateImage() {
+  this.currentImage = this.colors[this.currentIndex];
+  this.updateProgress();
+}
+
 }

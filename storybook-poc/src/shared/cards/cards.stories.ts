@@ -33,8 +33,8 @@ export const Product: Story = {
     image: '/assets/icons/product.png',
     colors: [
       '/assets/icons/product.png',
-      '/assets/icons/promo.svg',
-      '/assets/icons/stats.svg'
+      '/assets/icons/card2.webp',
+      '/assets/icons/card3.webp'
     ],
     moreOffers: 3
   }

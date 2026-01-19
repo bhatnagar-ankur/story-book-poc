@@ -8,6 +8,7 @@ $dialog-warning: #FF9E1B;
 
 .dialog {
     display: flex;
+    font-family: 'Myriad Pro';
     flex-direction: column;
     background: $dialog-backgroung;
     border-radius: 4px;
@@ -70,9 +71,10 @@ $dialog-warning: #FF9E1B;
 
 /* ----- BODY ----- */
 .body {
-    padding: 16px 24px;
+    padding: 12px 24px 20px;
     color: #212529;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.5;
     flex: 1;
 }
 

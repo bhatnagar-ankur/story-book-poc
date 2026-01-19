@@ -18,29 +18,32 @@
   @else if (variant === 'product') {
   <div class="product-image" (mouseover)="showHover = true" (mouseleave)="showHover = false">
     <div class="image-progress-bar">
-      <div class="image-progress-fill"></div>
+      <div class="image-progress-fill" [style.width.%]="progressWidth"></div>
     </div>
     @if (tag) {
     <span class="tag">{{ tag }}</span>
     }
 
-    <img [src]="image" alt="" />
+    <img [src]="currentImage" alt="" />
 
     @if (showHover) {
-    <span class="nav-arrow left"></span>
-    <span class="nav-arrow right"></span>
+    <span class="nav-arrow left" (click)="prevImage($event)"></span>
+    <span class="nav-arrow right" (click)="nextImage($event)"></span>
     }
   </div>
 
+ @if (!showSwatches) {
   <div class="color-link" (click)="toggleSwatches()">
     <a>{{ colors.length }} Colours</a>
   </div>
+}
+
 
   @if (showSwatches) {
   <div class="swatch-row">
-    @for (c of colors; track c) {
-    <div class="swatch">
-      <img [src]="c">
+    @for (color of colors; let i = $index; track color) {
+    <div class="swatch" (click)="selectImage(i)" [ngClass]="{ active: currentIndex === i }">
+      <img [src]="color" class="swatch-img">
     </div>
     }
   </div>

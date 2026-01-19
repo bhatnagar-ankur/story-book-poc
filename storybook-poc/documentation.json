@@ -1167,7 +1167,7 @@
         },
         {
             "name": "Cards",
-            "id": "component-Cards-9dac00ff3052f2d5e4af3b6b7dd7242b1f99cefd722dd647a2d203d6e44d1b0a74ff8c8b9819920073499b389ec28e88dfe56e274fcf3196fdf94095457a5fec",
+            "id": "component-Cards-b5df80904158ee359ceafb8d327e804ea62e88e1508e13f29059e9a49eabdf4ed98c467daf82b2e9c78c6dc6c01896090c109f978beb1fa9ebe68bbfcc01858c",
             "file": "src/shared/cards/cards.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1199,6 +1199,24 @@
                     "deprecationMessage": "",
                     "line": 22,
                     "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "currentImage",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "currentIndex",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "number",
                     "decorators": []
                 },
                 {
@@ -1256,6 +1274,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "progressWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
                     "name": "strikePrice",
                     "defaultValue": "0",
                     "deprecated": false,
@@ -1303,7 +1330,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25
+                    "line": 28
                 },
                 {
                     "name": "showSwatches",
@@ -1314,7 +1341,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 29
                 },
                 {
                     "name": "wishlist",
@@ -1325,17 +1352,55 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27
+                    "line": 30
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "selectImage",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "toggleSwatches",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1345,7 +1410,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateProgress",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1367,13 +1442,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Buttons } from '../buttons/buttons';\r\n\r\n@Component({\r\n  selector: 'app-cards',\r\n  imports: [CommonModule, Buttons],\r\n  templateUrl: './cards.html',\r\n  styleUrl: './cards.scss',\r\n})\r\nexport class Cards {\r\n  @Input() variant: 'promo' | 'product' | 'stats' = 'promo';\r\n  @Input() title = '';\r\n  @Input() description = '';\r\n  @Input() image = '';\r\n  @Input() tag = ''; \r\n  @Input() price = 0;\r\n  @Input() strikePrice = 0;\r\n  @Input() colors: string[] = [];\r\n  @Input() moreOffers = 0;\r\n  @Input() offer = '';\r\n  @Input() completed = '';\r\n  @Input() incomplete = '';\r\n\r\n  showHover = false;\r\n  showSwatches = false;\r\n  wishlist = false;\r\n\r\n  toggleWishlist() {\r\n    this.wishlist = !this.wishlist;\r\n  }\r\n\r\n  toggleSwatches() {\r\n    this.showSwatches = !this.showSwatches;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Buttons } from '../buttons/buttons';\r\n\r\n@Component({\r\n  selector: 'app-cards',\r\n  imports: [CommonModule, Buttons],\r\n  templateUrl: './cards.html',\r\n  styleUrl: './cards.scss',\r\n})\r\nexport class Cards {\r\n  @Input() variant: 'promo' | 'product' | 'stats' = 'promo';\r\n  @Input() title = '';\r\n  @Input() description = '';\r\n  @Input() image = '';\r\n  @Input() tag = ''; \r\n  @Input() price = 0;\r\n  @Input() strikePrice = 0;\r\n  @Input() colors: string[] = [];\r\n  @Input() moreOffers = 0;\r\n  @Input() offer = '';\r\n  @Input() completed = '';\r\n  @Input() incomplete = '';\r\n  @Input() currentImage = '';\r\n  @Input() currentIndex = 0;\r\n  @Input() progressWidth = 0;\r\n\r\n  showHover = false;\r\n  showSwatches = false;\r\n  wishlist = false;\r\n\r\n  toggleWishlist() {\r\n    this.wishlist = !this.wishlist;\r\n  }\r\n\r\n  toggleSwatches() {\r\n    this.showSwatches = !this.showSwatches;\r\n  }\r\n  ngOnInit() {\r\n  if (this.variant === 'product') {\r\n    this.currentImage = this.image;\r\n    this.updateProgress();\r\n  }\r\n}\r\nselectImage(index: number) {\r\n  this.currentIndex = index;\r\n  this.currentImage = this.colors[index];\r\n  this.updateProgress();\r\n}\r\nupdateProgress() {\r\n  const total = this.colors.length || 1;\r\n  this.progressWidth = ((this.currentIndex + 1) / total) * 100;\r\n}\r\n\r\n}\r\n",
             "styleUrl": "./cards.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"card\" [ngClass]=\"variant\">\r\n\r\n  @if (variant === 'promo') {\r\n  <div class=\"promo-left\">\r\n    <img [src]=\"image\" alt=\"\" />\r\n  </div>\r\n\r\n  <div class=\"promo-right\">\r\n    <h2 class=\"promo-title\">{{ title }}</h2>\r\n    <div class=\"promo-divider\"></div>\r\n    <p>{{ description }}</p>\r\n    <app-buttons class=\"cta\" label=\"LEARN MORE\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n\r\n  </div>\r\n  }\r\n\r\n  @else if (variant === 'product') {\r\n  <div class=\"product-image\" (mouseover)=\"showHover = true\" (mouseleave)=\"showHover = false\">\r\n    <div class=\"image-progress-bar\">\r\n      <div class=\"image-progress-fill\"></div>\r\n    </div>\r\n    @if (tag) {\r\n    <span class=\"tag\">{{ tag }}</span>\r\n    }\r\n\r\n    <img [src]=\"image\" alt=\"\" />\r\n\r\n    @if (showHover) {\r\n    <span class=\"nav-arrow left\"></span>\r\n    <span class=\"nav-arrow right\"></span>\r\n    }\r\n  </div>\r\n\r\n  <div class=\"color-link\" (click)=\"toggleSwatches()\">\r\n    <a>{{ colors.length }} Colours</a>\r\n  </div>\r\n\r\n  @if (showSwatches) {\r\n  <div class=\"swatch-row\">\r\n    @for (c of colors; track c) {\r\n    <div class=\"swatch\">\r\n      <img [src]=\"c\">\r\n    </div>\r\n    }\r\n  </div>\r\n  }\r\n\r\n  <div class=\"product-info\">\r\n    <div class=\"product-title-row\">\r\n      <h3>{{ title }}</h3>\r\n\r\n      <span class=\"wishlist\" [ngClass]=\"{ active: wishlist }\" (click)=\"toggleWishlist()\"></span>\r\n    </div>\r\n\r\n    <p>{{ description }}</p>\r\n\r\n    <div class=\"price-row\">\r\n      <span class=\"price\">₹{{ price }}</span>\r\n      @if (strikePrice) {\r\n      <span class=\"strike\">₹{{ strikePrice }}</span>\r\n      }\r\n      <span class=\"offer\">{{ offer }}</span>\r\n    </div>\r\n\r\n    @if (moreOffers) {\r\n    <div class=\"extra-offers\">+{{ moreOffers }} Offers</div>\r\n    }\r\n  </div>\r\n\r\n  }\r\n\r\n  @else if (variant === 'stats') {\r\n  <div class=\"stats-left\">\r\n    <img [src]=\"image\" />\r\n  </div>\r\n\r\n  <div class=\"stats-divider\"></div>\r\n\r\n  <div class=\"stats-right\">\r\n    <h3>{{ title }}</h3>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Completed</span>\r\n      <span class=\"completed-content\">{{ completed }}</span>\r\n    </div>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Incomplete</span>\r\n      <span class=\"completed-content\">{{ incomplete }}</span>\r\n    </div>\r\n\r\n    <app-buttons class=\"stats-cta\" label=\"UPDATE DETAILS\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n  </div>\r\n  }\r\n</div>"
+            "templateData": "<div class=\"card\" [ngClass]=\"variant\">\r\n\r\n  @if (variant === 'promo') {\r\n  <div class=\"promo-left\">\r\n    <img [src]=\"image\" alt=\"\" />\r\n  </div>\r\n\r\n  <div class=\"promo-right\">\r\n    <h2 class=\"promo-title\">{{ title }}</h2>\r\n    <div class=\"promo-divider\"></div>\r\n    <p>{{ description }}</p>\r\n    <app-buttons class=\"cta\" label=\"LEARN MORE\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n\r\n  </div>\r\n  }\r\n\r\n  @else if (variant === 'product') {\r\n  <div class=\"product-image\" (mouseover)=\"showHover = true\" (mouseleave)=\"showHover = false\">\r\n    <div class=\"image-progress-bar\">\r\n      <div class=\"image-progress-fill\"></div>\r\n    </div>\r\n    @if (tag) {\r\n    <span class=\"tag\">{{ tag }}</span>\r\n    }\r\n\r\n    <img [src]=\"currentImage\" alt=\"\" />\r\n\r\n    @if (showHover) {\r\n    <span class=\"nav-arrow left\"></span>\r\n    <span class=\"nav-arrow right\"></span>\r\n    }\r\n  </div>\r\n\r\n  <div class=\"color-link\" (click)=\"toggleSwatches()\">\r\n    <a>{{ colors.length }} Colours</a>\r\n  </div>\r\n\r\n  @if (showSwatches) {\r\n  <div class=\"swatch-row\">\r\n    @for (color of colors; let i = $index; track color) {\r\n    <div class=\"swatch\" (click)=\"selectImage(i)\" [ngClass]=\"{ active: currentIndex === i }\">\r\n      <img [src]=\"color\" class=\"swatch-img\">\r\n    </div>\r\n    }\r\n  </div>\r\n  }\r\n\r\n  <div class=\"product-info\">\r\n    <div class=\"product-title-row\">\r\n      <h3>{{ title }}</h3>\r\n\r\n      <span class=\"wishlist\" [ngClass]=\"{ active: wishlist }\" (click)=\"toggleWishlist()\"></span>\r\n    </div>\r\n\r\n    <p>{{ description }}</p>\r\n\r\n    <div class=\"price-row\">\r\n      <span class=\"price\">₹{{ price }}</span>\r\n      @if (strikePrice) {\r\n      <span class=\"strike\">₹{{ strikePrice }}</span>\r\n      }\r\n      <span class=\"offer\">{{ offer }}</span>\r\n    </div>\r\n\r\n    @if (moreOffers) {\r\n    <div class=\"extra-offers\">+{{ moreOffers }} Offers</div>\r\n    }\r\n  </div>\r\n\r\n  }\r\n\r\n  @else if (variant === 'stats') {\r\n  <div class=\"stats-left\">\r\n    <img [src]=\"image\" />\r\n  </div>\r\n\r\n  <div class=\"stats-divider\"></div>\r\n\r\n  <div class=\"stats-right\">\r\n    <h3>{{ title }}</h3>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Completed</span>\r\n      <span class=\"completed-content\">{{ completed }}</span>\r\n    </div>\r\n\r\n    <div class=\"stats-row\">\r\n      <span class=\"completed\">Incomplete</span>\r\n      <span class=\"completed-content\">{{ incomplete }}</span>\r\n    </div>\r\n\r\n    <app-buttons class=\"stats-cta\" label=\"UPDATE DETAILS\" buttonType=\"text\" size=\"medium\" icon=\"assets/icons/dropdown.svg\" iconPosition=\"right\">\r\n    </app-buttons>\r\n  </div>\r\n  }\r\n</div>"
         },
         {
             "name": "Checkbox",
@@ -3386,7 +3461,7 @@
                 "linktype": "component",
                 "name": "Cards",
                 "coveragePercent": 0,
-                "coverageCount": "0/18",
+                "coverageCount": "0/24",
                 "status": "low"
             },
             {

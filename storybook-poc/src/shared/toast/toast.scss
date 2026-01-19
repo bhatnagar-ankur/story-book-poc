@@ -6,6 +6,7 @@ $error: #CC3629;
 
 .toast {
     display: flex;
+    font-family: 'Myriad Pro';
     align-items: stretch;
     gap: 16px;
     padding: 0;
@@ -36,7 +37,9 @@ $error: #CC3629;
     font-size: 18px;
     font-weight: 600;
 }
-
+.content-subtitle{
+    text-decoration: underline;
+}
 .content p {
     display: flex;
     margin: 0;
