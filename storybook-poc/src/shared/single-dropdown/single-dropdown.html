@@ -1,28 +1,24 @@
-<div
-  class="ms-wrapper"
-  [ngClass]="{
+<div class="ms-wrapper" [ngClass]="{
     disabled: disabled,
     error: !!error,
     readonly: readonly,
     focused: isOpen || !!selected
-  }"
-  (click)="toggleDropdown()"
->
+  }" (click)="toggleDropdown()">
   <label class="ms-label">
     {{ label }}
     @if (required) {
-      <span>*</span>
+    <span>*</span>
     }
   </label>
 
   <div class="ms-control">
     <div class="selected-list">
       @if (!selected && focused) {
-        <span class="placeholder">{{ placeholder }}</span>
+      <span class="placeholder">{{ placeholder }}</span>
       }
 
       @if (selected) {
-        <span class="single-value">{{ selected }}</span>
+      <span class="single-value">{{ truncate(selected) }}</span>
       }
     </div>
 
@@ -33,21 +29,17 @@
 </div>
 
 @if (error) {
-  <p class="error-text">{{ error }}</p>
+<p class="error-text">{{ error }}</p>
 }
 
 @if (isOpen && !disabled && !readonly) {
-  <div class="dropdown">
-    @for (opt of options; track opt) {
-      <div
-        class="option"
-        (click)="select(opt); $event.stopPropagation()"
-        [ngClass]="{ selected: selected === opt }"
-      >
-        <span>{{ opt }}</span>
-      </div>
-    } @empty {
-      <div class="no-options">No results found</div>
-    }
+<div class="dropdown">
+  @for (opt of options; track opt) {
+  <div class="option" (click)="select(opt); $event.stopPropagation()" [ngClass]="{ selected: selected === opt }">
+    <span>{{ opt }}</span>
   </div>
+  } @empty {
+  <div class="no-options">No results found</div>
+  }
+</div>
 }

@@ -4,6 +4,7 @@ $field-fill-rectangle-on: #1F364E;
 $field-fill-dot-disabled: #6C757D;
 $field-fill-dot-disabled-rect: #CED4DA80;
 $disabled-border: #CED4DA;
+$toggle-border:#007DBA;
 
 .toggle-wrapper {
     position: relative;
@@ -68,4 +69,67 @@ $disabled-border: #CED4DA;
         background-color: $field-fill-dot-disabled;
         transform: translateX(21px);
     }
+}
+
+.iconic-toggle {
+  display: flex;
+  width: 112px;
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid $toggle-border;
+  overflow: hidden;
+  background: $field-fill-dot;
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.icon-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-text {
+    font-size: 11px;
+    line-height: 1;
+    color: $field-fill-rectangle-on;
+  }
+
+  &.active {
+    background: $toggle-border;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+
+    .icon-text {
+      color: $field-fill-dot;
+      font-weight: 500;
+    }
+  }
+}
+
+.default-toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-text {
+  font-size: 12px;
+  color: $field-fill-rectangle-on;
 }

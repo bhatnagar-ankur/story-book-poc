@@ -18,18 +18,24 @@ export class SingleDropdown {
   @Input() placeholder = 'Select Item';
 
   isOpen = false;
-  focused = false; 
+  focused = false;
+  truncate(value: string | null, limit = 10): string {
+    if (!value) return '';
+    return value.length > limit
+      ? value.slice(0, limit) + '…'
+      : value;
+  }
 
   toggleDropdown() {
     if (this.disabled || this.readonly) return;
 
     this.isOpen = !this.isOpen;
-    this.focused = this.isOpen; 
+    this.focused = this.isOpen;
   }
 
   select(item: string) {
     this.selected = item;
     this.isOpen = false;
-    this.focused = true; 
+    this.focused = true;
   }
 }

@@ -12,5 +12,6 @@ export class Toast {
   @Input() title = '';
   @Input() message = '';
   @Input() subTitle = '';
+  @Input() position: | 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom' | 'center-top' | 'center-bottom' = 'left-top';
   @Output() close = new EventEmitter<void>();
 }

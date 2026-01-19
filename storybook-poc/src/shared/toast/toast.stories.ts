@@ -2,10 +2,28 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Toast } from './toast';
 
 export default {
-    title: 'Design System/Toast',
-    component: Toast,
-    tags: ['autodocs'],
+  title: 'Design System/Toast',
+  component: Toast,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['progress', 'success', 'warning', 'error'],
+    },
+    position: {
+      control: 'select',
+      options: [
+        'left-top',
+        'left-bottom',
+        'right-top',
+        'right-bottom',
+        'center-top',
+        'center-bottom',
+      ],
+    },
+  },
 } as Meta<Toast>;
+
 
 type Story = StoryObj<Toast>;
 

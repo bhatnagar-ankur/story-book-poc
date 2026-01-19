@@ -54,6 +54,10 @@ $option-hover: #00a3e0;
       .single-value {
         font-size: 16px;
         color: $readonly-color;
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -111,10 +115,13 @@ $option-hover: #00a3e0;
 }
 
 .option {
-  height: 48px;
+  min-height: 48px;
   padding: 0 16px;
   display: flex;
   align-items: center;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
   cursor: url('/assets/icons/hand-cursor.svg') 4 0, pointer;
   border-bottom: 1px solid rgba(24, 54, 80, 0.45);
 }

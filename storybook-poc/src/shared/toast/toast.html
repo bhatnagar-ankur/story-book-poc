@@ -1,12 +1,23 @@
-<div class="toast" [ngClass]="variant">
+<div class="toast" [ngClass]="[variant, position]">
     <div class="side"></div>
 
     <div class="content">
         <strong class="content-title">{{ title }}</strong>
-        <p><strong class="content-subtitle">{{ subTitle }}</strong> {{ message }}</p>
+        <p>
+            @if (variant==='progress'){
+            <strong class="content-subtitle">{{ subTitle }}</strong>
+            }
+            @if (variant !== 'progress') {
+                <a href="#" class="content-subtitle link" (click)="$event.preventDefault()">
+                {{ subTitle }}
+            </a>
+            }
+
+            {{ message }}
+        </p>
     </div>
 
-    <button class="close-btn">
-        <img src="/assets/icons/close-button.svg" />
+    <button class="close-btn" (click)="close.emit()">
+        <img src="/assets/icons/close-button.svg" alt="close"/>
     </button>
 </div>

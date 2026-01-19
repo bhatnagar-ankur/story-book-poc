@@ -14,22 +14,6 @@ const meta: Meta<RadioButton> = {
 export default meta;
 type Story = StoryObj<RadioButton>;
 
-/** Unselected — No Label */
-export const Unselected_NoLabel: Story = {
-  args: {
-    selected: false,
-    label: '',
-  },
-};
-
-/** Selected — No Label */
-export const Selected_NoLabel: Story = {
-  args: {
-    selected: true,
-    label: '',
-  },
-};
-
 /** Unselected — With Label */
 export const Unselected_WithLabel: Story = {
   args: {

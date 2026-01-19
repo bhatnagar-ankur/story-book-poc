@@ -21,6 +21,12 @@ export class MultiSelectDropdown {
   isOpen = false;
   focused = false;
 
+  truncate(value: string, limit = 10): string {
+    return value.length > limit
+      ? value.slice(0, limit) + '…'
+      : value;
+  }
+
   toggleDropdown() {
     if (this.disabled || this.readonly) return;
 

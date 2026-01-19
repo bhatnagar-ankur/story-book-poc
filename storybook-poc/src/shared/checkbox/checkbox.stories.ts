@@ -15,24 +15,6 @@ const meta: Meta<Checkbox> = {
 export default meta;
 type Story = StoryObj<Checkbox>;
 
-/* Unchecked without label */
-export const Unchecked_NoLabel: Story = {
-    args: {
-        checked: false,
-        indeterminate: false,
-        label: ''
-    },
-};
-
-/* Checked without label */
-export const Checked_NoLabel: Story = {
-    args: {
-        checked: true,
-        indeterminate: false,
-        label: ''
-    },
-};
-
 /* Unchecked with label */
 export const Unchecked_WithLabel: Story = {
     args: {
@@ -48,15 +30,6 @@ export const Checked_WithLabel: Story = {
         checked: true,
         indeterminate: false,
         label: 'Label'
-    },
-};
-
-/* Partial with no label */
-export const Partial_NoLabel: Story = {
-    args: {
-        checked: false,
-        indeterminate: true,
-        label: ''
     },
 };
 

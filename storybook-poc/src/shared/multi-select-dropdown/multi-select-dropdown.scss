@@ -36,7 +36,8 @@ $option-hover: #00A3E0;
     /* CONTROL BOX */
     .ms-control {
         display: flex;
-        height: 48px;
+        min-height: 48px;
+        height: auto;
         padding: 0 16px;
         align-items: center;
         gap: 8px;
@@ -47,6 +48,8 @@ $option-hover: #00A3E0;
 
         .selected-list {
             display: flex;
+            flex-wrap: wrap;
+            max-width: calc(100% - 32px);
             align-items: center;
             gap: 2px;
 
@@ -63,6 +66,10 @@ $option-hover: #00A3E0;
             }
 
             .selected-item {
+                max-width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 display: flex;
                 padding: 3px 8px 3px 12px;
                 align-items: center;
@@ -121,7 +128,7 @@ $option-hover: #00A3E0;
 
 .option {
     display: flex;
-    height: 48px;
+    min-height: 48px;
     padding: 0 16px;
     align-items: center;
     gap: 10px;
@@ -130,6 +137,10 @@ $option-hover: #00A3E0;
     border-bottom: 1px solid rgba(24, 54, 80, 0.45);
     background: $input-background;
     color: $readonly-color;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+
     cursor: url('/assets/icons/hand-cursor.svg') 4 0, pointer;
 }
 
