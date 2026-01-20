@@ -14,6 +14,17 @@ const meta: Meta<DialogBox> = {
             control: { type: 'radio' },
             options: ['default', 'error', 'information', 'warning'],
         },
+        position: {
+      control: 'select',
+      options: [
+        'left-top',
+        'left-bottom',
+        'right-top',
+        'right-bottom',
+        'center-top',
+        'center-bottom',
+      ],
+    },
     },
     args: {
         size: 'default',

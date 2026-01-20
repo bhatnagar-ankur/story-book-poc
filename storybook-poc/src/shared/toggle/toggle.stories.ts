@@ -6,11 +6,13 @@ const meta: Meta<Toggle> = {
   component: Toggle,
   tags: ['autodocs'],
   argTypes: {
-    text: { control: 'text' },
+    size: {control:'radio', options: ['sm','md']},
+    onText: { control: 'text' },
+    offText: { control: 'text' },
     showText: { control: 'boolean' },
     variant: {
       control: 'radio',
-      options: ['default', 'iconic'],
+      options: ['default', 'iconic', 'text'],
     },
   },
 };
@@ -19,25 +21,28 @@ export default meta;
 type Story = StoryObj<Toggle>;
 
 export const ToggleOff: Story = {
-  args: { checked: false, disabled: false, showText: true, text: 'Toggle off', variant: 'default', }
+  args: { checked: false, disabled: false, showText: true, onText: 'Toggle on', offText: 'Toggle off', variant: 'default', }
 };
 
 export const ToggleOn: Story = {
-  args: { checked: true, disabled: false, showText: true, text: 'Toggle on', variant: 'default', }
+  args: { checked: true, disabled: false, showText: true, onText: 'Toggle on', offText: 'Toggle off', variant: 'default', }
 };
-
 export const ToggleOffDisabled: Story = {
-  args: { checked: false, disabled: true, showText: true, text: 'Disabled', variant: 'default', }
+  args: { checked: false, disabled: true, showText: true, onText: 'Disabled on', offText: 'Disabled off', variant: 'default', }
 };
 
 export const ToggleOnDisabled: Story = {
-  args: { checked: true, disabled: true, showText: true, text: 'Disabled on', variant: 'default', }
+  args: { checked: true, disabled: true, showText: true, onText: 'Disabled on', offText: 'Disabled off', variant: 'default', }
 };
 
-export const IconicToggleEnabled: Story = {
+export const IconicToggleOn: Story = {
   args: { checked: true, disabled: false, variant: 'iconic', },
 };
 
-export const IconicToggleDisabled: Story = {
-  args: { checked: false, disabled: true, variant: 'iconic', },
+export const IconicToggleOff: Story = {
+  args: { checked: false, disabled: false, variant: 'iconic', },
 };
+
+export const ToggleText: Story ={
+  args: {checked: true, disabled:false, variant:'text'}
+}

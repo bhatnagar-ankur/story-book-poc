@@ -11,11 +11,12 @@
         <span>*</span>
         }
     </label>
+    <div>
+        <input class="field-input" [(ngModel)]="value" [placeholder]="placeholder" [disabled]="disabled"
+            [readonly]="readonly" [required]="required" (focus)="isFocused = true" (blur)="isFocused = false" />
 
-    <input class="field-input" [(ngModel)]="value" [placeholder]="placeholder" [disabled]="disabled"
-        [readonly]="readonly" [required]="required" (focus)="isFocused = true" (blur)="isFocused = false" />
-
-    @if(error){
-    <p class="error-text">{{ error }}</p>
-    }
+        @if(error){
+        <p class="error-text">{{ error }}</p>
+        }
+    </div>
 </div>

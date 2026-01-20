@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Buttons } from './buttons';
 
 const meta: Meta<Buttons> = {
-    title: 'Design System/Button',
+    title: 'Design System/Buttons',
     component: Buttons,
     tags: ['autodocs'],
     argTypes: {
@@ -49,7 +49,7 @@ export const Text: Story = {
 };
 
 /** ICONIC TEXT */
-export const Iconic: Story = {
+export const IconicText: Story = {
     args: {
         label: 'Reset',
         buttonType: 'iconic',

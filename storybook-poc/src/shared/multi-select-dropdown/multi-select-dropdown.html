@@ -35,11 +35,12 @@
             }
             }
         </div>
-
-
-        <div class="arrow" [ngClass]="{open: isOpen}">
-            <img src="/assets/icons/dropdown.svg">
+        
+        @if (!readonly) {
+        <div class="arrow" [ngClass]="{ open: isOpen }">
+            <img src="/assets/icons/dropdown.svg" />
         </div>
+        }
     </div>
 </div>
 @if (error) {

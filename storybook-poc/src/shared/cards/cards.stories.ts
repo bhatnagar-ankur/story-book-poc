@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Cards } from './cards';
 
 export default {
-  title: 'Design System/Card',
+  title: 'Design System/Cards',
   component: Cards,
   tags: ['autodocs'],
   argTypes: {
@@ -26,7 +26,7 @@ export const Product: Story = {
     variant: 'product',
     tag: 'Bestseller',
     title: 'TOMMY HILFIGER',
-    description: 'Cropped Regular Blue Sh...',
+    description: "Cropped Regular Blue Shirt in Myntra.",
     price: 9375,
     strikePrice: 12500,
     offer: '20% OFF',

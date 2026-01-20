@@ -1,27 +1,23 @@
 $field-fill-dot: #FFF;
 $field-fill-rectangle: #BABEC3;
-$field-fill-rectangle-on: #1F364E;
+$field-fill-rectangle-on: #212529;
 $field-fill-dot-disabled: #6C757D;
 $field-fill-dot-disabled-rect: #CED4DA80;
 $disabled-border: #CED4DA;
-$toggle-border:#007DBA;
+$toggle-border: #01A2E0;
 
 .toggle-wrapper {
-    position: relative;
-    font-family: 'Myriad Pro';
-    display: inline-block;
-    width: 45px;
-    height: 24px;
-    box-sizing: border-box;
-}
+  position: relative;
+  font-family: 'Myriad Pro';
+  display: inline-block;
 
-.toggle-input {
+  .toggle-input {
     opacity: 0;
     width: 0;
     height: 0;
-}
+  }
 
-.toggle-slider {
+  .toggle-slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
@@ -30,51 +26,74 @@ $toggle-border:#007DBA;
     transition: 0.2s;
     box-sizing: border-box;
 
-    &:after {
-        content: "";
-        position: absolute;
-        width: 18px;
-        height: 18px;
-        left: 3px;
-        top: 3px;
-        background-color: $field-fill-dot;
-        border-radius: 50%;
-        transition: 0.2s;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $field-fill-dot;
+      border-radius: 50%;
+      transition: 0.2s;
     }
-}
+  }
 
-.toggle-input:checked+.toggle-slider {
-    background-color: $field-fill-rectangle-on;
+  &.sm {
+    width: 45px;
+    height: 24px;
 
-    &:after {
-        transform: translateX(21px);
-        background-color: $field-fill-dot;
+    .toggle-slider::after {
+      width: 18px;
+      height: 18px;
+      top: 3px;
+      left: 3px;
     }
-}
 
-.toggle-input:disabled+.toggle-slider {
+    .toggle-input:checked + .toggle-slider::after,
+    .toggle-input:checked:disabled + .toggle-slider::after {
+      transform: translateX(21px);
+    }
+  }
+
+  &.md {
+    width: 54px;
+    height: 29px;
+
+    .toggle-slider::after {
+      width: 21px;
+      height: 21px;
+      top: 4px;
+      left: 4px;
+    }
+
+    .toggle-input:checked + .toggle-slider::after,
+    .toggle-input:checked:disabled + .toggle-slider::after {
+      transform: translateX(25px);
+    }
+  }
+
+  .toggle-input:disabled + .toggle-slider {
     background-color: $field-fill-dot-disabled-rect;
     box-shadow: inset 0 0 0 1px $disabled-border;
-    cursor: not-allowed;
 
-    &:after {
-        background-color: $field-fill-dot-disabled
+    &::after {
+      background-color: $field-fill-dot-disabled;
     }
-}
+  }
+   .toggle-input:checked + .toggle-slider {
+    background-color: $toggle-border;
+  }
 
-.toggle-input:checked:disabled+.toggle-slider {
+  .toggle-input:disabled + .toggle-slider {
     background-color: $field-fill-dot-disabled-rect;
 
-    &:after {
-        background-color: $field-fill-dot-disabled;
-        transform: translateX(21px);
+    &::after {
+      background-color: $field-fill-dot-disabled;
     }
+  }
 }
 
 .iconic-toggle {
   display: flex;
-  width: 112px;
-  height: 56px;
+  width: 138px;
+  height: 54px;
   border-radius: 6px;
   border: 1px solid $toggle-border;
   overflow: hidden;
@@ -89,7 +108,6 @@ $toggle-border:#007DBA;
 .icon-btn {
   flex: 1;
   border: none;
-  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,6 +115,7 @@ $toggle-border:#007DBA;
   gap: 4px;
   cursor: pointer;
   transition: background 0.2s ease;
+  background-color: lighten($toggle-border, 50%);
 
   img {
     width: 18px;
@@ -107,6 +126,7 @@ $toggle-border:#007DBA;
     font-size: 11px;
     line-height: 1;
     color: $field-fill-rectangle-on;
+    font-family: 'Myriad Pro';
   }
 
   &.active {
@@ -125,11 +145,62 @@ $toggle-border:#007DBA;
 
 .default-toggle-wrapper {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  font-family: 'Myriad Pro';
   gap: 8px;
 }
 
 .toggle-text {
   font-size: 12px;
   color: $field-fill-rectangle-on;
+}
+
+.text-toggle {
+  display: flex;
+  width: 207px;
+  height: 54px;
+  border-radius: 6px;
+  border: 1px solid $toggle-border;
+  overflow: hidden;
+  background: $field-fill-dot;
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.text-btn {
+  flex: 1;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Myriad Pro';
+  color: $field-fill-rectangle-on;
+  transition: all 0.2s ease;
+  background-color: lighten($toggle-border, 50%);
+
+  &:not(:last-child) {
+    border-right: 1px solid $toggle-border;
+  }
+
+  &.active {
+    background: $toggle-border;
+    color: $field-fill-dot;
+    font-weight: 500;
+  }
+
+  &:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 }

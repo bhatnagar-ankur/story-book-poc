@@ -104,6 +104,10 @@ $option-hover: #00A3E0;
     color: $field-error;
     font-size: 14px;
     margin: 0 16px;
+    width: 509px;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .ms-wrapper.focused .ms-control {
@@ -170,9 +174,7 @@ $option-hover: #00A3E0;
 
 .ms-wrapper.readonly .ms-control {
     background: $input-background;
-    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
     border: none;
-
 }
 
 .ms-wrapper.error .ms-control {

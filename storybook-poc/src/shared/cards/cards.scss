@@ -11,12 +11,13 @@ $offer: #E4312C;
 $prod-link: #A3A4A4;
 $stats-divider: #E0E0E0;
 $stats-row: #6C757D;
+$link:#007DBA;
 
 /*PROMO */
 .card {
     display: flex;
     width: 508px;
-    height: 249px;
+    min-height: 249px;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
@@ -25,7 +26,7 @@ $stats-row: #6C757D;
 
 .promo-left {
     width: 50%;
-    height: 249px;
+    min-height: 249px;
     background-color: $promo-left;
     border-top-right-radius: 110px;
     display: flex;
@@ -36,7 +37,7 @@ $stats-row: #6C757D;
 
 .promo-left img {
     width: 180px;
-    height: 120px;
+    min-height: 120px;
     object-fit: contain;
 }
 
@@ -46,6 +47,9 @@ $stats-row: #6C757D;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .promo-title {
@@ -204,6 +208,9 @@ $stats-row: #6C757D;
     flex-direction: column;
     gap: 2px;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .product-title-row {
@@ -314,8 +321,11 @@ $stats-row: #6C757D;
     font-weight: 500;
     line-height: normal;
     margin-top: 4px;
+    cursor: pointer;
 }
-
+.extra-offers:hover{
+    color: $link;
+}
 .nav-arrow {
     position: absolute;
     top: 50%;
@@ -348,7 +358,7 @@ $stats-row: #6C757D;
 /*STATS*/
 .card.stats {
     width: 374px;
-    height: auto;
+    min-height: 153px;
     border-radius: 16px;
     background: $card-bg;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.10);
@@ -367,13 +377,13 @@ $stats-row: #6C757D;
 
 .stats-left img {
     width: 79.004px;
-    height: 80px;
+    min-height: 80px;
     object-fit: contain;
 }
 
 .stats-divider {
     width: 1px;
-    height: 137px;
+    min-height: 137px;
     background: $stats-divider;
     margin-right: 20px;
 }
@@ -382,8 +392,11 @@ $stats-row: #6C757D;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12x;
+    gap: 12px;
     padding-left: 0;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .stats-right h3 {
@@ -392,18 +405,23 @@ $stats-row: #6C757D;
     font-size: 18px;
     color: $promo-divider;
     font-family: 'Montserrat';
-    margin-bottom: 16px;
 }
 
 .stats-right h3::after {
     content: "";
     display: block;
+    margin: 16px 0;
     width: 20px;
-    height: 1px;
-    margin-top: 10px;
+    min-height: 1px;
     background: $promo-divider;
 }
-
+.stats-row-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
+    justify-content: space-between;
+    align-content: space-between;
+}
 .stats-row {
     display: flex;
     justify-content: space-between; 
@@ -421,7 +439,6 @@ color: $promo-divider;
 }
 
 .stats-right app-buttons.stats-cta {
-    margin-top: 8px;
     --btn-color: #00A3E0;
     --icon-rotate: -90deg;
     --btn-justify: flex-start;

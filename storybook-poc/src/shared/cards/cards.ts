@@ -13,7 +13,7 @@ export class Cards {
   @Input() title = '';
   @Input() description = '';
   @Input() image = '';
-  @Input() tag = ''; 
+  @Input() tag = '';
   @Input() price = 0;
   @Input() strikePrice = 0;
   @Input() colors: string[] = [];
@@ -37,48 +37,52 @@ export class Cards {
     this.showSwatches = !this.showSwatches;
   }
   ngOnInit() {
-  if (this.variant === 'product') {
-    this.currentImage = this.image;
+    if (this.variant === 'product') {
+      this.currentImage = this.image;
+      this.updateProgress();
+    }
+  }
+  selectImage(index: number) {
+    this.currentIndex = index;
+    this.currentImage = this.colors[index];
     this.updateProgress();
   }
-}
-selectImage(index: number) {
-  this.currentIndex = index;
-  this.currentImage = this.colors[index];
-  this.updateProgress();
-}
-updateProgress() {
-  const total = this.colors.length || 1;
-  this.progressWidth = ((this.currentIndex + 1) / total) * 100;
-}
-prevImage(event: Event) {
-  event.stopPropagation();
+  updateProgress() {
+    const total = this.colors.length || 1;
+    this.progressWidth = ((this.currentIndex + 1) / total) * 100;
+  }
+  prevImage(event: Event) {
+    event.stopPropagation();
 
-  if (!this.colors.length) return;
+    if (!this.colors.length) return;
 
-  this.currentIndex =
-    this.currentIndex === 0
-      ? this.colors.length - 1
-      : this.currentIndex - 1;
+    this.currentIndex =
+      this.currentIndex === 0
+        ? this.colors.length - 1
+        : this.currentIndex - 1;
 
-  this.updateImage();
-}
+    this.updateImage();
+  }
 
-nextImage(event: Event) {
-  event.stopPropagation();
+  nextImage(event: Event) {
+    event.stopPropagation();
 
-  if (!this.colors.length) return;
+    if (!this.colors.length) return;
 
-  this.currentIndex =
-    this.currentIndex === this.colors.length - 1
-      ? 0
-      : this.currentIndex + 1;
+    this.currentIndex =
+      this.currentIndex === this.colors.length - 1
+        ? 0
+        : this.currentIndex + 1;
 
-  this.updateImage();
-}
-updateImage() {
-  this.currentImage = this.colors[this.currentIndex];
-  this.updateProgress();
-}
-
+    this.updateImage();
+  }
+  updateImage() {
+    this.currentImage = this.colors[this.currentIndex];
+    this.updateProgress();
+  }
+  truncate(value: string, limit = 26): string {
+    return value.length > limit
+      ? value.slice(0, limit) + '…'
+      : value;
+  }
 }

@@ -1,31 +1,58 @@
 @if (variant === 'default') {
 <div class="default-toggle-wrapper">
-  <label class="toggle-wrapper">
+  <label class="toggle-wrapper" [ngClass]="size">
     <input type="checkbox" class="toggle-input" [checked]="checked" [disabled]="disabled" (change)="onToggle()" />
     <span class="toggle-slider"></span>
   </label>
   @if (showText) {
   <span class="toggle-text">
-    {{ text }}
+    {{ displayText }}
   </span>
   }
 </div>
 }
 
 @if (variant === 'iconic') {
-<div class="iconic-toggle" [class.disabled]="disabled">
+  <div
+    class="iconic-toggle"
+    [class.disabled]="disabled"
+    (click)="onToggle()"
+  >
+    <!-- TABLE -->
+    <div class="icon-btn" [class.active]="checked">
+      <img src="assets/icons/table.svg" alt="table" />
+      @if (showText) {
+        <span class="icon-text">Table</span>
+      }
+    </div>
 
-  <button class="icon-btn" [class.active]="checked" (click)="setValue(true)" [disabled]="disabled">
-    <img src="assets/icons/table.svg" alt="check" />
-    @if (showText) {
-    <span class="icon-text">Table</span>
-    } </button>
+    <!-- GALLERY -->
+    <div class="icon-btn" [class.active]="!checked">
+      <img src="assets/icons/gallery.svg" alt="gallery" />
+      @if (showText) {
+        <span class="icon-text">Gallery</span>
+      }
+    </div>
+  </div>
+}
 
-  <button class="icon-btn" [class.active]="!checked" (click)="setValue(false)" [disabled]="disabled">
-    <img src="assets/icons/gallery.svg" alt="close" />
-    @if (showText) {
-    <span class="icon-text">Gallery</span>
-    } </button>
+@if (variant === 'text') {
+  <div class="text-toggle" [class.disabled]="disabled">
 
-</div>
+    <label class="text-btn" [class.active]="checked === true">
+      <input type="radio" hidden (click)="setValue(true)" />
+      YES
+    </label>
+
+    <label class="text-btn" [class.active]="checked === false">
+      <input type="radio" hidden (click)="setValue(false)" />
+      NO
+    </label>
+
+    <label class="text-btn" [class.active]="checked === null">
+      <input type="radio" hidden (click)="setValue(null)" />
+      BOTH
+    </label>
+
+  </div>
 }

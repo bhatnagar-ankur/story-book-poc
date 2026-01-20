@@ -91,7 +91,6 @@ $option-hover: #00a3e0;
 
 .ms-wrapper.readonly .ms-control {
   background: $input-background;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
   border: none;
 }
 
@@ -103,6 +102,10 @@ $option-hover: #00a3e0;
   font-size: 14px;
   color: $field-error;
   margin: 0 16px;
+  width: 509px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 /* Dropdown */

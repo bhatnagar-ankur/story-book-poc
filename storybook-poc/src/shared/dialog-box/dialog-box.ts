@@ -13,6 +13,7 @@ export class DialogBox {
   @Input() size: 'default' | 'medium' | 'large' = 'default';
   @Input() title: string = '';
   @Input() message: string = '';
+  @Input() position: | 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom' | 'center-top' | 'center-bottom' = 'left-top';
 
   @Output() cancel = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<void>();

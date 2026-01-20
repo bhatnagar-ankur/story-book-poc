@@ -3,8 +3,8 @@ $progress: #5BC2E7;
 $success: #4CBB17;
 $warning: #FF9E1B;
 $error: #CC3629;
-$toast-message:#212529;
-$link:#007DBA;
+$toast-message: #212529;
+$link: #007DBA;
 
 .toast {
     display: flex;
@@ -19,7 +19,12 @@ $link:#007DBA;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
     position: fixed;
     z-index: 1000;
+    max-height: calc(100vh - 32px);
+    overflow: hidden;
     color: $toast-message;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .side {
@@ -34,21 +39,24 @@ $link:#007DBA;
     width: 302px;
     padding: 8px 8px 8px 0;
     gap: 8px;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
 }
 
 .content .content-title {
     font-size: 18px;
     font-weight: 600;
 }
+
 .content-subtitle.link {
-  color: $toast-message;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: underline;
+    color: $toast-message;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .content-subtitle.link:hover {
-  color: $link;
+    color: $link;
 }
 
 .content p {
@@ -103,33 +111,33 @@ $link:#007DBA;
 }
 
 .left-top {
-  top: 16px;
-  left: 16px;
+    top: 16px;
+    left: 16px;
 }
 
 .left-bottom {
-  bottom: 16px;
-  left: 16px;
+    bottom: 16px;
+    left: 16px;
 }
 
 .right-top {
-  top: 16px;
-  right: 16px;
+    top: 16px;
+    right: 16px;
 }
 
 .right-bottom {
-  bottom: 16px;
-  right: 16px;
+    bottom: 16px;
+    right: 16px;
 }
 
 .center-top {
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .center-bottom {
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
 }

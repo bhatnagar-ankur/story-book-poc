@@ -9,7 +9,8 @@
     <h2 class="promo-title">{{ title }}</h2>
     <div class="promo-divider"></div>
     <p>{{ description }}</p>
-    <app-buttons class="cta" label="LEARN MORE" buttonType="text" size="medium" icon="assets/icons/dropdown.svg" iconPosition="right">
+    <app-buttons class="cta" label="LEARN MORE" buttonType="text" size="medium" icon="assets/icons/dropdown.svg"
+      iconPosition="right">
     </app-buttons>
 
   </div>
@@ -32,11 +33,11 @@
     }
   </div>
 
- @if (!showSwatches) {
+  @if (!showSwatches) {
   <div class="color-link" (click)="toggleSwatches()">
     <a>{{ colors.length }} Colours</a>
   </div>
-}
+  }
 
 
   @if (showSwatches) {
@@ -56,7 +57,7 @@
       <span class="wishlist" [ngClass]="{ active: wishlist }" (click)="toggleWishlist()"></span>
     </div>
 
-    <p>{{ description }}</p>
+    <p>{{ truncate(description) }}</p>
 
     <div class="price-row">
       <span class="price">₹{{ price }}</span>
@@ -67,7 +68,7 @@
     </div>
 
     @if (moreOffers) {
-    <div class="extra-offers">+{{ moreOffers }} Offers</div>
+    <a href="#" class="extra-offers" (click)="$event.preventDefault()">+{{ moreOffers }} Offers</a>
     }
   </div>
 
@@ -82,18 +83,19 @@
 
   <div class="stats-right">
     <h3>{{ title }}</h3>
+    <div class="stats-row-container">
+      <div class="stats-row">
+        <span class="completed">Completed</span>
+        <span class="completed-content">{{ completed }}</span>
+      </div>
 
-    <div class="stats-row">
-      <span class="completed">Completed</span>
-      <span class="completed-content">{{ completed }}</span>
+      <div class="stats-row">
+        <span class="completed">Incomplete</span>
+        <span class="completed-content">{{ incomplete }}</span>
+      </div>
     </div>
-
-    <div class="stats-row">
-      <span class="completed">Incomplete</span>
-      <span class="completed-content">{{ incomplete }}</span>
-    </div>
-
-    <app-buttons class="stats-cta" label="UPDATE DETAILS" buttonType="text" size="medium" icon="assets/icons/dropdown.svg" iconPosition="right">
+    <app-buttons class="stats-cta" label="UPDATE DETAILS" buttonType="text" size="medium"
+      icon="assets/icons/dropdown.svg" iconPosition="right">
     </app-buttons>
   </div>
   }

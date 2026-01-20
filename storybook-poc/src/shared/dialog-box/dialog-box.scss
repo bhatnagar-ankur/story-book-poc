@@ -14,7 +14,10 @@ $dialog-warning: #FF9E1B;
     border-radius: 4px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    max-height: calc(100vh - 32px);
+    overflow: hidden;
+    z-index: 1000;
 }
 
 /* ----- SIZES ----- */
@@ -35,7 +38,7 @@ $dialog-warning: #FF9E1B;
     display: flex;
     align-items: center;
     padding: 0 24px;
-    height: 56px;
+    min-height: 56px;
     color: $dialog-backgroung;
     font-weight: 700;
     gap: 12px;
@@ -61,8 +64,8 @@ $dialog-warning: #FF9E1B;
 
 /* Icon */
 .icon {
-    width: 24px;
-    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     display: inline-block;
     background-repeat: no-repeat;
     background-size: contain;
@@ -76,6 +79,8 @@ $dialog-warning: #FF9E1B;
     font-size: 16px;
     line-height: 1.5;
     flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
 }
 
 /* ----- FOOTER ----- */
@@ -121,4 +126,35 @@ $dialog-warning: #FF9E1B;
 
 .dialog.warning .icon {
     background-image: url('/assets/icons/warning-poc.svg');
+}
+.left-top {
+  top: 16px;
+  left: 16px;
+}
+
+.left-bottom {
+  bottom: 16px;
+  left: 16px;
+}
+
+.right-top {
+  top: 16px;
+  right: 16px;
+}
+
+.right-bottom {
+  bottom: 16px;
+  right: 16px;
+}
+
+.center-top {
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-bottom {
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
 }

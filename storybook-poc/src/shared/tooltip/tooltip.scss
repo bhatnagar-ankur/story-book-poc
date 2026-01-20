@@ -1,0 +1,113 @@
+$tooltip-text:#FFF;
+$tooltip-background: #3F4443;
+
+.tooltip {
+  position: relative;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 40px;
+  text-decoration: underline;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: auto;
+  height: auto;
+  background-color: $tooltip-background;
+  color: $tooltip-text;
+  text-align: center;
+  border-radius: 4px;
+  padding:8px;
+  position: absolute;
+  z-index: 10;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-family: Myriad Pro;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+}
+
+/* Show tooltip */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* TOP */
+.tooltiptext.top {
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltiptext.top::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 95%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: $tooltip-background transparent transparent transparent;
+}
+
+/* BOTTOM */
+.tooltiptext.bottom {
+  top: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltiptext.bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 5%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent $tooltip-background transparent;
+}
+
+/* LEFT */
+.tooltiptext.left {
+  right: 53%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltiptext.left::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent $tooltip-background;
+}
+
+/* RIGHT */
+.tooltiptext.right {
+  left: 53%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltiptext.right::after {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent $tooltip-background transparent transparent;
+}

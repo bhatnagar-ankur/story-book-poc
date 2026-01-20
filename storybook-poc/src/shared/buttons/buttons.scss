@@ -53,7 +53,9 @@ $button-sizes: (
     gap: 10px;
     color: var(--btn-color, $primary-color);
     transition: all 400ms ease-out;
-    overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 
     @each $name, $size in $button-sizes {
         &.#{$name} {
