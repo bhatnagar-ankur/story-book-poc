@@ -13,8 +13,8 @@ $tooltip-background: #3F4443;
 
 .tooltiptext {
   visibility: hidden;
-  width: auto;
-  height: auto;
+  width: 280px;
+  max-height: auto;
   background-color: $tooltip-background;
   color: $tooltip-text;
   text-align: center;
@@ -22,16 +22,14 @@ $tooltip-background: #3F4443;
   padding:8px;
   position: absolute;
   z-index: 10;
-  white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s ease;
-  font-family: Myriad Pro;
+  font-family: 'Myriad Pro';
   font-weight: 400;
-  font-style: Regular;
   font-size: 16px;
-  line-height: 100%;
-  letter-spacing: 0%;
-
+  line-height: 1;
+  white-space: normal; 
+  word-wrap: break-word;
 }
 
 /* Show tooltip */

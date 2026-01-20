@@ -3306,7 +3306,7 @@
         },
         {
             "name": "Tooltip",
-            "id": "component-Tooltip-33b7c373ba3e72d8a389ad2dce91c3823bfa5c8beceb10e9e5ea9068d73dec608f142ee41234cd85fc056d3640bda3fec28b5cc3184e6be6007d74d092206164",
+            "id": "component-Tooltip-dbba11a27bc4d97db040b21d92594d02b7223063ec8dfc61a35c5453d261fa91e5926e2d81dbc620482f09ee8795755f06de5745ac653da5d9a07333fe061baa",
             "file": "src/shared/tooltip/tooltip.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3333,7 +3333,7 @@
                 },
                 {
                     "name": "position",
-                    "defaultValue": "'top'",
+                    "defaultValue": "'bottom'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
@@ -3367,13 +3367,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tooltip',\r\n  imports: [CommonModule],\r\n  templateUrl: './tooltip.html',\r\n  styleUrl: './tooltip.scss',\r\n})\r\nexport class Tooltip {\r\n  @Input() text = '';\r\n  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'top';\r\n  @Input() label = 'Tooltip';\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tooltip',\r\n  imports: [CommonModule],\r\n  templateUrl: './tooltip.html',\r\n  styleUrl: './tooltip.scss',\r\n})\r\nexport class Tooltip {\r\n  @Input() text = '';\r\n  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';\r\n  @Input() label = 'Tooltip';\r\n}\r\n",
             "styleUrl": "./tooltip.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"tooltip-container\">\r\n  <div class=\"tooltip\">\r\n    {{label}}\r\n  <span class=\"tooltiptext\">{{ text }}</span>\r\n</div>\r\n</div>\r\n"
+            "templateData": "<div class=\"tooltip\">\r\n  {{ label }}\r\n  <span class=\"tooltiptext\" [ngClass]=\"position\">\r\n    {{ text }}\r\n  </span>\r\n</div>\r\n"
         }
     ],
     "modules": [],

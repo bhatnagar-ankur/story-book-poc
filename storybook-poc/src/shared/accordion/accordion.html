@@ -1,0 +1,22 @@
+<div class="accordion" [ngClass]="type">
+  <button
+    class="accordion-header"
+    (click)="toggle()"
+    [attr.aria-expanded]="expanded"
+  >
+    <img
+      src="assets/icons/accordion-dropdown.svg"
+      alt="Toggle accordion"
+      class="accordion-icon"
+      [class.expanded]="expanded"
+    />
+
+    <span class="accordion-title">{{ title }}</span>
+  </button>
+
+  @if (expanded) {
+    <div class="accordion-body">
+      {{ content }}
+    </div>
+  }
+</div>
