@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
 
 @Component({
@@ -9,6 +9,8 @@ import { Checkbox } from '../checkbox/checkbox';
   styleUrl: './multi-select-dropdown.scss',
 })
 export class MultiSelectDropdown {
+  constructor(private element: ElementRef) { }
+
   @Input() label = '';
   @Input() options: string[] = [];
   @Input() disabled = false;
@@ -31,10 +33,18 @@ export class MultiSelectDropdown {
   }
 
   handleClick(): void {
-    if (this.disabled || this.readonly) return;
+  if (this.disabled || this.readonly) return;
+  if (this.mode === 'dropdown') {
     this.isOpen = !this.isOpen;
-    this.isFocused = this.isOpen;
   }
+
+  if (this.mode === 'search') {
+    this.isOpen = true;
+  }
+
+  this.isFocused = this.isOpen;
+}
+
 
   toggleSelect(item: string) {
     const exists = this.selected.includes(item);
@@ -51,5 +61,15 @@ export class MultiSelectDropdown {
     this.filteredOptions = this.options.filter(opt =>
       opt.toLowerCase().includes(value)
     );
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const clickedInside = this.element.nativeElement.contains(event.target);
+
+    if (!clickedInside && this.isOpen) {
+      this.isOpen = false;
+      this.isFocused = false;
+    }
   }
 }

@@ -1,36 +1,33 @@
 <div class="accordion" [ngClass]="type">
-  <button
-    class="accordion-header"
-    (click)="toggle()"
-    [attr.aria-expanded]="expanded"
-  >
+  <button class="accordion-header" (click)="toggle()" [attr.aria-expanded]="expanded">
     <div class="accordion-title-group">
       <span class="accordion-title">{{ title }}</span>
       @if (type === 'primary') {
-        <app-checkbox
-        class="accordion-checkbox"
-        label="Checkbox"
-        [class.expanded]="expanded"
-      ></app-checkbox>
+      <app-checkbox class="accordion-checkbox" label="Checkbox" [class.expanded]="expanded"></app-checkbox>
       }
     </div>
 
-    <img
-      src="assets/icons/accordion-dropdown.svg"
-      alt="Toggle accordion"
-      class="accordion-icon"
-      [class.expanded]="expanded"
-    />
+    <img src="assets/icons/accordion-dropdown.svg" alt="Toggle accordion" class="accordion-icon"
+      [class.expanded]="expanded" />
   </button>
 
   @if (expanded) {
-    <div class="accordion-body">
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']"></app-multi-select-dropdown>
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']"></app-multi-select-dropdown>
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']" [dropdownIcon]="'assets/icons/search.svg'"></app-multi-select-dropdown>
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']" [dropdownIcon]="'assets/icons/search.svg'"></app-multi-select-dropdown>
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']" [dropdownIcon]="'assets/icons/search.svg'"></app-multi-select-dropdown>
-      <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea','China','Iran']" [dropdownIcon]="'assets/icons/search.svg'"></app-multi-select-dropdown>
-    </div>
+  <div class="accordion-body">
+    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Iraq']" mode="dropdown">
+    </app-multi-select-dropdown>
+    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
+      [dropdownIcon]="'assets/icons/search.svg'">
+    </app-multi-select-dropdown>
+    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
+      [dropdownIcon]="'assets/icons/search.svg'">
+    </app-multi-select-dropdown> <app-multi-select-dropdown label="Country"
+      [options]="['India','Japan','Korea','China','Iran']"></app-multi-select-dropdown>
+    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
+      [dropdownIcon]="'assets/icons/search.svg'">
+    </app-multi-select-dropdown>
+    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
+      [dropdownIcon]="'assets/icons/search.svg'">
+    </app-multi-select-dropdown>
+  </div>
   }
 </div>

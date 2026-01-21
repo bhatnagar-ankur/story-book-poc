@@ -2,7 +2,9 @@
         disabled: disabled,
         error: !!error,
         readonly: readonly,
-        focused: isOpen || selected.length > 0
+        focused: isOpen || selected.length > 0,
+        'dropdown-mode': mode === 'dropdown',
+    'search-mode': mode === 'search'
      }" (click)="handleClick()">
 
     <label class="ms-label">
@@ -37,30 +39,31 @@
         </div>
 
         @if (!readonly) {
-        <div class="arrow" [ngClass]="{ open: isOpen }">
-            <img [src]="dropdownIcon" alt="" aria-hidden="true" class="icon"
-                [class.rotate]="mode === 'dropdown' && isOpen" />
+        <div class="arrow">
+            <img class="icon" [src]="dropdownIcon" [class.rotate]="mode === 'dropdown' && isOpen" alt=""
+                aria-hidden="true" />
         </div>
+
         }
     </div>
+    @if (isOpen && !disabled && !readonly) {
+    <div class="dropdown" (click)="$event.stopPropagation()">
+        @for (opt of options; track opt) {
+        <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
+            [ngClass]="{checked: selected.includes(opt)}">
+
+            <app-checkbox [checked]="selected.includes(opt)" [label]="''"></app-checkbox>
+            <span class="option-text" [attr.data-full]="opt">
+                {{ truncate(opt) }}
+            </span>
+
+        </div>
+        } @empty {
+        <div class="no-options">No results found</div>
+        }
+    </div>
+    }
 </div>
 @if (error) {
 <p class="error-text">{{ error }}</p>
-}
-@if (isOpen && !disabled && !readonly) {
-<div class="dropdown">
-    @for (opt of options; track opt) {
-    <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
-        [ngClass]="{checked: selected.includes(opt)}">
-
-        <app-checkbox [checked]="selected.includes(opt)" [label]="''"></app-checkbox>
-        <span class="option-text" [attr.data-full]="opt">
-            {{ truncate(opt) }}
-        </span>
-
-    </div>
-    } @empty {
-    <div class="no-options">No results found</div>
-    }
-</div>
 }

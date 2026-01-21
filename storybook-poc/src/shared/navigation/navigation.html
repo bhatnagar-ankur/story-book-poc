@@ -1,1 +1,31 @@
-<p>navigation works!</p>
+<nav class="sidebar" [class.collapsed]="!expanded">
+
+  <button class="toggle-btn" (click)="toggle()">
+    <img
+      src="assets/icons/navigation.svg"
+      alt="Toggle sidebar"
+    />
+  </button>
+
+  <ul class="nav-list">
+    @for (item of navItems; track item.label) {
+      <li class="nav-item">
+
+        <div class="nav-main">
+          <img class="icon" [src]="item.icon" />
+          @if (expanded) {
+            <span class="label">{{ item.label }}</span>
+          }
+        </div>
+
+        @if (expanded && item.children?.length) {
+          <ul class="sub-list">
+            @for (child of item.children; track child) {
+              <li class="sub-item">{{ child }}</li>
+            }
+          </ul>
+        }
+      </li>
+    }
+  </ul>
+</nav>

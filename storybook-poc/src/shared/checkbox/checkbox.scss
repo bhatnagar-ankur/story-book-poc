@@ -1,5 +1,7 @@
-$checkbox-black: #3F4443;
-$checkbox-color: #FFFFFF;
+:host {
+    --checkbox-black: #3F4443;
+    --checkbox-color: #FFFFFF;
+}
 
 .checkbox-container {
     display: flex;
@@ -25,9 +27,9 @@ $checkbox-color: #FFFFFF;
 .checkmark {
     width: 18px;
     height: 18px;
-    border: 2px solid $checkbox-black;
+    border: 2px solid var(--checkbox-black);
     border-radius: 3px;
-    background-color: $checkbox-color;
+    background-color: var(--checkbox-color);
     display: inline-block;
     box-sizing: border-box;
 }
@@ -40,12 +42,12 @@ $checkbox-color: #FFFFFF;
 
 .checkbox-container .checkbox-input:indeterminate+.checkmark {
     background: url('/assets/icons/partial.svg') no-repeat center;
-    background-color: $checkbox-black;
+    background-color: var(--checkbox-black);
     background-size: 18px 18px;
 }
 
 .label-text {
     font-size: 14px;
-    color: $checkbox-black;
+    color: var(--checkbox-label-color, var(--checkbox-black));
     font-family: 'Myriad Pro';
 }

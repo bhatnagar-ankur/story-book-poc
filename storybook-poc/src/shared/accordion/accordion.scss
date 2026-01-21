@@ -5,6 +5,9 @@ $box-shadow-body: #0000000D;
 $border-color: #D0D0CE;
 
 .accordion {
+  position: relative;
+  z-index: 1;
+
   &-header {
     display: flex;
     align-items: center;
@@ -59,15 +62,17 @@ $border-color: #D0D0CE;
 
     .accordion-header[aria-expanded='true'] {
       background-color: $accordion-bg;
+
       color: $accordion-color;
+      .accordion-checkbox input[type='checkbox'] {
+        accent-color: $accordion-color;
+      }
+      --checkbox-label-color: $accordion-color;
+      --checkbox-black: $accordion-color;
     }
 
     .accordion-body {
       box-shadow: 7px 7px 6px 0px $box-shadow-body;
-    }
-
-    .accordion-checkbox.expanded {
-      filter: brightness(0) invert(1);
     }
 
     .accordion-icon {
@@ -113,11 +118,11 @@ $border-color: #D0D0CE;
     gap: 16px;
     position: relative;
     z-index: 1;
+    overflow: visible;
   }
 }
 
 .accordion-body app-multi-select-dropdown {
   width: 500px;
   height: 48px;
-  z-index: 2;
 }

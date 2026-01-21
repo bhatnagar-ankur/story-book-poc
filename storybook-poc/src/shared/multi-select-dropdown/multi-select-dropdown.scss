@@ -16,7 +16,6 @@ $option-hover: #00A3E0;
     gap: 10px;
     position: relative;
 
-    /* LABEL FLOAT */
     .ms-label {
         position: absolute;
         top: 50%;
@@ -27,18 +26,23 @@ $option-hover: #00A3E0;
         color: $field-disabled-color;
         transition: all .2s;
         background-color: $input-background;
+        max-width: calc(100% - 40px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index: 1;
 
         span {
             color: $field-error;
         }
     }
 
-    /* CONTROL BOX */
     .ms-control {
         display: flex;
         min-height: 48px;
         height: auto;
-        padding: 0 16px;
+        padding: 0 40px 0 16px;
+        position: relative;
         align-items: center;
         gap: 8px;
         flex: 1 0 0;
@@ -89,13 +93,28 @@ $option-hover: #00A3E0;
             }
         }
 
-        .arrow {
-            margin-left: auto;
-            transition: transform .2s;
+        .icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
 
-            &.open {
-                transform: rotate(180deg);
-            }
+        .icon.rotate {
+            transform: rotate(180deg);
+        }
+
+        .arrow {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .ms-wrapper.dropdown-mode .arrow.open {
+            transform: rotate(180deg);
         }
     }
 }
@@ -123,11 +142,17 @@ $option-hover: #00A3E0;
 
 /* DROPDOWN */
 .dropdown {
-    margin-top: 2px;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+
+    width: 100%;
+    background: $input-background;
+    z-index: 20;
+
+    border: 1px solid #183650;
     border-radius: 6px;
-    border: 1px solid $field-active;
-    width: 509px;
-    background: transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
 }
 
 .option {
@@ -182,4 +207,3 @@ $option-hover: #00A3E0;
     box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
     margin-bottom: 6px;
 }
-
