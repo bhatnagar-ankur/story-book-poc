@@ -1,6 +1,15 @@
 <div class="tooltip">
   {{ label }}
-  <span class="tooltiptext" [ngClass]="position">
-    {{ text }}
+
+  <span class="tooltiptext" [ngClass]="[position, expanded ? 'expanded' : 'collapsed']"
+    (click)="$event.stopPropagation()">
+    <span class="tooltip-content">
+      {{ text }}
+    </span>
+    @if (isTruncated) {
+    <span class="read-more" (click)="toggle($event)">
+      {{ expanded ? 'Read less' : 'Read more' }}
+    </span>
+    }
   </span>
 </div>

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { SingleDropdown } from './single-dropdown';
 
 const meta: Meta<SingleDropdown> = {
-  title: 'Design System/Single Select',
+  title: 'Design System/Single Select Dropdown',
   component: SingleDropdown,
   tags: ['autodocs'],
 };

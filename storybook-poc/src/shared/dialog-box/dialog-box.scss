@@ -1,4 +1,4 @@
-$dialog-backgroung: #FFFFFF;
+$dialog-background: #FFFFFF;
 $dialog-okay: #007DBA;
 $dialog-modal: #183650;
 $dialog-font: #212529;
@@ -10,7 +10,7 @@ $dialog-warning: #FF9E1B;
     display: flex;
     font-family: 'Myriad Pro';
     flex-direction: column;
-    background: $dialog-backgroung;
+    background: $dialog-background;
     border-radius: 4px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
     overflow: hidden;
@@ -39,7 +39,7 @@ $dialog-warning: #FF9E1B;
     align-items: center;
     padding: 0 24px;
     min-height: 56px;
-    color: $dialog-backgroung;
+    color: $dialog-background;
     font-weight: 700;
     gap: 12px;
     position: relative;
@@ -70,17 +70,24 @@ $dialog-warning: #FF9E1B;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    filter: brightness(0) invert(1);
 }
 
 /* ----- BODY ----- */
 .body {
-    padding: 12px 24px 20px;
-    color: #212529;
+    color: $dialog-font;
     font-size: 16px;
     line-height: 1.5;
+    min-height: 0;
+    display: flex;
     flex: 1;
+    padding: 28px 0;
+}
+
+.body-inner {
+    padding: 0 24px;
     overflow-y: auto;
-    max-height: calc(100vh - 80px);
+    width: 100%;
 }
 
 /* ----- FOOTER ----- */
@@ -90,7 +97,7 @@ $dialog-warning: #FF9E1B;
     align-items: center;
     padding: 12px 24px;
     gap: 16px;
-    background: $dialog-backgroung;
+    background: $dialog-background;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
 }
 
@@ -127,34 +134,35 @@ $dialog-warning: #FF9E1B;
 .dialog.warning .icon {
     background-image: url('/assets/icons/warning-poc.svg');
 }
+
 .left-top {
-  top: 16px;
-  left: 16px;
+    top: 16px;
+    left: 16px;
 }
 
 .left-bottom {
-  bottom: 16px;
-  left: 16px;
+    bottom: 16px;
+    left: 16px;
 }
 
 .right-top {
-  top: 16px;
-  right: 16px;
+    top: 16px;
+    right: 16px;
 }
 
 .right-bottom {
-  bottom: 16px;
-  right: 16px;
+    bottom: 16px;
+    right: 16px;
 }
 
 .center-top {
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .center-bottom {
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
 }

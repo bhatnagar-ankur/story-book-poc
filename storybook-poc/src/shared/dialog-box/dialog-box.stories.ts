@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { DialogBox } from './dialog-box';
 
 const meta: Meta<DialogBox> = {
-    title: 'Design System/Dialog',
+    title: 'Design System/Modal-Dialog box',
     component: DialogBox,
     tags: ['autodocs'],
     argTypes: {

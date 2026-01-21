@@ -18,7 +18,7 @@ type Story = StoryObj<Accordion>;
 
 export const Primary: Story = {
   args: {
-    title: 'Primary Accordion',
+    title: 'Accordion Title',
     type: 'primary',
     expanded: false,
     content: 'This is the primary accordion content.'
@@ -27,7 +27,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    title: 'Secondary Accordion',
+    title: 'Accordion Title',
     type: 'secondary',
     expanded: false,
     content: 'This is the secondary accordion content.'

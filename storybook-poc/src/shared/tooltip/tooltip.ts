@@ -11,4 +11,17 @@ export class Tooltip {
   @Input() text = '';
   @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() label = 'Tooltip';
+
+  expanded = false;
+  isTruncated = false;
+
+  ngAfterViewInit() {
+    this.isTruncated = this.text?.length > 120;
+  }
+
+  toggle(event: Event) {
+    event.stopPropagation();
+    this.expanded = !this.expanded;
+  }
+
 }

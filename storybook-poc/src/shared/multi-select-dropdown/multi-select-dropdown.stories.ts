@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { MultiSelectDropdown } from './multi-select-dropdown';
 
 const meta: Meta<MultiSelectDropdown> = {
-  title: 'Design System/Multi Select',
+  title: 'Design System/Multiple Select Dropdown',
   component: MultiSelectDropdown,
   tags: ['autodocs']
 };

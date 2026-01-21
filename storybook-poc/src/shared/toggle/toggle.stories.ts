@@ -20,27 +20,16 @@ export default meta;
 
 type Story = StoryObj<Toggle>;
 
-export const ToggleOff: Story = {
+export const SmallToggleButton: Story = {
   args: { checked: false, disabled: false, showText: true, onText: 'Toggle on', offText: 'Toggle off', variant: 'default', }
 };
 
-export const ToggleOn: Story = {
-  args: { checked: true, disabled: false, showText: true, onText: 'Toggle on', offText: 'Toggle off', variant: 'default', }
-};
-export const ToggleOffDisabled: Story = {
-  args: { checked: false, disabled: true, showText: true, onText: 'Disabled on', offText: 'Disabled off', variant: 'default', }
+export const MediumToggleButton: Story = {
+  args: { checked: true, disabled: false, showText: true, onText: 'Toggle on', offText: 'Toggle off', variant: 'default', size: 'md' }
 };
 
-export const ToggleOnDisabled: Story = {
-  args: { checked: true, disabled: true, showText: true, onText: 'Disabled on', offText: 'Disabled off', variant: 'default', }
-};
-
-export const IconicToggleOn: Story = {
+export const IconicToggle: Story = {
   args: { checked: true, disabled: false, variant: 'iconic', },
-};
-
-export const IconicToggleOff: Story = {
-  args: { checked: false, disabled: false, variant: 'iconic', },
 };
 
 export const ToggleText: Story ={

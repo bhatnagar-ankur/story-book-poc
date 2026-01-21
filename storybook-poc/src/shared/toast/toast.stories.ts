@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Toast } from './toast';
 
 export default {
-  title: 'Design System/Toast',
+  title: 'Design System/Toast Messages',
   component: Toast,
   tags: ['autodocs'],
   argTypes: {

@@ -16,22 +16,24 @@ export class MultiSelectDropdown {
   @Input() error = '';
   @Input() required = true;
   @Input() selected: string[] = [];
+  filteredOptions: string[] = [];
+
   @Input() placeholder = 'Select Items';
+  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';
+  @Input() mode: 'dropdown' | 'search' = 'dropdown';
 
   isOpen = false;
-  focused = false;
-
+  isFocused = false;
   truncate(value: string, limit = 10): string {
     return value.length > limit
       ? value.slice(0, limit) + '…'
       : value;
   }
 
-  toggleDropdown() {
+  handleClick(): void {
     if (this.disabled || this.readonly) return;
-
     this.isOpen = !this.isOpen;
-    this.focused = this.isOpen;
+    this.isFocused = this.isOpen;
   }
 
   toggleSelect(item: string) {
@@ -44,5 +46,10 @@ export class MultiSelectDropdown {
   removeSelected(item: string) {
     this.selected = this.selected.filter(i => i !== item);
   }
-
+  filterOptions(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredOptions = this.options.filter(opt =>
+      opt.toLowerCase().includes(value)
+    );
+  }
 }

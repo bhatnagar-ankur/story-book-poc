@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { InputField } from './input-field';
 
 const meta: Meta<InputField> = {
-  title: 'Design System/Input Field',
+  title: 'Design System/Text Fields',
   component: InputField,
   tags: ['autodocs'],
   decorators: [

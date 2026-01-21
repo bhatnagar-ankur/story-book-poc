@@ -3,7 +3,7 @@
         error: !!error,
         readonly: readonly,
         focused: isOpen || selected.length > 0
-     }" (click)="toggleDropdown()">
+     }" (click)="handleClick()">
 
     <label class="ms-label">
         {{ label }}
@@ -14,7 +14,7 @@
 
     <div class="ms-control">
         <div class="selected-list">
-            @if(selected.length === 0 && focused) {
+            @if(selected.length === 0 && isFocused) {
             <span class="placeholder">{{ placeholder }}</span>
             }
             @if(selected.length === 1) {
@@ -35,10 +35,11 @@
             }
             }
         </div>
-        
+
         @if (!readonly) {
         <div class="arrow" [ngClass]="{ open: isOpen }">
-            <img src="/assets/icons/dropdown.svg" />
+            <img [src]="dropdownIcon" alt="" aria-hidden="true" class="icon"
+                [class.rotate]="mode === 'dropdown' && isOpen" />
         </div>
         }
     </div>
@@ -53,7 +54,10 @@
         [ngClass]="{checked: selected.includes(opt)}">
 
         <app-checkbox [checked]="selected.includes(opt)" [label]="''"></app-checkbox>
-        <span>{{ opt }}</span>
+        <span class="option-text" [attr.data-full]="opt">
+            {{ truncate(opt) }}
+        </span>
+
     </div>
     } @empty {
     <div class="no-options">No results found</div>

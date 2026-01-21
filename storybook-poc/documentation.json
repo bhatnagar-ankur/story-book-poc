@@ -89,6 +89,101 @@
     "directives": [],
     "components": [
         {
+            "name": "Accordion",
+            "id": "component-Accordion-c2521d819f58e72cadb1a1c73406fbe42ad46fd35dc04513c38951e9ba4cb818b9f41c8297868700c14a12055fff50b18a8e7f36d2ca310f78d9a2276e053500",
+            "file": "src/shared/accordion/accordion.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-accordion",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./accordion.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "content",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "expanded",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "\"primary\" | \"secondary\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "toggle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "Checkbox"
+                },
+                {
+                    "name": "MultiSelectDropdown"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\nimport { MultiSelectDropdown } from '../multi-select-dropdown/multi-select-dropdown';\r\n\r\n@Component({\r\n  selector: 'app-accordion',\r\n  imports: [CommonModule, Checkbox, MultiSelectDropdown],\r\n  templateUrl: './accordion.html',\r\n  styleUrl: './accordion.scss',\r\n})\r\nexport class Accordion {\r\n  @Input() title!: string;\r\n  @Input() type: 'primary' | 'secondary' = 'primary';\r\n  @Input() expanded = false;\r\n  @Input() content!: string;\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n  }\r\n}\r\n",
+            "styleUrl": "./accordion.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"accordion\" [ngClass]=\"type\">\r\n  <button\r\n    class=\"accordion-header\"\r\n    (click)=\"toggle()\"\r\n    [attr.aria-expanded]=\"expanded\"\r\n  >\r\n    <div class=\"accordion-title-group\">\r\n      <span class=\"accordion-title\">{{ title }}</span>\r\n      @if (type === 'primary') {\r\n        <app-checkbox\r\n        class=\"accordion-checkbox\"\r\n        label=\"Checkbox\"\r\n        [class.expanded]=\"expanded\"\r\n      ></app-checkbox>\r\n      }\r\n    </div>\r\n\r\n    <img\r\n      src=\"assets/icons/accordion-dropdown.svg\"\r\n      alt=\"Toggle accordion\"\r\n      class=\"accordion-icon\"\r\n      [class.expanded]=\"expanded\"\r\n    />\r\n  </button>\r\n\r\n  @if (expanded) {\r\n    <div class=\"accordion-body\">\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\" [dropdownIcon]=\"'assets/icons/search.svg'\"></app-multi-select-dropdown>\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\" [dropdownIcon]=\"'assets/icons/search.svg'\"></app-multi-select-dropdown>\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\" [dropdownIcon]=\"'assets/icons/search.svg'\"></app-multi-select-dropdown>\r\n      <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Korea','China','Iran']\" [dropdownIcon]=\"'assets/icons/search.svg'\"></app-multi-select-dropdown>\r\n    </div>\r\n  }\r\n</div>\r\n"
+        },
+        {
             "name": "Alert",
             "id": "component-Alert-59bc2fa07f307ebd5dab2af4909fe431723287b78d34ca91e1c94eb0b44fada1909cb2a9afd83fadd30bda64762fe17a290c0e085ac0fdff9d0cb0bb4f59578f",
             "file": "src/components/alert/alert.component.ts",
@@ -1984,7 +2079,7 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "DialogBox-1",
-            "templateData": "<div class=\"dialog\" [ngClass]=\"[variant, size, position]\">\r\n    <div class=\"header\">\r\n        <span class=\"icon\"></span>\r\n        <h2>{{ title }}</h2>\r\n        <button class=\"close-btn\" (click)=\"closeCancel()\">\r\n            <img src=\"./assets/icons/close.svg\" class=\"close-img\" />\r\n        </button>\r\n    </div>\r\n\r\n    <div class=\"body\">\r\n        <p>{{ message }}</p>\r\n    </div>\r\n\r\n    <div class=\"footer\">\r\n        <app-buttons label=\"CANCEL\" buttonType=\"text\" (click)=\"closeCancel()\"></app-buttons>\r\n        <app-buttons label=\"Okay\" buttonType=\"primary\" (click)=\"closeConfirm()\"></app-buttons>\r\n    </div>\r\n</div>"
+            "templateData": "<div class=\"dialog\" [ngClass]=\"[variant, size, position]\">\r\n    <div class=\"header\">\r\n        <span class=\"icon\"></span>\r\n        <h2>{{ title }}</h2>\r\n        <button class=\"close-btn\" (click)=\"closeCancel()\">\r\n            <img src=\"./assets/icons/close.svg\" class=\"close-img\" />\r\n        </button>\r\n    </div>\r\n\r\n    <div class=\"body\">\r\n        <div class=\"body-inner\">\r\n            <p class=\"body-message\">{{ message }}</p>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"footer\">\r\n        <app-buttons label=\"CANCEL\" buttonType=\"text\" (click)=\"closeCancel()\"></app-buttons>\r\n        <app-buttons label=\"Okay\" buttonType=\"primary\" (click)=\"closeConfirm()\"></app-buttons>\r\n    </div>\r\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -2364,7 +2459,7 @@
         },
         {
             "name": "MultiSelectDropdown",
-            "id": "component-MultiSelectDropdown-03bdab84c1c10488ee5386f77fa19be289ade3f5abed87168a3cd0978cc7695aeb354f1c598af764b3ed6691b07c2d50a3b2b4b7fa745ee458c60469f9f8f012",
+            "id": "component-MultiSelectDropdown-2f5e57653ec3f25284aaa7e7dde3954bedf076285fff026ae951a596f3c4f7b669bd9e9e403045700eef0ed2dde4d6249a2a5afa35a8da8d970b4e04427684c6",
             "file": "src/shared/multi-select-dropdown/multi-select-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2390,6 +2485,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "dropdownIcon",
+                    "defaultValue": "'assets/icons/dropdown.svg'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "error",
                     "defaultValue": "''",
                     "deprecated": false,
@@ -2408,6 +2512,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "mode",
+                    "defaultValue": "'dropdown'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "\"dropdown\" | \"search\"",
+                    "decorators": []
+                },
+                {
                     "name": "options",
                     "defaultValue": "[]",
                     "deprecated": false,
@@ -2421,7 +2534,7 @@
                     "defaultValue": "'Select Items'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 },
@@ -2456,7 +2569,18 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "focused",
+                    "name": "filteredOptions",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "isFocused",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -2464,7 +2588,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 26
                 },
                 {
                     "name": "isOpen",
@@ -2475,10 +2599,48 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 25
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "filterOptions",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handleClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "removeSelected",
                     "args": [
@@ -2492,7 +2654,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2508,16 +2670,6 @@
                     ]
                 },
                 {
-                    "name": "toggleDropdown",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 30,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "toggleSelect",
                     "args": [
                         {
@@ -2530,7 +2682,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2565,7 +2717,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2608,13 +2760,51 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  @Input() placeholder = 'Select Items';\r\n\r\n  isOpen = false;\r\n  focused = false;\r\n\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen;\r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  filteredOptions: string[] = [];\r\n\r\n  @Input() placeholder = 'Select Items';\r\n  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';\r\n  @Input() mode: 'dropdown' | 'search' = 'dropdown';\r\n\r\n  isOpen = false;\r\n  isFocused = false;\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  handleClick(): void {\r\n    if (this.disabled || this.readonly) return;\r\n    this.isOpen = !this.isOpen;\r\n    this.isFocused = this.isOpen;\r\n  }\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n  filterOptions(event: Event): void {\r\n    const value = (event.target as HTMLInputElement).value.toLowerCase();\r\n    this.filteredOptions = this.options.filter(opt =>\r\n      opt.toLowerCase().includes(value)\r\n    );\r\n  }\r\n}\r\n",
             "styleUrl": "./multi-select-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\" (click)=\"toggleDropdown()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && focused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\" (click)=\"removeSelected(item); $event.stopPropagation()\">\r\n                {{ truncate(item) }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n        \r\n        @if (!readonly) {\r\n        <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n            <img src=\"/assets/icons/dropdown.svg\" />\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n    <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n        <app-checkbox [checked]=\"selected.includes(opt)\" [label]=\"''\"></app-checkbox>\r\n        <span>{{ opt }}</span>\r\n    </div>\r\n    } @empty {\r\n    <div class=\"no-options\">No results found</div>\r\n    }\r\n</div>\r\n}"
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0\r\n     }\" (click)=\"handleClick()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && isFocused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\" (click)=\"removeSelected(item); $event.stopPropagation()\">\r\n                {{ truncate(item) }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n        @if (!readonly) {\r\n        <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n            <img [src]=\"dropdownIcon\" alt=\"\" aria-hidden=\"true\" class=\"icon\"\r\n                [class.rotate]=\"mode === 'dropdown' && isOpen\" />\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n    @for (opt of options; track opt) {\r\n    <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n        [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n        <app-checkbox [checked]=\"selected.includes(opt)\" [label]=\"''\"></app-checkbox>\r\n        <span class=\"option-text\" [attr.data-full]=\"opt\">\r\n            {{ truncate(opt) }}\r\n        </span>\r\n\r\n    </div>\r\n    } @empty {\r\n    <div class=\"no-options\">No results found</div>\r\n    }\r\n</div>\r\n}"
+        },
+        {
+            "name": "Navigation",
+            "id": "component-Navigation-9881ad970f5effc8a29e1acfe9581463e8b6779caf96374cd5b3288e0e3dda4be3b54dfee5ca1fc05768bf0c1f7a5c85d7a5ed456c9a7d6d6e7264cf77174404",
+            "file": "src/shared/navigation/navigation.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-navigation",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./navigation.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n\r\n}\r\n",
+            "styleUrl": "./navigation.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>navigation works!</p>\r\n"
         },
         {
             "name": "PageComponent",
@@ -3306,7 +3496,7 @@
         },
         {
             "name": "Tooltip",
-            "id": "component-Tooltip-dbba11a27bc4d97db040b21d92594d02b7223063ec8dfc61a35c5453d261fa91e5926e2d81dbc620482f09ee8795755f06de5745ac653da5d9a07333fe061baa",
+            "id": "component-Tooltip-0697302da902b54367a68c53d339a6767ba57ba0beac8f16e9c23a418421597929ec684544d275591131c6e47ad91d89255e4881d72d33e88cb310a8679b0d63",
             "file": "src/shared/tooltip/tooltip.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3351,8 +3541,70 @@
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "expanded",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "isTruncated",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggle",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -3367,13 +3619,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tooltip',\r\n  imports: [CommonModule],\r\n  templateUrl: './tooltip.html',\r\n  styleUrl: './tooltip.scss',\r\n})\r\nexport class Tooltip {\r\n  @Input() text = '';\r\n  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';\r\n  @Input() label = 'Tooltip';\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tooltip',\r\n  imports: [CommonModule],\r\n  templateUrl: './tooltip.html',\r\n  styleUrl: './tooltip.scss',\r\n})\r\nexport class Tooltip {\r\n  @Input() text = '';\r\n  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';\r\n  @Input() label = 'Tooltip';\r\n\r\n  expanded = false;\r\n  isTruncated = false;\r\n\r\n  ngAfterViewInit() {\r\n    this.isTruncated = this.text?.length > 120;\r\n  }\r\n\r\n  toggle(event: Event) {\r\n    event.stopPropagation();\r\n    this.expanded = !this.expanded;\r\n  }\r\n\r\n}\r\n",
             "styleUrl": "./tooltip.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"tooltip\">\r\n  {{ label }}\r\n  <span class=\"tooltiptext\" [ngClass]=\"position\">\r\n    {{ text }}\r\n  </span>\r\n</div>\r\n"
+            "templateData": "<div class=\"tooltip\">\r\n  {{ label }}\r\n\r\n  <span class=\"tooltiptext\" [ngClass]=\"[position, expanded ? 'expanded' : 'collapsed']\"\r\n    (click)=\"$event.stopPropagation()\">\r\n    <span class=\"tooltip-content\">\r\n      {{ text }}\r\n    </span>\r\n    @if (isTruncated) {\r\n    <span class=\"read-more\" (click)=\"toggle($event)\">\r\n      {{ expanded ? 'Read less' : 'Read more' }}\r\n    </span>\r\n    }\r\n  </span>\r\n</div>"
         }
     ],
     "modules": [],
@@ -3643,7 +3895,7 @@
         "children": []
     },
     "coverage": {
-        "count": 12,
+        "count": 11,
         "status": "low",
         "files": [
             {
@@ -3865,6 +4117,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/shared/accordion/accordion.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Accordion",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
                 "filePath": "src/shared/buttons/buttons.ts",
                 "type": "component",
                 "linktype": "component",
@@ -3915,7 +4176,16 @@
                 "linktype": "component",
                 "name": "MultiSelectDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/15",
+                "coverageCount": "0/19",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/navigation/navigation.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Navigation",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -3960,7 +4230,7 @@
                 "linktype": "component",
                 "name": "Tooltip",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/8",
                 "status": "low"
             }
         ]
