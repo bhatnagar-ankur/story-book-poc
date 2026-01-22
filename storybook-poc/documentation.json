@@ -2504,7 +2504,7 @@
         },
         {
             "name": "MultiSelectDropdown",
-            "id": "component-MultiSelectDropdown-dcd9bdec5a4c3349c19a3b93f1a26462dc4ecb78b082652542daf83cf0046f273bed9901c3817f49f6c90ac2cf6f1ce641fc89fa303d5a69a96489018f912ef5",
+            "id": "component-MultiSelectDropdown-76858e65a1dd569e7dc75f8acf60ccccf3693e101ddef75296f115814f1bd72316ffca8acb00f916de2b98491f93e7ad3c3a7e229bfb73159d6c1c9ab195d2f3",
             "file": "src/shared/multi-select-dropdown/multi-select-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2661,7 +2661,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2699,7 +2699,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -2736,7 +2736,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 59,
+                    "line": 56,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2764,7 +2764,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2844,7 +2844,7 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 70
+                    "line": 67
                 }
             ],
             "standalone": false,
@@ -2860,7 +2860,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  constructor(private element: ElementRef) { }\r\n\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  filteredOptions: string[] = [];\r\n\r\n  @Input() placeholder = 'Select Items';\r\n  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';\r\n  @Input() mode: 'dropdown' | 'search' = 'dropdown';\r\n\r\n  isOpen = false;\r\n  isFocused = false;\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  handleClick(): void {\r\n  if (this.disabled || this.readonly) return;\r\n\r\n  // dropdown opens list\r\n  if (this.mode === 'dropdown') {\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  // search opens list but keeps icon static\r\n  if (this.mode === 'search') {\r\n    this.isOpen = true;\r\n  }\r\n\r\n  this.isFocused = this.isOpen;\r\n}\r\n\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n  filterOptions(event: Event): void {\r\n    const value = (event.target as HTMLInputElement).value.toLowerCase();\r\n    this.filteredOptions = this.options.filter(opt =>\r\n      opt.toLowerCase().includes(value)\r\n    );\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const clickedInside = this.element.nativeElement.contains(event.target);\r\n\r\n    if (!clickedInside && this.isOpen) {\r\n      this.isOpen = false;\r\n      this.isFocused = false;\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  constructor(private element: ElementRef) { }\r\n\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  filteredOptions: string[] = [];\r\n\r\n  @Input() placeholder = 'Select Items';\r\n  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';\r\n  @Input() mode: 'dropdown' | 'search' = 'dropdown';\r\n\r\n  isOpen = false;\r\n  isFocused = false;\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  handleClick(): void {\r\n  if (this.disabled || this.readonly) return;\r\n  if (this.mode === 'dropdown') {\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  if (this.mode === 'search') {\r\n    this.isOpen = true;\r\n  }\r\n\r\n  this.isFocused = this.isOpen;\r\n}\r\n\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n  filterOptions(event: Event): void {\r\n    const value = (event.target as HTMLInputElement).value.toLowerCase();\r\n    this.filteredOptions = this.options.filter(opt =>\r\n      opt.toLowerCase().includes(value)\r\n    );\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const clickedInside = this.element.nativeElement.contains(event.target);\r\n\r\n    if (!clickedInside && this.isOpen) {\r\n      this.isOpen = false;\r\n      this.isFocused = false;\r\n    }\r\n  }\r\n}\r\n",
             "styleUrl": "./multi-select-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2963,7 +2963,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n\r\n  <!-- Toggle -->\r\n  <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n    <img\r\n      src=\"assets/icons/navigation.svg\"\r\n      alt=\"Toggle sidebar\"\r\n    />\r\n  </button>\r\n\r\n  <!-- Navigation -->\r\n  <ul class=\"nav-list\">\r\n    @for (item of navItems; track item.label) {\r\n      <li class=\"nav-item\">\r\n\r\n        <div class=\"nav-main\">\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          @if (expanded) {\r\n            <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n        </div>\r\n\r\n        @if (expanded && item.children?.length) {\r\n          <ul class=\"sub-list\">\r\n            @for (child of item.children; track child) {\r\n              <li class=\"sub-item\">{{ child }}</li>\r\n            }\r\n          </ul>\r\n        }\r\n\r\n      </li>\r\n    }\r\n  </ul>\r\n\r\n</nav>\r\n"
+            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n\r\n  <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n    <img\r\n      src=\"assets/icons/navigation.svg\"\r\n      alt=\"Toggle sidebar\"\r\n    />\r\n  </button>\r\n\r\n  <ul class=\"nav-list\">\r\n    @for (item of navItems; track item.label) {\r\n      <li class=\"nav-item\">\r\n\r\n        <div class=\"nav-main\">\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          @if (expanded) {\r\n            <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n        </div>\r\n\r\n        @if (expanded && item.children?.length) {\r\n          <ul class=\"sub-list\">\r\n            @for (child of item.children; track child) {\r\n              <li class=\"sub-item\">{{ child }}</li>\r\n            }\r\n          </ul>\r\n        }\r\n      </li>\r\n    }\r\n  </ul>\r\n</nav>\r\n"
         },
         {
             "name": "PageComponent",

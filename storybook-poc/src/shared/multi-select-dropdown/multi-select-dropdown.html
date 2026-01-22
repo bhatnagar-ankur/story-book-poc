@@ -48,19 +48,29 @@
     </div>
     @if (isOpen && !disabled && !readonly) {
     <div class="dropdown" (click)="$event.stopPropagation()">
-        @for (opt of options; track opt) {
-        <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
-            [ngClass]="{checked: selected.includes(opt)}">
 
-            <app-checkbox [checked]="selected.includes(opt)" [label]="''"></app-checkbox>
-            <span class="option-text" [attr.data-full]="opt">
-                {{ truncate(opt) }}
-            </span>
+        @if (mode === 'search') {
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search" (input)="filterOptions($event)" autofocus />
+        </div>
+        }
+
+        @for (opt of filteredOptions; track opt) {
+        <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
+            [ngClass]="{ checked: selected.includes(opt) }">
+            <app-checkbox [checked]="selected.includes(opt)" [label]="''">
+            </app-checkbox>
+            <app-tooltip [label]="truncate(opt)" [text]="opt" position="right">
+                <span class="option-text">
+                    {{ truncate(opt) }}
+                </span>
+            </app-tooltip>
 
         </div>
         } @empty {
         <div class="no-options">No results found</div>
         }
+
     </div>
     }
 </div>
