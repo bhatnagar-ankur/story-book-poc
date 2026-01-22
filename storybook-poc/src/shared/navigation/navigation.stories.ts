@@ -4,25 +4,113 @@ import { Navigation } from './navigation';
 const meta: Meta<Navigation> = {
   title: 'Design System/Navigation',
   component: Navigation,
-  tags: ['autodocs'],
   argTypes: {
-    expanded: {
-      control: 'boolean'
-    }
-  }
+  expanded: {
+    control: 'boolean',
+    description: 'Expand / Collapse sidebar',
+  },
+
+  showIcons: {
+    control: 'boolean',
+    description: 'Show / Hide menu icons',
+  },
+
+  showLogo: {
+    control: 'boolean',
+    description: 'Show / Hide logo',
+  },
+
+  activeIndex: {
+    control: {
+      type: 'number',
+      min: 0,
+      max: 10,
+      step: 1,
+    },
+    description: 'Selected menu index',
+  },
+
+  navItems: {
+    control: 'object',
+  },
+},
+  tags: ['autodocs'],
 };
 
 export default meta;
 type Story = StoryObj<Navigation>;
 
-export const Expanded: Story = {
+export const SideNavigation: Story = {
   args: {
-    expanded: true
-  }
-};
-
-export const Collapsed: Story = {
-  args: {
-    expanded: false
-  }
+    expanded: true,
+    showIcons: true,
+    showLogo: true,
+    navItems: [
+      {
+        icon: 'assets/icons/home-icon.svg',
+        label: 'Home',
+      },
+      {
+        icon: 'assets/icons/analytics-icon.svg',
+        label: 'Analytics Dashboard',
+      },
+      {
+        icon: 'assets/icons/home-icon.svg',
+        label: 'Shipment',
+        children: ['Create Shipments', 'Shipments'],
+      },
+      {
+        icon: 'assets/icons/miller-coors-icon.svg',
+        label: 'Miller Coors',
+      },
+      {
+        icon: 'assets/icons/marketplace-icon.svg',
+        label: 'Marketplace',
+      },
+      {
+        icon: 'assets/icons/booking-icon.svg',
+        label: 'Booking',
+      },
+      {
+        icon: 'assets/icons/rates-icon.svg',
+        label: 'Rates',
+      },
+      {
+        icon: 'assets/icons/reports-icon.svg',
+        label: 'Reports',
+      },
+      {
+        icon: 'assets/icons/rail-car-schedular-icon.svg',
+        label: 'Rail Car Schedular',
+      },
+      {
+        icon: 'assets/icons/accounts-icon.svg',
+        label: 'Account',
+      },
+      {
+        icon: 'assets/icons/resources-icon.svg',
+        label: 'Resources',
+      },
+      {
+        icon: 'assets/icons/help-icon.svg',
+        label: 'Help',
+      },
+      {
+        icon: 'assets/icons/load-icon.svg',
+        label: 'Load',
+      },
+      {
+        icon: 'assets/icons/load-icon.svg',
+        label: 'History',
+      },
+      {
+        icon: 'assets/icons/load-icon.svg',
+        label: 'Service Center',
+      },
+      {
+        icon: 'assets/icons/load-icon.svg',
+        label: 'Admin',
+      },
+    ],
+  },
 };

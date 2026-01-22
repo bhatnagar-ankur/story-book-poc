@@ -1,31 +1,65 @@
 <nav class="sidebar" [class.collapsed]="!expanded">
-
-  <button class="toggle-btn" (click)="toggle()">
-    <img
-      src="assets/icons/navigation.svg"
-      alt="Toggle sidebar"
-    />
-  </button>
-
-  <ul class="nav-list">
-    @for (item of navItems; track item.label) {
-      <li class="nav-item">
-
-        <div class="nav-main">
+  <div class="nav-header">
+    @if (showLogo && expanded) {
+    <img src="assets/icons/logo.svg" class="logo" />
+    }
+    @if (!expanded){
+    <span class="app-name">Fracht
+      <span class="sub-text">GROUP</span>
+    </span>
+    }
+    <button class="toggle-btn" (click)="toggle()">
+      <img src="assets/icons/navigation.svg" alt="Toggle sidebar" class="expand-icon" />
+    </button>
+  </div>
+  <div class="nav-scroll">
+    <ul class="nav-list">
+      @for (item of navItems; track item.label; let i = $index) {
+      <li class="nav-item" (mouseenter)="hoveredIndex = i" (mouseleave)="hoveredIndex = null">
+        <div class="nav-main" (click)="onParentClick(i, !!item.children?.length)" [class.active]="activeIndex === i">
+          @if (showIcons) {
           <img class="icon" [src]="item.icon" />
+          }
+
           @if (expanded) {
-            <span class="label">{{ item.label }}</span>
+          <span class="label">{{ item.label }}</span>
+          }
+
+          @if (item.children?.length && expanded) {
+          <img src="assets/icons/dropdown.svg" class="dropdown-icon" [class.open]="openIndex === i" />
           }
         </div>
+        @if (!expanded && hoveredIndex === i) {
+        <div class="hover-panel">
 
-        @if (expanded && item.children?.length) {
-          <ul class="sub-list">
+          <div class="hover-title">
+            {{ item.label }}
+          </div>
+
+          @if (item.children?.length) {
+          <ul class="hover-children">
             @for (child of item.children; track child) {
-              <li class="sub-item">{{ child }}</li>
+            <li>{{ child }}</li>
             }
           </ul>
+          }
+
+        </div>
+        }
+        @if (expanded && item.children?.length && openIndex === i) {
+        <ul class="sub-list">
+          @for (child of item.children; track child; let ci = $index) {
+          <li class="sub-item" (click)="selectChild(i, ci)" [class.active-child]="
+          activeChild?.parent === i &&
+          activeChild?.index === ci
+        ">
+            <span class="sub-text">{{ child }}</span>
+          </li>
+          }
+        </ul>
         }
       </li>
-    }
-  </ul>
+      }
+    </ul>
+  </div>
 </nav>
