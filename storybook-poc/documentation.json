@@ -57,33 +57,23 @@
             "extends": []
         },
         {
-            "name": "NavItem",
-            "id": "interface-NavItem-ef8b58917624357f42704d1ae9011d94a806e60d0b656bb951bc6842d6d6e9c6eada6151f1af93b5e8e4729ffc5e025698ff74e48ebd53c6e1a767f939f95de0",
+            "name": "NavChild",
+            "id": "interface-NavChild-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
             "file": "src/shared/navigation/navigation.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n    if (!this.expanded) {\r\n      this.expanded = true;\r\n      return;\r\n    }\r\n    this.activeIndex = index;\r\n    this.activeChild = null;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = this.openIndex === index ? null : index;\r\n    } else {\r\n      this.openIndex = null;\r\n    }\r\n  }\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "properties": [
-                {
-                    "name": "children",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string[]",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 5
-                },
                 {
                     "name": "icon",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
                     "indexKey": "",
-                    "optional": false,
+                    "optional": true,
                     "description": "",
-                    "line": 3
+                    "line": 4
                 },
                 {
                     "name": "label",
@@ -93,7 +83,52 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 4
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "NavItem",
+            "id": "interface-NavItem-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
+            "file": "src/shared/navigation/navigation.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "children",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "NavChild[]",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
                 }
             ],
             "indexSignatures": [],
@@ -2950,7 +2985,7 @@
         },
         {
             "name": "Navigation",
-            "id": "component-Navigation-ef8b58917624357f42704d1ae9011d94a806e60d0b656bb951bc6842d6d6e9c6eada6151f1af93b5e8e4729ffc5e025698ff74e48ebd53c6e1a767f939f95de0",
+            "id": "component-Navigation-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
             "file": "src/shared/navigation/navigation.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2971,7 +3006,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 23,
                     "type": "number | null",
                     "decorators": []
                 },
@@ -2980,7 +3015,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 19,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2989,16 +3024,16 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 24,
                     "type": "number | null",
                     "decorators": []
                 },
                 {
-                    "name": "showIcons",
+                    "name": "showChildIcons",
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 21,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -3007,7 +3042,16 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 22,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showParentIcons",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -3023,7 +3067,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 26
                 },
                 {
                     "name": "hoveredIndex",
@@ -3034,7 +3078,18 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 25
+                },
+                {
+                    "name": "hoverY",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
                 },
                 {
                     "name": "navItems",
@@ -3045,10 +3100,107 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 28
+                },
+                {
+                    "name": "panelTop",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "onHover",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onHoverChildClick",
+                    "args": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "onParentClick",
                     "args": [
@@ -3068,7 +3220,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3111,7 +3263,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 89,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3141,7 +3293,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 74,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3158,7 +3310,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3183,13 +3335,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n    if (!this.expanded) {\r\n      this.expanded = true;\r\n      return;\r\n    }\r\n    this.activeIndex = index;\r\n    this.activeChild = null;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = this.openIndex === index ? null : index;\r\n    } else {\r\n      this.openIndex = null;\r\n    }\r\n  }\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "styleUrl": "./navigation.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n  <div class=\"nav-header\">\r\n    @if (showLogo && expanded) {\r\n    <img src=\"assets/icons/logo.svg\" class=\"logo\" />\r\n    }\r\n    @if (!expanded){\r\n    <span class=\"app-name\">Fracht\r\n      <span class=\"sub-text\">GROUP</span>\r\n    </span>\r\n    }\r\n    <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n      <img src=\"assets/icons/navigation.svg\" alt=\"Toggle sidebar\" class=\"expand-icon\" />\r\n    </button>\r\n  </div>\r\n  <div class=\"nav-scroll\">\r\n    <ul class=\"nav-list\">\r\n      @for (item of navItems; track item.label; let i = $index) {\r\n      <li class=\"nav-item\" (mouseenter)=\"hoveredIndex = i\" (mouseleave)=\"hoveredIndex = null\">\r\n        <div class=\"nav-main\" (click)=\"onParentClick(i, !!item.children?.length)\" [class.active]=\"activeIndex === i\">\r\n          @if (showIcons) {\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          }\r\n\r\n          @if (expanded) {\r\n          <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n\r\n          @if (item.children?.length && expanded) {\r\n          <img src=\"assets/icons/dropdown.svg\" class=\"dropdown-icon\" [class.open]=\"openIndex === i\" />\r\n          }\r\n        </div>\r\n        @if (!expanded && hoveredIndex === i) {\r\n        <div class=\"hover-panel\">\r\n\r\n          <div class=\"hover-title\">\r\n            {{ item.label }}\r\n          </div>\r\n\r\n          @if (item.children?.length) {\r\n          <ul class=\"hover-children\">\r\n            @for (child of item.children; track child) {\r\n            <li>{{ child }}</li>\r\n            }\r\n          </ul>\r\n          }\r\n\r\n        </div>\r\n        }\r\n        @if (expanded && item.children?.length && openIndex === i) {\r\n        <ul class=\"sub-list\">\r\n          @for (child of item.children; track child; let ci = $index) {\r\n          <li class=\"sub-item\" (click)=\"selectChild(i, ci)\" [class.active-child]=\"\r\n          activeChild?.parent === i &&\r\n          activeChild?.index === ci\r\n        \">\r\n            <span class=\"sub-text\">{{ child }}</span>\r\n          </li>\r\n          }\r\n        </ul>\r\n        }\r\n      </li>\r\n      }\r\n    </ul>\r\n  </div>\r\n</nav>"
+            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n  <div class=\"nav-header\">\r\n    @if (showLogo && expanded) {\r\n    <img src=\"assets/icons/logo.svg\" class=\"logo\" />\r\n    }\r\n    @if (!expanded){\r\n    <span class=\"app-name\">Fracht\r\n      <span class=\"sub-text-logo\">GROUP</span>\r\n    </span>\r\n    }\r\n    <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n      <img src=\"assets/icons/navigation.svg\" alt=\"Toggle sidebar\" class=\"expand-icon\" />\r\n    </button>\r\n  </div>\r\n  <div class=\"nav-scroll\">\r\n    <ul class=\"nav-list\">\r\n      @for (item of navItems; track item.label; let i = $index) {\r\n      <li class=\"nav-item\" (mouseenter)=\"onHover(i, $event)\" (mouseleave)=\"hoveredIndex = null\">\r\n        <div class=\"nav-main\" (click)=\"onParentClick(i, !!item.children?.length)\" [class.active]=\"activeIndex === i\">\r\n          @if (showParentIcons) {\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          }\r\n\r\n\r\n          @if (expanded) {\r\n          <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n\r\n          @if (item.children?.length && expanded) {\r\n          <img src=\"assets/icons/dropdown.svg\" class=\"dropdown-icon\" [class.open]=\"openIndex === i\" />\r\n          }\r\n        </div>\r\n        @if (!expanded && hoveredIndex === i && item.children?.length) {\r\n        <div class=\"hover-panel\" [style.top.px]=\"panelTop\">\r\n\r\n          <!-- <div class=\"hover-title\">\r\n            {{ item.label }}\r\n          </div> -->\r\n\r\n          @if (item.children?.length) {\r\n          <ul class=\"hover-children\">\r\n            @for (child of item.children; track child; let ci = $index) {\r\n\r\n            <li class=\"hover-child-item\">\r\n              @if (showChildIcons && child.icon) {\r\n              <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n              }\r\n\r\n\r\n              <span class=\"sub-text\">{{ child.label }}</span>\r\n            </li>\r\n            }\r\n          </ul>\r\n          }\r\n\r\n        </div>\r\n        }\r\n        @if (expanded && item.children?.length && openIndex === i) {\r\n        <ul class=\"sub-list\">\r\n          @for (child of item.children; track child; let ci = $index) {\r\n          <li class=\"sub-item\" (click)=\"selectChild(i, ci)\" [class.active-child]=\"\r\n    activeChild?.parent === i &&\r\n    activeChild?.index === ci\r\n  \">\r\n            @if (showChildIcons && expanded && child.icon) {\r\n            <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n            }\r\n\r\n\r\n            <span class=\"sub-text\">{{ child.label }}</span>\r\n          </li>\r\n\r\n          }\r\n        </ul>\r\n        }\r\n      </li>\r\n      }\r\n    </ul>\r\n  </div>\r\n</nav>"
         },
         {
             "name": "PageComponent",
@@ -4280,7 +4432,7 @@
         "children": []
     },
     "coverage": {
-        "count": 11,
+        "count": 10,
         "status": "low",
         "files": [
             {
@@ -4570,7 +4722,16 @@
                 "linktype": "component",
                 "name": "Navigation",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/18",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/navigation/navigation.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "NavChild",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {

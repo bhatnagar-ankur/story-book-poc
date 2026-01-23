@@ -18,8 +18,11 @@
       }
 
       @if (selected) {
-      <span class="single-value">{{ truncate(selected) }}</span>
+      <span class="single-value full-value">
+        {{ selected }}
+      </span>
       }
+
     </div>
 
     @if (!readonly) {
@@ -38,8 +41,13 @@
 <div class="dropdown">
   @for (opt of options; track opt) {
   <div class="option" (click)="select(opt); $event.stopPropagation()" [ngClass]="{ selected: selected === opt }">
-    <span>{{ opt }}</span>
+    <app-tooltip [label]="truncate(opt)" [text]="opt" position="right">
+      <span class="option-text truncate-text">
+        {{ truncate(opt) }}
+      </span>
+    </app-tooltip>
   </div>
+
   } @empty {
   <div class="no-options">No results found</div>
   }

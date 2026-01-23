@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Tooltip } from '../tooltip/tooltip';
 
 @Component({
   selector: 'app-single-dropdown',
-  imports: [CommonModule],
+  imports: [CommonModule, Tooltip],
   templateUrl: './single-dropdown.html',
   styleUrl: './single-dropdown.scss',
 })
 export class SingleDropdown {
+  constructor(private element: ElementRef) { }
+
   @Input() label = '';
   @Input() options: string[] = [];
   @Input() disabled = false;
@@ -38,4 +41,14 @@ export class SingleDropdown {
     this.isOpen = false;
     this.focused = true;
   }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedInside = this.element.nativeElement.contains(event.target);
+
+    if (!clickedInside && this.isOpen) {
+      this.isOpen = false;
+      this.focused = false;
+    }
+  }
+
 }

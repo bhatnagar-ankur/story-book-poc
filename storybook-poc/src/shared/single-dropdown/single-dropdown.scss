@@ -33,7 +33,7 @@ $option-hover: #00a3e0;
 
   .ms-control {
     display: flex;
-    height: 48px;
+    min-height: 48px;
     padding: 0 16px;
     align-items: center;
     gap: 8px;
@@ -54,10 +54,11 @@ $option-hover: #00a3e0;
       .single-value {
         font-size: 16px;
         color: $readonly-color;
-        max-width: 300px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        max-width: 100%;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        word-break: break-word;
       }
     }
 
@@ -142,4 +143,26 @@ $option-hover: #00a3e0;
   padding: 12px 16px;
   font-size: 14px;
   color: $field-disabled-color;
+}
+.option-text {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.full-value {
+  white-space: normal;    
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.truncate-text {
+  max-width: 180px;        
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
