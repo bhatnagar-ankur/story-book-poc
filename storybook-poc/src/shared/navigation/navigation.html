@@ -17,9 +17,10 @@
       @for (item of navItems; track item.label; let i = $index) {
       <li class="nav-item" (mouseenter)="onHover(i, $event)" (mouseleave)="hoveredIndex = null">
         <div class="nav-main" (click)="onParentClick(i, !!item.children?.length)" [class.active]="activeIndex === i">
-          @if (showIcons) {
+          @if (showParentIcons) {
           <img class="icon" [src]="item.icon" />
           }
+
 
           @if (expanded) {
           <span class="label">{{ item.label }}</span>
@@ -40,8 +41,13 @@
           <ul class="hover-children">
             @for (child of item.children; track child; let ci = $index) {
 
-            <li class="hover-child-item" (click)="onHoverChildClick(i, ci)">
-              <span class="sub-text">{{ child }}</span>
+            <li class="hover-child-item">
+              @if (showChildIcons && child.icon) {
+              <img class="sub-icon" [src]="child.icon" />
+              }
+
+
+              <span class="sub-text">{{ child.label }}</span>
             </li>
             }
           </ul>
@@ -53,11 +59,17 @@
         <ul class="sub-list">
           @for (child of item.children; track child; let ci = $index) {
           <li class="sub-item" (click)="selectChild(i, ci)" [class.active-child]="
-          activeChild?.parent === i &&
-          activeChild?.index === ci
-        ">
-            <span class="sub-text">{{ child }}</span>
+    activeChild?.parent === i &&
+    activeChild?.index === ci
+  ">
+            @if (showChildIcons && expanded && child.icon) {
+            <img class="sub-icon" [src]="child.icon" />
+            }
+
+
+            <span class="sub-text">{{ child.label }}</span>
           </li>
+
           }
         </ul>
         }

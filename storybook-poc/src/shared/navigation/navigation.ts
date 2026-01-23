@@ -1,8 +1,13 @@
 import { Component, Input } from '@angular/core';
+export interface NavChild {
+  label: string;
+  icon?: string;
+}
+
 export interface NavItem {
   icon: string;
   label: string;
-  children?: string[];
+  children?: NavChild[];
 }
 @Component({
   selector: 'app-navigation',
@@ -12,7 +17,8 @@ export interface NavItem {
 })
 export class Navigation {
   @Input() expanded = false;
-  @Input() showIcons = true;
+  @Input() showParentIcons = true;
+  @Input() showChildIcons = true;
   @Input() showLogo = true;
   @Input() activeIndex: number | null = null;
   @Input() openIndex: number | null = null;

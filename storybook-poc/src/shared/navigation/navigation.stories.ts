@@ -5,35 +5,40 @@ const meta: Meta<Navigation> = {
   title: 'Design System/Navigation',
   component: Navigation,
   argTypes: {
-  expanded: {
-    control: 'boolean',
-    description: 'Expand / Collapse sidebar',
-  },
-
-  showIcons: {
-    control: 'boolean',
-    description: 'Show / Hide menu icons',
-  },
-
-  showLogo: {
-    control: 'boolean',
-    description: 'Show / Hide logo',
-  },
-
-  activeIndex: {
-    control: {
-      type: 'number',
-      min: 0,
-      max: 10,
-      step: 1,
+    expanded: {
+      control: 'boolean',
+      description: 'Expand / Collapse sidebar',
     },
-    description: 'Selected menu index',
-  },
+    showParentIcons: {
+      control: 'boolean',
+      description: 'Show / Hide parent menu icons',
+    },
 
-  navItems: {
-    control: 'object',
+    showChildIcons: {
+      control: 'boolean',
+      description: 'Show / Hide child menu icons',
+    },
+
+
+    showLogo: {
+      control: 'boolean',
+      description: 'Show / Hide logo',
+    },
+
+    activeIndex: {
+      control: {
+        type: 'number',
+        min: 0,
+        max: 10,
+        step: 1,
+      },
+      description: 'Selected menu index',
+    },
+
+    navItems: {
+      control: 'object',
+    },
   },
-},
   tags: ['autodocs'],
 };
 
@@ -43,7 +48,8 @@ type Story = StoryObj<Navigation>;
 export const SideNavigation: Story = {
   args: {
     expanded: true,
-    showIcons: true,
+    showParentIcons: true,
+    showChildIcons: true,
     showLogo: true,
     navItems: [
       {
@@ -57,7 +63,10 @@ export const SideNavigation: Story = {
       {
         icon: 'assets/icons/home-icon.svg',
         label: 'Shipment',
-        children: ['Create Shipments', 'Shipments'],
+        children: [
+          { label: 'Create Shipments', icon: 'assets/icons/home-icon.svg' },
+          { label: 'Shipments', icon: 'assets/icons/reports-icon.svg' }
+        ],
       },
       {
         icon: 'assets/icons/miller-coors-icon.svg',
