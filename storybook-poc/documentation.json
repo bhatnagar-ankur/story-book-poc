@@ -58,12 +58,12 @@
         },
         {
             "name": "NavItem",
-            "id": "interface-NavItem-a96c5372250477a5b0631bac17dd3cd0e44ce57f02729d71f364a3ba67878ed939c30b855134e4b3cc0953337a7da431ddb0c7feae96c77c0935959095b9c5a1",
+            "id": "interface-NavItem-ef8b58917624357f42704d1ae9011d94a806e60d0b656bb951bc6842d6d6e9c6eada6151f1af93b5e8e4729ffc5e025698ff74e48ebd53c6e1a767f939f95de0",
             "file": "src/shared/navigation/navigation.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = true;\r\n\r\n  navItems: NavItem[] = [\r\n    {\r\n      icon: 'assets/icons/home.svg',\r\n      label: 'Dashboard'\r\n    },\r\n    {\r\n      icon: 'assets/icons/user.svg',\r\n      label: 'Users',\r\n      children: ['Add User', 'User List']\r\n    },\r\n    {\r\n      icon: 'assets/icons/settings.svg',\r\n      label: 'Settings',\r\n      children: ['Profile', 'Security']\r\n    }\r\n  ];\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n    if (!this.expanded) {\r\n      this.expanded = true;\r\n      return;\r\n    }\r\n    this.activeIndex = index;\r\n    this.activeChild = null;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = this.openIndex === index ? null : index;\r\n    } else {\r\n      this.openIndex = null;\r\n    }\r\n  }\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "children",
@@ -2504,7 +2504,7 @@
         },
         {
             "name": "MultiSelectDropdown",
-            "id": "component-MultiSelectDropdown-76858e65a1dd569e7dc75f8acf60ccccf3693e101ddef75296f115814f1bd72316ffca8acb00f916de2b98491f93e7ad3c3a7e229bfb73159d6c1c9ab195d2f3",
+            "id": "component-MultiSelectDropdown-c6e8697ae21219ed9c16f1d422389bacde65644e91ec6e54129c2f308e747ce260955d7034a0ecb067b287c65e6be4e22ca244a8dbedac29881fe917c4c58e58",
             "file": "src/shared/multi-select-dropdown/multi-select-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2525,7 +2525,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2534,7 +2534,7 @@
                     "defaultValue": "'assets/icons/dropdown.svg'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 25,
                     "type": "string",
                     "decorators": []
                 },
@@ -2543,7 +2543,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -2552,7 +2552,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -2561,7 +2561,7 @@
                     "defaultValue": "'dropdown'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 26,
                     "type": "\"dropdown\" | \"search\"",
                     "decorators": []
                 },
@@ -2570,7 +2570,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -2579,7 +2579,7 @@
                     "defaultValue": "'Select Items'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 24,
                     "type": "string",
                     "decorators": []
                 },
@@ -2588,7 +2588,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 18,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2597,7 +2597,7 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 20,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2606,12 +2606,21 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 21,
                     "type": "string[]",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "selectedChange",
+                    "defaultValue": "new EventEmitter<string[]>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "filteredOptions",
@@ -2622,7 +2631,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 22
                 },
                 {
                     "name": "isFocused",
@@ -2633,7 +2642,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 29
                 },
                 {
                     "name": "isOpen",
@@ -2644,7 +2653,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27
+                    "line": 28
                 }
             ],
             "methodsClass": [
@@ -2661,7 +2670,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 59,
+                    "line": 65,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2678,6 +2687,44 @@
                 },
                 {
                     "name": "handleClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 81,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
@@ -2699,7 +2746,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -2736,7 +2783,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2764,7 +2811,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2799,7 +2846,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2844,7 +2891,7 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 67
+                    "line": 73
                 }
             ],
             "standalone": false,
@@ -2855,12 +2902,15 @@
                 },
                 {
                     "name": "Checkbox"
+                },
+                {
+                    "name": "Tooltip"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown {\r\n  constructor(private element: ElementRef) { }\r\n\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  filteredOptions: string[] = [];\r\n\r\n  @Input() placeholder = 'Select Items';\r\n  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';\r\n  @Input() mode: 'dropdown' | 'search' = 'dropdown';\r\n\r\n  isOpen = false;\r\n  isFocused = false;\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  handleClick(): void {\r\n  if (this.disabled || this.readonly) return;\r\n  if (this.mode === 'dropdown') {\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  if (this.mode === 'search') {\r\n    this.isOpen = true;\r\n  }\r\n\r\n  this.isFocused = this.isOpen;\r\n}\r\n\r\n\r\n  toggleSelect(item: string) {\r\n    const exists = this.selected.includes(item);\r\n    this.selected = exists\r\n      ? this.selected.filter(i => i !== item)\r\n      : [...this.selected, item];\r\n  }\r\n\r\n  removeSelected(item: string) {\r\n    this.selected = this.selected.filter(i => i !== item);\r\n  }\r\n  filterOptions(event: Event): void {\r\n    const value = (event.target as HTMLInputElement).value.toLowerCase();\r\n    this.filteredOptions = this.options.filter(opt =>\r\n      opt.toLowerCase().includes(value)\r\n    );\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const clickedInside = this.element.nativeElement.contains(event.target);\r\n\r\n    if (!clickedInside && this.isOpen) {\r\n      this.isOpen = false;\r\n      this.isFocused = false;\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\nimport { Tooltip } from '../tooltip/tooltip';\r\n\r\n@Component({\r\n  selector: 'app-multi-select-dropdown',\r\n  imports: [CommonModule, Checkbox,Tooltip],\r\n  templateUrl: './multi-select-dropdown.html',\r\n  styleUrl: './multi-select-dropdown.scss',\r\n})\r\nexport class MultiSelectDropdown implements OnInit, OnChanges {\r\n  constructor(private element: ElementRef) { }\r\n\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = true;\r\n  @Input() selected: string[] = [];\r\n  filteredOptions: string[] = [];\r\n\r\n  @Input() placeholder = 'Select Items';\r\n  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';\r\n  @Input() mode: 'dropdown' | 'search' = 'dropdown';\r\n@Output() selectedChange = new EventEmitter<string[]>();\r\n  isOpen = false;\r\n  isFocused = false;\r\n  truncate(value: string, limit = 10): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n  ngOnInit(): void {\r\n    this.filteredOptions = [...this.options];\r\n  }\r\n  handleClick(): void {\r\n    if (this.disabled || this.readonly) return;\r\n    if (this.mode === 'dropdown') {\r\n      this.isOpen = !this.isOpen;\r\n    }\r\n\r\n    if (this.mode === 'search') {\r\n      this.isOpen = true;\r\n    }\r\n\r\n    this.isFocused = this.isOpen;\r\n    this.filteredOptions = [...this.options];\r\n  }\r\ntoggleSelect(item: string) {\r\n  const updated = this.selected.includes(item)\r\n    ? this.selected.filter(i => i !== item)\r\n    : [...this.selected, item];\r\n\r\n  this.selected = updated;\r\n  this.selectedChange.emit(updated);\r\n}\r\n\r\nremoveSelected(item: string) {\r\n  this.selected = this.selected.filter(i => i !== item);\r\n  this.selectedChange.emit(this.selected);\r\n}\r\n\r\n  filterOptions(event: Event): void {\r\n    const value = (event.target as HTMLInputElement).value.toLowerCase();\r\n    this.filteredOptions = this.options.filter(opt =>\r\n      opt.toLowerCase().includes(value)\r\n    );\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const clickedInside = this.element.nativeElement.contains(event.target);\r\n\r\n    if (!clickedInside && this.isOpen) {\r\n      this.isOpen = false;\r\n      this.isFocused = false;\r\n    }\r\n  }\r\n  ngOnChanges(changes: SimpleChanges): void {\r\n  if (changes['options']) {\r\n    this.filteredOptions = [...this.options];\r\n  }\r\n\r\n  if (changes['selected']) {\r\n    this.selected = [...this.selected];\r\n  }\r\n}\r\n\r\n}\r\n",
             "styleUrl": "./multi-select-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2878,7 +2928,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 11,
+                "line": 12,
                 "jsdoctags": [
                     {
                         "name": "element",
@@ -2892,11 +2942,15 @@
                 ]
             },
             "extends": [],
-            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0,\r\n        'dropdown-mode': mode === 'dropdown',\r\n    'search-mode': mode === 'search'\r\n     }\" (click)=\"handleClick()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && isFocused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\" (click)=\"removeSelected(item); $event.stopPropagation()\">\r\n                {{ truncate(item) }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n        @if (!readonly) {\r\n        <div class=\"arrow\">\r\n            <img class=\"icon\" [src]=\"dropdownIcon\" [class.rotate]=\"mode === 'dropdown' && isOpen\" alt=\"\"\r\n                aria-hidden=\"true\" />\r\n        </div>\r\n\r\n        }\r\n    </div>\r\n    @if (isOpen && !disabled && !readonly) {\r\n    <div class=\"dropdown\" (click)=\"$event.stopPropagation()\">\r\n        @for (opt of options; track opt) {\r\n        <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n            [ngClass]=\"{checked: selected.includes(opt)}\">\r\n\r\n            <app-checkbox [checked]=\"selected.includes(opt)\" [label]=\"''\"></app-checkbox>\r\n            <span class=\"option-text\" [attr.data-full]=\"opt\">\r\n                {{ truncate(opt) }}\r\n            </span>\r\n\r\n        </div>\r\n        } @empty {\r\n        <div class=\"no-options\">No results found</div>\r\n        }\r\n    </div>\r\n    }\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}"
+            "implements": [
+                "OnInit",
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isOpen || selected.length > 0,\r\n        'dropdown-mode': mode === 'dropdown',\r\n    'search-mode': mode === 'search'\r\n     }\" (click)=\"handleClick()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <div class=\"selected-list\">\r\n            @if(selected.length === 0 && isFocused) {\r\n            <span class=\"placeholder\">{{ placeholder }}</span>\r\n            }\r\n            @if(selected.length === 1) {\r\n            <span class=\"single-value\">{{ selected[0] }}</span>\r\n            }\r\n            @if (selected.length > 1) {\r\n            @for (item of selected | slice:0:2; track item) {\r\n            <div class=\"selected-item\" (click)=\"removeSelected(item); $event.stopPropagation()\">\r\n                {{ truncate(item) }}\r\n                <img src=\"/assets/icons/close-button.svg\" />\r\n            </div>\r\n            }\r\n\r\n            @if (selected.length > 2) {\r\n            <div class=\"selected-item extra\">\r\n                +{{ selected.length - 2 }}\r\n            </div>\r\n            }\r\n            }\r\n        </div>\r\n\r\n        @if (!readonly) {\r\n        <div class=\"arrow\">\r\n            <img class=\"icon\" [src]=\"dropdownIcon\" [class.rotate]=\"mode === 'dropdown' && isOpen\" alt=\"\"\r\n                aria-hidden=\"true\" />\r\n        </div>\r\n\r\n        }\r\n    </div>\r\n    @if (isOpen && !disabled && !readonly) {\r\n    <div class=\"dropdown\" (click)=\"$event.stopPropagation()\">\r\n\r\n        @if (mode === 'search') {\r\n        <div class=\"search-box\">\r\n            <input type=\"text\" class=\"search-input\" placeholder=\"Search\" (input)=\"filterOptions($event)\" autofocus />\r\n        </div>\r\n        }\r\n\r\n        @for (opt of filteredOptions; track opt) {\r\n        <div class=\"option\" (click)=\"toggleSelect(opt); $event.stopPropagation()\"\r\n            [ngClass]=\"{ checked: selected.includes(opt) }\">\r\n            <app-checkbox [checked]=\"selected.includes(opt)\" [label]=\"''\">\r\n            </app-checkbox>\r\n            <app-tooltip [label]=\"truncate(opt)\" [text]=\"opt\" position=\"right\">\r\n                <span class=\"option-text\">\r\n                    {{ truncate(opt) }}\r\n                </span>\r\n            </app-tooltip>\r\n\r\n        </div>\r\n        } @empty {\r\n        <div class=\"no-options\">No results found</div>\r\n        }\r\n\r\n    </div>\r\n    }\r\n</div>\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}"
         },
         {
             "name": "Navigation",
-            "id": "component-Navigation-a96c5372250477a5b0631bac17dd3cd0e44ce57f02729d71f364a3ba67878ed939c30b855134e4b3cc0953337a7da431ddb0c7feae96c77c0935959095b9c5a1",
+            "id": "component-Navigation-ef8b58917624357f42704d1ae9011d94a806e60d0b656bb951bc6842d6d6e9c6eada6151f1af93b5e8e4729ffc5e025698ff74e48ebd53c6e1a767f939f95de0",
             "file": "src/shared/navigation/navigation.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2913,11 +2967,47 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "activeIndex",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "number | null",
+                    "decorators": []
+                },
+                {
                     "name": "expanded",
-                    "defaultValue": "true",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "openIndex",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "number | null",
+                    "decorators": []
+                },
+                {
+                    "name": "showIcons",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showLogo",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -2925,27 +3015,163 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "activeChild",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "hoveredIndex",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
                     "name": "navItems",
-                    "defaultValue": "[\r\n    {\r\n      icon: 'assets/icons/home.svg',\r\n      label: 'Dashboard'\r\n    },\r\n    {\r\n      icon: 'assets/icons/user.svg',\r\n      label: 'Users',\r\n      children: ['Add User', 'User List']\r\n    },\r\n    {\r\n      icon: 'assets/icons/settings.svg',\r\n      label: 'Settings',\r\n      children: ['Profile', 'Security']\r\n    }\r\n  ]",
+                    "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "NavItem[]",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 22
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "onParentClick",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "hasChildren",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "hasChildren",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "selectChild",
+                    "args": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 52,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "toggle",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleItem",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -2957,13 +3183,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = true;\r\n\r\n  navItems: NavItem[] = [\r\n    {\r\n      icon: 'assets/icons/home.svg',\r\n      label: 'Dashboard'\r\n    },\r\n    {\r\n      icon: 'assets/icons/user.svg',\r\n      label: 'Users',\r\n      children: ['Add User', 'User List']\r\n    },\r\n    {\r\n      icon: 'assets/icons/settings.svg',\r\n      label: 'Settings',\r\n      children: ['Profile', 'Security']\r\n    }\r\n  ];\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: string[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n    if (!this.expanded) {\r\n      this.expanded = true;\r\n      return;\r\n    }\r\n    this.activeIndex = index;\r\n    this.activeChild = null;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = this.openIndex === index ? null : index;\r\n    } else {\r\n      this.openIndex = null;\r\n    }\r\n  }\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "styleUrl": "./navigation.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n\r\n  <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n    <img\r\n      src=\"assets/icons/navigation.svg\"\r\n      alt=\"Toggle sidebar\"\r\n    />\r\n  </button>\r\n\r\n  <ul class=\"nav-list\">\r\n    @for (item of navItems; track item.label) {\r\n      <li class=\"nav-item\">\r\n\r\n        <div class=\"nav-main\">\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          @if (expanded) {\r\n            <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n        </div>\r\n\r\n        @if (expanded && item.children?.length) {\r\n          <ul class=\"sub-list\">\r\n            @for (child of item.children; track child) {\r\n              <li class=\"sub-item\">{{ child }}</li>\r\n            }\r\n          </ul>\r\n        }\r\n      </li>\r\n    }\r\n  </ul>\r\n</nav>\r\n"
+            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n  <div class=\"nav-header\">\r\n    @if (showLogo && expanded) {\r\n    <img src=\"assets/icons/logo.svg\" class=\"logo\" />\r\n    }\r\n    @if (!expanded){\r\n    <span class=\"app-name\">Fracht\r\n      <span class=\"sub-text\">GROUP</span>\r\n    </span>\r\n    }\r\n    <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n      <img src=\"assets/icons/navigation.svg\" alt=\"Toggle sidebar\" class=\"expand-icon\" />\r\n    </button>\r\n  </div>\r\n  <div class=\"nav-scroll\">\r\n    <ul class=\"nav-list\">\r\n      @for (item of navItems; track item.label; let i = $index) {\r\n      <li class=\"nav-item\" (mouseenter)=\"hoveredIndex = i\" (mouseleave)=\"hoveredIndex = null\">\r\n        <div class=\"nav-main\" (click)=\"onParentClick(i, !!item.children?.length)\" [class.active]=\"activeIndex === i\">\r\n          @if (showIcons) {\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          }\r\n\r\n          @if (expanded) {\r\n          <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n\r\n          @if (item.children?.length && expanded) {\r\n          <img src=\"assets/icons/dropdown.svg\" class=\"dropdown-icon\" [class.open]=\"openIndex === i\" />\r\n          }\r\n        </div>\r\n        @if (!expanded && hoveredIndex === i) {\r\n        <div class=\"hover-panel\">\r\n\r\n          <div class=\"hover-title\">\r\n            {{ item.label }}\r\n          </div>\r\n\r\n          @if (item.children?.length) {\r\n          <ul class=\"hover-children\">\r\n            @for (child of item.children; track child) {\r\n            <li>{{ child }}</li>\r\n            }\r\n          </ul>\r\n          }\r\n\r\n        </div>\r\n        }\r\n        @if (expanded && item.children?.length && openIndex === i) {\r\n        <ul class=\"sub-list\">\r\n          @for (child of item.children; track child; let ci = $index) {\r\n          <li class=\"sub-item\" (click)=\"selectChild(i, ci)\" [class.active-child]=\"\r\n          activeChild?.parent === i &&\r\n          activeChild?.index === ci\r\n        \">\r\n            <span class=\"sub-text\">{{ child }}</span>\r\n          </li>\r\n          }\r\n        </ul>\r\n        }\r\n      </li>\r\n      }\r\n    </ul>\r\n  </div>\r\n</nav>"
         },
         {
             "name": "PageComponent",
@@ -4335,7 +4561,7 @@
                 "linktype": "component",
                 "name": "MultiSelectDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/22",
+                "coverageCount": "0/25",
                 "status": "low"
             },
             {
@@ -4344,7 +4570,7 @@
                 "linktype": "component",
                 "name": "Navigation",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {

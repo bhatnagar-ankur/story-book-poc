@@ -5,7 +5,7 @@
     }
     @if (!expanded){
     <span class="app-name">Fracht
-      <span class="sub-text">GROUP</span>
+      <span class="sub-text-logo">GROUP</span>
     </span>
     }
     <button class="toggle-btn" (click)="toggle()">
@@ -15,7 +15,7 @@
   <div class="nav-scroll">
     <ul class="nav-list">
       @for (item of navItems; track item.label; let i = $index) {
-      <li class="nav-item" (mouseenter)="hoveredIndex = i" (mouseleave)="hoveredIndex = null">
+      <li class="nav-item" (mouseenter)="onHover(i, $event)" (mouseleave)="hoveredIndex = null">
         <div class="nav-main" (click)="onParentClick(i, !!item.children?.length)" [class.active]="activeIndex === i">
           @if (showIcons) {
           <img class="icon" [src]="item.icon" />
@@ -29,17 +29,20 @@
           <img src="assets/icons/dropdown.svg" class="dropdown-icon" [class.open]="openIndex === i" />
           }
         </div>
-        @if (!expanded && hoveredIndex === i) {
-        <div class="hover-panel">
+        @if (!expanded && hoveredIndex === i && item.children?.length) {
+        <div class="hover-panel" [style.top.px]="panelTop">
 
-          <div class="hover-title">
+          <!-- <div class="hover-title">
             {{ item.label }}
-          </div>
+          </div> -->
 
           @if (item.children?.length) {
           <ul class="hover-children">
-            @for (child of item.children; track child) {
-            <li>{{ child }}</li>
+            @for (child of item.children; track child; let ci = $index) {
+
+            <li class="hover-child-item" (click)="onHoverChildClick(i, ci)">
+              <span class="sub-text">{{ child }}</span>
+            </li>
             }
           </ul>
           }

@@ -55,24 +55,22 @@ $border-color: #D0D0CE;
     .accordion-header {
       flex-direction: row;
       background-color: transparent;
-      border: none;
+      border: 1px solid $accordion-bg;
+      border-radius: 4px;
       color: $accordion-bg;
       box-shadow: 2px 2px 6px 0px $box-shadow-header;
     }
 
     .accordion-header[aria-expanded='true'] {
       background-color: $accordion-bg;
-
       color: $accordion-color;
+border-radius: 4px 4px 0 0;
       .accordion-checkbox input[type='checkbox'] {
         accent-color: $accordion-color;
       }
+
       --checkbox-label-color: $accordion-color;
       --checkbox-black: $accordion-color;
-    }
-
-    .accordion-body {
-      box-shadow: 7px 7px 6px 0px $box-shadow-body;
     }
 
     .accordion-icon {
@@ -97,6 +95,10 @@ $border-color: #D0D0CE;
       gap: 16px;
     }
 
+    .accordion-header[aria-expanded='true'] {
+      border-bottom: 1px solid $accordion-bg;
+    }
+
     .accordion-icon {
       transform: rotate(-90deg);
       filter: none;
@@ -119,6 +121,7 @@ $border-color: #D0D0CE;
     position: relative;
     z-index: 1;
     overflow: visible;
+    box-shadow: 2px 2px 6px 0px $box-shadow-header;
   }
 }
 

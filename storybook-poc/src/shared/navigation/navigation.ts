@@ -20,20 +20,51 @@ export class Navigation {
   activeChild: { parent: number; index: number } | null = null;
 
   navItems: NavItem[] = [];
+  hoverY = 0;
+  panelTop: number = 0;
+  onHover(index: number, event: MouseEvent) {
+    const target = event.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    this.panelTop = rect.top;
+    this.hoveredIndex = index;
+
+    this.hoverY = rect.top + rect.height / 2;
+  }
+  onHoverChildClick(parentIndex: number, childIndex: number) {
+    this.expanded = true;
+    this.activeIndex = parentIndex;
+    this.openIndex = parentIndex;
+    this.activeChild = {
+      parent: parentIndex,
+      index: childIndex,
+    };
+    this.hoveredIndex = null;
+  }
+
   onParentClick(index: number, hasChildren: boolean) {
-    if (!this.expanded) {
-      this.expanded = true;
+
+    if (this.openIndex === index) {
+      this.openIndex = null;
+      this.activeChild = null;
       return;
     }
+
     this.activeIndex = index;
-    this.activeChild = null;
 
     if (hasChildren) {
-      this.openIndex = this.openIndex === index ? null : index;
+      this.openIndex = index;
+
+      this.activeChild = {
+        parent: index,
+        index: 0
+      };
     } else {
       this.openIndex = null;
+      this.activeChild = null;
     }
   }
+
+
   toggle() {
     this.expanded = !this.expanded;
 
