@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Tooltip } from '../tooltip/tooltip';
 
 @Component({
   selector: 'app-toggle',
-  imports: [CommonModule],
+  imports: [CommonModule, Tooltip],
   templateUrl: './toggle.html',
   styleUrl: './toggle.scss',
 })
@@ -15,6 +16,8 @@ export class Toggle {
   @Input() variant: 'default' | 'iconic' | 'text' = 'default';
   @Input() onText = 'Toggle on';
   @Input() offText = 'Toggle off';
+  @Input() leftText = 'Table';
+  @Input() rightText = 'Gallery';
   @Output() changed = new EventEmitter<boolean | null>();
   get displayText(): string {
     if (this.checked === true) return this.onText;
@@ -44,5 +47,14 @@ export class Toggle {
 
     this.changed.emit(this.checked);
   }
+  getTruncatedText(text: string): string {
+    if (!text) return '';
+    return text.length > 10 ? text.slice(0, 10) + '…' : text;
+  }
+
+  isLongText(text: string): boolean {
+    return !!text && text.length > 10;
+  }
+
 
 }

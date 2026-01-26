@@ -1,0 +1,129 @@
+$field-disabled-color: #6c757d;
+$field-active: #183650;
+$field-disabled: #f4f4f4;
+$field-error: #cc3629;
+$input-background: #fff;
+$readonly-color: #212529;
+$field-disabled-border: #d9d9d9;
+$option-hover: #00a3e0;
+
+.ms-wrapper {
+  display: flex;
+  font-family: 'Myriad Pro';
+  width: 509px;
+  align-items: flex-start;
+  position: relative;
+
+  .ms-label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    padding: 0 4px;
+    color: $field-disabled-color;
+    transition: all 0.2s;
+    background-color: $input-background;
+
+    span {
+      color: $field-error;
+    }
+  }
+
+  .ms-control {
+    display: flex;
+    min-height: 48px;
+    padding: 0 16px;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    border-radius: 4px;
+    border: 1px solid rgba(24, 54, 80, 0.45);
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      color: $readonly-color;
+    }
+
+    .search-icon {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.ms-wrapper.focused .ms-label {
+  top: -2px;
+  font-size: 14px;
+}
+
+.ms-wrapper.focused .ms-control {
+  border-color: $field-active;
+}
+
+.ms-wrapper.disabled .ms-control {
+  background: $field-disabled;
+  border: 1px solid $field-disabled-border;
+  cursor: not-allowed;
+}
+
+.ms-wrapper.readonly .ms-control {
+  background: transparent;
+  border: none;
+}
+
+.ms-wrapper.error .ms-control {
+  border: 1px solid $field-error;
+}
+
+.error-text {
+  font-size: 14px;
+  color: $field-error;
+  margin: 4px 16px;
+  width: 509px;
+  word-wrap: break-word;
+}
+
+.dropdown {
+  margin-top: 2px;
+  border-radius: 6px;
+  border: 1px solid $field-active;
+  width: 509px;
+  background: $input-background;
+}
+
+.option {
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(24, 54, 80, 0.45);
+}
+
+.option:hover {
+  background-color: $option-hover;
+  color: $input-background;
+}
+
+.option.selected {
+  font-weight: 600;
+}
+
+.no-options {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: $field-disabled-color;
+}
+
+.truncate-text {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

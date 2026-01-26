@@ -64,7 +64,8 @@ $border-color: #D0D0CE;
     .accordion-header[aria-expanded='true'] {
       background-color: $accordion-bg;
       color: $accordion-color;
-border-radius: 4px 4px 0 0;
+      border-radius: 4px 4px 0 0;
+
       .accordion-checkbox input[type='checkbox'] {
         accent-color: $accordion-color;
       }

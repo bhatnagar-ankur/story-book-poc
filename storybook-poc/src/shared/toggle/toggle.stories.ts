@@ -29,7 +29,7 @@ export const MediumToggleButton: Story = {
 };
 
 export const IconicToggle: Story = {
-  args: { checked: true, disabled: false, variant: 'iconic', },
+  args: { checked: true, disabled: false, variant: 'iconic', leftText: 'Table', rightText: 'Gallery' },
 };
 
 export const ToggleText: Story ={

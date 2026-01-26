@@ -3518,7 +3518,7 @@
         },
         {
             "name": "SingleDropdown",
-            "id": "component-SingleDropdown-e559787e136fa280e3a345c6f9fe841560476b490f4240a19fa00fbbcd29c89872dfcc1be84567b2e1b3df6e0e7fd5ac40a233210a26dced4338edb79003490f",
+            "id": "component-SingleDropdown-ce6c53a04859edd44f3fd648ddf18eb6eef8e6d1c30e64f7ce098965f7a34f9ade7604334b98f9376cb785aeed87ac239b922f4ce906d1bd72fca7a37677e413",
             "file": "src/shared/single-dropdown/single-dropdown.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3539,7 +3539,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -3548,7 +3548,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -3557,7 +3557,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 14,
                     "type": "string",
                     "decorators": []
                 },
@@ -3566,7 +3566,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 15,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -3575,7 +3575,7 @@
                     "defaultValue": "'Select Item'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 },
@@ -3584,7 +3584,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -3593,7 +3593,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -3602,7 +3602,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 20,
                     "type": "string | null",
                     "decorators": []
                 }
@@ -3618,7 +3618,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 24
                 },
                 {
                     "name": "isOpen",
@@ -3629,10 +3629,47 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 23
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "onDocumentClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "select",
                     "args": [
@@ -3646,7 +3683,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3667,7 +3704,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 32,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3691,7 +3728,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3720,24 +3757,71 @@
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
-            "hostListeners": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 45
+                }
+            ],
             "standalone": false,
             "imports": [
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "Tooltip"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-single-dropdown',\r\n  imports: [CommonModule],\r\n  templateUrl: './single-dropdown.html',\r\n  styleUrl: './single-dropdown.scss',\r\n})\r\nexport class SingleDropdown {\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() selected: string | null = null;\r\n  @Input() placeholder = 'Select Item';\r\n\r\n  isOpen = false;\r\n  focused = false;\r\n  truncate(value: string | null, limit = 10): string {\r\n    if (!value) return '';\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen;\r\n  }\r\n\r\n  select(item: string) {\r\n    this.selected = item;\r\n    this.isOpen = false;\r\n    this.focused = true;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input } from '@angular/core';\r\nimport { Tooltip } from '../tooltip/tooltip';\r\n\r\n@Component({\r\n  selector: 'app-single-dropdown',\r\n  imports: [CommonModule, Tooltip],\r\n  templateUrl: './single-dropdown.html',\r\n  styleUrl: './single-dropdown.scss',\r\n})\r\nexport class SingleDropdown {\r\n  constructor(private element: ElementRef) { }\r\n\r\n  @Input() label = '';\r\n  @Input() options: string[] = [];\r\n  @Input() disabled = false;\r\n  @Input() readonly = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() selected: string | null = null;\r\n  @Input() placeholder = 'Select Item';\r\n\r\n  isOpen = false;\r\n  focused = false;\r\n  truncate(value: string | null, limit = 10): string {\r\n    if (!value) return '';\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n\r\n  toggleDropdown() {\r\n    if (this.disabled || this.readonly) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.focused = this.isOpen;\r\n  }\r\n\r\n  select(item: string) {\r\n    this.selected = item;\r\n    this.isOpen = false;\r\n    this.focused = true;\r\n  }\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent) {\r\n    const clickedInside = this.element.nativeElement.contains(event.target);\r\n\r\n    if (!clickedInside && this.isOpen) {\r\n      this.isOpen = false;\r\n      this.focused = false;\r\n    }\r\n  }\r\n\r\n}\r\n",
             "styleUrl": "./single-dropdown.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "element",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "element",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!selected\r\n  }\" (click)=\"toggleDropdown()\">\r\n  <label class=\"ms-label\">\r\n    {{ label }}\r\n    @if (required) {\r\n    <span>*</span>\r\n    }\r\n  </label>\r\n\r\n  <div class=\"ms-control\">\r\n    <div class=\"selected-list\">\r\n      @if (!selected && focused) {\r\n      <span class=\"placeholder\">{{ placeholder }}</span>\r\n      }\r\n\r\n      @if (selected) {\r\n      <span class=\"single-value\">{{ truncate(selected) }}</span>\r\n      }\r\n    </div>\r\n\r\n    @if (!readonly) {\r\n    <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n      <img src=\"/assets/icons/dropdown.svg\" />\r\n    </div>\r\n    }\r\n  </div>\r\n</div>\r\n\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n  @for (opt of options; track opt) {\r\n  <div class=\"option\" (click)=\"select(opt); $event.stopPropagation()\" [ngClass]=\"{ selected: selected === opt }\">\r\n    <span>{{ opt }}</span>\r\n  </div>\r\n  } @empty {\r\n  <div class=\"no-options\">No results found</div>\r\n  }\r\n</div>\r\n}"
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!selected\r\n  }\" (click)=\"toggleDropdown()\">\r\n  <label class=\"ms-label\">\r\n    {{ label }}\r\n    @if (required) {\r\n    <span>*</span>\r\n    }\r\n  </label>\r\n\r\n  <div class=\"ms-control\">\r\n    <div class=\"selected-list\">\r\n      @if (!selected && focused) {\r\n      <span class=\"placeholder\">{{ placeholder }}</span>\r\n      }\r\n\r\n      @if (selected) {\r\n      <span class=\"single-value full-value\">\r\n        {{ selected }}\r\n      </span>\r\n      }\r\n\r\n    </div>\r\n\r\n    @if (!readonly) {\r\n    <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n      <img src=\"/assets/icons/dropdown.svg\" />\r\n    </div>\r\n    }\r\n  </div>\r\n</div>\r\n\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n  @for (opt of options; track opt) {\r\n  <div class=\"option\" (click)=\"select(opt); $event.stopPropagation()\" [ngClass]=\"{ selected: selected === opt }\">\r\n    <app-tooltip [label]=\"truncate(opt)\" [text]=\"opt\" position=\"right\">\r\n      <span class=\"option-text truncate-text\">\r\n        {{ truncate(opt) }}\r\n      </span>\r\n    </app-tooltip>\r\n  </div>\r\n\r\n  } @empty {\r\n  <div class=\"no-options\">No results found</div>\r\n  }\r\n</div>\r\n}"
         },
         {
             "name": "Toast",
@@ -4758,7 +4842,7 @@
                 "linktype": "component",
                 "name": "SingleDropdown",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/17",
                 "status": "low"
             },
             {

@@ -13,46 +13,68 @@
 }
 
 @if (variant === 'iconic') {
-  <div
-    class="iconic-toggle"
-    [class.disabled]="disabled"
-    (click)="onToggle()"
-  >
-    <!-- TABLE -->
-    <div class="icon-btn" [class.active]="checked">
-      <img src="assets/icons/table.svg" alt="table" />
-      @if (showText) {
-        <span class="icon-text">Table</span>
-      }
-    </div>
+<div class="iconic-toggle" [class.disabled]="disabled" (click)="onToggle()">
+  <!-- TABLE -->
+  <div class="icon-btn" [class.active]="checked">
+    <img src="assets/icons/table.svg" alt="table" />
+    @if (showText) {
 
-    <!-- GALLERY -->
-    <div class="icon-btn" [class.active]="!checked">
-      <img src="assets/icons/gallery.svg" alt="gallery" />
-      @if (showText) {
-        <span class="icon-text">Gallery</span>
-      }
-    </div>
+    @if (isLongText(leftText)) {
+
+    <app-tooltip [label]="getTruncatedText(leftText)" [text]="leftText" position="right">
+    </app-tooltip>
+
+    } @else {
+
+    <span class="icon-text">
+      {{ leftText }}
+    </span>
+
+    }
+
+    }
   </div>
+
+  <!-- GALLERY -->
+  <div class="icon-btn" [class.active]="!checked">
+    <img src="assets/icons/gallery.svg" alt="gallery" />
+    @if (showText) {
+
+    @if (isLongText(rightText)) {
+
+    <app-tooltip [label]="getTruncatedText(rightText)" [text]="rightText" position="right">
+    </app-tooltip>
+
+    } @else {
+
+    <span class="icon-text">
+      {{ rightText }}
+    </span>
+
+    }
+
+    }
+  </div>
+</div>
 }
 
 @if (variant === 'text') {
-  <div class="text-toggle" [class.disabled]="disabled">
+<div class="text-toggle" [class.disabled]="disabled">
 
-    <label class="text-btn" [class.active]="checked === true">
-      <input type="radio" hidden (click)="setValue(true)" />
-      YES
-    </label>
+  <label class="text-btn" [class.active]="checked === true">
+    <input type="radio" hidden (click)="setValue(true)" />
+    YES
+  </label>
 
-    <label class="text-btn" [class.active]="checked === false">
-      <input type="radio" hidden (click)="setValue(false)" />
-      NO
-    </label>
+  <label class="text-btn" [class.active]="checked === false">
+    <input type="radio" hidden (click)="setValue(false)" />
+    NO
+  </label>
 
-    <label class="text-btn" [class.active]="checked === null">
-      <input type="radio" hidden (click)="setValue(null)" />
-      BOTH
-    </label>
+  <label class="text-btn" [class.active]="checked === null">
+    <input type="radio" hidden (click)="setValue(null)" />
+    BOTH
+  </label>
 
-  </div>
+</div>
 }

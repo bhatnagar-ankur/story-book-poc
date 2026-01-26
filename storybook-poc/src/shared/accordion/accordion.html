@@ -3,7 +3,9 @@
     <div class="accordion-title-group">
       <span class="accordion-title">{{ title }}</span>
       @if (type === 'primary') {
-      <app-checkbox class="accordion-checkbox" label="Checkbox" [class.expanded]="expanded"></app-checkbox>
+      <app-checkbox class="accordion-checkbox" label="Checkbox" [class.inverse]="expanded"
+        (click)="$event.stopPropagation()">
+      </app-checkbox>
       }
     </div>
 
@@ -15,19 +17,16 @@
   <div class="accordion-body">
     <app-multi-select-dropdown label="Country" [options]="['India','Japan','Iraq']" mode="dropdown">
     </app-multi-select-dropdown>
-    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
-      [dropdownIcon]="'assets/icons/search.svg'">
-    </app-multi-select-dropdown>
-    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
-      [dropdownIcon]="'assets/icons/search.svg'">
-    </app-multi-select-dropdown> <app-multi-select-dropdown label="Country"
+    <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
+    </app-search>
+    <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
+    </app-search> 
+    <app-multi-select-dropdown label="Country"
       [options]="['India','Japan','Korea','China','Iran']"></app-multi-select-dropdown>
-    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
-      [dropdownIcon]="'assets/icons/search.svg'">
-    </app-multi-select-dropdown>
-    <app-multi-select-dropdown label="Country" [options]="['India','Japan','Korea']" mode="search"
-      [dropdownIcon]="'assets/icons/search.svg'">
-    </app-multi-select-dropdown>
+    <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
+    </app-search>
+    <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
+    </app-search>
   </div>
   }
 </div>

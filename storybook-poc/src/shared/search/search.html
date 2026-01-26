@@ -1,0 +1,49 @@
+<div class="ms-wrapper" [ngClass]="{
+    disabled: disabled,
+    error: !!error,
+    readonly: readonly,
+    focused: isOpen || !!searchText
+  }" (click)="toggleDropdown()">
+    
+    <label class="ms-label">
+        {{ label }}
+        @if (required) {
+            <span>*</span>
+        }
+    </label>
+
+    <div class="ms-control">
+        <input type="text" class="search-input" [(ngModel)]="searchText" [disabled]="disabled" [readonly]="readonly"
+            (focus)="isOpen = true; focused = true" (click)="$event.stopPropagation()" />
+        
+        @if (!readonly) {
+            <div class="search-icon">
+                <img src="/assets/icons/search.svg" />
+            </div>
+        }
+    </div>
+</div>
+
+@if (error) {
+    <p class="error-text">{{ error }}</p>
+}
+
+@if (isOpen && !disabled && !readonly) {
+    <div class="dropdown">
+        @for (opt of filteredOptions; track opt) {
+            <div class="option" (click)="select(opt); $event.stopPropagation()"
+                [ngClass]="{ selected: selected === opt }">
+
+                <app-tooltip [label]="truncate(opt)" [text]="opt" position="right">
+                    <span class="option-text truncate-text">
+                        {{ truncate(opt) }}
+                    </span>
+                </app-tooltip>
+            </div>
+        } @empty {
+            <div class="no-options">
+                No results found
+            </div>
+        }
+    </div>
+}

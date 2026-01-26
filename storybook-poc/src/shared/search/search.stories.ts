@@ -1,0 +1,69 @@
+import { Meta, StoryObj } from '@storybook/angular';
+import { Search } from './search';
+
+const meta: Meta<Search> = {
+  title: 'Design System/Searchable Dropdown',
+  component: Search,
+  tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<Search>;
+
+const options = [
+  'India',
+  'United States',
+  'United Kingdom',
+  'Canada',
+  'Australia',
+  'Germany',
+  'France',
+];
+
+export const Default: Story = {
+  args: {
+    label: 'Country',
+    options,
+    required: true,
+  },
+};
+
+export const WithValue: Story = {
+  args: {
+    label: 'Country',
+    options,
+    selected: 'India',
+    required: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Country',
+    options,
+    selected: 'India',
+    disabled: true,
+    required: true,
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    label: 'Country',
+    options,
+    selected: 'India',
+    readonly: true,
+    required: true,
+  },
+};
+
+export const ErrorState: Story = {
+  args: {
+    label: 'Country',
+    options,
+    selected: 'India',
+    error: 'Country is required',
+    required: true, 
+  },
+};
