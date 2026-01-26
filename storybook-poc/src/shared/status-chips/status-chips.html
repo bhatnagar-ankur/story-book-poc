@@ -1,0 +1,69 @@
+<div class="group-wrapper">
+    <!-- GOOD -->
+    @if (activeStatus === 'all' || activeStatus === 'good') {
+    <div class="group-column">
+        @for (label of goodLabels; track label; let i = $index) {
+        <div class="chip" [ngClass]="[styleType, getColor('good', i)]">
+            @if (styleType === 'style1') {
+            <span class="dot"></span>
+            }
+            @if (styleType === 'style3') {
+            <span class="left-bar"></span>
+            }
+            <span class="text">{{ label }}</span>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- BAD -->
+    @if (activeStatus === 'all' || activeStatus === 'bad') {
+    <div class="group-column">
+        @for (label of badLabels; track label; let i = $index) {
+        <div class="chip" [ngClass]="[styleType, getColor('bad', i)]">
+            @if (styleType === 'style1') {
+            <span class="dot"></span>
+            }
+            @if (styleType === 'style3') {
+            <span class="left-bar"></span>
+            }
+            <span class="text">{{ label }}</span>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- PROGRESS -->
+    @if (activeStatus === 'all' || activeStatus === 'progress') {
+    <div class="group-column">
+        @for (label of progressLabels; track label; let i = $index) {
+        <div class="chip" [ngClass]="[styleType, getColor('progress', i)]">
+            @if (styleType === 'style1') {
+            <span class="dot"></span>
+            }
+            @if (styleType === 'style3') {
+            <span class="left-bar"></span>
+            }
+            <span class="text">{{ label }}</span>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- NEUTRAL -->
+    @if (activeStatus === 'all' || activeStatus === 'neutral') {
+    <div class="group-column">
+        @for (label of neutralLabels; track label; let i = $index) {
+        <div class="chip" [ngClass]="[styleType, getColor('neutral', i)]">
+            @if (styleType === 'style1') {
+            <span class="dot"></span>
+            }
+            @if (styleType === 'style3') {
+            <span class="left-bar"></span>
+            }
+            <span class="text">{{ label }}</span>
+        </div>
+        }
+    </div>
+    }
+</div>
