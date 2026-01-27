@@ -35,8 +35,8 @@ export const Style1: Story = {
 
         goodLabelsText: 'Good 1,Good 2,Good 3',
         badLabelsText: 'Bad 1,Bad 2,Bad 3',
-        progressLabelsText: 'Progress 1,Progress 2,Progress 3',
-        neutralLabelsText: 'Neutral 1,Neutral 2,Neutral 3',
+        progressLabelsText: 'Inprogress Blue 1,Inprogress Blue 2,Inprogress Blue 3',
+        neutralLabelsText: 'Neutral Gray 1,Neutral Gray 2,Neutral Gray 3',
     },
 };
 
@@ -46,7 +46,7 @@ export const Style2: Story = {
         activeStatus: 'all',
         goodLabelsText: 'Good 1,Good 2,Good 3',
         badLabelsText: 'Bad 1,Bad 2,Bad 3',
-        progressLabelsText: 'Progress 1,Progress 2,Progress 3',
+        progressLabelsText: 'In progress 1,In progress 2,In progress 3',
         neutralLabelsText: 'Neutral 1,Neutral 2,Neutral 3',
     },
 };
@@ -57,7 +57,7 @@ export const Style3: Story = {
         activeStatus: 'all',
         goodLabelsText: 'Good 1,Good 2,Good 3',
         badLabelsText: 'Bad 1,Bad 2,Bad 3',
-        progressLabelsText: 'Progress 1,Progress 2,Progress 3',
+        progressLabelsText: 'In progress 1,In progress 2,In progress 3',
         neutralLabelsText: 'Neutral 1,Neutral 2,Neutral 3',
     },
 };

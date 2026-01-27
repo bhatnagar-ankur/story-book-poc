@@ -9,6 +9,9 @@ export type StyleType = 'style1' | 'style2' | 'style3';
   styleUrl: './status-chips.scss',
 })
 export class StatusChips {
+  @Input() mode: 'single' | 'group' = 'group';
+  @Input() label = 'Good 1';
+  @Input() status: StatusType = 'good';
   @Input() styleType: StyleType = 'style1';
   @Input() activeStatus: StatusType | 'all' = 'all';
   @Input() goodLabelsText = 'Good 1,Good 2,Good 3';

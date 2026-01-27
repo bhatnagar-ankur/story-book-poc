@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Search } from './search';
 
 const meta: Meta<Search> = {
-  title: 'Design System/Searchable Dropdown',
+  title: 'Design System/Search',
   component: Search,
   tags: ['autodocs'],
 };
@@ -63,7 +63,7 @@ export const ErrorState: Story = {
     label: 'Country',
     options,
     selected: 'India',
-    error: 'Country is required',
+    error: "Error message goes here",
     required: true, 
   },
 };

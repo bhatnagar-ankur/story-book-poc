@@ -4240,7 +4240,7 @@
         },
         {
             "name": "StatusChips",
-            "id": "component-StatusChips-ebf5489944153d7552d1d2b47ed32749445fb40ef9e21d46ab0a50132a5ccd07020f566a353f4dbbbe0e84e5784fdc17398cbd38279357b6fe40e45ea5f5afd6",
+            "id": "component-StatusChips-31b1ba1873b34132072a1a72090d55cbc7e1e1bfc74781b46983a5c6f726d1956e693079ba6ed6956e41b93a9bb25a687033cd6541549b0040f4a514c016a26c",
             "file": "src/shared/status-chips/status-chips.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4261,40 +4261,22 @@
                     "defaultValue": "'all'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 13,
                     "type": "StatusType | \"all\"",
                     "decorators": []
                 },
                 {
-                    "name": "badLabels",
-                    "defaultValue": "['Bad 1', 'Bad 2', 'Bad 3']",
+                    "name": "badLabelsText",
+                    "defaultValue": "'Bad 1,Bad 2,Bad 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
-                    "type": "string[]",
+                    "line": 15,
+                    "type": "string",
                     "decorators": []
                 },
                 {
-                    "name": "goodLabels",
-                    "defaultValue": "['Good 1', 'Good 2', 'Good 3']",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 25,
-                    "type": "string[]",
-                    "decorators": []
-                },
-                {
-                    "name": "grouped",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 19,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "''",
+                    "name": "goodLabelsText",
+                    "defaultValue": "'Good 1,Good 2,Good 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
@@ -4302,30 +4284,21 @@
                     "decorators": []
                 },
                 {
-                    "name": "neutralLabels",
-                    "defaultValue": "['Neutral 1', 'Neutral 2', 'Neutral 3']",
+                    "name": "neutralLabelsText",
+                    "defaultValue": "'Neutral 1,Neutral 2,Neutral 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
-                    "type": "string[]",
+                    "line": 17,
+                    "type": "string",
                     "decorators": []
                 },
                 {
-                    "name": "progressLabels",
-                    "defaultValue": "['In progress 1', 'In progress 2', 'In progress 3']",
+                    "name": "progressLabelsText",
+                    "defaultValue": "'Progress 1,Progress 2,Progress 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
-                    "type": "string[]",
-                    "decorators": []
-                },
-                {
-                    "name": "status",
-                    "defaultValue": "'good'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "StatusType",
+                    "line": 16,
+                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -4333,14 +4306,104 @@
                     "defaultValue": "'style1'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 12,
                     "type": "StyleType",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "colorMap",
+                    "defaultValue": "{\r\n    good: ['green1', 'green2', 'green3'],\r\n    bad: ['red1', 'red2', 'red3'],\r\n    progress: ['blue1', 'blue2', 'blue3'],\r\n    neutral: ['gray1', 'gray2', 'gray3'],\r\n  } as const",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getColor",
+                    "args": [
+                        {
+                            "name": "status",
+                            "type": "StatusType",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "status",
+                            "type": "StatusType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "parse",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string[]",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -4355,13 +4418,51 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nexport type StatusType = 'good' | 'bad' | 'progress' | 'neutral';\r\nexport type StyleType = 'style1' | 'style2' | 'style3';\r\n@Component({\r\n  selector: 'app-status-chips',\r\n  imports: [CommonModule],\r\n  templateUrl: './status-chips.html',\r\n  styleUrl: './status-chips.scss',\r\n})\r\nexport class StatusChips {\r\n\r\n  // Single chip (not used in grouped preview)\r\n  @Input() label: string = '';\r\n  @Input() status: StatusType = 'good';\r\n  @Input() styleType: StyleType = 'style1';\r\n\r\n  // Show grouped layout\r\n  @Input() grouped: boolean = true;\r\n\r\n  // ✅ Control which column is visible\r\n  @Input() activeStatus: StatusType | 'all' = 'all';\r\n\r\n  // ✅ Labels (Controllable)\r\n  @Input() goodLabels: string[] = ['Good 1', 'Good 2', 'Good 3'];\r\n  @Input() badLabels: string[] = ['Bad 1', 'Bad 2', 'Bad 3'];\r\n  @Input() progressLabels: string[] = ['In progress 1', 'In progress 2', 'In progress 3'];\r\n  @Input() neutralLabels: string[] = ['Neutral 1', 'Neutral 2', 'Neutral 3'];\r\n\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nexport type StatusType = 'good' | 'bad' | 'progress' | 'neutral';\r\nexport type StyleType = 'style1' | 'style2' | 'style3';\r\n@Component({\r\n  selector: 'app-status-chips',\r\n  imports: [CommonModule],\r\n  templateUrl: './status-chips.html',\r\n  styleUrl: './status-chips.scss',\r\n})\r\nexport class StatusChips {\r\n  @Input() styleType: StyleType = 'style1';\r\n  @Input() activeStatus: StatusType | 'all' = 'all';\r\n  @Input() goodLabelsText = 'Good 1,Good 2,Good 3';\r\n  @Input() badLabelsText = 'Bad 1,Bad 2,Bad 3';\r\n  @Input() progressLabelsText = 'Progress 1,Progress 2,Progress 3';\r\n  @Input() neutralLabelsText = 'Neutral 1,Neutral 2,Neutral 3';\r\n  readonly colorMap = {\r\n    good: ['green1', 'green2', 'green3'],\r\n    bad: ['red1', 'red2', 'red3'],\r\n    progress: ['blue1', 'blue2', 'blue3'],\r\n    neutral: ['gray1', 'gray2', 'gray3'],\r\n  } as const;\r\n\r\n  get goodLabels(): string[] {\r\n    return this.parse(this.goodLabelsText);\r\n  }\r\n\r\n  get badLabels(): string[] {\r\n    return this.parse(this.badLabelsText);\r\n  }\r\n\r\n  get progressLabels(): string[] {\r\n    return this.parse(this.progressLabelsText);\r\n  }\r\n\r\n  get neutralLabels(): string[] {\r\n    return this.parse(this.neutralLabelsText);\r\n  }\r\n\r\n  private parse(value: string): string[] {\r\n    return value\r\n      .split(',')\r\n      .map(v => v.trim())\r\n      .filter(Boolean);\r\n  }\r\n\r\n  getColor(status: StatusType, index: number): string {\r\n    return this.colorMap[status][index % 3];\r\n  }\r\n}\r\n",
             "styleUrl": "./status-chips.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"group-wrapper\">\r\n\r\n  <!-- GOOD -->\r\n  @if (activeStatus === 'all' || activeStatus === 'good') {\r\n    <div class=\"group-column\">\r\n\r\n      @for (label of goodLabels; track label) {\r\n        <app-status-chips\r\n          [label]=\"label\"\r\n          status=\"good\"\r\n          [styleType]=\"styleType\">\r\n        </app-status-chips>\r\n      }\r\n\r\n    </div>\r\n  }\r\n\r\n  <!-- BAD -->\r\n  @if (activeStatus === 'all' || activeStatus === 'bad') {\r\n    <div class=\"group-column\">\r\n\r\n      @for (label of badLabels; track label) {\r\n        <app-status-chips\r\n          [label]=\"label\"\r\n          status=\"bad\"\r\n          [styleType]=\"styleType\">\r\n        </app-status-chips>\r\n      }\r\n\r\n    </div>\r\n  }\r\n\r\n  <!-- PROGRESS -->\r\n  @if (activeStatus === 'all' || activeStatus === 'progress') {\r\n    <div class=\"group-column\">\r\n\r\n      @for (label of progressLabels; track label) {\r\n        <app-status-chips\r\n          [label]=\"label\"\r\n          status=\"progress\"\r\n          [styleType]=\"styleType\">\r\n        </app-status-chips>\r\n      }\r\n\r\n    </div>\r\n  }\r\n\r\n  <!-- NEUTRAL -->\r\n  @if (activeStatus === 'all' || activeStatus === 'neutral') {\r\n    <div class=\"group-column\">\r\n\r\n      @for (label of neutralLabels; track label) {\r\n        <app-status-chips\r\n          [label]=\"label\"\r\n          status=\"neutral\"\r\n          [styleType]=\"styleType\">\r\n        </app-status-chips>\r\n      }\r\n\r\n    </div>\r\n  }\r\n\r\n</div>\r\n"
+            "accessors": {
+                "goodLabels": {
+                    "name": "goodLabels",
+                    "getSignature": {
+                        "name": "goodLabels",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 25
+                    }
+                },
+                "badLabels": {
+                    "name": "badLabels",
+                    "getSignature": {
+                        "name": "badLabels",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 29
+                    }
+                },
+                "progressLabels": {
+                    "name": "progressLabels",
+                    "getSignature": {
+                        "name": "progressLabels",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 33
+                    }
+                },
+                "neutralLabels": {
+                    "name": "neutralLabels",
+                    "getSignature": {
+                        "name": "neutralLabels",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 37
+                    }
+                }
+            },
+            "templateData": "<div class=\"group-wrapper\">\r\n    <!-- GOOD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'good') {\r\n    <div class=\"group-column\">\r\n        @for (label of goodLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('good', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            @if (styleType === 'style3') {\r\n            <span class=\"left-bar\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- BAD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'bad') {\r\n    <div class=\"group-column\">\r\n        @for (label of badLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('bad', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            @if (styleType === 'style3') {\r\n            <span class=\"left-bar\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- PROGRESS -->\r\n    @if (activeStatus === 'all' || activeStatus === 'progress') {\r\n    <div class=\"group-column\">\r\n        @for (label of progressLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('progress', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            @if (styleType === 'style3') {\r\n            <span class=\"left-bar\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- NEUTRAL -->\r\n    @if (activeStatus === 'all' || activeStatus === 'neutral') {\r\n    <div class=\"group-column\">\r\n        @for (label of neutralLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('neutral', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            @if (styleType === 'style3') {\r\n            <span class=\"left-bar\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n</div>"
         },
         {
             "name": "Toast",

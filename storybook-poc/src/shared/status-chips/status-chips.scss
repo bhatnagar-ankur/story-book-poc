@@ -14,6 +14,7 @@
 .gray2 { --c: #6C757D; }
 .gray3 { --c: #B9B9B9; }
 $background-color: #fff;
+$color:#3F4443;
 .group-wrapper {
   display: flex;
   gap: 32px;
@@ -28,13 +29,14 @@ $background-color: #fff;
 .chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-size: 16px;
   font-weight: 400;
   border-radius: 12px;
-  padding: 4px 10px;
   font-family: 'Myriad Pro';
   width: fit-content;
+  min-width: 104px;
 }
 
 .text {
@@ -46,41 +48,34 @@ $background-color: #fff;
 }
 
 .style1 .dot {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  color: $color;
 }
 
 .style2 {
   color: $background-color;
-  padding: 6px 14px;
-  border-radius: 16px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  height: 32px;
+  gap: 10px;
+  font-weight: 600;
 }
 
 .style3 {
   background: $background-color;
-  border: 1px solid;
-  padding: 0 10px 0 0;   
+  border: 1px solid var(--c);
+  border-left: 11px solid var(--c);
+  padding: 4px 12px;   
   border-radius: 4px;
   display: flex;
   align-items: center;
-  height: 32px;
-  min-width: 104px;
   gap: 10px;
-}
-
-.style3 .left-bar {
-  width: 8px;
-  height: 100%;              
-  background: var(--c);
-
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-
-  margin-right: 8px;
+  justify-content: center;
+  height: 32px;
+  font-weight: 600;
+  color: $color;
 }
 
 .chip {
@@ -95,10 +90,6 @@ $background-color: #fff;
 
   &.style3 {
     border-color: var(--c);
-    color: var(--c);
-  }
-
-  &.style3 .left-bar {
-    background: var(--c);
+    border-left-color: var(--c);
   }
 }

@@ -1,3 +1,18 @@
+<!-- SINGLE CHIP MODE -->
+@if (mode === 'single') {
+<div class="chip" [ngClass]="[
+      styleType,
+      getColor(status, 0)
+    ]">
+    @if (styleType === 'style1') {
+    <span class="dot"></span>
+    }
+    <span class="text">{{ label }}</span>
+</div>
+}
+
+<!-- GROUP MODE -->
+@if (mode === 'group') {
 <div class="group-wrapper">
     <!-- GOOD -->
     @if (activeStatus === 'all' || activeStatus === 'good') {
@@ -6,9 +21,6 @@
         <div class="chip" [ngClass]="[styleType, getColor('good', i)]">
             @if (styleType === 'style1') {
             <span class="dot"></span>
-            }
-            @if (styleType === 'style3') {
-            <span class="left-bar"></span>
             }
             <span class="text">{{ label }}</span>
         </div>
@@ -24,16 +36,13 @@
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
-            @if (styleType === 'style3') {
-            <span class="left-bar"></span>
-            }
             <span class="text">{{ label }}</span>
         </div>
         }
     </div>
     }
 
-    <!-- PROGRESS -->
+    <!-- Progress -->
     @if (activeStatus === 'all' || activeStatus === 'progress') {
     <div class="group-column">
         @for (label of progressLabels; track label; let i = $index) {
@@ -41,16 +50,13 @@
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
-            @if (styleType === 'style3') {
-            <span class="left-bar"></span>
-            }
             <span class="text">{{ label }}</span>
         </div>
         }
     </div>
     }
 
-    <!-- NEUTRAL -->
+    <!-- Neutral -->
     @if (activeStatus === 'all' || activeStatus === 'neutral') {
     <div class="group-column">
         @for (label of neutralLabels; track label; let i = $index) {
@@ -58,12 +64,10 @@
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
-            @if (styleType === 'style3') {
-            <span class="left-bar"></span>
-            }
             <span class="text">{{ label }}</span>
         </div>
         }
     </div>
     }
 </div>
+}
