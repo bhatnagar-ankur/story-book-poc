@@ -1,22 +1,62 @@
-<button
-  class="button-main-container"
-  [ngClass]="buttonType"
-  [disabled]="disabled">
-
-  @if (icon && iconPosition === 'left') {
-    <span
-      class="icon"
-      [style]="{'mask-image': 'url(' + icon + ')'}">
-    </span>
+<div class="btn-wrapper">
+  @if (buttonType === 'order' && orderState === 'progress') {
+  <div class="order-progress-area">
+    <img src="/assets/icons/placeOrder.svg" class="order-image" [style.left.%]="orderProgress" />
+    <div class="order-bar">
+      <div class="order-bar-fill" [style.width.%]="orderProgress"></div>
+    </div>
+  </div>
   }
+  <!-- MAIN BUTTON -->
+  @if (buttonType !== 'order' || orderState !== 'progress') {
+  <button class="button-main-container" [ngClass]="[
+        buttonType,
+        buttonType === 'download' ? 'state-' + downloadState : '',
+        buttonType === 'order' ? 'state-' + orderState : ''
+      ]" [disabled]="disabled || orderState === 'progress'" (click)="onButtonClick()">
 
-  {{ label }}
-
-  @if (icon && iconPosition === 'right') {
-    <span
-      class="icon"
-      [style]="{'mask-image': 'url(' + icon + ')'}">
+    <!-- Left Icon -->
+    @if (icon && iconPosition === 'left') {
+    <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}">
     </span>
+    }
+    <!-- DOWNLOAD -->
+    @if (buttonType === 'download') {
+    <span class="content">
+      @if (downloadState !== 'done') {
+      {{ label }}
+      } @else {
+      Download
+      }
+    </span>
+    }
+    <!-- ORDER TEXT -->
+    @else if (buttonType === 'order') {
+    @if (orderState === 'idle') {
+    <span>Complete Order</span>
+    }
+    @else if (orderState === 'done') {
+    <span class="order-done-text">
+      Order Placed
+      <img [src]="orderSuccessIcon" alt="success" class="orderSuccess-image" />
+    </span>
+    }
+    }
+    <!-- DEFAULT -->
+    @else {
+    {{ label }}
+    }
+    <!-- Right Icon -->
+    @if (icon && iconPosition === 'right') {
+    <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}">
+    </span>
+    }
+  </button>
   }
-
-</button>
+  <!-- DOWNLOAD MESSAGE -->
+  @if (buttonType === 'download' && downloadState === 'done') {
+  <div class="download-complete-text">
+    Downloading completed successfully
+  </div>
+  }
+</div>

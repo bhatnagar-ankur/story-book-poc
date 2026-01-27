@@ -58,3 +58,21 @@ export const Long: Story = {
         disabled: false,
     }
 };
+/** DOWNLOAD */
+export const Download: Story = {
+  args: {
+    label: 'Download',
+    buttonType: 'download',
+    icon: './assets/icons/download-icon.svg',
+    iconPosition: 'right',
+    disabled: false,
+  }
+};
+/** ORDER COMPLETE */
+export const OrderComplete: Story = {
+  args: {
+    buttonType: 'order',
+    disabled: false,
+    orderSuccessIcon: '/assets/icons/tick-icon.svg',
+  }
+};

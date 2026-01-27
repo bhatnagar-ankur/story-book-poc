@@ -264,7 +264,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"accordion\" [ngClass]=\"type\">\r\n  <button class=\"accordion-header\" (click)=\"toggle()\" [attr.aria-expanded]=\"expanded\">\r\n    <div class=\"accordion-title-group\">\r\n      <span class=\"accordion-title\">{{ title }}</span>\r\n      @if (type === 'primary') {\r\n      <app-checkbox class=\"accordion-checkbox\" label=\"Checkbox\" [class.inverse]=\"expanded\"\r\n        (click)=\"$event.stopPropagation()\">\r\n      </app-checkbox>\r\n      }\r\n    </div>\r\n\r\n    <img src=\"assets/icons/accordion-dropdown.svg\" alt=\"Toggle accordion\" class=\"accordion-icon\"\r\n      [class.expanded]=\"expanded\" />\r\n  </button>\r\n\r\n  @if (expanded) {\r\n  <div class=\"accordion-body\">\r\n    <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Iraq']\" mode=\"dropdown\">\r\n    </app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search> \r\n    <app-multi-select-dropdown label=\"Country\"\r\n      [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n  </div>\r\n  }\r\n</div>"
+            "templateData": "<div class=\"accordion\" [ngClass]=\"type\">\r\n  <button class=\"accordion-header\" (click)=\"toggle()\" [attr.aria-expanded]=\"expanded\">\r\n    <div class=\"accordion-title-group\">\r\n      <span class=\"accordion-title\">{{ title }}</span>\r\n      @if (type === 'primary') {\r\n      <app-checkbox class=\"accordion-checkbox\" label=\"Checkbox\" [class.inverse]=\"expanded\"\r\n        (click)=\"$event.stopPropagation()\">\r\n      </app-checkbox>\r\n      }\r\n    </div>\r\n\r\n    <img src=\"assets/icons/accordion-dropdown.svg\" alt=\"Toggle accordion\" class=\"accordion-icon\"\r\n      [class.expanded]=\"expanded\" />\r\n  </button>\r\n\r\n  @if (expanded) {\r\n  <div class=\"accordion-body\">\r\n    <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Iraq']\" mode=\"dropdown\">\r\n    </app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-multi-select-dropdown label=\"Country\"\r\n      [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n  </div>\r\n  }\r\n</div>"
         },
         {
             "name": "Alert",
@@ -1249,7 +1249,7 @@
         },
         {
             "name": "Buttons",
-            "id": "component-Buttons-975f399bd77a1c8a1e7a88259b019a280ea9fda86089e1d8c161447859b85790a16bbaff075c33b4c1030e5c08933a12a42db6df2da39592684810cf2c2c9d06",
+            "id": "component-Buttons-d83bf8102e139685c75325b00e8d911d05a47d507ae423960f6ab2cb5131058ec9bc68da4b67e720739a124b11c06ac752556f6dda9b636206677d7b885177fc",
             "file": "src/shared/buttons/buttons.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1273,7 +1273,7 @@
                     "rawdescription": "\n\nSelecting the type of button\n",
                     "description": "<p>Selecting the type of button</p>\n",
                     "line": 18,
-                    "type": "\"primary\" | \"secondary\" | \"text\" | \"iconic\" | \"long\"",
+                    "type": "\"primary\" | \"secondary\" | \"text\" | \"iconic\" | \"long\" | \"download\"",
                     "decorators": []
                 },
                 {
@@ -1319,8 +1319,41 @@
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "downloadState",
+                    "defaultValue": "'idle'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"idle\" | \"border\" | \"progress\" | \"done\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onButtonClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "startDownloadAnimation",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -1335,13 +1368,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  /**\r\n   * Label name to display\r\n   */\r\n  @Input() label: string = '';\r\n  /**\r\n   * Selecting the type of button\r\n   */\r\n  @Input() buttonType: 'primary' | 'secondary' | 'text' | 'iconic' | 'long' = 'primary';\r\n  /**\r\n   * Enabling or disabling the button\r\n   */\r\n  @Input() disabled: boolean = false;\r\n  /**\r\n   * Displaying the icon(optional)\r\n   */\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n}\r\n",
+            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  /**\r\n   * Label name to display\r\n   */\r\n  @Input() label: string = '';\r\n  /**\r\n   * Selecting the type of button\r\n   */\r\n  @Input() buttonType: 'primary' | 'secondary' | 'text' | 'iconic' | 'long' | 'download' = 'primary';\r\n  /**\r\n   * Enabling or disabling the button\r\n   */\r\n  @Input() disabled: boolean = false;\r\n  /**\r\n   * Displaying the icon(optional)\r\n   */\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n  downloadState: 'idle' | 'border' | 'progress' | 'done' = 'idle';\r\n\r\n\r\n  onButtonClick() {\r\n    if (this.buttonType !== 'download') return;\r\n    this.startDownloadAnimation();\r\n  }\r\n\r\n  startDownloadAnimation() {\r\n    this.downloadState = 'border';\r\n    setTimeout(() => {\r\n      this.downloadState = 'progress';\r\n      setTimeout(() => {\r\n        this.downloadState = 'done';\r\n        setTimeout(() => {\r\n          this.downloadState = 'idle';\r\n        }, 2000);\r\n      }, 300);\r\n    }, 200);\r\n  }\r\n}\r\n",
             "styleUrl": "./buttons.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<button\r\n  class=\"button-main-container\"\r\n  [ngClass]=\"buttonType\"\r\n  [disabled]=\"disabled\">\r\n\r\n  @if (icon && iconPosition === 'left') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n  {{ label }}\r\n\r\n  @if (icon && iconPosition === 'right') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n</button>\r\n"
+            "templateData": "<button\r\n  class=\"button-main-container\"\r\n  [ngClass]=\"[\r\n    buttonType,\r\n    buttonType === 'download' ? 'state-' + downloadState : ''\r\n  ]\"\r\n  [disabled]=\"disabled\"\r\n  (click)=\"onButtonClick()\"\r\n>\r\n\r\n  @if (icon && iconPosition === 'left') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n  <span class=\"content\">\r\n    {{ label }}\r\n  </span>\r\n\r\n  @if (icon && iconPosition === 'right') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n</button>\r\n\r\n\r\n@if (buttonType === 'download' && downloadState === 'done') {\r\n  <div class=\"download-complete-text\">\r\n    Download Completed\r\n  </div>\r\n}\r\n"
         },
         {
             "name": "Cards",
@@ -1752,7 +1785,7 @@
         },
         {
             "name": "Checkbox",
-            "id": "component-Checkbox-a76c7435cf40a1748cef09eed1206236fdce576b34d4ae29919c09157efb10aa74e5f57aa9ca7168442716e80838bb58a087ff275d37ef2798530912b16dd664",
+            "id": "component-Checkbox-91c805fbc48554476f9a73c6f3737d83efc47088ee9db5a0b84f745f6851f19eaddd605c33f16bbcd9bf0053d425002f596e9ba76f8c87fc87e6d338302a1d53",
             "file": "src/shared/checkbox/checkbox.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1773,7 +1806,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 10,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1782,7 +1815,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 11,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1790,7 +1823,7 @@
                     "name": "label",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 }
@@ -1801,7 +1834,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 13,
                     "type": "EventEmitter"
                 }
             ],
@@ -1820,7 +1853,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 15,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1841,24 +1874,17 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [
-                {
-                    "name": "StatusChips"
-                },
-                {
-                    "name": "StatusChips"
-                }
-            ],
+            "imports": [],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\nimport { StatusChips } from \"../status-chips/status-chips\";\r\n\r\n@Component({\r\n  selector: 'app-checkbox',\r\n  imports: [StatusChips, StatusChips],\r\n  templateUrl: './checkbox.html',\r\n  styleUrl: './checkbox.scss',\r\n})\r\nexport class Checkbox {\r\n  @Input() checked = false;\r\n  @Input() indeterminate = false;\r\n  @Input() label?: string;\r\n  @Output() checkedChange = new EventEmitter<boolean>();\r\n\r\n  onChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.checked = input.checked;\r\n    this.indeterminate = false;\r\n    this.checkedChange.emit(this.checked);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-checkbox',\r\n  imports: [],\r\n  templateUrl: './checkbox.html',\r\n  styleUrl: './checkbox.scss',\r\n})\r\nexport class Checkbox {\r\n  @Input() checked = false;\r\n  @Input() indeterminate = false;\r\n  @Input() label?: string;\r\n  @Output() checkedChange = new EventEmitter<boolean>();\r\n\r\n  onChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.checked = input.checked;\r\n    this.indeterminate = false;\r\n    this.checkedChange.emit(this.checked);\r\n  }\r\n}\r\n",
             "styleUrl": "./checkbox.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<label class=\"cb-root\">\r\n\r\n    <input type=\"checkbox\" class=\"cb-input\" [checked]=\"checked\" [indeterminate]=\"indeterminate\"\r\n        (change)=\"onChange($event)\" />\r\n\r\n    <span class=\"cb-box\">\r\n\r\n        <!-- Check -->\r\n        <svg class=\"cb-check\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M20 6L9 17l-5-5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"\r\n                stroke-linejoin=\"round\" />\r\n        </svg>\r\n\r\n        <!-- Indeterminate -->\r\n        <svg class=\"cb-partial\" viewBox=\"0 0 24 24\">\r\n            <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" />\r\n        </svg>\r\n\r\n    </span>\r\n\r\n    @if (label) {\r\n    <span class=\"cb-label\">{{ label }}</span>\r\n    }\r\n\r\n</label>\r\n<app-status-chips\r\nmode=\"single\"\r\nlabel=\"bad 1\"\r\nstatus=\"good\"\r\nstyleType=\"style3\"></app-status-chips>"
+            "templateData": "<label class=\"cb-root\">\r\n\r\n    <input type=\"checkbox\" class=\"cb-input\" [checked]=\"checked\" [indeterminate]=\"indeterminate\"\r\n        (change)=\"onChange($event)\" />\r\n\r\n    <span class=\"cb-box\">\r\n\r\n        <!-- Check -->\r\n        <svg class=\"cb-check\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M20 6L9 17l-5-5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"\r\n                stroke-linejoin=\"round\" />\r\n        </svg>\r\n\r\n        <!-- Indeterminate -->\r\n        <svg class=\"cb-partial\" viewBox=\"0 0 24 24\">\r\n            <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" />\r\n        </svg>\r\n\r\n    </span>\r\n\r\n    @if (label) {\r\n    <span class=\"cb-label\">{{ label }}</span>\r\n    }\r\n\r\n</label>"
         },
         {
             "name": "CloseButton",
@@ -3936,7 +3962,7 @@
                     }
                 }
             },
-            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!searchText\r\n  }\" (click)=\"toggleDropdown()\">\r\n    \r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n            <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <input type=\"text\" class=\"search-input\" [(ngModel)]=\"searchText\" [disabled]=\"disabled\" [readonly]=\"readonly\"\r\n            (focus)=\"isOpen = true; focused = true\" (click)=\"$event.stopPropagation()\" />\r\n        \r\n        @if (!readonly) {\r\n            <div class=\"search-icon\">\r\n                <img src=\"/assets/icons/search.svg\" />\r\n            </div>\r\n        }\r\n    </div>\r\n</div>\r\n\r\n@if (error) {\r\n    <p class=\"error-text\">{{ error }}</p>\r\n}\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n    <div class=\"dropdown\">\r\n        @for (opt of filteredOptions; track opt) {\r\n            <div class=\"option\" (click)=\"select(opt); $event.stopPropagation()\"\r\n                [ngClass]=\"{ selected: selected === opt }\">\r\n\r\n                <app-tooltip [label]=\"truncate(opt)\" [text]=\"opt\" position=\"right\">\r\n                    <span class=\"option-text truncate-text\">\r\n                        {{ truncate(opt) }}\r\n                    </span>\r\n                </app-tooltip>\r\n            </div>\r\n        } @empty {\r\n            <div class=\"no-options\">\r\n                No results found\r\n            </div>\r\n        }\r\n    </div>\r\n}"
+            "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!searchText\r\n  }\" (click)=\"toggleDropdown()\">\r\n\r\n    <label class=\"ms-label\">\r\n        {{ label }}\r\n        @if (required) {\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n\r\n    <div class=\"ms-control\">\r\n        <input type=\"text\" class=\"search-input\" [(ngModel)]=\"searchText\" [disabled]=\"disabled\" [readonly]=\"readonly\"\r\n            (focus)=\"isOpen = true; focused = true\" (click)=\"$event.stopPropagation()\" />\r\n\r\n        @if (!readonly) {\r\n        <div class=\"search-icon\">\r\n            <img src=\"/assets/icons/search.svg\" />\r\n        </div>\r\n        }\r\n    </div>\r\n\r\n    @if (isOpen && !disabled && !readonly) {\r\n    <div class=\"dropdown\">\r\n        @for (opt of filteredOptions; track opt) {\r\n        <div class=\"option\" (click)=\"select(opt); $event.stopPropagation()\" [ngClass]=\"{ selected: selected === opt }\">\r\n\r\n            <app-tooltip [label]=\"truncate(opt)\" [text]=\"opt\" position=\"right\">\r\n                <span class=\"option-text truncate-text\">\r\n                    {{ truncate(opt) }}\r\n                </span>\r\n            </app-tooltip>\r\n        </div>\r\n        } @empty {\r\n        <div class=\"no-options\">\r\n            No results found\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n</div>\r\n\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}"
         },
         {
             "name": "SingleDropdown",
@@ -4247,7 +4273,7 @@
         },
         {
             "name": "StatusChips",
-            "id": "component-StatusChips-b4106bc395c90031b27c4693db45fed66b9b9f0746078fff775188e5ff7ccc75530a781ad4a3c1a614c23baeb4ee939367b79bab53801fa43e84d016e4767cd1",
+            "id": "component-StatusChips-1525523dbab18749d1bb3432bb1f3111e0298c8e86a70699ec7553519dd06de49d97ec1ee3a1296b750d5c34da4bb5b39efe287b538a7a3b38900e923d5c0a23",
             "file": "src/shared/status-chips/status-chips.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4268,7 +4294,7 @@
                     "defaultValue": "'all'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "StatusType | \"all\"",
                     "decorators": []
                 },
@@ -4277,7 +4303,7 @@
                     "defaultValue": "'Bad 1,Bad 2,Bad 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -4286,7 +4312,7 @@
                     "defaultValue": "'Good 1,Good 2,Good 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -4313,7 +4339,7 @@
                     "defaultValue": "'Neutral 1,Neutral 2,Neutral 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 },
@@ -4322,7 +4348,16 @@
                     "defaultValue": "'Progress 1,Progress 2,Progress 3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedChip",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -4340,7 +4375,7 @@
                     "defaultValue": "'style1'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "StyleType",
                     "decorators": []
                 }
@@ -4356,7 +4391,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 22,
                     "modifierKind": [
                         148
                     ]
@@ -4382,7 +4417,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 51,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4419,7 +4454,7 @@
                     "optional": false,
                     "returnType": "string[]",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4429,6 +4464,49 @@
                         {
                             "name": "value",
                             "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "showChip",
+                    "args": [
+                        {
+                            "name": "status",
+                            "type": "StatusType",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "status",
+                            "type": "StatusType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -4452,7 +4530,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nexport type StatusType = 'good' | 'bad' | 'progress' | 'neutral';\r\nexport type StyleType = 'style1' | 'style2' | 'style3';\r\n@Component({\r\n  selector: 'app-status-chips',\r\n  imports: [CommonModule],\r\n  templateUrl: './status-chips.html',\r\n  styleUrl: './status-chips.scss',\r\n})\r\nexport class StatusChips {\r\n  @Input() mode: 'single' | 'group' = 'group';\r\n  @Input() label = 'Good 1';\r\n  @Input() status: StatusType = 'good';\r\n  @Input() styleType: StyleType = 'style1';\r\n  @Input() activeStatus: StatusType | 'all' = 'all';\r\n  @Input() goodLabelsText = 'Good 1,Good 2,Good 3';\r\n  @Input() badLabelsText = 'Bad 1,Bad 2,Bad 3';\r\n  @Input() progressLabelsText = 'Progress 1,Progress 2,Progress 3';\r\n  @Input() neutralLabelsText = 'Neutral 1,Neutral 2,Neutral 3';\r\n  readonly colorMap = {\r\n    good: ['green1', 'green2', 'green3'],\r\n    bad: ['red1', 'red2', 'red3'],\r\n    progress: ['blue1', 'blue2', 'blue3'],\r\n    neutral: ['gray1', 'gray2', 'gray3'],\r\n  } as const;\r\n\r\n  get goodLabels(): string[] {\r\n    return this.parse(this.goodLabelsText);\r\n  }\r\n\r\n  get badLabels(): string[] {\r\n    return this.parse(this.badLabelsText);\r\n  }\r\n\r\n  get progressLabels(): string[] {\r\n    return this.parse(this.progressLabelsText);\r\n  }\r\n\r\n  get neutralLabels(): string[] {\r\n    return this.parse(this.neutralLabelsText);\r\n  }\r\n\r\n  private parse(value: string): string[] {\r\n    return value\r\n      .split(',')\r\n      .map(v => v.trim())\r\n      .filter(Boolean);\r\n  }\r\n\r\n  getColor(status: StatusType, index: number): string {\r\n    return this.colorMap[status][index % 3];\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nexport type StatusType = 'good' | 'bad' | 'progress' | 'neutral';\r\nexport type StyleType = 'style1' | 'style2' | 'style3';\r\n@Component({\r\n  selector: 'app-status-chips',\r\n  imports: [CommonModule],\r\n  templateUrl: './status-chips.html',\r\n  styleUrl: './status-chips.scss',\r\n})\r\nexport class StatusChips {\r\n  @Input() mode: 'single' | 'group' = 'group';\r\n  @Input() label = 'Good 1';\r\n  @Input() status: StatusType = 'good';\r\n  @Input() selectedChip: string = '';\r\n  @Input() styleType: StyleType = 'style1';\r\n  @Input() activeStatus: StatusType | 'all' = 'all';\r\n  @Input() goodLabelsText = 'Good 1,Good 2,Good 3';\r\n  @Input() badLabelsText = 'Bad 1,Bad 2,Bad 3';\r\n  @Input() progressLabelsText = 'Progress 1,Progress 2,Progress 3';\r\n  @Input() neutralLabelsText = 'Neutral 1,Neutral 2,Neutral 3';\r\n  readonly colorMap = {\r\n    good: ['green1', 'green2', 'green3'],\r\n    bad: ['red1', 'red2', 'red3'],\r\n    progress: ['blue1', 'blue2', 'blue3'],\r\n    neutral: ['gray1', 'gray2', 'gray3'],\r\n  } as const;\r\n\r\n  get goodLabels(): string[] {\r\n    return this.parse(this.goodLabelsText);\r\n  }\r\n\r\n  get badLabels(): string[] {\r\n    return this.parse(this.badLabelsText);\r\n  }\r\n\r\n  get progressLabels(): string[] {\r\n    return this.parse(this.progressLabelsText);\r\n  }\r\n\r\n  get neutralLabels(): string[] {\r\n    return this.parse(this.neutralLabelsText);\r\n  }\r\n\r\n  private parse(value: string): string[] {\r\n    return value\r\n      .split(',')\r\n      .map(v => v.trim())\r\n      .filter(Boolean);\r\n  }\r\n\r\n  getColor(status: StatusType, index: number): string {\r\n    return this.colorMap[status][index % 3];\r\n  }\r\n  showChip(status: StatusType, index: number): boolean {\r\n  if (!this.selectedChip) return true;\r\n  return this.selectedChip === `${status}-${index}`;\r\n}\r\n}\r\n",
             "styleUrl": "./status-chips.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -4465,7 +4543,7 @@
                         "name": "goodLabels",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 28
+                        "line": 29
                     }
                 },
                 "badLabels": {
@@ -4474,7 +4552,7 @@
                         "name": "badLabels",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 32
+                        "line": 33
                     }
                 },
                 "progressLabels": {
@@ -4483,7 +4561,7 @@
                         "name": "progressLabels",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 36
+                        "line": 37
                     }
                 },
                 "neutralLabels": {
@@ -4492,11 +4570,11 @@
                         "name": "neutralLabels",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 40
+                        "line": 41
                     }
                 }
             },
-            "templateData": "<!-- SINGLE CHIP MODE -->\r\n@if (mode === 'single') {\r\n<div class=\"chip\" [ngClass]=\"[\r\n      styleType,\r\n      getColor(status, 0)\r\n    ]\">\r\n    @if (styleType === 'style1') {\r\n    <span class=\"dot\"></span>\r\n    }\r\n    <span class=\"text\">{{ label }}</span>\r\n</div>\r\n}\r\n\r\n<!-- GROUP MODE -->\r\n@if (mode === 'group') {\r\n<div class=\"group-wrapper\">\r\n    <!-- GOOD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'good') {\r\n    <div class=\"group-column\">\r\n        @for (label of goodLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('good', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- BAD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'bad') {\r\n    <div class=\"group-column\">\r\n        @for (label of badLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('bad', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Progress -->\r\n    @if (activeStatus === 'all' || activeStatus === 'progress') {\r\n    <div class=\"group-column\">\r\n        @for (label of progressLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('progress', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Neutral -->\r\n    @if (activeStatus === 'all' || activeStatus === 'neutral') {\r\n    <div class=\"group-column\">\r\n        @for (label of neutralLabels; track label; let i = $index) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('neutral', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n    </div>\r\n    }\r\n</div>\r\n}"
+            "templateData": "<!-- SINGLE CHIP MODE -->\r\n@if (mode === 'single') {\r\n<div class=\"chip\" [ngClass]=\"[\r\n      styleType,\r\n      getColor(status, 0)\r\n    ]\">\r\n    @if (styleType === 'style1') {\r\n    <span class=\"dot\"></span>\r\n    }\r\n    <span class=\"text\">{{ label }}</span>\r\n</div>\r\n}\r\n\r\n<!-- GROUP MODE -->\r\n@if (mode === 'group') {\r\n<div class=\"group-wrapper\">\r\n    <!-- GOOD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'good') {\r\n    <div class=\"group-column\">\r\n        @for (label of goodLabels; track label; let i = $index) {\r\n        @if (showChip('good', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('good', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- BAD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'bad') {\r\n    <div class=\"group-column\">\r\n        @for (label of badLabels; track label; let i = $index) {\r\n        @if (showChip('bad', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('bad', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Progress -->\r\n    @if (activeStatus === 'all' || activeStatus === 'progress') {\r\n    <div class=\"group-column\">\r\n        @for (label of progressLabels; track label; let i = $index) {\r\n        @if (showChip('progress', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('progress', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Neutral -->\r\n    @if (activeStatus === 'all' || activeStatus === 'neutral') {\r\n    <div class=\"group-column\">\r\n        @for (label of neutralLabels; track label; let i = $index) {\r\n        @if (showChip('neutral', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('neutral', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n</div>\r\n}"
         },
         {
             "name": "Toast",
@@ -5549,9 +5627,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "Buttons",
-                "coveragePercent": 66,
-                "coverageCount": "4/6",
-                "status": "good"
+                "coveragePercent": 44,
+                "coverageCount": "4/9",
+                "status": "medium"
             },
             {
                 "filePath": "src/shared/cards/cards.ts",
@@ -5658,7 +5736,7 @@
                 "linktype": "component",
                 "name": "StatusChips",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {

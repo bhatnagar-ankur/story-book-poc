@@ -6,7 +6,11 @@ $iconic-color: #212529;
 $primary-border-color: #00A3E0;
 $default-border-color: #D9D9D9;
 $primary-background: #F4F4F4;
-
+$download-bg:#c4c4c4;
+$download-complete:#868484;
+$download-success:#169202;
+$order-fill:#CB99F4;
+$order-button-bg:#9747FF;
 /*-----COMMON STYLES-----*/
 %base-filled {
     border-radius: 4px;
@@ -95,9 +99,10 @@ $button-sizes: (
         @extend %base-disabled;
     }
 }
+
 .icon {
-    width: 16px;
-    height: 16px;
+    width: 1em;
+    height: 1em;
     display: inline-block;
     background-color: currentColor;
     transform: rotate(var(--icon-rotate, 0deg));
@@ -136,4 +141,203 @@ $button-sizes: (
     &:disabled {
         @extend %base-disabled;
     }
+}
+
+/* ----- SMOOTH DOWNLOAD BUTTON ----- */
+
+.download {
+    width: 237px;
+    height: 55px;
+    border-radius: 4px;
+    background: $download-bg;
+    color: $primary-color;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    transition:
+        background 300ms ease,
+        transform 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.download:active {
+    transform: scale(0.97);
+}
+
+.button-main-container.download {
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* Left border */
+.button-main-container.download::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: $download-complete;
+    transition: width 200ms ease, opacity 200ms ease;
+    z-index: 0;
+}
+
+.button-main-container.download.state-border::before {
+    width: 2px;
+    opacity: 1;
+}
+
+.button-main-container.download.state-done::before {
+    width: 0;
+    opacity: 0;
+}
+
+.button-main-container.download::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: $download-complete;
+    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease;
+    z-index: 0;
+}
+
+/* Progress running */
+.button-main-container.download.state-progress::after {
+    width: 100%;
+    opacity: 1;
+}
+
+/* Done → hide overlay */
+.button-main-container.download.state-done::after {
+    width: 100%;
+    opacity: 0;
+}
+
+.button-main-container.download.state-done {
+    background: $download-bg;
+}
+
+.button-main-container.download.state-done::after {
+    width: 100%;
+    transition: none;
+}
+
+.download .content,
+.download span {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.download-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.download-complete-text {
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 300;
+    text-align: start;
+    color: $download-success;
+    opacity: 0;
+    transform: translateY(-4px);
+    animation: fadeInUp 400ms ease forwards;
+}
+
+.order-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.order-progress-area {
+    position: relative;
+    width: 150px;
+    height: 40px;
+}
+
+.order-image {
+    position: absolute;
+    top: -36px;
+    left: 5%;
+    width: 40px;
+    height: auto;
+    transition: left 300ms linear;
+}
+
+.order-bar {
+    width: 100%;
+    height: 10px;
+    background: $default-border-color;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 34px;
+}
+
+.order-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: $order-fill;
+    border-radius: 10px;
+    transition: width 300ms linear;
+}
+
+.order {
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    background: $order-button-bg;
+    color: $primary-color;
+    font-family: 'Inter', sans-serif;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+
+    transition: background 300ms ease;
+}
+
+.order:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.order-done-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.orderSuccess-image{
+    width: 16px;
+    height: 11px;
 }
