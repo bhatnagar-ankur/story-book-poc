@@ -10,7 +10,8 @@ $option-hover: #00a3e0;
 .ms-wrapper {
   display: flex;
   font-family: 'Myriad Pro';
-  width: 509px;
+  width: 100%;
+  max-width: 509px;
   align-items: flex-start;
   gap: 10px;
   position: relative;
@@ -25,6 +26,11 @@ $option-hover: #00a3e0;
     color: $field-disabled-color;
     transition: all 0.2s;
     background-color: $input-background;
+    max-width: calc(100% - 40px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 1;
 
     span {
       color: $field-error;
@@ -34,16 +40,19 @@ $option-hover: #00a3e0;
   .ms-control {
     display: flex;
     min-height: 48px;
+    height: auto;
     padding: 0 16px;
     align-items: center;
     gap: 8px;
-    flex: 1;
+    width: 100%;
+    flex: 1 0 0;
     border-radius: 4px;
     border: 1px solid rgba(24, 54, 80, 0.45);
 
     .selected-list {
       display: flex;
       align-items: center;
+      width: 100%;
 
       .placeholder {
         font-size: 16px;
@@ -102,8 +111,9 @@ $option-hover: #00a3e0;
 .error-text {
   font-size: 14px;
   color: $field-error;
-  margin: 0 16px;
-  width: 509px;
+  margin: 4px 16px 0;
+  width: 100%;
+  max-width: 509px;
   word-wrap: break-word;
   overflow-wrap: anywhere;
   white-space: normal;
@@ -114,8 +124,13 @@ $option-hover: #00a3e0;
   margin-top: 2px;
   border-radius: 6px;
   border: 1px solid $field-active;
-  width: 509px;
+  width: 100%;
+  max-width: 509px;
   background: $input-background;
+  max-height: 240px;
+  max-height: 288px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .option {
@@ -144,25 +159,104 @@ $option-hover: #00a3e0;
   font-size: 14px;
   color: $field-disabled-color;
 }
-.option-text {
-  max-width: 180px;
+
+.option-text,
+.truncate-text {
+  max-width: 60%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
 }
+
 .full-value {
-  white-space: normal;    
+  white-space: normal;
   overflow: visible;
-  text-overflow: unset;
   word-break: break-word;
   max-width: 100%;
 }
 
-.truncate-text {
-  max-width: 180px;        
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
+/* ===== Mobile ===== */
+
+@media (max-width: 480px) {
+
+  .ms-wrapper {
+    max-width: 100%;
+  }
+
+  .ms-label {
+    font-size: 14px;
+  }
+
+  .ms-control {
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .ms-control .selected-list {
+
+    .placeholder,
+    .single-value {
+      font-size: 14px;
+    }
+  }
+
+  .dropdown {
+    max-width: 100%;
+  }
+
+  .option {
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .option-text,
+  .truncate-text {
+    max-width: 100%;
+  }
+
+  .error-text {
+    font-size: 13px;
+  }
+}
+
+/* ===== Tablet ===== */
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .ms-wrapper {
+    max-width: 420px;
+  }
+
+  .dropdown,
+  .error-text {
+    max-width: 420px;
+  }
+
+  .option-text,
+  .truncate-text {
+    max-width: 70%;
+  }
+}
+
+/* ===== Large Screens ===== */
+
+@media (min-width: 1200px) {
+
+  .ms-wrapper {
+    max-width: 540px;
+  }
+
+  .dropdown,
+  .error-text {
+    max-width: 540px;
+  }
+
+  .ms-label {
+    font-size: 17px;
+  }
+
+  .single-value {
+    font-size: 17px;
+  }
 }

@@ -10,7 +10,8 @@ $option-hover: #00a3e0;
 .ms-wrapper {
   display: flex;
   font-family: 'Myriad Pro';
-  width: 509px;
+  width: 100%;
+  max-width: 509px;
   align-items: flex-start;
   position: relative;
 
@@ -36,7 +37,7 @@ $option-hover: #00a3e0;
     padding: 0 16px;
     align-items: center;
     gap: 8px;
-    flex: 1;
+    width: 100%;
     border-radius: 4px;
     border: 1px solid rgba(24, 54, 80, 0.45);
 
@@ -47,12 +48,14 @@ $option-hover: #00a3e0;
       font-size: 16px;
       background: transparent;
       color: $readonly-color;
+      min-width: 0;
     }
 
     .search-icon {
       margin-left: auto;
       display: flex;
       align-items: center;
+      flex-shrink: 0;
     }
   }
 }
@@ -85,17 +88,29 @@ $option-hover: #00a3e0;
   font-size: 14px;
   color: $field-error;
   margin: 4px 16px;
-  width: 509px;
+  width: 100%;
+  max-width: 509px;
   word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .dropdown {
-  margin-top: 2px;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  max-width: 509px;
+  background: $input-background;
   border-radius: 6px;
   border: 1px solid $field-active;
-  width: 509px;
-  background: transparent;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 1000;
+  max-height: 288px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
 
 .option {
   min-height: 48px;
@@ -126,4 +141,84 @@ $option-hover: #00a3e0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 480px) {
+
+  .ms-wrapper {
+    max-width: 100%;
+  }
+
+  .ms-label {
+    font-size: 14px;
+  }
+
+  .ms-control {
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .ms-control .search-input {
+    font-size: 14px;
+  }
+
+  .dropdown,
+  .error-text {
+    max-width: 100%;
+  }
+
+  .option {
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .truncate-text {
+    max-width: 100%;
+  }
+
+  .error-text {
+    font-size: 13px;
+  }
+}
+
+/* ===== Tablet ===== */
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .ms-wrapper {
+    max-width: 420px;
+  }
+
+  .dropdown,
+  .error-text {
+    max-width: 420px;
+  }
+
+  .truncate-text {
+    max-width: 80%;
+  }
+}
+
+/* ===== Large Screens ===== */
+
+@media (min-width: 1200px) {
+
+  .ms-wrapper {
+    max-width: 540px;
+  }
+
+  .dropdown,
+  .error-text {
+    max-width: 540px;
+  }
+
+  .ms-label {
+    font-size: 17px;
+  }
+
+  .search-input {
+    font-size: 17px;
+  }
 }

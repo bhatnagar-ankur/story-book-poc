@@ -24,7 +24,8 @@ $border-color: #D0D0CE;
   &-title-group {
     display: flex;
     align-items: center;
-    min-width: 235px;
+    min-width: 0;
+    max-width: 100%;
     min-height: 22px;
     gap: 12px;
   }
@@ -127,6 +128,108 @@ $border-color: #D0D0CE;
 }
 
 .accordion-body app-multi-select-dropdown {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 48px;
+}
+.accordion-body app-search {
+  width: 100%;
+  max-width: 500px;
+  height: 48px;
+}
+/* ===============================
+   📱 Mobile (0 - 480px)
+================================ */
+
+@media (max-width: 480px) {
+
+  .accordion {
+
+    &-header {
+      height: auto ;
+      min-height: 48px;
+      padding: 10px 12px;
+      gap: 8px;
+    }
+
+    &-title {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    &-title-group {
+      gap: 8px;
+    }
+
+    &-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    &-body {
+      padding: 12px;
+      gap: 12px;
+      flex-direction: column;
+    }
+  }
+
+  .accordion-body app-multi-select-dropdown {
+    max-width: 100%;
+    height: 44px;
+  }
+}
+
+/* ===============================
+   📲 Tablet (481px - 768px)
+================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .accordion {
+
+    &-header {
+      padding: 12px 14px;
+    }
+
+    &-title {
+      font-size: 16px;
+    }
+
+    &-body {
+      padding: 14px;
+      gap: 14px;
+    }
+  }
+
+  .accordion-body app-multi-select-dropdown {
+    max-width: 420px;
+  }
+}
+
+/* ===============================
+   💻 Large Screens (1200px+)
+================================ */
+
+@media (min-width: 1200px) {
+
+  .accordion {
+
+    &-header {
+      min-height: 56px;
+      padding: 14px 16px;
+    }
+
+    &-title {
+      font-size: 18px;
+    }
+
+    &-body {
+      padding: 16px;
+      gap: 16px;
+    }
+  }
+
+  .accordion-body app-multi-select-dropdown {
+    max-width: 500px;
+  }
 }

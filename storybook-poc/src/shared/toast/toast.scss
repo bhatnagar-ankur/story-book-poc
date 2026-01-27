@@ -16,6 +16,7 @@ $link: #007DBA;
     border: 1px solid transparent;
     background: $toast-bg;
     width: 360px;
+    max-width: calc(100% - 32px);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
     position: fixed;
     z-index: 1000;
@@ -36,7 +37,7 @@ $link: #007DBA;
 .content {
     display: flex;
     flex-direction: column;
-    width: 302px;
+    width: 100%;
     padding: 8px 8px 8px 0;
     gap: 8px;
     overflow-y: auto;
@@ -53,10 +54,10 @@ $link: #007DBA;
     font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
-}
 
-.content-subtitle.link:hover {
-    color: $link;
+    &:hover {
+        color: $link;
+    }
 }
 
 .content p {
@@ -80,34 +81,34 @@ $link: #007DBA;
 
 .progress {
     border-color: $progress;
-}
 
-.progress .side {
-    background: $progress;
+    .side {
+        background: $progress;
+    }
 }
 
 .success {
     border-color: $success;
-}
 
-.success .side {
-    background: $success;
+    .side {
+        background: $success;
+    }
 }
 
 .warning {
     border-color: $warning;
-}
 
-.warning .side {
-    background: $warning;
+    .side {
+        background: $warning;
+    }
 }
 
 .error {
     border-color: $error;
-}
 
-.error .side {
-    background: $error;
+    .side {
+        background: $error;
+    }
 }
 
 .left-top {
@@ -140,4 +141,70 @@ $link: #007DBA;
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
+}
+/* ===== Mobile (up to 480px) ===== */
+@media (max-width: 480px) {
+
+    .toast {
+        width: 100%;
+        max-width: calc(100% - 28px);
+
+        gap: 12px;
+        border-radius: 6px;
+    }
+
+    .side {
+        width: 10px;
+    }
+
+    .content {
+        padding: 8px;
+    }
+
+    .content .content-title {
+        font-size: 16px;
+    }
+
+    .content p {
+        font-size: 13px;
+    }
+
+    .close-btn {
+        top: 8px;
+        right: 8px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ===== Tablet (481px - 768px) ===== */
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .toast {
+        width: 320px;
+    }
+
+    .content .content-title {
+        font-size: 17px;
+    }
+
+    .content p {
+        font-size: 13.5px;
+    }
+}
+
+/* ===== Large Screens (1200px+) ===== */
+@media (min-width: 1200px) {
+
+    .toast {
+        width: 380px;
+    }
+
+    .content .content-title {
+        font-size: 19px;
+    }
+
+    .content p {
+        font-size: 15px;
+    }
 }
