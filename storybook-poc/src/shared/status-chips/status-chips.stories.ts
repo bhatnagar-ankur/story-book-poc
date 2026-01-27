@@ -22,6 +22,17 @@ const meta: Meta<StatusChips> = {
         badLabelsText: { control: 'text' },
         progressLabelsText: { control: 'text' },
         neutralLabelsText: { control: 'text' },
+        selectedChip: {
+            control: 'select',
+            options: [
+                '',
+                'good-0', 'good-1', 'good-2',
+                'bad-0', 'bad-1', 'bad-2',
+                'progress-0', 'progress-1', 'progress-2',
+                'neutral-0', 'neutral-1', 'neutral-2',
+            ],
+            description: 'Show only selected chip',
+        },
     },
 };
 

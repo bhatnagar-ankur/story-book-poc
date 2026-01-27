@@ -32,21 +32,22 @@ $primary-background: #F4F4F4;
 
 /*-----WIDTH SIZE BASED ON TYPE-----*/
 $button-sizes: (
-    primary: 127px,
-    secondary: 127px,
+    primary: auto,
+    secondary: auto,
     text: auto,
-    iconic: 101px,
+    iconic: auto,
     long: 508px
 );
 
 .button-main-container {
+    min-width: 100px;
     font-family: "Myriad Pro";
     font-size: 16px;
     font-weight: 600;
     line-height: 24px;
     cursor: pointer;
     border: none;
-    padding: 10px;
+    padding: 10px 14px;
     display: flex;
     justify-content: var(--btn-justify, center);
     align-items: center;
@@ -94,25 +95,6 @@ $button-sizes: (
         @extend %base-disabled;
     }
 }
-
-.text {
-    background: transparent;
-    color: var(--btn-color, $secondary-color);
-    text-transform: uppercase;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 1;
-
-    &:hover:not(:disabled) {
-        color: var(--btn-hover-color, $iconic-color);
-    }
-
-    &:disabled {
-        color: $disabled-color;
-        cursor: not-allowed;
-    }
-}
-
 .icon {
     width: 16px;
     height: 16px;

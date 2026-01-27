@@ -12,6 +12,7 @@ export class StatusChips {
   @Input() mode: 'single' | 'group' = 'group';
   @Input() label = 'Good 1';
   @Input() status: StatusType = 'good';
+  @Input() selectedChip: string = '';
   @Input() styleType: StyleType = 'style1';
   @Input() activeStatus: StatusType | 'all' = 'all';
   @Input() goodLabelsText = 'Good 1,Good 2,Good 3';
@@ -51,4 +52,8 @@ export class StatusChips {
   getColor(status: StatusType, index: number): string {
     return this.colorMap[status][index % 3];
   }
+  showChip(status: StatusType, index: number): boolean {
+  if (!this.selectedChip) return true;
+  return this.selectedChip === `${status}-${index}`;
+}
 }

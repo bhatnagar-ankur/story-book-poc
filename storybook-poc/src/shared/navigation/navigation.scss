@@ -110,11 +110,38 @@ $hover-border: #6E7D89;
   overflow-x: visible;
 
   &::-webkit-scrollbar {
+    width: 6px;
     display: none;
   }
 
   scrollbar-width: none;
 }
+
+.sidebar:hover .nav-scroll {
+  scrollbar-width: thin;
+}
+
+.sidebar:hover .nav-scroll::-webkit-scrollbar {
+  display: block;
+}
+
+.sidebar:hover .nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.sidebar:hover .nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nav-scroll::-webkit-scrollbar {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar:hover .nav-scroll::-webkit-scrollbar {
+  opacity: 1;
+}
+
 
 .nav-list {
   list-style: none;

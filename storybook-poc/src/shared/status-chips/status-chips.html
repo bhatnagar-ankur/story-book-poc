@@ -18,12 +18,14 @@
     @if (activeStatus === 'all' || activeStatus === 'good') {
     <div class="group-column">
         @for (label of goodLabels; track label; let i = $index) {
+        @if (showChip('good', i)) {
         <div class="chip" [ngClass]="[styleType, getColor('good', i)]">
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
             <span class="text">{{ label }}</span>
         </div>
+        }
         }
     </div>
     }
@@ -32,12 +34,14 @@
     @if (activeStatus === 'all' || activeStatus === 'bad') {
     <div class="group-column">
         @for (label of badLabels; track label; let i = $index) {
+        @if (showChip('bad', i)) {
         <div class="chip" [ngClass]="[styleType, getColor('bad', i)]">
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
             <span class="text">{{ label }}</span>
         </div>
+        }
         }
     </div>
     }
@@ -46,12 +50,14 @@
     @if (activeStatus === 'all' || activeStatus === 'progress') {
     <div class="group-column">
         @for (label of progressLabels; track label; let i = $index) {
+        @if (showChip('progress', i)) {
         <div class="chip" [ngClass]="[styleType, getColor('progress', i)]">
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
             <span class="text">{{ label }}</span>
         </div>
+        }
         }
     </div>
     }
@@ -60,12 +66,14 @@
     @if (activeStatus === 'all' || activeStatus === 'neutral') {
     <div class="group-column">
         @for (label of neutralLabels; track label; let i = $index) {
+        @if (showChip('neutral', i)) {
         <div class="chip" [ngClass]="[styleType, getColor('neutral', i)]">
             @if (styleType === 'style1') {
             <span class="dot"></span>
             }
             <span class="text">{{ label }}</span>
         </div>
+        }
         }
     </div>
     }

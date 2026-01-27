@@ -74,7 +74,9 @@ $option-hover: #00a3e0;
   border: 1px solid $field-disabled-border;
   cursor: not-allowed;
 }
-
+.ms-wrapper.disabled .ms-label {
+    background: $field-disabled;
+}
 .ms-wrapper.readonly .ms-control {
   background: transparent;
   border: none;

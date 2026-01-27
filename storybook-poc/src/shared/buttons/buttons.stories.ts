@@ -8,6 +8,7 @@ const meta: Meta<Buttons> = {
     argTypes: {
         label: { control: 'text' },
         disabled: { control: 'boolean' },
+        icon: { control: 'text' },
         iconPosition: {
         control: { type: 'radio' },
         options: ['left', 'right'],
@@ -35,15 +36,6 @@ export const Secondary: Story = {
     args: {
         label: 'Button Text',
         buttonType: 'secondary',
-        disabled: false,
-    }
-};
-
-/** TEXT */
-export const Text: Story = {
-    args: {
-        label: 'Button Text',
-        buttonType: 'text',
         disabled: false,
     }
 };
