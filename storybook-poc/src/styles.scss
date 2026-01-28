@@ -115,3 +115,10 @@ body {
   src: url('/assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-Medium.ttf') format('woff2');
   font-weight: 500;
 }
+@font-face {
+  font-family: 'BookAlt';
+  src: url('/assets/fonts/neutra-book-alt.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

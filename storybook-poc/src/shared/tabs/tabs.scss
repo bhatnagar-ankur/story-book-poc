@@ -1,0 +1,225 @@
+:host {
+    display: inline-block;
+    width: fit-content;
+}
+
+.tabs {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    font-family: "Inter", sans-serif;
+}
+
+.tab {
+    padding: 8px 16px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    min-width: 90px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #595959;
+}
+
+.tab-label {
+    display: inline-block;
+}
+
+.tab:focus {
+    outline: none;
+}
+
+/* ===== STYLE 1 ===== */
+
+.tabs-style-1 {
+    border: 1px solid #183650;
+    border-radius: 4px;
+    font-family: 'Myriad Pro';
+    overflow: hidden;
+    box-shadow: 1px 1px 2px 0px #0000000D;
+}
+
+.tabs-style-1 .tab {
+    border-right: 0.5px solid #183650;
+    color: #183650;
+}
+
+.tabs-style-1 .tab:last-child {
+    border-right: none;
+}
+
+.tabs-style-1 .tab.active {
+    background: #183650;
+    color: #fff;
+}
+
+
+/* ===== STYLE 2 ===== */
+
+.tabs-style-2 {
+    gap: 28px;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 6px;
+    font-family: 'BookAlt';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tabs-style-2 .tab {
+    gap: 8px;
+    color: #595959;
+    position: relative;
+}
+
+.tabs-style-2 .tab.active {
+    color: #005480;
+    font-weight: 600;
+}
+
+.tabs-style-2 .tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #005480;
+    border-radius: 2px;
+}
+
+
+/* ===== STYLE 3 ===== */
+
+.tabs-style-3 {
+    background: #fff;
+    padding: 4px 4px 0 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    gap: 6px;
+    position: relative;
+    overflow: visible;
+}
+
+.tabs-style-3 .tab {
+    position: relative;
+    color: #000000;
+    font-weight: 400;
+
+}
+
+.tabs-style-3 .tab.active {
+    color: #2D81FD;
+    font-weight: 700;
+}
+
+.tabs-style-3 .tab.active::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: -4px;
+    width: 100%;
+    height: 3px;
+    background: #2D81FD;
+}
+
+/* ===== STYLE 4 ===== */
+
+.tabs-style-4 {
+    background: #ffffff;
+    border: 2px solid #DADADA;
+    border-radius: 24px;
+    padding: 0;
+    gap: 0;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.tabs-style-4 .tab {
+    border-radius: 0;
+    color: #B1B1B1;
+    padding: 8px 22px;
+    font-weight: 500;
+    background: transparent;
+    border-right: 1px solid #DADADA;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.tabs-style-4 .tab:last-child {
+    border-right: none;
+}
+
+.tabs-style-4 .tab:first-child {
+    border-radius: 24px 0 0 24px;
+}
+
+.tabs-style-4 .tab:last-child {
+    border-radius: 0 24px 24px 0;
+}
+
+.tabs-style-4 .tab.active {
+    background: #4ba6d8;
+    color: #fff;
+
+    z-index: 2;
+}
+
+.tabs-style-4 .tab.active+.tab {
+    border-left: none;
+}
+
+.tabs-style-4 .tab.active {
+    border-right: none;
+}
+
+/* ===== STYLE 5 ===== */
+
+.tabs-style-5 {
+    background: #f6cfd1;
+    border-radius: 24px;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    width: fit-content;
+}
+
+.tabs-style-5 .tab {
+    flex: 1;
+    border-radius: 20px;
+    padding: 8px 38px;
+    color: #565F5C;
+    text-align: center;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.tabs-style-5 .tab.active {
+    background: #7a0000;
+    color: #fff;
+}
+
+/* ===== ICON SUPPORT ===== */
+
+.icon {
+    width: 24px;
+    height: 24px;
+    background: currentColor;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+.tab:hover:not(.active) {
+    background: rgba(0, 0, 0, 0.04);
+}
