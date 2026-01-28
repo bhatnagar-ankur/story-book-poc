@@ -6,11 +6,17 @@ $iconic-color: #212529;
 $primary-border-color: #00A3E0;
 $default-border-color: #D9D9D9;
 $primary-background: #F4F4F4;
-$download-bg:#c4c4c4;
-$download-complete:#868484;
-$download-success:#169202;
-$order-fill:#CB99F4;
-$order-button-bg:#9747FF;
+$download-bg: #c4c4c4;
+$download-complete: #868484;
+$download-success: #169202;
+$order-fill: #CB99F4;
+$order-button-bg: #9747FF;
+$orange-btn:#F5821F;
+$text-color-black: #000000;
+$pink-btn:#E77172;
+$add-to-cart-bg: #F70000;
+$add-to-cart-hover:#BB0000;
+
 /*-----COMMON STYLES-----*/
 %base-filled {
     border-radius: 4px;
@@ -44,6 +50,8 @@ $button-sizes: (
 );
 
 .button-main-container {
+    position: relative;
+    overflow: hidden;
     min-width: 100px;
     font-family: "Myriad Pro";
     font-size: 16px;
@@ -61,6 +69,7 @@ $button-sizes: (
     word-wrap: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
+    text-align: center;
 
     @each $name, $size in $button-sizes {
         &.#{$name} {
@@ -170,10 +179,6 @@ $button-sizes: (
         box-shadow 150ms ease;
 }
 
-.download:active {
-    transform: scale(0.97);
-}
-
 .button-main-container.download {
     font-size: 20px;
     font-family: 'Inter', sans-serif;
@@ -191,7 +196,7 @@ $button-sizes: (
     width: 0;
     height: 100%;
     background: $download-complete;
-    transition: width 200ms ease, opacity 200ms ease;
+    transition: width 400ms ease;
     z-index: 0;
 }
 
@@ -213,7 +218,7 @@ $button-sizes: (
     height: 100%;
     width: 0%;
     background: $download-complete;
-    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease;
+    transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
 }
 
@@ -332,12 +337,401 @@ $button-sizes: (
 }
 
 .order-done-text {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.orderSuccess-image{
+.orderSuccess-image {
     width: 16px;
     height: 11px;
 }
+
+/* ===== Stack Buttons ===== */
+
+.stack-orange {
+    background: $orange-btn;
+    color: $text-color-black;
+    border-radius: 10px;
+    border: 1px solid $text-color-black;
+}
+
+.stack-orange:hover {
+    background: $orange-btn;
+}
+
+/* ===== Text Slide Animation (ONLY Stack Buttons) ===== */
+
+.stack-orange {
+
+    .btn-text-wrapper {
+        position: relative;
+        height: 24px;
+        width: 100%;
+        overflow: hidden;
+        display: block;
+    }
+
+    .btn-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+        line-height: 24px;
+    }
+
+    .default-text {
+        transform: translateY(0%);
+    }
+
+    .hover-text {
+        transform: translateY(100%);
+    }
+
+    &:hover {
+        .default-text {
+            transform: translateY(-100%);
+        }
+
+        .hover-text {
+            transform: translateY(0%);
+        }
+    }
+}
+
+/* ===== Pink Circle Hover Effect ===== */
+
+.stack-pink {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 1;
+    background-color: $pink-btn;
+    color: $text-color-black;
+    transition: color 0.4s ease 0.2s;
+    border: 1px solid $text-color-black;
+}
+
+/* Keep text above */
+.stack-pink>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Circle */
+.stack-pink::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: $text-color-black;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* Hover: expand circle */
+.stack-pink:hover::before {
+    transform: translate(-50%, -50%) scale(20);
+}
+
+/* Hover text color */
+.stack-pink:hover {
+    transition: color 0.4s ease 0s;
+    color: $pink-btn;
+}
+
+/* ===== Animated Rainbow Black Button (Magic Effect) ===== */
+
+@property --x {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@property --y {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+
+/* Black Button */
+.button-main-container.stack-black {
+    --x: 0%;
+    --y: 0%;
+
+    /* Inverted values */
+    --ix: calc(100% - var(--x));
+    --iy: calc(100% - var(--y));
+
+    width: 148px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -1%;
+    color: $primary-color;
+    background: $text-color-black;
+
+    border-radius: 35px;
+    border: 4px solid transparent;
+
+    cursor: pointer;
+
+    /* Layered backgrounds */
+    background:
+
+        /* Inner background */
+        linear-gradient($text-color-black, $text-color-black) padding-box,
+
+        /* White highlight (opposite side) */
+        radial-gradient(ellipse 140px 60px at var(--ix) var(--iy),
+            rgba(255, 255, 255, 2),
+            rgba(255, 255, 255, 2),
+            transparent 180%) padding-box,
+
+        /* Rainbow border */
+        radial-gradient(ellipse 90px 50px at var(--x) var(--y),
+            $add-to-cart-bg,
+            $orange-btn,
+            $pink-btn,
+            $download-success,
+            $primary-border-color,
+            $order-fill,
+            $secondary-color,
+            transparent 75%) border-box,
+
+        /* Base border */
+        linear-gradient($text-color-black, $text-color-black) border-box;
+
+    transition:
+        --x 0.4s ease-in-out,
+        --y 0.4s ease-in-out;
+}
+
+
+/* Hover → Move glow */
+.button-main-container.stack-black:hover {
+    --x: 100%;
+    --y: 100%;
+}
+
+.button-main-container.cart {
+  background: $add-to-cart-bg;
+  color: $primary-color;
+
+  border-radius: 6px;
+  height: 40px;
+  min-width: 140px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: background 200ms ease-out;
+}
+.button-main-container.cart:hover {
+  background: $add-to-cart-hover;
+}
+
+.button-main-container.cart:active {
+  background: $add-to-cart-bg;
+}
+.button-main-container.cart .icon {
+  width: 16px;
+  height: 16px;
+
+  background: $primary-color;
+
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+.button-main-container.cart.animate {
+  animation: cart-btn 2s ease-out forwards;
+}
+.button-main-container.cart.animate .cart-text {
+  animation: cart-text 2s ease-out forwards;
+}
+.button-main-container.cart.animate .icon {
+  animation: cart-icon 2s ease-out forwards;
+}
+@keyframes cart-btn {
+
+  /* Normal */
+  0% {
+    width: 140px;
+    height: 40px;
+  }
+
+  /* Shrink width */
+  50% {
+    width: 70px;
+    height: 40px;
+  }
+
+  /* Small pill */
+  65% {
+    width: 55px;
+    height: 40px;
+  }
+
+  /* Text-only phase (reduce height) */
+  75% {
+    width: 80px;
+    height: 32px;  
+  }
+
+  /* Expand (restore height) */
+  90% {
+    width: 120px;
+    height: 36px;
+  }
+
+  /* Full */
+  100% {
+    width: 140px;
+    height: 40px;
+  }
+}
+
+@keyframes cart-text {
+
+  /* Normal */
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  /* Move right */
+  25% {
+    opacity: 1;
+    transform: translateX(20px) scale(0.95);
+  }
+
+  /* Reach end */
+  45% {
+    opacity: 1;
+    transform: translateX(55px) scale(0.9);
+  }
+
+  /* Fade out */
+  55% {
+    opacity: 0;
+    transform: translateX(70px) scale(0.85);
+  }
+
+  /* Fully hidden (reset position) */
+  65% {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.9);
+  }
+
+  /* Start entering from LEFT */
+  75% {
+    opacity: 1;
+    transform: translateX(-25px) scale(0.95);
+  }
+
+  /* Slide to center */
+  85% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  /* Normal */
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+@keyframes cart-icon {
+
+  /* Normal (left side) */
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+
+  /* Move slightly right with bend */
+  20% {
+    transform: rotate(-37.8deg) scale(1.1);
+    opacity: 1;
+  }
+
+  /* Text almost gone → icon reaches CENTER */
+  40% {
+    transform: translateX(25px) rotate(0deg) scale(1.05);
+    opacity: 1;
+  }
+
+  /* Stay in CENTER briefly */
+  50% {
+    transform: translateX(50px) scale(1.05);
+    opacity: 1;
+  }
+
+  /* Move to right edge */
+  65% {
+    transform: translateX(95px) scale(1.05);
+    opacity: 1;
+  }
+
+  /* Fade at edge */
+  75% {
+    transform: translateX(95px) scale(0.8);
+    opacity: 0.4;
+  }
+
+  /* Gone */
+  80% {
+    transform: translateX(95px) scale(0.7);
+    opacity: 0;
+  }
+
+  /* Stay hidden */
+  85% {
+    opacity: 0;
+  }
+
+  /* Return slowly */
+  92% {
+    transform: translateX(15px) scale(0.95);
+    opacity: 0.6;
+  }
+
+  /* Normal */
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+

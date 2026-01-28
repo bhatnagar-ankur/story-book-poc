@@ -1249,7 +1249,7 @@
         },
         {
             "name": "Buttons",
-            "id": "component-Buttons-d83bf8102e139685c75325b00e8d911d05a47d507ae423960f6ab2cb5131058ec9bc68da4b67e720739a124b11c06ac752556f6dda9b636206677d7b885177fc",
+            "id": "component-Buttons-0262746677bc92bd758666e46e3609db86fb731952a6dd56180d3aca71a5db28ebded185ae4283a1ef2679a599ea5ae203685b7b31be7f1ba24fe420b4dc23fb",
             "file": "src/shared/buttons/buttons.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1270,10 +1270,8 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nSelecting the type of button\n",
-                    "description": "<p>Selecting the type of button</p>\n",
-                    "line": 18,
-                    "type": "\"primary\" | \"secondary\" | \"text\" | \"iconic\" | \"long\" | \"download\"",
+                    "line": 15,
+                    "type": "\"primary\" | \"secondary\" | \"text\" | \"iconic\" | \"long\" | \"download\" | \"order\" | \"fancy\" | \"stack-orange\" | \"stack-pink\" | \"stack-black\"",
                     "decorators": []
                 },
                 {
@@ -1281,9 +1279,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nEnabling or disabling the button\n",
-                    "description": "<p>Enabling or disabling the button</p>\n",
-                    "line": 22,
+                    "line": 27,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1291,9 +1287,7 @@
                     "name": "icon",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nDisplaying the icon(optional)\n",
-                    "description": "<p>Displaying the icon(optional)</p>\n",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": []
                 },
@@ -1302,7 +1296,7 @@
                     "defaultValue": "'left'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 29,
                     "type": "\"left\" | \"right\"",
                     "decorators": []
                 },
@@ -1311,9 +1305,16 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nLabel name to display\n",
-                    "description": "<p>Label name to display</p>\n",
                     "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "orderSuccessIcon",
+                    "defaultValue": "'/assets/icons/tick-icon.svg'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
                     "type": "string",
                     "decorators": []
                 }
@@ -1329,7 +1330,51 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 32
+                },
+                {
+                    "name": "isDownloading",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "isOrdering",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "orderProgress",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "orderState",
+                    "defaultValue": "'idle'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"idle\" | \"progress\" | \"done\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
                 }
             ],
             "methodsClass": [
@@ -1339,19 +1384,99 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "startDownloadAnimation",
+                    "name": "runStepAnimation",
+                    "args": [
+                        {
+                            "name": "setState",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "state",
+                                    "type": "string",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "onReset",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": []
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "setState",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "state",
+                                    "type": "string",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "onReset",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "startDownload",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 83,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "startOrder",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
                 }
             ],
             "deprecated": false,
@@ -1368,13 +1493,39 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  /**\r\n   * Label name to display\r\n   */\r\n  @Input() label: string = '';\r\n  /**\r\n   * Selecting the type of button\r\n   */\r\n  @Input() buttonType: 'primary' | 'secondary' | 'text' | 'iconic' | 'long' | 'download' = 'primary';\r\n  /**\r\n   * Enabling or disabling the button\r\n   */\r\n  @Input() disabled: boolean = false;\r\n  /**\r\n   * Displaying the icon(optional)\r\n   */\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n  downloadState: 'idle' | 'border' | 'progress' | 'done' = 'idle';\r\n\r\n\r\n  onButtonClick() {\r\n    if (this.buttonType !== 'download') return;\r\n    this.startDownloadAnimation();\r\n  }\r\n\r\n  startDownloadAnimation() {\r\n    this.downloadState = 'border';\r\n    setTimeout(() => {\r\n      this.downloadState = 'progress';\r\n      setTimeout(() => {\r\n        this.downloadState = 'done';\r\n        setTimeout(() => {\r\n          this.downloadState = 'idle';\r\n        }, 2000);\r\n      }, 300);\r\n    }, 200);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule, NgClass } from '@angular/common';\r\nimport { ChangeDetectorRef, Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-buttons',\r\n  imports: [CommonModule],\r\n  templateUrl: './buttons.html',\r\n  styleUrl: './buttons.scss',\r\n})\r\nexport class Buttons {\r\n  constructor(private cd: ChangeDetectorRef) { }\r\n\r\n  /* Inputs */\r\n  @Input() label: string = '';\r\n  @Input() buttonType:\r\n    | 'primary'\r\n    | 'secondary'\r\n    | 'text'\r\n    | 'iconic'\r\n    | 'long'\r\n    | 'download'\r\n    | 'order' | 'fancy'\r\n    | 'stack-orange'\r\n    | 'stack-pink'\r\n    | 'stack-black' = 'primary';\r\n\r\n  @Input() disabled = false;\r\n  @Input() icon?: string;\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n  @Input() orderSuccessIcon: string = '/assets/icons/tick-icon.svg';\r\n  /* States */\r\n  downloadState: 'idle' | 'border' | 'progress' | 'done' = 'idle';\r\n  orderState: 'idle' | 'progress' | 'done' = 'idle';\r\n  orderProgress = 0;\r\n  isDownloading = false;\r\n  isOrdering = false;\r\n\r\n  /* Click Handler */\r\n  onButtonClick() {\r\n    if (this.buttonType === 'download') {\r\n      this.startDownload();\r\n    }\r\n\r\n    if (this.buttonType === 'order') {\r\n      this.startOrder();\r\n    }\r\n  }\r\n\r\n  /* Generic Animation Runner */\r\n  private runStepAnimation(\r\n    setState: (state: string) => void,\r\n    onReset: () => void\r\n  ) {\r\n    setState('idle');\r\n    this.cd.detectChanges();\r\n\r\n    setTimeout(() => {\r\n      setState('border');\r\n      this.cd.detectChanges();\r\n\r\n      setTimeout(() => {\r\n        setState('progress');\r\n        this.cd.detectChanges();\r\n\r\n        setTimeout(() => {\r\n          setState('done');\r\n          this.cd.detectChanges();\r\n\r\n          // Freeze then reset\r\n          setTimeout(() => {\r\n            onReset();\r\n            this.cd.detectChanges();\r\n          }, 1500);\r\n\r\n        }, 600);\r\n\r\n      }, 900);\r\n\r\n    }, 100);\r\n  }\r\n\r\n  /* Download */\r\n  private startDownload() {\r\n    if (this.isDownloading) return;\r\n\r\n    this.isDownloading = true;\r\n\r\n    this.runStepAnimation(\r\n      (state) => (this.downloadState = state as any),\r\n      () => {\r\n        this.isDownloading = false;\r\n      }\r\n    );\r\n  }\r\n\r\n  /* Order */\r\n  private startOrder() {\r\n    if (this.isOrdering || this.orderState === 'done') return;\r\n    this.isOrdering = true;\r\n    this.orderState = 'progress';\r\n    this.orderProgress = 20;\r\n\r\n    const interval = setInterval(() => {\r\n      this.orderProgress += 10;\r\n\r\n      if (this.orderProgress >= 100) {\r\n        this.orderProgress = 100;\r\n        clearInterval(interval);\r\n\r\n        this.orderState = 'done';\r\n        this.isOrdering = false;\r\n      }\r\n\r\n      this.cd.detectChanges();\r\n    }, 300);\r\n  }\r\n}",
             "styleUrl": "./buttons.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "cd",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "cd",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<button\r\n  class=\"button-main-container\"\r\n  [ngClass]=\"[\r\n    buttonType,\r\n    buttonType === 'download' ? 'state-' + downloadState : ''\r\n  ]\"\r\n  [disabled]=\"disabled\"\r\n  (click)=\"onButtonClick()\"\r\n>\r\n\r\n  @if (icon && iconPosition === 'left') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n  <span class=\"content\">\r\n    {{ label }}\r\n  </span>\r\n\r\n  @if (icon && iconPosition === 'right') {\r\n    <span\r\n      class=\"icon\"\r\n      [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n  }\r\n\r\n</button>\r\n\r\n\r\n@if (buttonType === 'download' && downloadState === 'done') {\r\n  <div class=\"download-complete-text\">\r\n    Download Completed\r\n  </div>\r\n}\r\n"
+            "templateData": "<div class=\"btn-wrapper\">\r\n  @if (buttonType === 'order' && orderState === 'progress') {\r\n  <div class=\"order-progress-area\">\r\n    <img src=\"/assets/icons/placeOrder.svg\" class=\"order-image\" [style.left.%]=\"orderProgress\" />\r\n    <div class=\"order-bar\">\r\n      <div class=\"order-bar-fill\" [style.width.%]=\"orderProgress\"></div>\r\n    </div>\r\n  </div>\r\n  }\r\n  <!-- MAIN BUTTON -->\r\n  @if (buttonType !== 'order' || orderState !== 'progress') {\r\n  <button class=\"button-main-container\" [ngClass]=\"[\r\n        buttonType,\r\n        buttonType === 'download' ? 'state-' + downloadState : '',\r\n        buttonType === 'order' ? 'state-' + orderState : ''\r\n      ]\" [disabled]=\"disabled || orderState === 'progress'\" (click)=\"onButtonClick()\">\r\n\r\n    <!-- Left Icon -->\r\n    @if (icon && iconPosition === 'left') {\r\n    <span class=\"icon\" [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n    }\r\n    <!-- DOWNLOAD -->\r\n    @if (buttonType === 'download') {\r\n    <span class=\"content\">\r\n      @if (downloadState !== 'done') {\r\n      {{ label }}\r\n      } @else {\r\n      Download\r\n      }\r\n    </span>\r\n    }\r\n    <!-- ORDER TEXT -->\r\n    @else if (buttonType === 'order') {\r\n    @if (orderState === 'idle') {\r\n    <span>Complete Order</span>\r\n    }\r\n    @else if (orderState === 'done') {\r\n    <span class=\"order-done-text\">\r\n      Order Placed\r\n      <img [src]=\"orderSuccessIcon\" alt=\"success\" class=\"orderSuccess-image\" />\r\n    </span>\r\n    }\r\n    }\r\n    <!-- DEFAULT -->\r\n    @else {\r\n\r\n  @if (buttonType === 'stack-orange') {\r\n\r\n    <span class=\"btn-text-wrapper\">\r\n      <span class=\"btn-text default-text\">{{ label }}</span>\r\n      <span class=\"btn-text hover-text\">{{ label }}</span>\r\n    </span>\r\n\r\n  } @else {\r\n    <span class=\"normal-label\">{{ label }}</span>\r\n\r\n  }\r\n\r\n}\r\n\r\n\r\n    <!-- Right Icon -->\r\n    @if (icon && iconPosition === 'right') {\r\n    <span class=\"icon\" [style]=\"{'mask-image': 'url(' + icon + ')'}\">\r\n    </span>\r\n    }\r\n  </button>\r\n  }\r\n  <!-- DOWNLOAD MESSAGE -->\r\n  @if (buttonType === 'download' && downloadState === 'done') {\r\n  <div class=\"download-complete-text\">\r\n    Downloading completed successfully\r\n  </div>\r\n  }\r\n</div>"
         },
         {
             "name": "Cards",
@@ -5392,7 +5543,7 @@
         "children": []
     },
     "coverage": {
-        "count": 9,
+        "count": 8,
         "status": "low",
         "files": [
             {
@@ -5627,9 +5778,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "Buttons",
-                "coveragePercent": 44,
-                "coverageCount": "4/9",
-                "status": "medium"
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
             },
             {
                 "filePath": "src/shared/cards/cards.ts",

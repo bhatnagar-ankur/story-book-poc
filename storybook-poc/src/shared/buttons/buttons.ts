@@ -19,11 +19,16 @@ export class Buttons {
     | 'iconic'
     | 'long'
     | 'download'
-    | 'order' = 'primary';
+    | 'order' | 'fancy'
+    | 'stack-orange'
+    | 'stack-pink'
+    | 'stack-black'
+    | 'cart' = 'primary';
 
   @Input() disabled = false;
   @Input() icon?: string;
   @Input() iconPosition: 'left' | 'right' = 'left';
+  @Input() showIcon: boolean = true;
   @Input() orderSuccessIcon: string = '/assets/icons/tick-icon.svg';
   /* States */
   downloadState: 'idle' | 'border' | 'progress' | 'done' = 'idle';
@@ -31,9 +36,13 @@ export class Buttons {
   orderProgress = 0;
   isDownloading = false;
   isOrdering = false;
+isCartAnimating = false;
 
   /* Click Handler */
   onButtonClick() {
+    if (this.buttonType === 'cart') {
+    this.runCartAnimation();
+  }
     if (this.buttonType === 'download') {
       this.startDownload();
     }
@@ -48,9 +57,6 @@ export class Buttons {
     setState: (state: string) => void,
     onReset: () => void
   ) {
-    setState('idle');
-    this.cd.detectChanges();
-
     setTimeout(() => {
       setState('border');
       this.cd.detectChanges();
@@ -67,18 +73,17 @@ export class Buttons {
           setTimeout(() => {
             onReset();
             this.cd.detectChanges();
-          }, 1500);
+          }, 800);
 
         }, 600);
 
-      }, 900);
-
-    }, 100);
+      }, 200);
+    }, 0);
   }
 
   /* Download */
   private startDownload() {
-    if (this.isDownloading) return;
+    if (this.isDownloading || this.downloadState === 'done') return;
 
     this.isDownloading = true;
 
@@ -92,7 +97,7 @@ export class Buttons {
 
   /* Order */
   private startOrder() {
-    if (this.isOrdering) return;
+    if (this.isOrdering || this.orderState === 'done') return;
     this.isOrdering = true;
     this.orderState = 'progress';
     this.orderProgress = 20;
@@ -111,4 +116,24 @@ export class Buttons {
       this.cd.detectChanges();
     }, 300);
   }
+  private runCartAnimation() {
+
+  if (this.isCartAnimating) return;
+
+  this.isCartAnimating = true;
+
+  // Add class
+  const btn = document.querySelector('.button-main-container.cart');
+
+  if (!btn) return;
+
+  btn.classList.add('animate');
+
+  // Remove after animation
+  setTimeout(() => {
+    btn.classList.remove('animate');
+    this.isCartAnimating = false;
+  }, 1600); // match animation duration
+}
+
 }

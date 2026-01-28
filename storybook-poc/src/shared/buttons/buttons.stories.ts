@@ -8,11 +8,12 @@ const meta: Meta<Buttons> = {
     argTypes: {
         label: { control: 'text' },
         disabled: { control: 'boolean' },
+        showIcon: { control: 'boolean' },
         icon: { control: 'text' },
         iconPosition: {
-        control: { type: 'radio' },
-        options: ['left', 'right'],
-    },
+            control: { type: 'radio' },
+            options: ['left', 'right'],
+        },
     },
     parameters: {
         pseudo: { hover: false, focus: false, active: false },
@@ -27,6 +28,8 @@ export const Primary: Story = {
     args: {
         label: 'Button Text',
         buttonType: 'primary',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
         disabled: false,
     }
 };
@@ -35,6 +38,8 @@ export const Primary: Story = {
 export const Secondary: Story = {
     args: {
         label: 'Button Text',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
         buttonType: 'secondary',
         disabled: false,
     }
@@ -54,25 +59,67 @@ export const IconicText: Story = {
 export const Long: Story = {
     args: {
         label: 'Button Text',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
         buttonType: 'long',
         disabled: false,
     }
 };
 /** DOWNLOAD */
 export const Download: Story = {
-  args: {
-    label: 'Download',
-    buttonType: 'download',
-    icon: './assets/icons/download-icon.svg',
-    iconPosition: 'right',
-    disabled: false,
-  }
+    args: {
+        label: 'Download',
+        buttonType: 'download',
+        icon: './assets/icons/download-icon.svg',
+        showIcon: true,
+        iconPosition: 'right',
+        disabled: false,
+    }
 };
 /** ORDER COMPLETE */
 export const OrderComplete: Story = {
+    args: {
+        buttonType: 'order',
+        disabled: false,
+        orderSuccessIcon: '/assets/icons/tick-icon.svg',
+        showIcon: true,
+    }
+};
+export const SlideAnimation: Story = {
+    args: {
+        label: 'Button',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
+        buttonType: 'stack-orange',
+    },
+};
+
+export const CircularAnimation: Story = {
+    args: {
+        label: 'Button',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
+        buttonType: 'stack-pink',
+    },
+};
+
+export const RotateAnimation: Story = {
+    args: {
+        label: 'Button',
+        icon: './assets/icons/close.svg',
+        showIcon: false,
+        buttonType: 'stack-black',
+    },
+};
+/** ADD TO CART */
+export const AddToCart: Story = {
   args: {
-    buttonType: 'order',
+    label: 'Add to Cart',
+    buttonType: 'cart',   
+    icon: './assets/icons/cart.svg',
+    showIcon: true,
+    iconPosition: 'left',
     disabled: false,
-    orderSuccessIcon: '/assets/icons/tick-icon.svg',
   }
 };
+

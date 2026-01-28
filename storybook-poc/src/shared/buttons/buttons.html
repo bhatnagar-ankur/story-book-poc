@@ -12,11 +12,12 @@
   <button class="button-main-container" [ngClass]="[
         buttonType,
         buttonType === 'download' ? 'state-' + downloadState : '',
-        buttonType === 'order' ? 'state-' + orderState : ''
+        buttonType === 'order' ? 'state-' + orderState : '',
+        buttonType === 'cart' && isCartAnimating ? 'animate' : ''
       ]" [disabled]="disabled || orderState === 'progress'" (click)="onButtonClick()">
 
     <!-- Left Icon -->
-    @if (icon && iconPosition === 'left') {
+    @if (showIcon && icon && iconPosition === 'left') {
     <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}">
     </span>
     }
@@ -43,11 +44,32 @@
     }
     }
     <!-- DEFAULT -->
-    @else {
-    {{ label }}
-    }
+   @else {
+
+  @if (buttonType === 'cart') {
+
+    <span class="cart-text">
+      {{ label }}
+    </span>
+
+  } @else if (buttonType === 'stack-orange') {
+
+    <span class="btn-text-wrapper">
+      <span class="btn-text default-text">{{ label }}</span>
+      <span class="btn-text hover-text">{{ label }}</span>
+    </span>
+
+  } @else {
+
+    <span class="normal-label">{{ label }}</span>
+
+  }
+
+}
+
+
     <!-- Right Icon -->
-    @if (icon && iconPosition === 'right') {
+    @if (showIcon && icon && iconPosition === 'right') {
     <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}">
     </span>
     }
