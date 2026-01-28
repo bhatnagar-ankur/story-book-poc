@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Tabs } from './tabs';
 
 const meta: Meta<Tabs> = {
-    title: 'Components/Tabs',
+    title: 'Design System/Tabs',
     component: Tabs,
 
     argTypes: {
@@ -53,7 +53,7 @@ export const Style1: Story = {
 export const Style2: Story = {
     args: {
         variant: 'style-2',
-        showIcon: false,
+        showIcon: true,
 
         tabs: [
             { label: 'Scores', icon: '/assets/icons/scores.svg', },
@@ -65,37 +65,37 @@ export const Style2: Story = {
     },
 };
 
-export const Style3_Card: Story = {
+export const Style3: Story = {
     args: {
         variant: 'style-3',
 
         tabs: [
-            { label: 'Overview' },
-            { label: 'Contact' },
-            { label: 'Documents' },
+            { label: 'Overview', icon: '/assets/icons/scores.svg' },
+            { label: 'Contact', icon: '/assets/icons/scores.svg' },
+            { label: 'Documents', icon: '/assets/icons/scores.svg' },
         ],
     },
 };
 
-export const Style4_Filter: Story = {
+export const Style4: Story = {
     args: {
         variant: 'style-4',
-
+        showIcon: false,
         tabs: [
-            { label: 'All' },
-            { label: 'Delivered' },
-            { label: 'Undelivered' },
+            { label: 'All', icon: '/assets/icons/scores.svg' },
+            { label: 'Delivered', icon: '/assets/icons/scores.svg' },
+            { label: 'Undelivered', icon: '/assets/icons/scores.svg' },
         ],
     },
 };
 
-export const Style5_DualPill: Story = {
+export const Style5: Story = {
     args: {
         variant: 'style-5',
-
+        showIcon: false,
         tabs: [
-            { label: 'Personal Details' },
-            { label: 'Past' },
+            { label: 'Personal Details', icon: '/assets/icons/scores.svg' },
+            { label: 'Past', icon: '/assets/icons/scores.svg' },
         ],
     },
 };

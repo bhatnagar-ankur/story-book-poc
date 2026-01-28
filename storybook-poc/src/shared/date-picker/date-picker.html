@@ -1,0 +1,151 @@
+<div class="date-picker">
+
+    <div class="input-box" (click)="toggle()">
+        <input readonly [value]="displayValue" placeholder="Select date" />
+        @if (icon) {
+        <img [src]="icon" alt="calendar" class="icon-img" />
+        }
+
+    </div>
+
+    @if (show) {
+    <div class="calendar">
+
+        <div class="header">
+
+            <button (click)="prevMonth()">‹</button>
+
+            <div class="month-year">
+
+                <span>
+                    {{ currentMonth | date:'MMMM' }}
+                </span>
+
+                <span class="year" (click)="openYearPicker()">
+
+                    {{ currentMonth | date:'yyyy' }}
+
+                </span>
+
+            </div>
+
+            <button (click)="nextMonth()">›</button>
+
+        </div>
+
+
+        <div class="week">
+            <span>M</span>
+            <span>T</span>
+            <span>W</span>
+            <span>T</span>
+            <span>F</span>
+            <span>S</span>
+            <span>S</span>
+        </div>
+
+        <div class="days">
+            @for (day of days; track day.date.getTime()) {
+            <span (click)="selectDate(day)" [class.outside]="!day.currentMonth" [class.active]="day.selected"
+                [class.range]="day.inRange">
+                {{ day.date.getDate() }}
+            </span>
+            } @empty {
+            <div class="no-days">No dates available</div>
+            }
+        </div>
+        @if (type === 'single') {
+        <div class="time-picker">
+
+            <select [(ngModel)]="hour">
+                @for (h of [].constructor(12); let i = $index; track i) {
+                <option [value]="i + 1">{{ i + 1 }}</option>
+                }
+            </select>
+
+            :
+
+            <select [(ngModel)]="minute">
+                @for (m of [].constructor(60); let i = $index; track i) {
+                <option [value]="i">{{ i < 10 ? '0' + i : i }}</option>
+                        }
+            </select>
+
+            <div class="ampm">
+
+                <button type="button" [class.active]="period === 'AM'" (click)="period = 'AM'">
+
+                    AM
+
+                </button>
+
+                <button type="button" [class.active]="period === 'PM'" (click)="period = 'PM'">
+
+                    PM
+
+                </button>
+
+            </div>
+
+
+        </div>
+        }
+        <div class="footer">
+            <button class="cancel" (click)="close()">Cancel</button>
+            <button class="ok" (click)="close()">Select</button>
+        </div>
+
+    </div>
+    @if (showYearPicker) {
+
+    <div class="year-panel">
+        <div class="year-input-wrapper">
+
+  <input
+    type="number"
+    class="year-input"
+    [(ngModel)]="tempYear"
+  />
+
+  @if (icon) {
+    <img
+      [src]="icon"
+      alt="calendar"
+      class="year-input-icon"
+    />
+  }
+
+</div>
+
+
+        <div class="year-grid" #yearGrid>
+
+            @for (y of years; track y) {
+            <div class="year-item" [class.active]="y === tempYear" (click)="tempYear = y">
+
+                {{ y }}
+
+            </div>
+            }
+
+        </div>
+
+        <div class="footer">
+
+            <button class="cancel" (click)="cancelYear()">
+                Cancel
+            </button>
+
+            <button class="ok" (click)="selectYear()">
+                Select
+            </button>
+
+        </div>
+
+    </div>
+
+    }
+
+    }
+
+</div>

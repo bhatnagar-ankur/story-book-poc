@@ -67,15 +67,15 @@
     gap: 28px;
     border-bottom: 1px solid transparent;
     padding-bottom: 6px;
-    font-family: 'BookAlt';
-    font-size: 14px;
-    font-weight: 400;
 }
 
 .tabs-style-2 .tab {
     gap: 8px;
     color: #595959;
     position: relative;
+    font-family: 'BookAlt';
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .tabs-style-2 .tab.active {
@@ -179,31 +179,53 @@
     border-right: none;
 }
 
-/* ===== STYLE 5 ===== */
+/* ===== STYLE 5 — Dual Pill (Auto Equal by Largest) ===== */
 
 .tabs-style-5 {
     background: #f6cfd1;
     border-radius: 24px;
     padding: 4px;
-    display: inline-flex;
+
+    display: inline-grid;               /* 👈 grid */
+    grid-auto-flow: column;             /* 👈 columns */
+    grid-auto-columns: 1fr;             /* 👈 equal */
+
     align-items: center;
-    gap: 0;
+    gap: 4px;
+
     width: fit-content;
 }
 
 .tabs-style-5 .tab {
-    flex: 1;
+
+    width: 100%;                        /* 👈 fill grid cell */
+
+    padding: 8px 20px;
+
     border-radius: 20px;
-    padding: 8px 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
     color: #565F5C;
-    text-align: center;
+    font-weight: 500;
+
     white-space: nowrap;
+
     transition: all 0.25s ease;
 }
 
+/* Active */
 .tabs-style-5 .tab.active {
     background: #7a0000;
     color: #fff;
+}
+
+/* Icon safety */
+.tabs-style-5 .icon {
+    flex-shrink: 0;
 }
 
 /* ===== ICON SUPPORT ===== */
