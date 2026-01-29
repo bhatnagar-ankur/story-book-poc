@@ -1,0 +1,257 @@
+<div class="pie-wrapper" [class]="variant">
+
+    @switch (variant) {
+
+    @case ('gradient') {
+    <div class="gradient-ring" [style.--percent]="percentage" [style.--size.px]="size">
+        <div class="outer-ring"></div>
+        <div class="inner-ring"></div>
+
+        <div class="center-text">
+            {{ percentage }}%
+        </div>
+    </div>
+    }
+
+    @case ('default') {
+    <div class="donut-chart" [style.width.px]="size" [style.height.px]="size">
+
+        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+            @for (seg of segments; track $index) {
+            <g class="donut-slice">
+                <path [attr.d]="getArcPath(getStart($index), getAngle(seg.value))" [attr.fill]="seg.color"
+                    stroke="rgba(0,0,0,0)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+
+            </g>
+            }
+        </svg>
+
+        <div class="donut-center">
+            <svg class="donut-dotted" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ff8c5a" stroke-width="0.6" stroke-dasharray="1 6"
+                    stroke-linecap="round" />
+            </svg>
+
+            <div class="donut-arrows">
+                <span>↑</span>
+                <span>↓</span>
+            </div>
+        </div>
+    </div>
+    }
+
+    @case ('temperature') {
+    <div class="temp-wrapper">
+        <svg class="temp-meter" [attr.width]="size" [attr.height]="size" attr.viewBox="0 0 400 400"
+            preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <linearGradient id="tempGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FF9364" />
+                    <stop offset="35%" stop-color="#F25F33" />
+                    <stop offset="70%" stop-color="#FFD572" />
+                    <stop offset="100%" stop-color="#FEBD38" />
+
+                </linearGradient>
+
+            </defs>
+
+            <path [attr.d]="getTempArc(180)" class="temp-bg" />
+
+            <path [attr.d]="getTempArc(180)" class="temp-fill" [attr.stroke-dasharray]="arcLength"
+                [attr.stroke-dashoffset]="dashOffset" />
+
+            <path [attr.d]="getTempDottedArc()" class="temp-dots" />
+
+            <line [attr.x1]="divider.x1" [attr.y1]="divider.y1" [attr.x2]="divider.x2" [attr.y2]="divider.y2"
+                class="temp-divider" />
+            <circle [attr.cx]="centerX" [attr.cy]="centerY" [attr.r]="size * 0.1" class="temp-center" />
+        </svg>
+    </div>
+    }
+    @case ('multi-ring') {
+
+    <div class="multi-ring-layout">
+        <div class="multi-ring-wrapper">
+
+            <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+
+                @for (ring of rings; track $index) {
+                <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="getRingRadius($index)" class="ring-bg" />
+                <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="getRingRadius($index)" class="ring-fill"
+                    [class.active]="selectedIndex === $index" [attr.stroke]="ring.color"
+                    [attr.stroke-dasharray]="getRingCircumference(getRingRadius($index))"
+                    [attr.stroke-dashoffset]="getRingOffset(ring.value, getRingRadius($index))"
+                    (mouseenter)="showTooltip($event, ring)" (mouseleave)="hideTooltip()"
+                    (click)="selectRing($index)" />
+
+                }
+                <g class="ring-scale">
+                    <text [attr.x]="size/2" y="16" text-anchor="middle">75%</text>
+                    <text [attr.x]="size - 8" [attr.y]="size/2 + 5" text-anchor="end">0%</text>
+                    <text [attr.x]="size/2" [attr.y]="size - 6" text-anchor="middle">25%</text>
+                    <text x="8" [attr.y]="size/2 + 5" text-anchor="start">50%</text>
+                </g>
+            </svg>
+        </div>
+        <div class="multi-ring-legend">
+
+            @for (ring of rings; track $index) {
+
+            <div class="legend-item" [class.active]="selectedIndex === $index" (click)="selectRing($index)">
+
+                <span class="legend-color" [style.background]="ring.color"></span>
+
+                <span class="legend-text">
+                    {{ ring.label }}
+                </span>
+
+                <span class="legend-value">
+                    {{ ring.value }}%
+                </span>
+
+            </div>
+            }
+
+        </div>
+
+    </div>
+    }
+    @case ('circular-temp') {
+
+    <div class="circular-temp-wrapper">
+
+        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+
+            <defs>
+                <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FF7ACB" />
+                    <stop offset="100%" stop-color="#FF4F9A" />
+                </linearGradient>
+            </defs>
+
+            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="circularRadius" class="circular-bg" />
+
+            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="circularRadius" class="circular-fill"
+                stroke="url(#pinkGrad)" [attr.stroke-dasharray]="circularLength + ' ' + circularCircumference"
+                [attr.stroke-dashoffset]="circularOffset" />
+
+            <circle [attr.cx]="circularDot.x" [attr.cy]="circularDot.y" r="5" class="circular-dot" />
+
+            <text [attr.x]="size/2" [attr.y]="size/2 + 10" text-anchor="middle" class="circular-text">
+                {{ temperature }}°
+            </text>
+
+        </svg>
+
+    </div>
+    }
+    @case ('circular-slider') {
+
+    <div class="circular-slider-wrapper">
+
+        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size"
+            (mousedown)="onCircleDown($event)" (mousemove)="onCircleMove($event)" (mouseup)="onCircleUp()"
+            (mouseleave)="onCircleUp()">
+
+            <defs>
+                <linearGradient id="sliderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#3B82F6" />
+                    <stop offset="50%" stop-color="#22C55E" />
+                    <stop offset="100%" stop-color="#7DD3FC" />
+                </linearGradient>
+            </defs>
+
+            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="sliderRadius" class="slider-bg" />
+
+            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="sliderRadius" class="slider-fill"
+                stroke="url(#sliderGrad)" [attr.stroke-dasharray]="sliderArcLength + ' ' + sliderCircumference"
+                [attr.stroke-dashoffset]="sliderOffset" />
+
+            <circle [attr.cx]="sliderDot.x" [attr.cy]="sliderDot.y" r="7" class="slider-knob" />
+
+            <text [attr.x]="size/2" [attr.y]="size/2 + 10" text-anchor="middle" class="slider-text">
+                {{ sliderValue }} lm
+            </text>
+
+        </svg>
+
+        <input type="range" class="slider-range" [min]="min" [max]="max" [(ngModel)]="sliderValue" />
+
+        <div class="slider-scale">
+            <span>%0</span>
+            <span>%100</span>
+        </div>
+
+    </div>
+    }
+    @case ('segmented-temp') {
+
+    <div class="segmented-temp-wrapper">
+
+        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+
+            <g [attr.transform]="'translate(' + size/2 + ',' + size/2 + ')'">
+
+                @for (seg of segmentArray; track $index) {
+
+                <rect x="-3" [attr.y]="-(size/2 - 20)" width="6" height="16" rx="2" [attr.fill]="
+    $index < activeSegments && isPowerOn
+      ? '#2563EB'
+      : '#E5EDF5'
+  " [attr.transform]="
+    'rotate(' + (-150 + ($index * 300 / segmentsCount)) + ')'
+  " />
+
+
+                }
+
+            </g>
+
+        </svg>
+        <div class="segmented-center">
+
+            <div class="seg-label">
+                Temperature
+            </div>
+
+            <div class="seg-value">
+                {{ currentTemp }}°
+            </div>
+
+        </div>
+        <div class="seg-controls">
+
+            <button (click)="decreaseTemp()">−</button>
+
+            <button class="power-btn" [class.off]="!isPowerOn" (click)="togglePower()">
+                ⏻
+            </button>
+
+            <button (click)="increaseTemp()">+</button>
+
+        </div>
+
+    </div>
+    }
+    @case ('radial-pie') {
+
+    <div class="radial-pie-wrapper">
+
+        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+
+            @for (i of [].constructor(radialSlices); track $index) {
+
+            <path [attr.d]="getRadialPath($index)" [attr.fill]="
+          radialColors[$index] ||
+          'hsl(210,70%,' + (90 - $index * 8) + '%)'
+        " class="radial-slice" />
+
+            }
+
+        </svg>
+
+    </div>
+    }
+
+    }
+</div>
