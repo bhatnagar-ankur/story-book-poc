@@ -73,11 +73,11 @@ isCartAnimating = false;
           setTimeout(() => {
             onReset();
             this.cd.detectChanges();
-          }, 800);
+          }, 1000);
 
-        }, 600);
+        }, 2000);
 
-      }, 200);
+      }, 400);
     }, 0);
   }
 

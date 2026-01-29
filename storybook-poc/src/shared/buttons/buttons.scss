@@ -196,7 +196,7 @@ $button-sizes: (
     width: 0;
     height: 100%;
     background: $download-complete;
-    transition: width 400ms ease;
+transition: width 2.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     z-index: 0;
 }
 
@@ -218,17 +218,15 @@ $button-sizes: (
     height: 100%;
     width: 0%;
     background: $download-complete;
-    transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+transition: width 2.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     z-index: 0;
 }
 
-/* Progress running */
 .button-main-container.download.state-progress::after {
     width: 100%;
     opacity: 1;
 }
 
-/* Done → hide overlay */
 .button-main-container.download.state-done::after {
     width: 100%;
     opacity: 0;
@@ -360,7 +358,7 @@ $button-sizes: (
     background: $orange-btn;
 }
 
-/* ===== Text Slide Animation (ONLY Stack Buttons) ===== */
+/* ===== Text Slide Animation ===== */
 
 .stack-orange {
 

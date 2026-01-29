@@ -4,264 +4,371 @@
   font-family: Inter, sans-serif;
 }
 
-/* Input */
+.date-picker.single-mode {
+
+  .days .range,
+  .days .range-start,
+  .days .range-end {
+    background: transparent;
+  }
+
+  .days .range-start::before,
+  .days .range-end::before {
+    display: none;
+  }
+
+  .days .active {
+    background: #3F2E50;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    margin: auto;
+  }
+}
+
 .input-box {
   border: 1px solid #bbb;
-  border-radius: 6px;
-
+  border-radius: 4px;
   padding: 8px 12px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   cursor: pointer;
   background: #fff;
+  min-width: 380px;
+  min-height: 48px;
+  box-sizing: border-box;
 }
 
 .input-box input {
   border: none;
   outline: none;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   cursor: pointer;
+  background: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.icon {
-  font-size: 16px;
+.icon-img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  flex-shrink: 0;
+  margin-left: 6px;
 }
 
-/* Popup */
-.calendar {
-
+.calendar-wrapper {
   position: absolute;
-  top: 110%;
-  left: 0;
-
-  width: 280px;
-
-  background: #fff;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 14px rgba(0,0,0,.15);
-
-  padding: 12px;
-
+  top: 48px;
+  left: 38%;
+  display: flex;
+  gap: 12px;
   z-index: 20;
 }
 
-/* Header */
+.calendar {
+  position: relative;
+  width: 264px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #D9D9D9;
+  padding: 8px;
+}
+
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  font-weight: 600;
+  justify-content: space-between;
+  gap: 22px;
   margin-bottom: 10px;
 }
 
-.header button {
+.nav-arrows {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.arrow {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.arrow.left {
+  transform: rotate(90deg);
+  background: transparent;
   border: none;
-  background: none;
-  font-size: 18px;
+  outline: none;
+}
+
+.arrow.right {
+  transform: rotate(-90deg);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.nav-arrows button {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
   cursor: pointer;
 }
 
-/* Week */
+.nav-arrows button:focus,
+.nav-arrows button:active,
+.nav-arrows button:focus-visible {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.month-year {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.month-year:hover {
+  background: #f0f0f0;
+}
+
+.month-year .arrow {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
 .week {
   display: grid;
-  grid-template-columns: repeat(7,1fr);
+  grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-size: 12px;
   color: #777;
 }
 
-/* Days */
 .days {
   display: grid;
-  grid-template-columns: repeat(7,1fr);
-  gap: 4px;
-
-  margin: 6px 0 10px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  margin-top: 4px;
 }
 
 .days span {
   height: 32px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 50%;
-
+  font-size: 12px;
   cursor: pointer;
-  transition: 0.2s;
+  position: relative;
+  color: #1f2937;
+  z-index: 0;
+  isolation: isolate;
 }
 
-.days span:hover {
+.days span:hover:not(.active):not(.range):not(.empty) {
   background: #f0f0f0;
+  border-radius: 50%;
 }
 
 .days .outside {
   color: #bbb;
 }
 
-/* Selected */
-.days .active {
-  background: #4b2c63;
-  color: #fff;
+.days .empty {
+  pointer-events: none;
 }
 
-/* Range */
 .days .range {
   background: #eee6f3;
+  color: #3F2E50;
 }
 
-/* Footer */
+.days .range,
+.days .range-start,
+.days .range-end {
+  height: 32px;
+  width: 100%;
+}
+
+.days .range-start,
+.days .range-end {
+  background: #eee6f3;
+  position: relative;
+  color: #fff;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.days .range-start {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+
+/* Right edge */
+.days .range-end {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.days .range-start::before,
+.days .range-end::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  background: #3F2E50;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.days span:nth-child(7n + 1).range,
+.days span:nth-child(7n + 1).range-start {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.days span:nth-child(7n).range,
+.days span:nth-child(7n).range-end {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
 .footer {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  align-items: center;
+  margin-top: 4px;
 }
 
 .footer button {
-  padding: 6px 14px;
-  border-radius: 4px;
+  padding: 6px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .cancel {
   background: none;
   border: none;
+  color: #555;
 }
 
 .ok {
   border: 1px solid #000;
   background: #fff;
-}
-.time-picker {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin: 8px 0;
+  font-weight: 500;
 }
 
-.time-picker select {
-  padding: 4px;
-  border-radius: 4px;
-}
-.month-year {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.month-year select {
-  padding: 2px 4px;
-  font-size: 12px;
-}
 .year-panel {
-
-  position: absolute;
-
-  top: 0;
-  left: 290px;
-
-  width: 220px;
-
-  background: #fff;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 14px rgba(0,0,0,.15);
-
-  padding: 12px;
-
-  z-index: 30;
-}
-
-
-/* Year Grid */
-.year-grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 8px;
-
-  max-height: 220px;
-
-  overflow-y: auto;
-}
-
-
-/* Year Cell */
-.year-item {
-
-  text-align: center;
-
-  padding: 6px 0;
-
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  font-size: 13px;
-}
-
-.year-item:hover {
-  background: #f0f0f0;
-}
-
-.year-item.active {
-  background: #4b2c63;
-  color: #fff;
-}
-.year-input {
-  width: 100%;
-  padding: 6px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-.ampm {
-  display: flex;
-  gap: 4px;
-}
-
-.ampm button {
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid #bbb;
-  background: #fff;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.ampm button.active {
-  background: #4b2c63;
-  color: #fff;
-  border-color: #4b2c63;
-}
-.year-input-wrapper {
   position: relative;
+  width: 264px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #D9D9D9;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  left: 30%;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.year-input-wrapper.outside {
+  position: absolute;
+  top: -49px;
+  left: 60%;
+  width: 380px;
+  height: 35px;
+  z-index: 25;
+}
+
+.year-item {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 16px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  color: #1f2937;
+
+  &:hover:not(.disabled) {
+    background: #f0f0f0;
+  }
+
+  &.active {
+    background: #3F2E50;
+    color: white;
+  }
+
+  &.disabled {
+    color: #9ca3af;
+    background: none;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+    filter: grayscale(1);
+
+    &:hover {
+      background: none;
+      color: #9ca3af;
+    }
+  }
+}
+
+.year-input-wrapper {
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
   width: 100%;
-  margin-bottom: 8px;
 }
 
 .year-input {
-  width: 80%;
-  padding: 6px 30px 6px 8px; 
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  background: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .year-input-icon {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  pointer-events: none; 
+  width: 18px;
+  height: 18px;
   opacity: 0.7;
+  flex-shrink: 0;
+  margin-left: 6px;
 }
