@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 interface Segment {
   value: number;
   color: string;
@@ -8,10 +9,14 @@ interface Ring {
   value: number;
   color: string;
 }
+interface RadialSlice {
+  value: number; // 0–100
+  color: string;
+}
 
 @Component({
   selector: 'app-pie-chart',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './pie-chart.html',
   styleUrl: './pie-chart.scss',
 })
@@ -30,6 +35,8 @@ export class PieChart {
 
   @Input() minTemp = 10;
   @Input() maxTemp = 30;
+  @Input() radialData: RadialSlice[] = [];
+  @Input() radialValues: number[] = [20, 15, 10, 25, 20, 10];
 
   currentTemp = 16;
   isPowerOn = true;
@@ -290,7 +297,11 @@ export class PieChart {
   }
 
   get sliderDot() {
-    const angle = this.sliderProgress * 300 - 210;
+
+    const progress =
+      (this.sliderValue - this.min) / (this.max - this.min);
+
+    const angle = progress * 360 - 90;
 
     const rad = (angle * Math.PI) / 180;
 
@@ -303,6 +314,7 @@ export class PieChart {
       y: cy + r * Math.sin(rad)
     };
   }
+
 
   onCircleDown(e: MouseEvent) {
     this.isDragging = true;
@@ -362,15 +374,21 @@ export class PieChart {
   togglePower() {
     this.isPowerOn = !this.isPowerOn;
   }
-  // ===== Radial Pie Helpers =====
 
-  getRadialPath(index: number): string {
+  getRadialValuePath(index: number, percent: number): string {
+
+    return this.getRadialSlicePath(index, percent / 100);
+  }
+
+  private getRadialSlicePath(index: number, scale: number): string {
 
     const cx = this.size / 2;
     const cy = this.size / 2;
-    const r = this.size / 2;
 
-    const angle = 360 / this.radialSlices;
+    const maxR = this.size / 2;
+    const r = maxR * scale;
+
+    const angle = 360 / this.radialData.length;
 
     const start = (index * angle - 90) * Math.PI / 180;
     const end = ((index + 1) * angle - 90) * Math.PI / 180;
@@ -388,5 +406,32 @@ export class PieChart {
     Z
   `;
   }
+
+  getRadialGradient(): string {
+
+    const total = this.radialValues.reduce((a, b) => a + b, 0);
+
+    let current = 0;
+    const parts: string[] = [];
+
+    this.radialValues.forEach((value, i) => {
+
+      const start = (current / total) * 360;
+      const end = ((current + value) / total) * 360;
+
+      parts.push(
+        `${this.radialColors[i] || '#ccc'} ${start}deg ${end}deg`
+      );
+
+      current += value;
+    });
+
+    return `conic-gradient(${parts.join(', ')})`;
+  }
+getLabelTransform(angle: number) {
+  const center = this.size / 2;
+
+  return `rotate(${angle} ${center} ${center})`;
+}
 
 }

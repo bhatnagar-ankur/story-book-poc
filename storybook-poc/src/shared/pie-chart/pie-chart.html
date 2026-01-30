@@ -85,12 +85,13 @@
                     (click)="selectRing($index)" />
 
                 }
-                <g class="ring-scale">
-                    <text [attr.x]="size/2" y="16" text-anchor="middle">75%</text>
-                    <text [attr.x]="size - 8" [attr.y]="size/2 + 5" text-anchor="end">0%</text>
-                    <text [attr.x]="size/2" [attr.y]="size - 6" text-anchor="middle">25%</text>
-                    <text x="8" [attr.y]="size/2 + 5" text-anchor="start">50%</text>
+                <g class="ring-scale" [attr.transform]="'rotate(90 ' + size/2 + ' ' + size/2 + ')'">
+                    <text [attr.x]="size/2" y="16" text-anchor="middle">0%</text>
+                    <text [attr.x]="size + 2" [attr.y]="size/2 + 5" text-anchor="end">25%</text>
+                    <text [attr.x]="size/2" [attr.y]="size - 6" text-anchor="middle">50%</text>
+                    <text x="-2" [attr.y]="size/2 + 5" text-anchor="start">75%</text>
                 </g>
+
             </svg>
         </div>
         <div class="multi-ring-legend">
@@ -105,9 +106,9 @@
                     {{ ring.label }}
                 </span>
 
-                <span class="legend-value">
+                <!-- <span class="legend-value">
                     {{ ring.value }}%
-                </span>
+                </span> -->
 
             </div>
             }
@@ -163,9 +164,8 @@
 
             <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="sliderRadius" class="slider-bg" />
 
-            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="sliderRadius" class="slider-fill"
-                stroke="url(#sliderGrad)" [attr.stroke-dasharray]="sliderArcLength + ' ' + sliderCircumference"
-                [attr.stroke-dashoffset]="sliderOffset" />
+            <circle [attr.cx]="size/2" [attr.cy]="size/2" [attr.r]="sliderRadius" class="slider-full"
+                stroke="url(#sliderGrad)" />
 
             <circle [attr.cx]="sliderDot.x" [attr.cy]="sliderDot.y" r="7" class="slider-knob" />
 
@@ -188,37 +188,39 @@
 
     <div class="segmented-temp-wrapper">
 
-        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+        <!-- Chart container -->
+        <div class="segmented-chart">
 
-            <g [attr.transform]="'translate(' + size/2 + ',' + size/2 + ')'">
+            <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+                <g [attr.transform]="'translate(' + size/2 + ',' + size/2 + ')'">
 
-                @for (seg of segmentArray; track $index) {
+                    @for (seg of segmentArray; track $index) {
 
-                <rect x="-3" [attr.y]="-(size/2 - 20)" width="6" height="16" rx="2" [attr.fill]="
-    $index < activeSegments && isPowerOn
-      ? '#2563EB'
-      : '#E5EDF5'
-  " [attr.transform]="
-    'rotate(' + (-150 + ($index * 300 / segmentsCount)) + ')'
-  " />
+                    <rect x="-3" [attr.y]="-(size/2 - 20)" width="6" height="16" rx="2" [attr.fill]="
+            $index < activeSegments && isPowerOn
+              ? '#2563EB'
+              : '#E5EDF5'
+          " [attr.transform]="
+            'rotate(' + (-150 + ($index * 300 / segmentsCount)) + ')'
+          " />
 
+                    }
 
-                }
+                </g>
+            </svg>
 
-            </g>
+            <!-- Center text -->
+            <div class="segmented-center">
 
-        </svg>
-        <div class="segmented-center">
+                <div class="seg-label">Temperature</div>
 
-            <div class="seg-label">
-                Temperature
-            </div>
+                <div class="seg-value">{{ currentTemp }}°</div>
 
-            <div class="seg-value">
-                {{ currentTemp }}°
             </div>
 
         </div>
+
+        <!-- Controls -->
         <div class="seg-controls">
 
             <button (click)="decreaseTemp()">−</button>
@@ -232,26 +234,19 @@
         </div>
 
     </div>
+
     }
     @case ('radial-pie') {
 
     <div class="radial-pie-wrapper">
 
-        <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
-
-            @for (i of [].constructor(radialSlices); track $index) {
-
-            <path [attr.d]="getRadialPath($index)" [attr.fill]="
-          radialColors[$index] ||
-          'hsl(210,70%,' + (90 - $index * 8) + '%)'
-        " class="radial-slice" />
-
-            }
-
-        </svg>
+        <div class="css-pie" [style.width.px]="size" [style.height.px]="size" [style.background]="getRadialGradient()">
+        </div>
 
     </div>
+
     }
+
 
     }
 </div>

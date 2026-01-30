@@ -1,7 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '../../components/button/button.component';
 import { Buttons } from '../buttons/buttons';
 interface Day {
   date: Date;
@@ -21,7 +20,7 @@ interface YearItem {
 
 @Component({
   selector: 'app-date-picker',
-  imports: [CommonModule, DatePipe, FormsModule, Buttons],
+  imports: [CommonModule, DatePipe, FormsModule],
   templateUrl: './date-picker.html',
   styleUrl: './date-picker.scss',
 })

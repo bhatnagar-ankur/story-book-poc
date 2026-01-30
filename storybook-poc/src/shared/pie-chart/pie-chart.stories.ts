@@ -81,11 +81,11 @@ export const Style7: Story = {
   }
 };
 export const Style8: Story = {
-
   args: {
     variant: 'radial-pie',
     size: 220,
-    radialSlices: 6,
+
+    radialValues: [20, 20, 20, 20, 20, 20],
 
     radialColors: [
       '#0B1F66',
