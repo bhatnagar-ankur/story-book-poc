@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { BarChart } from './bar-chart';
 
 const meta: Meta<BarChart> = {
-  title: 'Charts/Style1 Progress Chart',
+  title: 'Design System/Style1 Progress Chart',
   component: BarChart,
 
   argTypes: {

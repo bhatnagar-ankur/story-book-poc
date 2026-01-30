@@ -1,0 +1,86 @@
+.badge-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Inter, Arial, sans-serif;
+}
+
+.pill {
+    color: #fff;
+
+    border-radius: 10px;
+    font-weight: 700;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+.pill.small {
+    font-size: 12px;
+    padding: 2px 8px;
+    min-height: 22px;
+}
+
+.pill.medium {
+    font-size: 16px;
+    padding: 4px 12px;
+    min-height: 26px;
+}
+
+.pill.blue,
+.icon.blue {
+    background-color: #1f7db8;
+}
+
+.pill.green,
+.icon.green {
+    background-color: #22c55e;
+}
+
+.pill.red,
+.icon.red {
+    background-color: #ef4444;
+}
+
+.pill.orange,
+.icon.orange {
+    background-color: #f97316;
+}
+
+.pill.gray,
+.icon.gray {
+    background-color: #6b7280;
+}
+
+.pill:hover {
+    filter: brightness(1.1);
+}
+
+.icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.icon:hover {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+}
