@@ -5,7 +5,7 @@
         focused: isFocused || value
      }">
 
-    <label class="field-label">
+    <label class="field-label" [ngClass]="size">
         {{ label }}
         @if(required){
         <span>*</span>

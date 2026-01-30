@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { BarChart } from './bar-chart';
 
 const meta: Meta<BarChart> = {
-  title: 'Design System/Style1 Progress Chart',
+  title: 'Design System/Bar Chart',
   component: BarChart,
 
   argTypes: {
@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj<BarChart>;
 
-export const Default: Story = {
+export const Style1: Story = {
   args: {
     labels: ['1','2','3','4','5','6','7'],
     values: [2, 1, 4, 5, 2, 0, 0],
@@ -28,7 +28,7 @@ export const Default: Story = {
   },
 };
 
-export const Style3Ranking: Story = {
+export const Style3: Story = {
   args: {
     variant: 'style3',
     title: 'List of countries',
@@ -45,7 +45,7 @@ export const Style3Ranking: Story = {
     ],
   },
 };
-export const Style4Stacked: Story = {
+export const Style4: Story = {
   args: {
     variant: 'style4',
     labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],

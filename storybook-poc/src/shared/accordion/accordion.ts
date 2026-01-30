@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, Input, QueryList } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
 import { MultiSelectDropdown } from '../multi-select-dropdown/multi-select-dropdown';
 import { Search } from '../search/search';
@@ -10,12 +10,16 @@ import { Search } from '../search/search';
   templateUrl: './accordion.html',
   styleUrl: './accordion.scss',
 })
-export class Accordion {
+export class Accordion implements AfterContentInit {
   @Input() title!: string;
   @Input() type: 'primary' | 'secondary' = 'primary';
   @Input() expanded = false;
   @Input() content!: string;
-
+  hasProjectedContent = false;
+@Input() useDefaultContent = false;
+  ngAfterContentInit() {
+    this.hasProjectedContent = this.content.length > 0;
+  }
   toggle() {
     this.expanded = !this.expanded;
   }

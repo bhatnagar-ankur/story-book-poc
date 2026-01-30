@@ -19,6 +19,7 @@ export class InputField {
   @Input() error = '';
   @Input() required = false;
   @Input() readonly = false;
+@Input() size: 'sm' | 'md' = 'md';
 
   isFocused = false;
 }

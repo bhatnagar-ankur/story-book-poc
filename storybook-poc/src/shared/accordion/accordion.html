@@ -15,6 +15,7 @@
 
   @if (expanded) {
   <div class="accordion-body">
+    @if (useDefaultContent) {
     <app-multi-select-dropdown label="Country" [options]="['India','Japan','Iraq']" mode="dropdown">
     </app-multi-select-dropdown>
     <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
@@ -27,6 +28,10 @@
     </app-search>
     <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>
     </app-search>
+    }
+    @else {
+      <ng-content></ng-content>
+    }
   </div>
   }
 </div>

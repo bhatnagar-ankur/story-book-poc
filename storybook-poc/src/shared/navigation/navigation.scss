@@ -329,3 +329,107 @@ $hover-border: #6E7D89;
 .hover-child-item .sub-icon {
   filter: none;
 }
+
+
+.bottom-collapse {
+  height: 52px;
+  background: #4a560f; 
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  user-select: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+  &:hover {
+    background: #3f4a0c;
+  }
+}
+.sidebar.slider-mode {
+  .toggle-btn {
+    display: none;
+  }
+}
+.sidebar.slider-mode {
+  background: #051A1F;   
+  color: #eaf4ff;       
+  .nav-header {
+    background: #051A1F;
+  }
+  .nav-main {
+    color: #eaf4ff;
+    font-weight: 600;
+    &:hover {
+      background: #123549;
+    }
+    &.active {
+      background: #92C204;
+      color: #ffffff;
+    }
+  }
+  .label {
+    color: #eaf4ff;
+  }
+  .icon {
+    filter: brightness(0) invert(1);
+  }
+  .sub-item {
+    color: #cfe6ff;
+    &:hover {
+      background: #123549;
+      color: #ffffff;
+    }
+    &.active-child {
+      color: #92C204;
+    }
+    &.active-child .sub-text::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background-color: #92C204;
+      border-radius: 2px;
+    }
+  }
+  .hover-panel {
+    background: #ffffff;
+    color: #0b1c26;
+    border: 1px solid #cfd8dc;
+  }
+  .hover-child-item {
+    background: #ffffff;
+    color: #0b1c26;
+    &:hover {
+      background: #f3f7fa;
+      color: #92C204;
+    }
+  }
+.hover-child-item .sub-text::after {
+  background: #92C204 ;
+}
+.hover-child-item.active-child .sub-text::after {
+  background: #92C204 ;
+}
+  &.collapsed {
+    .nav-main {
+      color: #ffffff;
+    }
+    .nav-item:hover .nav-main {
+      background: #1b6fa8;
+    }
+  }
+  .bottom-collapse {
+    background: #3B4A0E;
+    color: #ffffff;
+  }
+  .bottom-collapse:hover {
+    background: #264f18;
+  }
+}

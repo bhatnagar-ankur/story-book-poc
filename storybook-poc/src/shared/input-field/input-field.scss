@@ -104,6 +104,21 @@ $field-disabled-border: #D9D9D9;
     overflow-wrap: anywhere;
     white-space: normal;
 }
+/* ================= SMALL INPUT ================= */
+
+.input-field.sm {
+
+  label {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  input {
+    height: 28px;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
 
 /* ===== Mobile (0 - 480px) ===== */
 

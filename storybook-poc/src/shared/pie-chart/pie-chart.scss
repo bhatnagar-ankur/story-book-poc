@@ -270,7 +270,6 @@
     stroke-width: 2;
     stroke: #ff7a3d;
 }
-/* ================= MULTI RING ================= */
 .multi-ring-layout{
   display: flex;
   flex-direction: row;
@@ -325,7 +324,6 @@
   background: #f4f6fb;
 }
 
-/* Active legend */
 .legend-item.active {
   background: #e9ecff;
   font-weight: 600;
@@ -356,7 +354,6 @@
   user-select: none;
   padding: 10px;
 }
-/* ================= CIRCULAR TEMP ================= */
 
 .circular-temp-wrapper {
   display: flex;
@@ -367,7 +364,6 @@
   transform: rotate(-135deg);
 }
 
-/* Background */
 .circular-bg {
   fill: none;
   stroke: #fde8f1;
@@ -375,7 +371,6 @@
   stroke-linecap: round;
 }
 
-/* Progress */
 .circular-fill {
   fill: none;
   stroke-width: 18;
@@ -384,7 +379,6 @@
   transition: stroke-dashoffset 0.8s ease;
 }
 
-/* Dot */
 .circular-dot {
   fill: #fff;
   stroke: #ff4f9a;
@@ -393,7 +387,6 @@
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
 }
 
-/* Center text */
 .circular-text {
   fill: #000;
   font-size: 42px;
@@ -402,7 +395,6 @@
   transform: rotate(135deg);
   transform-origin: center;
 }
-/* ================= CIRCULAR SLIDER ================= */
 
 .circular-slider-wrapper {
   display: flex;
@@ -412,19 +404,15 @@
 }
 
 .circular-slider-wrapper svg {
-  // transform: rotate(-210deg);
   cursor: pointer;
 }
 
-/* Background */
 .slider-bg {
   fill: none;
   stroke: #e6eef6;
   stroke-width: 16;
   stroke-linecap: round;
 }
-
-/* Fill */
 .slider-fill {
   fill: none;
   stroke-width: 16;
@@ -433,7 +421,6 @@
   transition: stroke-dashoffset 0.3s ease;
 }
 
-/* Knob */
 .slider-knob {
   fill: #fff;
   stroke: #3b82f6;
@@ -442,7 +429,6 @@
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
 }
 
-/* Center text */
 .slider-text {
   fill: #222;
   font-size: 28px;
@@ -451,8 +437,6 @@
   transform: none;
 text-anchor: middle;
   dominant-baseline: middle;}
-
-/* Range */
 
 .slider-range {
   width: 80%;
@@ -474,8 +458,6 @@ text-anchor: middle;
   stroke-linecap: round;
 }
 
-/* ================= SEGMENTED TEMP ================= */
-
 .segmented-temp-wrapper {
   display: flex;
   flex-direction: column;
@@ -492,7 +474,6 @@ text-anchor: middle;
   text-align: center;
   pointer-events: none;
 }
-/* Segmented chart container */
 
 .segmented-chart {
   position: relative;
@@ -500,10 +481,9 @@ text-anchor: middle;
   height: fit-content;
 }
 
-/* Controls closer to chart */
 
 .seg-controls {
-  margin-top: -10px; /* adjust if needed */
+  margin-top: -10px; 
 }
 
 .seg-label {
@@ -517,9 +497,6 @@ text-anchor: middle;
   font-weight: 600;
   color: #111;
 }
-
-/* Controls */
-
 .seg-controls {
   display: flex;
   gap: 22px;
@@ -546,13 +523,13 @@ text-anchor: middle;
 }
 
 .power-btn {
-  background: #2563eb !important;
-  color: #fff !important;
+  background: #2563eb ;
+  color: #fff ;
 }
 
 .power-btn.off {
-  background: #cbd5e1 !important;
-  color: #555 !important;
+  background: #cbd5e1;
+  color: #555 ;
 }
 
 .radial-pie-wrapper {

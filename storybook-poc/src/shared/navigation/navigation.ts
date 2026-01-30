@@ -22,6 +22,7 @@ export class Navigation {
   @Input() showLogo = true;
   @Input() activeIndex: number | null = null;
   @Input() openIndex: number | null = null;
+  @Input() useSlider = false;
   hoveredIndex: number | null = null;
   activeChild: { parent: number; index: number } | null = null;
 
