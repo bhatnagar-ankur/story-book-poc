@@ -1,11 +1,9 @@
 <div class="tabs" [ngClass]="'tabs-' + variant">
     @for (tab of tabs; track tab.label; let i = $index) {
     <button class="tab" [class.active]="activeIndex === i" (click)="selectTab(i)">
-        <!-- Icon -->
         @if (showIcon && tab.icon) {
         <span class="icon" [style.mask-image]="'url(' + tab.icon + ')'"></span>
         }
-        <!-- Label -->
         <span class="tab-label">
             {{ tab.label }}
         </span>

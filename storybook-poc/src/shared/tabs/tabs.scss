@@ -1,3 +1,15 @@
+$tab-col: #595959;
+$border: #183650;
+$white: #fff;
+$black: #000;
+$tab-active: #005480;
+$tab-bg: #2D81FD;
+$tab-border: #DADADA;
+$tab-color: #B1B1B1;
+$style4-bg: #4ba6d8;
+$style5-bg: #f6cfd1;
+$style5-active: #710000;
+
 :host {
     display: inline-block;
     width: fit-content;
@@ -25,7 +37,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.25s ease;
-    color: #595959;
+    color: $tab-col;
 }
 
 .tab-label {
@@ -37,9 +49,8 @@
 }
 
 /* ===== STYLE 1 ===== */
-
 .tabs-style-1 {
-    border: 1px solid #183650;
+    border: 1px solid $border;
     border-radius: 4px;
     font-family: 'Myriad Pro';
     overflow: hidden;
@@ -47,8 +58,8 @@
 }
 
 .tabs-style-1 .tab {
-    border-right: 0.5px solid #183650;
-    color: #183650;
+    border-right: 0.5px solid $border;
+    color: $border;
 }
 
 .tabs-style-1 .tab:last-child {
@@ -56,8 +67,8 @@
 }
 
 .tabs-style-1 .tab.active {
-    background: #183650;
-    color: #fff;
+    background: $border;
+    color: $white;
 }
 
 
@@ -71,7 +82,7 @@
 
 .tabs-style-2 .tab {
     gap: 8px;
-    color: #595959;
+    color: $tab-col;
     position: relative;
     font-family: 'BookAlt';
     font-size: 14px;
@@ -79,7 +90,7 @@
 }
 
 .tabs-style-2 .tab.active {
-    color: #005480;
+    color: $tab-active;
     font-weight: 600;
 }
 
@@ -90,7 +101,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #005480;
+    background: $tab-active;
     border-radius: 2px;
 }
 
@@ -98,7 +109,7 @@
 /* ===== STYLE 3 ===== */
 
 .tabs-style-3 {
-    background: #fff;
+    background: $white;
     padding: 4px 4px 0 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
     gap: 6px;
@@ -108,13 +119,13 @@
 
 .tabs-style-3 .tab {
     position: relative;
-    color: #000000;
+    color: $black;
     font-weight: 400;
 
 }
 
 .tabs-style-3 .tab.active {
-    color: #2D81FD;
+    color: $tab-bg;
     font-weight: 700;
 }
 
@@ -126,14 +137,14 @@
     bottom: -4px;
     width: 100%;
     height: 3px;
-    background: #2D81FD;
+    background: $tab-bg;
 }
 
 /* ===== STYLE 4 ===== */
 
 .tabs-style-4 {
-    background: #ffffff;
-    border: 2px solid #DADADA;
+    background: $white;
+    border: 2px solid $tab-border;
     border-radius: 24px;
     padding: 0;
     gap: 0;
@@ -143,11 +154,11 @@
 
 .tabs-style-4 .tab {
     border-radius: 0;
-    color: #B1B1B1;
+    color: $tab-color;
     padding: 8px 22px;
     font-weight: 500;
     background: transparent;
-    border-right: 1px solid #DADADA;
+    border-right: 1px solid $tab-border;
     position: relative;
     transition: all 0.25s ease;
 }
@@ -165,8 +176,8 @@
 }
 
 .tabs-style-4 .tab.active {
-    background: #4ba6d8;
-    color: #fff;
+    background: $style4-bg;
+    color: $white;
 
     z-index: 2;
 }
@@ -179,56 +190,40 @@
     border-right: none;
 }
 
-/* ===== STYLE 5 — Dual Pill (Auto Equal by Largest) ===== */
-
 .tabs-style-5 {
-    background: #f6cfd1;
+    background: $style5-bg;
     border-radius: 24px;
     padding: 4px;
-
-    display: inline-grid;               /* 👈 grid */
-    grid-auto-flow: column;             /* 👈 columns */
-    grid-auto-columns: 1fr;             /* 👈 equal */
-
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     align-items: center;
     gap: 4px;
-
     width: fit-content;
 }
 
 .tabs-style-5 .tab {
-
-    width: 100%;                        /* 👈 fill grid cell */
-
+    width: 100%;
     padding: 8px 20px;
-
     border-radius: 20px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-
-    color: #565F5C;
+    color: $tab-col;
     font-weight: 500;
-
     white-space: nowrap;
-
     transition: all 0.25s ease;
 }
 
-/* Active */
 .tabs-style-5 .tab.active {
-    background: #7a0000;
-    color: #fff;
+    background: $style5-active;
+    color: $white;
 }
 
-/* Icon safety */
 .tabs-style-5 .icon {
     flex-shrink: 0;
 }
-
-/* ===== ICON SUPPORT ===== */
 
 .icon {
     width: 24px;

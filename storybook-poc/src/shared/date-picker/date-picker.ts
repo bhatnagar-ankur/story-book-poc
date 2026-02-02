@@ -1,7 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Buttons } from '../buttons/buttons';
 interface Day {
   date: Date;
   currentMonth: boolean;
@@ -40,8 +39,6 @@ export class DatePicker implements OnInit, OnChanges {
   years: YearItem[] = [];
   startDate: Date | null = null;
   endDate: Date | null = null;
-  hour!: number;
-  minute!: number;
   @ViewChild('yearGrid') yearGrid!: ElementRef;
 
   ngOnInit() {
@@ -53,11 +50,6 @@ export class DatePicker implements OnInit, OnChanges {
       1
     );
     this.tempYear = today.getFullYear();
-    const now = new Date();
-    let h = now.getHours();
-    h = h % 12 || 12;
-    this.hour = h;
-    this.minute = now.getMinutes();
     this.buildYears();
     this.generateCalendar();
   }
@@ -146,8 +138,6 @@ export class DatePicker implements OnInit, OnChanges {
     if (!day.currentMonth) return;
     if (this.type === 'single') {
       const selected = new Date(day.date);
-      selected.setHours(this.hour);
-      selected.setMinutes(this.minute);
       this.startDate = selected;
       this.close();
     }

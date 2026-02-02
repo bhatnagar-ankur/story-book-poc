@@ -1,5 +1,16 @@
+$default-bg: #fff;
+$delta: #222;
+$track: #edf2f7;
+$fill: #3f51f7;
+$x-label: #77838F;
+$rank-header: #64748b;
+$yellow-1: #FFD572;
+$yellow-2: #FEBD38;
+$purple-1: #B09FFF;
+$purple-2: #8D79F6;
+
 .chart-card {
-    background: #fff;
+    background: $default-bg;
     padding: 24px 28px;
     width: fit-content;
     box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
@@ -21,7 +32,7 @@
 .delta {
     font-size: 12px;
     font-weight: 500;
-    color: #222;
+    color: $delta;
     margin-bottom: 6px;
     height: 16px;
 }
@@ -29,7 +40,7 @@
 .track {
     height: 280px;
     width: 90%;
-    background: #edf2f7;
+    background: $track;
     border-radius: 14px 14px 0 0;
     display: flex;
     align-items: flex-end;
@@ -38,14 +49,14 @@
 
 .fill {
     width: 100%;
-    background: #3f51f7;
+    background: $fill;
     border-radius: 14px 14px 0 0;
     transition: height 0.5s ease;
 }
 
 .x-label {
     font-size: 13px;
-    color: #77838F;
+    color: $x-label;
     margin-top: 8px;
     font-weight: 600;
 }
@@ -60,12 +71,12 @@
     justify-content: space-between;
     margin-bottom: 14px;
     font-size: 13px;
-    color: #64748b;
+    color: $rank-header;
     font-weight: 500;
 }
 
 .style3 .title {
-    color: #111;
+    color: $delta;
 }
 
 .style3 .rank-list {
@@ -76,7 +87,7 @@
 .style3 .rank-bar {
     height: 34px;
     border-radius: 0;
-    color: #fff;
+    color: $default-bg;
     font-size: 13px;
     font-weight: 500;
     display: flex;
@@ -113,7 +124,7 @@
 .style4 .track {
     height: 360px;
     width: 35px;
-    background: #ede9fe;
+    background: $track;
     border-radius: 10px;
     display: flex;
     flex-direction: column-reverse;
@@ -126,7 +137,7 @@
 }
 
 .style4 .yellow {
-    background: linear-gradient(#FFD572, #FEBD38);
+    background: linear-gradient($yellow-1, $yellow-2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-left-radius: 0;
@@ -134,7 +145,7 @@
 }
 
 .style4 .purple {
-    background: linear-gradient(#B09FFF, #8D79F6);
+    background: linear-gradient($purple-1, $purple-2);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 0;
@@ -144,5 +155,5 @@
 .style4 .x-label {
     margin-top: 10px;
     font-size: 12px;
-    color: #6b7280;
+    color: $rank-header;
 }

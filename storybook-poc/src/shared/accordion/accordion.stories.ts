@@ -21,7 +21,6 @@ export const Primary: Story = {
     title: 'Accordion Title',
     type: 'primary',
     expanded: false,
-    content: 'This is the primary accordion content.'
   }
 };
 
@@ -30,6 +29,5 @@ export const Secondary: Story = {
     title: 'Accordion Title',
     type: 'secondary',
     expanded: false,
-    content: 'This is the secondary accordion content.'
   }
 };

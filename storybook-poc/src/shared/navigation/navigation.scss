@@ -4,6 +4,14 @@ $option-hover: #007DBA;
 $active-child-color: #FF9E1B;
 $border-bottom: #B9B9B9;
 $hover-border: #6E7D89;
+$box-shadow: #00000026;
+$style2-bg: #4a560f;
+$style2-hover: #3f4a0c;
+$slide: #051A1F;
+$style2-collapse: #3B4A0E;
+$collapse-hover: #264f18;
+$style2-subtext: #92C204;
+$child-hover: #0b1c26;
 
 .sidebar {
   width: 304px;
@@ -65,7 +73,7 @@ $hover-border: #6E7D89;
   border: 1px solid $hover-border;
   border-radius: 0 4px 4px 0;
   gap: 10px;
-  box-shadow: 0px 2px 6px 2px #00000026;
+  box-shadow: 0px 2px 6px 2px $box-shadow;
   z-index: 9999;
 }
 
@@ -133,6 +141,7 @@ $hover-border: #6E7D89;
 .sidebar:hover .nav-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .nav-scroll::-webkit-scrollbar {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -333,8 +342,8 @@ $hover-border: #6E7D89;
 
 .bottom-collapse {
   height: 52px;
-  background: #4a560f; 
-  color: #ffffff;
+  background: $style2-bg;
+  color: $sidebar-text-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -346,47 +355,60 @@ $hover-border: #6E7D89;
   border-top: 1px solid rgba(255, 255, 255, 0.25);
   text-transform: uppercase;
   transition: background 0.2s ease;
+
   &:hover {
-    background: #3f4a0c;
+    background: $style2-hover;
   }
 }
+
 .sidebar.slider-mode {
   .toggle-btn {
     display: none;
   }
 }
+
 .sidebar.slider-mode {
-  background: #051A1F;   
-  color: #eaf4ff;       
+  background: $slide;
+  color: $sidebar-text-color;
+
   .nav-header {
-    background: #051A1F;
+    background: $slide;
   }
+
   .nav-main {
-    color: #eaf4ff;
+    color: $sidebar-text-color;
     font-weight: 600;
+
     &:hover {
-      background: #123549;
+      background: $collapse-hover;
     }
+
     &.active {
-      background: #92C204;
-      color: #ffffff;
+      background: $style2-subtext;
+      color: $sidebar-text-color;
     }
   }
+
   .label {
-    color: #eaf4ff;
+    color: $sidebar-text-color;
   }
+
   .icon {
     filter: brightness(0) invert(1);
   }
+
   .sub-item {
-    color: #cfe6ff;
+    color: $sidebar-text-color;
+
     &:hover {
-      background: #123549;
-      color: #ffffff;
+      background: $collapse-hover;
+      color: $sidebar-text-color;
     }
+
     &.active-child {
-      color: #92C204;
+      color: $style2-subtext;
     }
+
     &.active-child .sub-text::after {
       content: '';
       position: absolute;
@@ -394,42 +416,51 @@ $hover-border: #6E7D89;
       bottom: -6px;
       width: 100%;
       height: 2px;
-      background-color: #92C204;
+      background-color: $style2-subtext;
       border-radius: 2px;
     }
   }
+
   .hover-panel {
-    background: #ffffff;
-    color: #0b1c26;
-    border: 1px solid #cfd8dc;
+    background: $sidebar-text-color;
+    color: $child-hover;
+    border: 1px solid $sidebar-text-color;
   }
+
   .hover-child-item {
-    background: #ffffff;
-    color: #0b1c26;
+    background: $sidebar-text-color;
+    color: $child-hover;
+
     &:hover {
-      background: #f3f7fa;
-      color: #92C204;
+      background: $sidebar-text-color;
+      color: $style2-subtext;
     }
   }
-.hover-child-item .sub-text::after {
-  background: #92C204 ;
-}
-.hover-child-item.active-child .sub-text::after {
-  background: #92C204 ;
-}
+
+  .hover-child-item .sub-text::after {
+    background: $style2-subtext;
+  }
+
+  .hover-child-item.active-child .sub-text::after {
+    background: $style2-subtext;
+  }
+
   &.collapsed {
     .nav-main {
-      color: #ffffff;
+      color: $sidebar-text-color;
     }
+
     .nav-item:hover .nav-main {
-      background: #1b6fa8;
+      background: $style2-hover;
     }
   }
+
   .bottom-collapse {
-    background: #3B4A0E;
-    color: #ffffff;
+    background: $style2-collapse;
+    color: $sidebar-text-color;
   }
+
   .bottom-collapse:hover {
-    background: #264f18;
+    background: $collapse-hover;
   }
 }

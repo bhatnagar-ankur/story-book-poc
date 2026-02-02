@@ -32,13 +32,13 @@ export const Style2: Story = {
   },
 };
 
-export const Style3: Story = {
-  args: {
-    variant: 'temperature',
-    temperature: 70,
-    size: 458
-  }
-};
+// export const Style3: Story = {
+//   args: {
+//     variant: 'temperature',
+//     temperature: 70,
+//     size: 458
+//   }
+// };
 
 export const Style4: Story = {
 
@@ -56,13 +56,13 @@ export const Style4: Story = {
   }
 };
 
-export const Style5: Story = {
-  args: {
-    variant: 'circular-temp',
-    temperature: 65,
-    size: 280
-  }
-};
+// export const Style5: Story = {
+//   args: {
+//     variant: 'circular-temp',
+//     temperature: 65,
+//     size: 280
+//   }
+// };
 export const Style6: Story = {
 
   args: {
@@ -80,20 +80,20 @@ export const Style7: Story = {
     maxTemp: 30
   }
 };
-export const Style8: Story = {
-  args: {
-    variant: 'radial-pie',
-    size: 220,
+// export const Style8: Story = {
+//   args: {
+//     variant: 'radial-pie',
+//     size: 220,
 
-    radialValues: [20, 20, 20, 20, 20, 20],
+//     radialValues: [20, 20, 20, 20, 20, 20],
 
-    radialColors: [
-      '#0B1F66',
-      '#003B8F',
-      '#005FB8',
-      '#0096C7',
-      '#48CAE4',
-      '#E0FBFC'
-    ]
-  }
-};
+//     radialColors: [
+//       '#0B1F66',
+//       '#003B8F',
+//       '#005FB8',
+//       '#0096C7',
+//       '#48CAE4',
+//       '#E0FBFC'
+//     ]
+//   }
+// };

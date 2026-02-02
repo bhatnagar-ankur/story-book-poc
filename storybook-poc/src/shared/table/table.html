@@ -135,46 +135,27 @@
 
         <app-accordion [title]="'Details'" type="secondary" [expanded]="row.expanded">
             @if (row.expanded) {
-            <div class="table-accordion-content" (click)="$event.stopPropagation()">
+            <div class="table-accordion-content" (click)="$event.stopPropagation()" #projected>
 
                 <!-- Grid -->
                 <div class="details-grid">
-
-                    <div class="details-col">
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
 
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-                    </div>
-
-
-                    <div class="details-col">
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-                    </div>
-
-
-                    <div class="details-col">
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-                    </div>
-
-
-                    <div class="details-col">
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-
                         <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
                         </app-input-field>
-                    </div>
-
                 </div>
 
                 <div class="details-desc">
@@ -183,6 +164,8 @@
                         <h4>Additional details</h4>
                         <p>
                             Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
+                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
+                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
                             risus.
                         </p>
                     </div>
@@ -192,6 +175,8 @@
                         <h4>Description</h4>
                         <p>
                             Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
+                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
+                            risus.Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet
                             risus.
                         </p>
                     </div>

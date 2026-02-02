@@ -13,9 +13,6 @@ export class BarChart {
   @Input() labels: string[] = ['1', '2', '3', '4', '5', '6', '7'];
   @Input() values: number[] = [2, 1, 4, 5, 2, 0, 0];
   @Input() max = 10;
-  @Input() currentIndex = 6;
-  @Input() maxY = 140;
-  @Input() stepY = 20;
   @Input() title = 'List of countries';
   @Input() stackA: number[] = [30, 45, 25, 40, 50, 15, 35];
   @Input() stackB: number[] = [20, 35, 18, 30, 42, 10, 25];

@@ -15,7 +15,7 @@
 
   @if (expanded) {
   <div class="accordion-body">
-    @if (useDefaultContent) {
+    @if (!hasProjectedContent) {
     <app-multi-select-dropdown label="Country" [options]="['India','Japan','Iraq']" mode="dropdown">
     </app-multi-select-dropdown>
     <app-search label="Country" [options]="['India','Japan','Korea']" [required]=true>

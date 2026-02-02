@@ -11,12 +11,13 @@ $offer: #E4312C;
 $prod-link: #A3A4A4;
 $stats-divider: #E0E0E0;
 $stats-row: #6C757D;
-$link:#007DBA;
+$link: #007DBA;
 
 /*PROMO */
 .card {
     display: flex;
-    width: 508px;
+    width: 100%;
+    max-width: 508px;
     min-height: 249px;
     border-radius: 16px;
     overflow: hidden;
@@ -94,7 +95,8 @@ $link:#007DBA;
     gap: 0;
     align-items: center;
     height: auto;
-    width: 260px;
+    width: 100%;
+    max-width: 260px;
     border-radius: 0;
     box-shadow: none;
     background: $card-bg;
@@ -193,9 +195,11 @@ $link:#007DBA;
     overflow: hidden;
     cursor: pointer;
 }
+
 .swatch.active {
-  border: 1px solid $promo-hover;
+    border: 1px solid $promo-hover;
 }
+
 .swatch-img {
     width: 100%;
     height: 100%;
@@ -323,9 +327,11 @@ $link:#007DBA;
     margin-top: 4px;
     cursor: pointer;
 }
-.extra-offers:hover{
+
+.extra-offers:hover {
     color: $link;
 }
+
 .nav-arrow {
     position: absolute;
     top: 50%;
@@ -357,7 +363,8 @@ $link:#007DBA;
 
 /*STATS*/
 .card.stats {
-    width: 374px;
+    width: 100%;
+    max-width: 374px;
     min-height: 153px;
     border-radius: 16px;
     background: $card-bg;
@@ -415,27 +422,29 @@ $link:#007DBA;
     min-height: 1px;
     background: $promo-divider;
 }
-.stats-row-container{
+
+.stats-row-container {
     display: flex;
     flex-direction: column;
     gap: 8px 0;
     justify-content: space-between;
     align-content: space-between;
 }
+
 .stats-row {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    gap: 12px; 
-    font-size: 14px;                     
+    gap: 12px;
+    font-size: 14px;
 }
 
-.completed{
-color: $stats-row;
+.completed {
+    color: $stats-row;
 }
 
-.completed-content{
-color: $promo-divider;
+.completed-content {
+    color: $promo-divider;
 }
 
 .stats-right app-buttons.stats-cta {
@@ -447,4 +456,67 @@ color: $promo-divider;
 
 .stats-right app-buttons.stats-cta:hover {
     color: $promo-hover;
+}
+
+/* ================= MOBILE STACK FIX ================= */
+
+@media (max-width: 480px) {
+
+    /* PROMO CARD */
+    .card {
+        flex-direction: column;
+    }
+
+    .promo-left,
+    .promo-right {
+        width: 100%;
+    }
+
+    .promo-left {
+        border-top-right-radius: 0;
+        min-height: auto;
+        padding: 16px;
+    }
+
+    .promo-left img {
+        width: 140px;
+    }
+
+    .promo-right {
+        padding: 16px;
+    }
+
+    .card.stats {
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .stats-left {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .stats-left img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .stats-right {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .stats-divider {
+        display: none;
+    }
+
+    .stats-row {
+        flex-wrap: wrap;
+    }
 }

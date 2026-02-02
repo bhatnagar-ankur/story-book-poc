@@ -14,11 +14,11 @@ export class Accordion implements AfterContentInit {
   @Input() title!: string;
   @Input() type: 'primary' | 'secondary' = 'primary';
   @Input() expanded = false;
-  @Input() content!: string;
   hasProjectedContent = false;
-@Input() useDefaultContent = false;
+  @ContentChild('projected', { read: ElementRef })
+  projectedContent!: ElementRef;
   ngAfterContentInit() {
-    this.hasProjectedContent = this.content.length > 0;
+    this.hasProjectedContent = !!this.projectedContent;
   }
   toggle() {
     this.expanded = !this.expanded;

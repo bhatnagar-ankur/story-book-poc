@@ -58,12 +58,12 @@
         },
         {
             "name": "Day",
-            "id": "interface-Day-10f25ce1b17078bf8353252a4d8cd6c615f9460acf1d3f02ef909ce33c07af69d0022f85c43bc85c1c8cd09c81abcb63544d5fa8193b0dc37943ce06d12f8187",
+            "id": "interface-Day-56c0f12a0253b7cefd3e118f71c2eec04803fca04de1b6545c59f0466e59fb13217daeccb9175e2918b54e2bc8026d083a4d87ae19effb0c43bc70f2cb5af685",
             "file": "src/shared/date-picker/date-picker.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { Buttons } from '../buttons/buttons';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  hour!: number;\r\n  minute!: number;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    const now = new Date();\r\n    let h = now.getHours();\r\n    h = h % 12 || 12;\r\n    this.hour = h;\r\n    this.minute = now.getMinutes();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      selected.setHours(this.hour);\r\n      selected.setMinutes(this.minute);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "currentMonth",
@@ -73,7 +73,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 6
                 },
                 {
                     "name": "date",
@@ -83,7 +83,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 5
                 },
                 {
                     "name": "inRange",
@@ -93,7 +93,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 10
+                    "line": 9
                 },
                 {
                     "name": "rangeEnd",
@@ -103,7 +103,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 13
+                    "line": 12
                 },
                 {
                     "name": "rangeStart",
@@ -113,7 +113,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 12
+                    "line": 11
                 },
                 {
                     "name": "selected",
@@ -123,7 +123,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 9
+                    "line": 8
                 }
             ],
             "indexSignatures": [],
@@ -133,12 +133,12 @@
         },
         {
             "name": "NavChild",
-            "id": "interface-NavChild-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
+            "id": "interface-NavChild-082f0ace5d8584d5ffdf3b564927a408334b19bd5fb025ec59824a375132a0de9b33d892f7850cd7da966ab18cc549ce7b1777ad2a31f3146ce07f22ddc6a588",
             "file": "src/shared/navigation/navigation.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  @Input() useSlider = false;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "icon",
@@ -168,12 +168,12 @@
         },
         {
             "name": "NavItem",
-            "id": "interface-NavItem-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
+            "id": "interface-NavItem-082f0ace5d8584d5ffdf3b564927a408334b19bd5fb025ec59824a375132a0de9b33d892f7850cd7da966ab18cc549ce7b1777ad2a31f3146ce07f22ddc6a588",
             "file": "src/shared/navigation/navigation.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  @Input() useSlider = false;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "children",
@@ -362,6 +362,146 @@
             "extends": []
         },
         {
+            "name": "TableColumn",
+            "id": "interface-TableColumn-795e6b0ec6d0c61922144b4459078d8db1b4d155645fee7296053dac34f542cdbb73993675d6aa22c7279b966856628056fe0f6bb1638ed7cd659912ac142f5f",
+            "file": "src/shared/table/table.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, HostListener, Input } from '@angular/core';\r\nimport { Accordion } from '../accordion/accordion';\r\nimport { InputField } from '../input-field/input-field';\r\nimport { StatusChips } from '../status-chips/status-chips';\r\nimport { Buttons } from \"../buttons/buttons\";\r\nimport { StatusBadge } from \"../status-badge/status-badge\";\r\nexport interface TableColumn {\r\n  key: string;\r\n  label: string;\r\n}\r\n\r\nexport interface TableRow {\r\n  id: number;\r\n  link: string;\r\n  date: string;\r\n  v1: string;\r\n  v2: string;\r\n  status: string;\r\n  expanded?: boolean;\r\n  showDetails?: boolean;\r\n  menuOpen?: boolean;\r\n}\r\n@Component({\r\n  selector: 'app-table',\r\n  imports: [CommonModule, Accordion, InputField, StatusChips, Buttons],\r\n  templateUrl: './table.html',\r\n  styleUrl: './table.scss',\r\n})\r\nexport class Table {\r\n  @Input()\r\n  variant: 'header' | 'accordion' | 'buttons' | 'menu' = 'header';\r\n  @Input() columns: TableColumn[] = [];\r\n  @Input() headerColumns: TableColumn[] = [];\r\n  @Input() rows: TableRow[] = [];\r\n  @Input() showSearch = true;\r\n  @Input() showSort = true;\r\n  @Input() expandableHeader = false;\r\n  @Input() headerExpanded = false;\r\n  @Input()\r\n  headerMode: 'default' | 'search-sort' = 'default';\r\n  toggle(row: TableRow) {\r\n    row.expanded = !row.expanded;\r\n  }\r\n  sortKey: string | null = null;\r\n  sortDir: 'asc' | 'desc' = 'asc';\r\n  onSort(key: string) {\r\n    if (this.sortKey === key) {\r\n      this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';\r\n    } else {\r\n      this.sortKey = key;\r\n      this.sortDir = 'asc';\r\n    }\r\n    this.sortRows();\r\n  }\r\n  sortRows() {\r\n    if (!this.sortKey) return;\r\n    const key = this.sortKey;\r\n    this.rows = [...this.rows].sort((a: any, b: any) => {\r\n      const v1 = a[key];\r\n      const v2 = b[key];\r\n      if (v1 < v2) return this.sortDir === 'asc' ? -1 : 1;\r\n      if (v1 > v2) return this.sortDir === 'asc' ? 1 : -1;\r\n      return 0;\r\n    });\r\n  }\r\n  activeFilterKey: string | null = null;\r\n  openFilter(key: string) {\r\n    if (this.activeFilterKey === key) {\r\n      this.activeFilterKey = null;\r\n    } else {\r\n      this.activeFilterKey = key; \r\n    }\r\n  }\r\n  getRowStatus(value: string): 'good' | 'bad' | 'progress' | 'neutral' {\r\n    if (!value) return 'neutral';\r\n    const v = value.toLowerCase();\r\n    if (v.includes('good')) return 'good';\r\n    if (v.includes('bad')) return 'bad';\r\n    if (v.includes('progress')) return 'progress';\r\n    return 'neutral';\r\n  }\r\n  toggleMenu(row: TableRow, event: Event) {\r\n    event.stopPropagation();\r\n    this.rows.forEach(r => {\r\n      if (r !== row) r.menuOpen = false;\r\n    });\r\n    row.menuOpen = !row.menuOpen;\r\n  }\r\n  onEdit(row: TableRow) {\r\n    console.log('Edit:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onDelete(row: TableRow) {\r\n    console.log('Delete:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onTrack(row: TableRow) {\r\n    console.log('Track:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  @HostListener('document:click')\r\n  closeAllMenus() {\r\n    this.rows.forEach(row => {\r\n      row.menuOpen = false;\r\n    });\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "TableRow",
+            "id": "interface-TableRow-795e6b0ec6d0c61922144b4459078d8db1b4d155645fee7296053dac34f542cdbb73993675d6aa22c7279b966856628056fe0f6bb1638ed7cd659912ac142f5f",
+            "file": "src/shared/table/table.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, HostListener, Input } from '@angular/core';\r\nimport { Accordion } from '../accordion/accordion';\r\nimport { InputField } from '../input-field/input-field';\r\nimport { StatusChips } from '../status-chips/status-chips';\r\nimport { Buttons } from \"../buttons/buttons\";\r\nimport { StatusBadge } from \"../status-badge/status-badge\";\r\nexport interface TableColumn {\r\n  key: string;\r\n  label: string;\r\n}\r\n\r\nexport interface TableRow {\r\n  id: number;\r\n  link: string;\r\n  date: string;\r\n  v1: string;\r\n  v2: string;\r\n  status: string;\r\n  expanded?: boolean;\r\n  showDetails?: boolean;\r\n  menuOpen?: boolean;\r\n}\r\n@Component({\r\n  selector: 'app-table',\r\n  imports: [CommonModule, Accordion, InputField, StatusChips, Buttons],\r\n  templateUrl: './table.html',\r\n  styleUrl: './table.scss',\r\n})\r\nexport class Table {\r\n  @Input()\r\n  variant: 'header' | 'accordion' | 'buttons' | 'menu' = 'header';\r\n  @Input() columns: TableColumn[] = [];\r\n  @Input() headerColumns: TableColumn[] = [];\r\n  @Input() rows: TableRow[] = [];\r\n  @Input() showSearch = true;\r\n  @Input() showSort = true;\r\n  @Input() expandableHeader = false;\r\n  @Input() headerExpanded = false;\r\n  @Input()\r\n  headerMode: 'default' | 'search-sort' = 'default';\r\n  toggle(row: TableRow) {\r\n    row.expanded = !row.expanded;\r\n  }\r\n  sortKey: string | null = null;\r\n  sortDir: 'asc' | 'desc' = 'asc';\r\n  onSort(key: string) {\r\n    if (this.sortKey === key) {\r\n      this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';\r\n    } else {\r\n      this.sortKey = key;\r\n      this.sortDir = 'asc';\r\n    }\r\n    this.sortRows();\r\n  }\r\n  sortRows() {\r\n    if (!this.sortKey) return;\r\n    const key = this.sortKey;\r\n    this.rows = [...this.rows].sort((a: any, b: any) => {\r\n      const v1 = a[key];\r\n      const v2 = b[key];\r\n      if (v1 < v2) return this.sortDir === 'asc' ? -1 : 1;\r\n      if (v1 > v2) return this.sortDir === 'asc' ? 1 : -1;\r\n      return 0;\r\n    });\r\n  }\r\n  activeFilterKey: string | null = null;\r\n  openFilter(key: string) {\r\n    if (this.activeFilterKey === key) {\r\n      this.activeFilterKey = null;\r\n    } else {\r\n      this.activeFilterKey = key; \r\n    }\r\n  }\r\n  getRowStatus(value: string): 'good' | 'bad' | 'progress' | 'neutral' {\r\n    if (!value) return 'neutral';\r\n    const v = value.toLowerCase();\r\n    if (v.includes('good')) return 'good';\r\n    if (v.includes('bad')) return 'bad';\r\n    if (v.includes('progress')) return 'progress';\r\n    return 'neutral';\r\n  }\r\n  toggleMenu(row: TableRow, event: Event) {\r\n    event.stopPropagation();\r\n    this.rows.forEach(r => {\r\n      if (r !== row) r.menuOpen = false;\r\n    });\r\n    row.menuOpen = !row.menuOpen;\r\n  }\r\n  onEdit(row: TableRow) {\r\n    console.log('Edit:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onDelete(row: TableRow) {\r\n    console.log('Delete:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onTrack(row: TableRow) {\r\n    console.log('Track:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  @HostListener('document:click')\r\n  closeAllMenus() {\r\n    this.rows.forEach(row => {\r\n      row.menuOpen = false;\r\n    });\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "date",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "expanded",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "link",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "menuOpen",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "showDetails",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "status",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "v1",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "v2",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-23c11020a2831beb3fa02ee911a75b64009c31bb46f73a01145c2560cb13b7f7e641105b678bd8fb01a5a199117001f3da4a78351d29d85d213ed7b82982091f",
             "file": "src/models/user.ts",
@@ -388,12 +528,12 @@
         },
         {
             "name": "YearItem",
-            "id": "interface-YearItem-10f25ce1b17078bf8353252a4d8cd6c615f9460acf1d3f02ef909ce33c07af69d0022f85c43bc85c1c8cd09c81abcb63544d5fa8193b0dc37943ce06d12f8187",
+            "id": "interface-YearItem-56c0f12a0253b7cefd3e118f71c2eec04803fca04de1b6545c59f0466e59fb13217daeccb9175e2918b54e2bc8026d083a4d87ae19effb0c43bc70f2cb5af685",
             "file": "src/shared/date-picker/date-picker.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { Buttons } from '../buttons/buttons';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  hour!: number;\r\n  minute!: number;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    const now = new Date();\r\n    let h = now.getHours();\r\n    h = h % 12 || 12;\r\n    this.hour = h;\r\n    this.minute = now.getMinutes();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      selected.setHours(this.hour);\r\n      selected.setMinutes(this.minute);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "disabled",
@@ -403,7 +543,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 17
                 },
                 {
                     "name": "value",
@@ -413,7 +553,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 16
                 }
             ],
             "indexSignatures": [],
@@ -430,7 +570,7 @@
     "components": [
         {
             "name": "Accordion",
-            "id": "component-Accordion-84fb6e021a3a49de0f440d746e458b695ff74f1e42a725d08d7d7724203d1dd6a8e5e48786eef21f4f459f2e5b3983077884e36e45639782e9e10a2d66069320",
+            "id": "component-Accordion-924f9359e370783aa477ff2ecb89b39b6daeab2edfed03a9ec238e0e7f64112eb1423c0c80e44ace90d06a31f3f5e6446bfa2b8977d612072c95ca526636a68a",
             "file": "src/shared/accordion/accordion.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -446,14 +586,6 @@
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
-                {
-                    "name": "content",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 17,
-                    "type": "string",
-                    "decorators": []
-                },
                 {
                     "name": "expanded",
                     "defaultValue": "false",
@@ -482,15 +614,56 @@
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hasProjectedContent",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "projectedContent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "decorators": [
+                        {
+                            "name": "ContentChild",
+                            "stringifiedArguments": "'projected', {read: ElementRef}"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ]
+                }
+            ],
             "methodsClass": [
+                {
+                    "name": "ngAfterContentInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "toggle",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 23,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -518,13 +691,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\nimport { MultiSelectDropdown } from '../multi-select-dropdown/multi-select-dropdown';\r\nimport { Search } from '../search/search';\r\n\r\n@Component({\r\n  selector: 'app-accordion',\r\n  imports: [CommonModule, Checkbox, MultiSelectDropdown, Search],\r\n  templateUrl: './accordion.html',\r\n  styleUrl: './accordion.scss',\r\n})\r\nexport class Accordion {\r\n  @Input() title!: string;\r\n  @Input() type: 'primary' | 'secondary' = 'primary';\r\n  @Input() expanded = false;\r\n  @Input() content!: string;\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, Input, QueryList } from '@angular/core';\r\nimport { Checkbox } from '../checkbox/checkbox';\r\nimport { MultiSelectDropdown } from '../multi-select-dropdown/multi-select-dropdown';\r\nimport { Search } from '../search/search';\r\n\r\n@Component({\r\n  selector: 'app-accordion',\r\n  imports: [CommonModule, Checkbox, MultiSelectDropdown, Search],\r\n  templateUrl: './accordion.html',\r\n  styleUrl: './accordion.scss',\r\n})\r\nexport class Accordion implements AfterContentInit {\r\n  @Input() title!: string;\r\n  @Input() type: 'primary' | 'secondary' = 'primary';\r\n  @Input() expanded = false;\r\n  hasProjectedContent = false;\r\n  @ContentChild('projected', { read: ElementRef })\r\n  projectedContent!: ElementRef;\r\n  ngAfterContentInit() {\r\n    this.hasProjectedContent = !!this.projectedContent;\r\n  }\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n  }\r\n}\r\n",
             "styleUrl": "./accordion.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"accordion\" [ngClass]=\"type\">\r\n  <button class=\"accordion-header\" (click)=\"toggle()\" [attr.aria-expanded]=\"expanded\">\r\n    <div class=\"accordion-title-group\">\r\n      <span class=\"accordion-title\">{{ title }}</span>\r\n      @if (type === 'primary') {\r\n      <app-checkbox class=\"accordion-checkbox\" label=\"Checkbox\" [class.inverse]=\"expanded\"\r\n        (click)=\"$event.stopPropagation()\">\r\n      </app-checkbox>\r\n      }\r\n    </div>\r\n\r\n    <img src=\"assets/icons/accordion-dropdown.svg\" alt=\"Toggle accordion\" class=\"accordion-icon\"\r\n      [class.expanded]=\"expanded\" />\r\n  </button>\r\n\r\n  @if (expanded) {\r\n  <div class=\"accordion-body\">\r\n    <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Iraq']\" mode=\"dropdown\">\r\n    </app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-multi-select-dropdown label=\"Country\"\r\n      [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n  </div>\r\n  }\r\n</div>"
+            "implements": [
+                "AfterContentInit"
+            ],
+            "templateData": "<div class=\"accordion\" [ngClass]=\"type\">\r\n  <button class=\"accordion-header\" (click)=\"toggle()\" [attr.aria-expanded]=\"expanded\">\r\n    <div class=\"accordion-title-group\">\r\n      <span class=\"accordion-title\">{{ title }}</span>\r\n      @if (type === 'primary') {\r\n      <app-checkbox class=\"accordion-checkbox\" label=\"Checkbox\" [class.inverse]=\"expanded\"\r\n        (click)=\"$event.stopPropagation()\">\r\n      </app-checkbox>\r\n      }\r\n    </div>\r\n\r\n    <img src=\"assets/icons/accordion-dropdown.svg\" alt=\"Toggle accordion\" class=\"accordion-icon\"\r\n      [class.expanded]=\"expanded\" />\r\n  </button>\r\n\r\n  @if (expanded) {\r\n  <div class=\"accordion-body\">\r\n    @if (!hasProjectedContent) {\r\n    <app-multi-select-dropdown label=\"Country\" [options]=\"['India','Japan','Iraq']\" mode=\"dropdown\">\r\n    </app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-multi-select-dropdown label=\"Country\"\r\n      [options]=\"['India','Japan','Korea','China','Iran']\"></app-multi-select-dropdown>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    <app-search label=\"Country\" [options]=\"['India','Japan','Korea']\" [required]=true>\r\n    </app-search>\r\n    }\r\n    @else {\r\n      <ng-content></ng-content>\r\n    }\r\n  </div>\r\n  }\r\n</div>"
         },
         {
             "name": "Alert",
@@ -1191,7 +1367,7 @@
         },
         {
             "name": "BarChart",
-            "id": "component-BarChart-1f00d8faae480e3dff5f2d97bac07188d6ff9ecb1bfacc90a60aa13a4c2f0a8286856c0d69118b34609e26cf0d33fdf0c0596aa8e9d0c448f2f16bf87bc4821a",
+            "id": "component-BarChart-2a374ffc13c03e8931cd7ff01b056a49aa6f2bdbbfe910afa8bfbfac7a8c5ad9aa218f1392ec38a9274a049b8e36ed5c2d1196f520d64e6de8137255935bfffd",
             "file": "src/shared/bar-chart/bar-chart.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1208,12 +1384,12 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "currentIndex",
-                    "defaultValue": "6",
+                    "name": "items",
+                    "defaultValue": "[\r\n    { label: 'Noruega', value: 95 },\r\n    { label: 'Australia', value: 85 },\r\n    { label: 'Suiza', value: 78 },\r\n    { label: 'Países Bajos', value: 72 },\r\n    { label: 'Estados Unidos', value: 65 },\r\n    { label: 'Alemania', value: 60 },\r\n    { label: 'Nueva Zelanda', value: 55 },\r\n    { label: 'Canadá', value: 50 },\r\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
-                    "type": "number",
+                    "line": 21,
+                    "type": "literal type[]",
                     "decorators": []
                 },
                 {
@@ -1221,7 +1397,7 @@
                     "defaultValue": "['1', '2', '3', '4', '5', '6', '7']",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 13,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -1230,22 +1406,13 @@
                     "defaultValue": "10",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 15,
                     "type": "number",
                     "decorators": []
                 },
                 {
-                    "name": "maxY",
-                    "defaultValue": "140",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 18,
-                    "type": "number",
-                    "decorators": []
-                },
-                {
-                    "name": "stepY",
-                    "defaultValue": "20",
+                    "name": "maxStack",
+                    "defaultValue": "100",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 19,
@@ -1253,11 +1420,47 @@
                     "decorators": []
                 },
                 {
+                    "name": "showCount",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "stackA",
+                    "defaultValue": "[30, 45, 25, 40, 50, 15, 35]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "number[]",
+                    "decorators": []
+                },
+                {
+                    "name": "stackB",
+                    "defaultValue": "[20, 35, 18, 30, 42, 10, 25]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "number[]",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "'List of countries'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "values",
                     "defaultValue": "[2, 1, 4, 5, 2, 0, 0]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 14,
                     "type": "number[]",
                     "decorators": []
                 },
@@ -1267,7 +1470,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
-                    "type": "\"style1\" | \"style2\"",
+                    "type": "\"style1\" | \"style2\" | \"style3\" | \"style4\"",
                     "decorators": []
                 }
             ],
@@ -1287,7 +1490,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1315,7 +1518,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1331,14 +1534,98 @@
                     ]
                 },
                 {
-                    "name": "getYLevels",
+                    "name": "getRankWidth",
+                    "args": [
+                        {
+                            "name": "val",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "val",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getShade",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getSortedItems",
                     "args": [],
                     "optional": false,
-                    "returnType": "{}",
+                    "returnType": "any",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "getStackHeight",
+                    "args": [
+                        {
+                            "name": "val",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "val",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -1355,13 +1642,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-bar-chart',\r\n  imports: [CommonModule],\r\n  templateUrl: './bar-chart.html',\r\n  styleUrl: './bar-chart.scss',\r\n})\r\nexport class BarChart {\r\n  @Input()\r\nvariant: 'style1' | 'style2' = 'style1';\r\n\r\n  @Input() labels: string[] = ['1', '2', '3', '4', '5', '6', '7'];\r\n  @Input() values: number[] = [2, 1, 4, 5, 2, 0, 0];\r\n  @Input() max = 10;\r\n  @Input() currentIndex = 6;\r\n  @Input() maxY = 140;\r\n  @Input() stepY = 20;\r\n  getHeight(val: number) {\r\n    return (val / this.max) * 100 + '%';\r\n  }\r\n  getDelta(val: number) {\r\n    return val > 0 ? `+${val} kg` : '';\r\n  }\r\n  getYLevels() {\r\n  const levels = [];\r\n  for (let i = 0; i <= this.maxY; i += this.stepY) {\r\n    levels.push(i);\r\n  }\r\n  return levels;\r\n}\r\n\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-bar-chart',\r\n  imports: [CommonModule],\r\n  templateUrl: './bar-chart.html',\r\n  styleUrl: './bar-chart.scss',\r\n})\r\nexport class BarChart {\r\n  @Input()\r\n  variant: 'style1' | 'style2' | 'style3' | 'style4' = 'style1';\r\n  @Input() labels: string[] = ['1', '2', '3', '4', '5', '6', '7'];\r\n  @Input() values: number[] = [2, 1, 4, 5, 2, 0, 0];\r\n  @Input() max = 10;\r\n  @Input() title = 'List of countries';\r\n  @Input() stackA: number[] = [30, 45, 25, 40, 50, 15, 35];\r\n  @Input() stackB: number[] = [20, 35, 18, 30, 42, 10, 25];\r\n  @Input() maxStack = 100;\r\n  @Input() showCount = true;\r\n  @Input() items: { label: string; value: number }[] = [\r\n    { label: 'Noruega', value: 95 },\r\n    { label: 'Australia', value: 85 },\r\n    { label: 'Suiza', value: 78 },\r\n    { label: 'Países Bajos', value: 72 },\r\n    { label: 'Estados Unidos', value: 65 },\r\n    { label: 'Alemania', value: 60 },\r\n    { label: 'Nueva Zelanda', value: 55 },\r\n    { label: 'Canadá', value: 50 },\r\n  ];\r\n  getHeight(val: number) {\r\n    return (val / this.max) * 100 + '%';\r\n  }\r\n  getDelta(val: number) {\r\n    return val > 0 ? `+${val} kg` : '';\r\n  }\r\n  getSortedItems() {\r\n    return [...this.items].sort((a, b) => b.value - a.value);\r\n  }\r\n  getRankWidth(val: number) {\r\n    const max = Math.max(...this.items.map(i => i.value));\r\n    return (val / max) * 100 + '%';\r\n  }\r\n  getShade(index: number) {\r\n    const shades = [\r\n      '#020066',\r\n      '#0b2a88',\r\n      '#1355a6',\r\n      '#1f7cbf',\r\n      '#2fa4d3',\r\n      '#50c7e8',\r\n      '#7ddff3',\r\n      '#bfeef9',\r\n    ];\r\n    return shades[index] || '#dbeafe';\r\n  }\r\n  getStackHeight(val: number) {\r\n    return (val / this.maxStack) * 100 + '%';\r\n  }\r\n\r\n}\r\n",
             "styleUrl": "./bar-chart.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "@if (variant === 'style1') {\r\n<div class=\"chart-card style1\">\r\n    <div class=\"chart\">\r\n        @for (val of values; track $index) {\r\n        <div class=\"bar-wrapper\">\r\n            <div class=\"delta\">\r\n                {{ getDelta(val) }}\r\n            </div>\r\n            <div class=\"track\">\r\n                <div class=\"fill\" [style.height]=\"getHeight(val)\">\r\n                </div>\r\n            </div>\r\n            <div class=\"x-label\">\r\n                {{ labels[$index] }}\r\n            </div>\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n}\r\n@if (variant === 'style2') {\r\n\r\n<div class=\"chart-card style2\">\r\n\r\n  <!-- Y Axis -->\r\n  <div class=\"y-axis\">\r\n\r\n    @for (y of getYLevels(); track y) {\r\n      <div class=\"y-tick\">{{ y }}</div>\r\n    }\r\n\r\n  </div>\r\n\r\n  <!-- Chart Area -->\r\n  <div class=\"chart-area\">\r\n\r\n    <!-- Grid -->\r\n    <div class=\"grid\">\r\n\r\n      @for (y of getYLevels(); track y) {\r\n        <div class=\"grid-line\"></div>\r\n      }\r\n\r\n    </div>\r\n\r\n    <!-- Bars -->\r\n    <div class=\"bars\">\r\n\r\n      @for (val of values; track $index) {\r\n\r\n        <div class=\"bar-col\">\r\n\r\n          <div class=\"track\">\r\n\r\n            <div\r\n              class=\"bar-fill\"\r\n              [class.future]=\"$index > currentIndex\"\r\n              [style.height]=\"(val / maxY) * 100 + '%'\"\r\n            ></div>\r\n\r\n          </div>\r\n\r\n          <div class=\"x-label\">\r\n            {{ labels[$index] }}\r\n          </div>\r\n\r\n        </div>\r\n\r\n      }\r\n\r\n      <!-- Current Line -->\r\n      <div\r\n        class=\"today-line\"\r\n        [style.left.%]=\"((currentIndex + 1) / values.length) * 100\">\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>\r\n\r\n}"
+            "templateData": "@if (variant === 'style1') {\r\n<div class=\"chart-card style1\">\r\n    <div class=\"chart\">\r\n        @for (val of values; track $index) {\r\n        <div class=\"bar-wrapper\">\r\n            <div class=\"delta\">\r\n                {{ getDelta(val) }}\r\n            </div>\r\n            <div class=\"track\">\r\n                <div class=\"fill\" [style.height]=\"getHeight(val)\">\r\n                </div>\r\n            </div>\r\n            <div class=\"x-label\">\r\n                {{ labels[$index] }}\r\n            </div>\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n}\r\n\r\n@if (variant === 'style3') {\r\n<div class=\"chart-card style3\">\r\n    <div class=\"rank-header\">\r\n        <span class=\"title\">\r\n            {{ title }}\r\n        </span>\r\n        @if (showCount) {\r\n        <span class=\"count\">\r\n            {{ items.length }} countries\r\n        </span>\r\n        }\r\n    </div>\r\n    <div class=\"rank-list\">\r\n        @for (item of getSortedItems(); track item.label; let i = $index) {\r\n        <div class=\"rank-bar\" [style.width]=\"getRankWidth(item.value)\" [style.background]=\"getShade(i)\">\r\n            {{ item.label }}\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n}\r\n\r\n@if (variant === 'style4') {\r\n<div class=\"chart-card style4\">\r\n    <div class=\"chart\">\r\n        @for (day of labels; track $index) {\r\n        <div class=\"bar-wrapper\">\r\n            <div class=\"track\">\r\n                <div class=\"stack yellow\" [style.height]=\"getStackHeight(stackA[$index])\">\r\n                </div>\r\n                <div class=\"stack purple\" [style.height]=\"getStackHeight(stackB[$index])\">\r\n                </div>\r\n            </div>\r\n            <div class=\"x-label\">\r\n                {{ day }}\r\n            </div>\r\n        </div>\r\n        }\r\n    </div>\r\n</div>\r\n}"
         },
         {
             "name": "Breadcrumb",
@@ -2584,7 +2871,7 @@
         },
         {
             "name": "DatePicker",
-            "id": "component-DatePicker-10f25ce1b17078bf8353252a4d8cd6c615f9460acf1d3f02ef909ce33c07af69d0022f85c43bc85c1c8cd09c81abcb63544d5fa8193b0dc37943ce06d12f8187",
+            "id": "component-DatePicker-56c0f12a0253b7cefd3e118f71c2eec04803fca04de1b6545c59f0466e59fb13217daeccb9175e2918b54e2bc8026d083a4d87ae19effb0c43bc70f2cb5af685",
             "file": "src/shared/date-picker/date-picker.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2605,7 +2892,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 33,
+                    "line": 32,
                     "type": "number | null",
                     "decorators": []
                 },
@@ -2613,7 +2900,7 @@
                     "name": "icon",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 29,
+                    "line": 28,
                     "type": "string",
                     "decorators": []
                 },
@@ -2622,7 +2909,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 30,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2631,7 +2918,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 30,
+                    "line": 29,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2640,7 +2927,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 31,
                     "type": "number | null",
                     "decorators": []
                 },
@@ -2649,7 +2936,7 @@
                     "defaultValue": "'single'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
+                    "line": 27,
                     "type": "\"single\" | \"range\"",
                     "decorators": []
                 }
@@ -2665,7 +2952,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37
+                    "line": 36
                 },
                 {
                     "name": "days",
@@ -2676,7 +2963,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 39
+                    "line": 38
                 },
                 {
                     "name": "endDate",
@@ -2687,27 +2974,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42
-                },
-                {
-                    "name": "hour",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 43
-                },
-                {
-                    "name": "minute",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 44
+                    "line": 41
                 },
                 {
                     "name": "show",
@@ -2718,7 +2985,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35
+                    "line": 34
                 },
                 {
                     "name": "showYearPicker",
@@ -2729,7 +2996,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 36
+                    "line": 35
                 },
                 {
                     "name": "startDate",
@@ -2740,7 +3007,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41
+                    "line": 40
                 },
                 {
                     "name": "tempYear",
@@ -2750,7 +3017,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38
+                    "line": 37
                 },
                 {
                     "name": "yearGrid",
@@ -2760,7 +3027,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 45,
+                    "line": 42,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -2780,7 +3047,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 40
+                    "line": 39
                 }
             ],
             "methodsClass": [
@@ -2790,7 +3057,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 222,
+                    "line": 212,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2800,7 +3067,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 300,
+                    "line": 290,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2817,7 +3084,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 215,
+                    "line": 205,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -2847,7 +3114,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 81,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2864,7 +3131,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 207,
+                    "line": 197,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2885,7 +3152,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 104,
+                    "line": 96,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2902,7 +3169,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 189,
+                    "line": 179,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2930,7 +3197,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 171,
+                    "line": 161,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2951,7 +3218,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 88,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2968,7 +3235,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 66,
+                    "line": 58,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2989,7 +3256,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2999,7 +3266,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 270,
+                    "line": 260,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3009,7 +3276,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 86,
+                    "line": 78,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3019,7 +3286,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 281,
+                    "line": 271,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3036,7 +3303,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 145,
+                    "line": 137,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3057,7 +3324,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 305,
+                    "line": 295,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3067,7 +3334,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 77,
+                    "line": 69,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3091,7 +3358,7 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 215
+                    "line": 205
                 }
             ],
             "standalone": false,
@@ -3112,7 +3379,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { Buttons } from '../buttons/buttons';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  hour!: number;\r\n  minute!: number;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    const now = new Date();\r\n    let h = now.getHours();\r\n    h = h % 12 || 12;\r\n    this.hour = h;\r\n    this.minute = now.getMinutes();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      selected.setHours(this.hour);\r\n      selected.setMinutes(this.minute);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule, DatePipe } from '@angular/common';\r\nimport { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\ninterface Day {\r\n  date: Date;\r\n  currentMonth: boolean;\r\n\r\n  selected?: boolean;\r\n  inRange?: boolean;\r\n\r\n  rangeStart?: boolean;\r\n  rangeEnd?: boolean;\r\n}\r\n\r\ninterface YearItem {\r\n  value: number;\r\n  disabled: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-date-picker',\r\n  imports: [CommonModule, DatePipe, FormsModule],\r\n  templateUrl: './date-picker.html',\r\n  styleUrl: './date-picker.scss',\r\n})\r\nexport class DatePicker implements OnInit, OnChanges {\r\n  @Input() type: 'single' | 'range' = 'single';\r\n  @Input() icon?: string;\r\n  @Input() noPastYears = false;\r\n  @Input() noFutureYears = false;\r\n  @Input() pastYearLimit: number | null = null;\r\n  @Input() futureYearLimit: number | null = null;\r\n\r\n  show = false;\r\n  showYearPicker = false;\r\n  currentMonth = new Date();\r\n  tempYear!: number;\r\n  days: Day[] = [];\r\n  years: YearItem[] = [];\r\n  startDate: Date | null = null;\r\n  endDate: Date | null = null;\r\n  @ViewChild('yearGrid') yearGrid!: ElementRef;\r\n\r\n  ngOnInit() {\r\n    const today = new Date();\r\n    this.startDate = today;\r\n    this.currentMonth = new Date(\r\n      today.getFullYear(),\r\n      today.getMonth(),\r\n      1\r\n    );\r\n    this.tempYear = today.getFullYear();\r\n    this.buildYears();\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (\r\n      changes['noPastYears'] ||\r\n      changes['noFutureYears'] ||\r\n      changes['pastYearLimit'] ||\r\n      changes['futureYearLimit']\r\n    ) {\r\n      this.buildYears();\r\n    }\r\n  }\r\n\r\n  toggle() {\r\n    this.show = !this.show;\r\n  }\r\n\r\n  close() {\r\n    this.show = false;\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  prevMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() - 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n\r\n\r\n  nextMonth() {\r\n    this.currentMonth = new Date(\r\n      this.currentMonth.getFullYear(),\r\n      this.currentMonth.getMonth() + 1,\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n  }\r\n  generateCalendar() {\r\n    this.days = [];\r\n    const year = this.currentMonth.getFullYear();\r\n    const month = this.currentMonth.getMonth();\r\n    const firstDay = new Date(year, month, 1).getDay();\r\n    const startOffset = firstDay === 0 ? 6 : firstDay - 1;\r\n    const totalDays = new Date(year, month + 1, 0).getDate();\r\n    for (let i = 0; i < startOffset; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n\r\n    for (let i = 1; i <= totalDays; i++) {\r\n      const d = new Date(year, month, i);\r\n      const isStart =\r\n        this.startDate &&\r\n        d.toDateString() === this.startDate.toDateString();\r\n      const isEnd =\r\n        this.endDate &&\r\n        d.toDateString() === this.endDate.toDateString();\r\n      this.days.push({\r\n        date: d,\r\n        currentMonth: true,\r\n        selected: this.isSelected(d),\r\n        inRange: this.isInRange(d),\r\n        rangeStart: !!isStart,\r\n        rangeEnd: !!isEnd,\r\n      });\r\n\r\n    }\r\n    const remaining = 42 - this.days.length;\r\n    for (let i = 0; i < remaining; i++) {\r\n      this.days.push({\r\n        date: new Date(),\r\n        currentMonth: false\r\n      });\r\n    }\r\n  }\r\n\r\n  selectDate(day: Day) {\r\n    if (!day.currentMonth) return;\r\n    if (this.type === 'single') {\r\n      const selected = new Date(day.date);\r\n      this.startDate = selected;\r\n      this.close();\r\n    }\r\n\r\n    if (this.type === 'range') {\r\n      if (!this.startDate || this.endDate) {\r\n        this.startDate = day.date;\r\n        this.endDate = null;\r\n      } else {\r\n        if (day.date < this.startDate) {\r\n          this.endDate = this.startDate;\r\n          this.startDate = day.date;\r\n        } else {\r\n          this.endDate = day.date;\r\n        }\r\n      }\r\n    }\r\n    this.generateCalendar();\r\n  }\r\n\r\n  isSelected(date: Date) {\r\n    if (this.type === 'single') {\r\n      return (\r\n        this.startDate?.toDateString() ===\r\n        date.toDateString()\r\n      );\r\n    }\r\n\r\n\r\n    return (\r\n      this.startDate?.toDateString() ===\r\n      date.toDateString() ||\r\n      this.endDate?.toDateString() ===\r\n      date.toDateString()\r\n    );\r\n  }\r\n\r\n\r\n  isInRange(date: Date) {\r\n    if (!this.startDate || !this.endDate) return false;\r\n    return date > this.startDate && date < this.endDate;\r\n  }\r\n\r\n  get displayValue() {\r\n    if (this.type === 'single') {\r\n      return this.startDate\r\n        ? this.format(this.startDate)\r\n        : '';\r\n    }\r\n    if (this.startDate && this.endDate) {\r\n      return `${this.format(this.startDate)} To ${this.format(this.endDate)}`;\r\n    }\r\n    return '';\r\n  }\r\n\r\n\r\n  format(d: Date) {\r\n    const day = d.toLocaleDateString('en-GB', { day: '2-digit' });\r\n    const month = d.toLocaleDateString('en-GB', { month: 'short' });\r\n    const year = d.getFullYear();\r\n    return `${day}-${month}-${year}`;\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  clickOutside(e: Event) {\r\n    const target = e.target as HTMLElement;\r\n    if (!target.closest('.date-picker')) {\r\n      this.close();\r\n    }\r\n  }\r\n\r\n  buildYears() {\r\n    const current = new Date().getFullYear();\r\n    const pastLimit =\r\n      this.pastYearLimit !== null\r\n        ? Number(this.pastYearLimit)\r\n        : null;\r\n    const futureLimit =\r\n      this.futureYearLimit !== null\r\n        ? Number(this.futureYearLimit)\r\n        : null;\r\n    const start = 1900;\r\n    const end = 2100;\r\n    this.years = [];\r\n    for (let i = start; i <= end; i++) {\r\n      let disabled = false;\r\n      if (this.noPastYears && i < current) {\r\n        disabled = true;\r\n      }\r\n      if (this.noFutureYears && i > current) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noPastYears &&\r\n        pastLimit !== null &&\r\n        i < current - pastLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      if (\r\n        !this.noFutureYears &&\r\n        futureLimit !== null &&\r\n        i > current + futureLimit\r\n      ) {\r\n        disabled = true;\r\n      }\r\n      this.years.push({\r\n        value: i,\r\n        disabled\r\n      });\r\n    }\r\n    const valid = this.years.find(\r\n      y => y.value === this.tempYear && !y.disabled\r\n    );\r\n    if (!valid) {\r\n      this.tempYear = current;\r\n    }\r\n  }\r\n\r\n  openYearPicker() {\r\n    const current = new Date().getFullYear();\r\n    this.tempYear = current;\r\n    this.showYearPicker = true;\r\n    requestAnimationFrame(() => {\r\n      requestAnimationFrame(() => {\r\n        this.scrollToYear();\r\n      });\r\n    });\r\n  }\r\n\r\n  scrollToYear() {\r\n    if (!this.yearGrid) return;\r\n    const current = new Date().getFullYear();\r\n    const items =\r\n      this.yearGrid.nativeElement.querySelectorAll(\r\n        '.year-item'\r\n      );\r\n    if (!items || !items.length) return;\r\n    const index = this.years.findIndex(\r\n      y => y.value === current\r\n    );\r\n    if (index === -1) return;\r\n    const el = items[index] as HTMLElement;\r\n    el.scrollIntoView({\r\n      behavior: 'auto',\r\n      block: 'center'\r\n    });\r\n  }\r\n\r\n  cancelYear() {\r\n\r\n    this.showYearPicker = false;\r\n  }\r\n\r\n  selectYear() {\r\n    const selected = this.years.find(\r\n      y => y.value === this.tempYear\r\n    );\r\n    if (!selected || selected.disabled) return;\r\n    this.currentMonth = new Date(\r\n      this.tempYear,\r\n      this.currentMonth.getMonth(),\r\n      1\r\n    );\r\n    this.generateCalendar();\r\n    this.showYearPicker = false;\r\n  }\r\n}\r\n",
             "styleUrl": "./date-picker.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -3129,7 +3396,7 @@
                         "name": "displayValue",
                         "type": "",
                         "returnType": "",
-                        "line": 194
+                        "line": 184
                     }
                 }
             },
@@ -3661,7 +3928,7 @@
         },
         {
             "name": "InputField",
-            "id": "component-InputField-e8b2a9e95162e4b7f84a27063df301d4177c32885fd88611ad8600926a64e650e9be589d7dd4151013c3101fd5ee54b531ddeaf177217db2347753de7bc8308a",
+            "id": "component-InputField-933b89d31bc1797436b9a0726a417e8586845b8da9e47b8c999b79e5a04c3a1fb902b59a7b490ef3cbd5c5f41254c7374e637a79ceb788ff2f10878be1576230",
             "file": "src/shared/input-field/input-field.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3732,6 +3999,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "\"sm\" | \"md\"",
+                    "decorators": []
+                },
+                {
                     "name": "value",
                     "defaultValue": "''",
                     "deprecated": false,
@@ -3752,7 +4028,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23
+                    "line": 24
                 }
             ],
             "methodsClass": [],
@@ -3774,13 +4050,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'app-input-field',\r\n  imports: [\r\n    CommonModule,\r\n    FormsModule\r\n  ],\r\n  templateUrl: './input-field.html',\r\n  styleUrl: './input-field.scss',\r\n})\r\nexport class InputField {\r\n  @Input() label = '';\r\n  @Input() placeholder = '';\r\n  @Input() value = '';\r\n  @Input() disabled = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() readonly = false;\r\n\r\n  isFocused = false;\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'app-input-field',\r\n  imports: [\r\n    CommonModule,\r\n    FormsModule\r\n  ],\r\n  templateUrl: './input-field.html',\r\n  styleUrl: './input-field.scss',\r\n})\r\nexport class InputField {\r\n  @Input() label = '';\r\n  @Input() placeholder = '';\r\n  @Input() value = '';\r\n  @Input() disabled = false;\r\n  @Input() error = '';\r\n  @Input() required = false;\r\n  @Input() readonly = false;\r\n@Input() size: 'sm' | 'md' = 'md';\r\n\r\n  isFocused = false;\r\n}\r\n",
             "styleUrl": "./input-field.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"field-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isFocused || value\r\n     }\">\r\n\r\n    <label class=\"field-label\">\r\n        {{ label }}\r\n        @if(required){\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n    <div>\r\n        <input class=\"field-input\" [(ngModel)]=\"value\" [placeholder]=\"placeholder\" [disabled]=\"disabled\"\r\n            [readonly]=\"readonly\" [required]=\"required\" (focus)=\"isFocused = true\" (blur)=\"isFocused = false\" />\r\n\r\n        @if(error){\r\n        <p class=\"error-text\">{{ error }}</p>\r\n        }\r\n    </div>\r\n</div>"
+            "templateData": "<div class=\"field-wrapper\" [ngClass]=\"{\r\n        disabled: disabled,\r\n        error: !!error,\r\n        readonly: readonly,\r\n        focused: isFocused || value\r\n     }\">\r\n\r\n    <label class=\"field-label\" [ngClass]=\"size\">\r\n        {{ label }}\r\n        @if(required){\r\n        <span>*</span>\r\n        }\r\n    </label>\r\n    <div>\r\n        <input class=\"field-input\" [(ngModel)]=\"value\" [placeholder]=\"placeholder\" [disabled]=\"disabled\"\r\n            [readonly]=\"readonly\" [required]=\"required\" (focus)=\"isFocused = true\" (blur)=\"isFocused = false\" />\r\n\r\n        @if(error){\r\n        <p class=\"error-text\">{{ error }}</p>\r\n        }\r\n    </div>\r\n</div>"
         },
         {
             "name": "MultiSelectDropdown",
@@ -4230,7 +4506,7 @@
         },
         {
             "name": "Navigation",
-            "id": "component-Navigation-f30e18f6b70b096d803ef93cc01c415a8da290b2e286d6d8f74a15062b4293936da2c4b0d514be9e2ba1d083a8e416715dbd975a004a8049623a5ff38e908a9c",
+            "id": "component-Navigation-082f0ace5d8584d5ffdf3b564927a408334b19bd5fb025ec59824a375132a0de9b33d892f7850cd7da966ab18cc549ce7b1777ad2a31f3146ce07f22ddc6a588",
             "file": "src/shared/navigation/navigation.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4299,6 +4575,15 @@
                     "line": 20,
                     "type": "boolean",
                     "decorators": []
+                },
+                {
+                    "name": "useSlider",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "boolean",
+                    "decorators": []
                 }
             ],
             "outputsClass": [],
@@ -4312,7 +4597,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 27
                 },
                 {
                     "name": "hoveredIndex",
@@ -4323,7 +4608,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25
+                    "line": 26
                 },
                 {
                     "name": "hoverY",
@@ -4334,7 +4619,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29
+                    "line": 30
                 },
                 {
                     "name": "navItems",
@@ -4345,7 +4630,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 29
                 },
                 {
                     "name": "panelTop",
@@ -4356,7 +4641,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30
+                    "line": 31
                 }
             ],
             "methodsClass": [
@@ -4379,7 +4664,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 32,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4422,7 +4707,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4465,7 +4750,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4508,7 +4793,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4538,7 +4823,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
+                    "line": 75,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4555,7 +4840,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 84,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4580,13 +4865,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface NavChild {\r\n  label: string;\r\n  icon?: string;\r\n}\r\n\r\nexport interface NavItem {\r\n  icon: string;\r\n  label: string;\r\n  children?: NavChild[];\r\n}\r\n@Component({\r\n  selector: 'app-navigation',\r\n  imports: [],\r\n  templateUrl: './navigation.html',\r\n  styleUrl: './navigation.scss',\r\n})\r\nexport class Navigation {\r\n  @Input() expanded = false;\r\n  @Input() showParentIcons = true;\r\n  @Input() showChildIcons = true;\r\n  @Input() showLogo = true;\r\n  @Input() activeIndex: number | null = null;\r\n  @Input() openIndex: number | null = null;\r\n  @Input() useSlider = false;\r\n  hoveredIndex: number | null = null;\r\n  activeChild: { parent: number; index: number } | null = null;\r\n\r\n  navItems: NavItem[] = [];\r\n  hoverY = 0;\r\n  panelTop: number = 0;\r\n  onHover(index: number, event: MouseEvent) {\r\n    const target = event.currentTarget as HTMLElement;\r\n    const rect = target.getBoundingClientRect();\r\n    this.panelTop = rect.top;\r\n    this.hoveredIndex = index;\r\n\r\n    this.hoverY = rect.top + rect.height / 2;\r\n  }\r\n  onHoverChildClick(parentIndex: number, childIndex: number) {\r\n    this.expanded = true;\r\n    this.activeIndex = parentIndex;\r\n    this.openIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex,\r\n    };\r\n    this.hoveredIndex = null;\r\n  }\r\n\r\n  onParentClick(index: number, hasChildren: boolean) {\r\n\r\n    if (this.openIndex === index) {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n      return;\r\n    }\r\n\r\n    this.activeIndex = index;\r\n\r\n    if (hasChildren) {\r\n      this.openIndex = index;\r\n\r\n      this.activeChild = {\r\n        parent: index,\r\n        index: 0\r\n      };\r\n    } else {\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n\r\n  toggle() {\r\n    this.expanded = !this.expanded;\r\n\r\n    if (!this.expanded) {\r\n      this.activeIndex = null;\r\n      this.openIndex = null;\r\n      this.activeChild = null;\r\n    }\r\n  }\r\n\r\n  toggleItem(index: number) {\r\n    this.activeIndex = this.activeIndex === index ? null : index;\r\n    this.activeChild = null;\r\n  }\r\n\r\n  selectChild(parentIndex: number, childIndex: number) {\r\n    this.activeIndex = parentIndex;\r\n    this.activeChild = {\r\n      parent: parentIndex,\r\n      index: childIndex\r\n    };\r\n  }\r\n}\r\n",
             "styleUrl": "./navigation.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\">\r\n  <div class=\"nav-header\">\r\n    @if (showLogo && expanded) {\r\n    <img src=\"assets/icons/logo.svg\" class=\"logo\" />\r\n    }\r\n    @if (!expanded){\r\n    <span class=\"app-name\">Fracht\r\n      <span class=\"sub-text-logo\">GROUP</span>\r\n    </span>\r\n    }\r\n    <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n      <img src=\"assets/icons/navigation.svg\" alt=\"Toggle sidebar\" class=\"expand-icon\" />\r\n    </button>\r\n  </div>\r\n  <div class=\"nav-scroll\">\r\n    <ul class=\"nav-list\">\r\n      @for (item of navItems; track item.label; let i = $index) {\r\n      <li class=\"nav-item\" (mouseenter)=\"onHover(i, $event)\" (mouseleave)=\"hoveredIndex = null\">\r\n        <div class=\"nav-main\" (click)=\"onParentClick(i, !!item.children?.length)\" [class.active]=\"activeIndex === i\">\r\n          @if (showParentIcons) {\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          }\r\n\r\n\r\n          @if (expanded) {\r\n          <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n\r\n          @if (item.children?.length && expanded) {\r\n          <img src=\"assets/icons/dropdown.svg\" class=\"dropdown-icon\" [class.open]=\"openIndex === i\" />\r\n          }\r\n        </div>\r\n        @if (!expanded && hoveredIndex === i && item.children?.length) {\r\n        <div class=\"hover-panel\" [style.top.px]=\"panelTop\">\r\n\r\n          <!-- <div class=\"hover-title\">\r\n            {{ item.label }}\r\n          </div> -->\r\n\r\n          @if (item.children?.length) {\r\n          <ul class=\"hover-children\">\r\n            @for (child of item.children; track child; let ci = $index) {\r\n\r\n            <li class=\"hover-child-item\">\r\n              @if (showChildIcons && child.icon) {\r\n              <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n              }\r\n\r\n\r\n              <span class=\"sub-text\">{{ child.label }}</span>\r\n            </li>\r\n            }\r\n          </ul>\r\n          }\r\n\r\n        </div>\r\n        }\r\n        @if (expanded && item.children?.length && openIndex === i) {\r\n        <ul class=\"sub-list\">\r\n          @for (child of item.children; track child; let ci = $index) {\r\n          <li class=\"sub-item\" (click)=\"selectChild(i, ci)\" [class.active-child]=\"\r\n    activeChild?.parent === i &&\r\n    activeChild?.index === ci\r\n  \">\r\n            @if (showChildIcons && expanded && child.icon) {\r\n            <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n            }\r\n\r\n\r\n            <span class=\"sub-text\">{{ child.label }}</span>\r\n          </li>\r\n\r\n          }\r\n        </ul>\r\n        }\r\n      </li>\r\n      }\r\n    </ul>\r\n  </div>\r\n</nav>"
+            "templateData": "<nav class=\"sidebar\" [class.collapsed]=\"!expanded\" [class.slider-mode]=\"useSlider\">\r\n  <div class=\"nav-header\">\r\n    @if (showLogo && expanded) {\r\n    <img src=\"assets/icons/logo.svg\" class=\"logo\" />\r\n    }\r\n    @if (!expanded){\r\n    <span class=\"app-name\">Fracht\r\n      <span class=\"sub-text-logo\">GROUP</span>\r\n    </span>\r\n    }\r\n    <button class=\"toggle-btn\" (click)=\"toggle()\">\r\n      <img src=\"assets/icons/navigation.svg\" alt=\"Toggle sidebar\" class=\"expand-icon\" />\r\n    </button>\r\n  </div>\r\n  <div class=\"nav-scroll\">\r\n    <ul class=\"nav-list\">\r\n      @for (item of navItems; track item.label; let i = $index) {\r\n      <li class=\"nav-item\" (mouseenter)=\"onHover(i, $event)\" (mouseleave)=\"hoveredIndex = null\">\r\n        <div class=\"nav-main\" (click)=\"onParentClick(i, !!item.children?.length)\" [class.active]=\"activeIndex === i\">\r\n          @if (showParentIcons) {\r\n          <img class=\"icon\" [src]=\"item.icon\" />\r\n          }\r\n\r\n\r\n          @if (expanded) {\r\n          <span class=\"label\">{{ item.label }}</span>\r\n          }\r\n\r\n          @if (item.children?.length && expanded) {\r\n          <img src=\"assets/icons/dropdown.svg\" class=\"dropdown-icon\" [class.open]=\"openIndex === i\" />\r\n          }\r\n        </div>\r\n        @if (!expanded && hoveredIndex === i && item.children?.length) {\r\n        <div class=\"hover-panel\" [style.top.px]=\"panelTop\">\r\n\r\n          <!-- <div class=\"hover-title\">\r\n            {{ item.label }}\r\n          </div> -->\r\n\r\n          @if (item.children?.length) {\r\n          <ul class=\"hover-children\">\r\n            @for (child of item.children; track child; let ci = $index) {\r\n\r\n            <li class=\"hover-child-item\">\r\n              @if (showChildIcons && child.icon) {\r\n              <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n              }\r\n\r\n\r\n              <span class=\"sub-text\">{{ child.label }}</span>\r\n            </li>\r\n            }\r\n          </ul>\r\n          }\r\n\r\n        </div>\r\n        }\r\n        @if (expanded && item.children?.length && openIndex === i) {\r\n        <ul class=\"sub-list\">\r\n          @for (child of item.children; track child; let ci = $index) {\r\n          <li class=\"sub-item\" (click)=\"selectChild(i, ci)\" [class.active-child]=\"\r\n    activeChild?.parent === i &&\r\n    activeChild?.index === ci\r\n  \">\r\n            @if (showChildIcons && expanded && child.icon) {\r\n            <img class=\"sub-icon\" [src]=\"child.icon\" />\r\n            }\r\n            <span class=\"sub-text\">{{ child.label }}</span>\r\n          </li>\r\n\r\n          }\r\n        </ul>\r\n        }\r\n      </li>\r\n      }\r\n    </ul>\r\n  </div>\r\n  @if (useSlider) {\r\n  <div class=\"bottom-collapse\" (click)=\"toggle()\">\r\n    @if (expanded){<span>&lt;&lt; COLLAPSE</span>}\r\n    @if (!expanded){<span>&gt;&gt;</span>}\r\n  </div>\r\n  }\r\n\r\n</nav>"
         },
         {
             "name": "PageComponent",
@@ -6517,6 +6802,104 @@
             "templateData": "<div class=\"ms-wrapper\" [ngClass]=\"{\r\n    disabled: disabled,\r\n    error: !!error,\r\n    readonly: readonly,\r\n    focused: isOpen || !!selected\r\n  }\" (click)=\"toggleDropdown()\">\r\n  <label class=\"ms-label\">\r\n    {{ label }}\r\n    @if (required) {\r\n    <span>*</span>\r\n    }\r\n  </label>\r\n\r\n  <div class=\"ms-control\">\r\n    <div class=\"selected-list\">\r\n      @if (!selected && focused) {\r\n      <span class=\"placeholder\">{{ placeholder }}</span>\r\n      }\r\n\r\n      @if (selected) {\r\n      <span class=\"single-value full-value\">\r\n        {{ selected }}\r\n      </span>\r\n      }\r\n\r\n    </div>\r\n\r\n    @if (!readonly) {\r\n    <div class=\"arrow\" [ngClass]=\"{ open: isOpen }\">\r\n      <img src=\"/assets/icons/dropdown.svg\" />\r\n    </div>\r\n    }\r\n  </div>\r\n</div>\r\n\r\n@if (error) {\r\n<p class=\"error-text\">{{ error }}</p>\r\n}\r\n\r\n@if (isOpen && !disabled && !readonly) {\r\n<div class=\"dropdown\">\r\n  @for (opt of options; track opt) {\r\n  <div class=\"option\" (click)=\"select(opt); $event.stopPropagation()\" [ngClass]=\"{ selected: selected === opt }\">\r\n    <app-tooltip [label]=\"truncate(opt)\" [text]=\"opt\" position=\"right\">\r\n      <span class=\"option-text truncate-text\">\r\n        {{ truncate(opt) }}\r\n      </span>\r\n    </app-tooltip>\r\n  </div>\r\n\r\n  } @empty {\r\n  <div class=\"no-options\">No results found</div>\r\n  }\r\n</div>\r\n}"
         },
         {
+            "name": "StatusBadge",
+            "id": "component-StatusBadge-03364d0d5851c6ae62f37e766c0c1f77f9c33bd257add19ec8dc04f7000142651c35b3214e30eee0e74543fd2accaa2ec46dead4230ab03657d4d41d997bb340",
+            "file": "src/shared/status-badge/status-badge.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-status-badge",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./status-badge.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'blue'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "\"blue\" | \"green\" | \"red\" | \"orange\" | \"gray\" | \"custom\"",
+                    "decorators": []
+                },
+                {
+                    "name": "count",
+                    "defaultValue": "1",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "customColor",
+                    "defaultValue": "'#1f7db8'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'small'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "\"small\" | \"medium\"",
+                    "decorators": []
+                },
+                {
+                    "name": "status",
+                    "defaultValue": "'both'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "\"warning\" | \"success\" | \"both\" | \"none\"",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'counter'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "\"counter\" | \"status\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-status-badge',\r\n  imports: [CommonModule],\r\n  templateUrl: './status-badge.html',\r\n  styleUrl: './status-badge.scss',\r\n})\r\nexport class StatusBadge {\r\n  @Input() variant: 'counter' | 'status' = 'counter';\r\n\r\n  /* Counter */\r\n  @Input() count = 1;\r\n  @Input() size: 'small' | 'medium' = 'small';\r\n  @Input()\r\n  color: 'blue' | 'green' | 'red' | 'orange' | 'gray' | 'custom' = 'blue';\r\n  @Input() customColor = '#1f7db8';\r\n  @Input()\r\n  status: 'warning' | 'success' | 'both' | 'none' = 'both';\r\n}\r\n",
+            "styleUrl": "./status-badge.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"badge-card\" [ngClass]=\"variant\">\r\n    @if (variant === 'counter') {\r\n    <div class=\"pill\" [ngClass]=\"[size, color]\" [style.background]=\"color === 'custom' ? customColor : null\">\r\n        <span>+</span>\r\n        <span>{{ count }}</span>\r\n    </div>\r\n    }\r\n    @if (variant === 'status') {\r\n    @if (status === 'warning' || status === 'both') {\r\n    <div class=\"icon\" [ngClass]=\"color\" [style.background-color]=\"color === 'custom' ? customColor : null\">\r\n        <img src=\"/assets/icons/warning-badge.svg\" />\r\n    </div>\r\n    }\r\n    @if (status === 'success' || status === 'both') {\r\n    <div class=\"icon\" [ngClass]=\"color\" [style.background-color]=\"color === 'custom' ? customColor : null\">\r\n        <img src=\"/assets/icons/tick-icon.svg\" />\r\n    </div>\r\n    }\r\n    }\r\n</div>"
+        },
+        {
             "name": "StatusChips",
             "id": "component-StatusChips-1525523dbab18749d1bb3432bb1f3111e0298c8e86a70699ec7553519dd06de49d97ec1ee3a1296b750d5c34da4bb5b39efe287b538a7a3b38900e923d5c0a23",
             "file": "src/shared/status-chips/status-chips.ts",
@@ -6822,6 +7205,455 @@
             "templateData": "<!-- SINGLE CHIP MODE -->\r\n@if (mode === 'single') {\r\n<div class=\"chip\" [ngClass]=\"[\r\n      styleType,\r\n      getColor(status, 0)\r\n    ]\">\r\n    @if (styleType === 'style1') {\r\n    <span class=\"dot\"></span>\r\n    }\r\n    <span class=\"text\">{{ label }}</span>\r\n</div>\r\n}\r\n\r\n<!-- GROUP MODE -->\r\n@if (mode === 'group') {\r\n<div class=\"group-wrapper\">\r\n    <!-- GOOD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'good') {\r\n    <div class=\"group-column\">\r\n        @for (label of goodLabels; track label; let i = $index) {\r\n        @if (showChip('good', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('good', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- BAD -->\r\n    @if (activeStatus === 'all' || activeStatus === 'bad') {\r\n    <div class=\"group-column\">\r\n        @for (label of badLabels; track label; let i = $index) {\r\n        @if (showChip('bad', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('bad', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Progress -->\r\n    @if (activeStatus === 'all' || activeStatus === 'progress') {\r\n    <div class=\"group-column\">\r\n        @for (label of progressLabels; track label; let i = $index) {\r\n        @if (showChip('progress', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('progress', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n\r\n    <!-- Neutral -->\r\n    @if (activeStatus === 'all' || activeStatus === 'neutral') {\r\n    <div class=\"group-column\">\r\n        @for (label of neutralLabels; track label; let i = $index) {\r\n        @if (showChip('neutral', i)) {\r\n        <div class=\"chip\" [ngClass]=\"[styleType, getColor('neutral', i)]\">\r\n            @if (styleType === 'style1') {\r\n            <span class=\"dot\"></span>\r\n            }\r\n            <span class=\"text\">{{ label }}</span>\r\n        </div>\r\n        }\r\n        }\r\n    </div>\r\n    }\r\n</div>\r\n}"
         },
         {
+            "name": "Table",
+            "id": "component-Table-795e6b0ec6d0c61922144b4459078d8db1b4d155645fee7296053dac34f542cdbb73993675d6aa22c7279b966856628056fe0f6bb1638ed7cd659912ac142f5f",
+            "file": "src/shared/table/table.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-table",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./table.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "columns",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "TableColumn[]",
+                    "decorators": []
+                },
+                {
+                    "name": "expandableHeader",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "headerColumns",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "TableColumn[]",
+                    "decorators": []
+                },
+                {
+                    "name": "headerExpanded",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "headerMode",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "\"default\" | \"search-sort\"",
+                    "decorators": []
+                },
+                {
+                    "name": "rows",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "TableRow[]",
+                    "decorators": []
+                },
+                {
+                    "name": "showSearch",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showSort",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'header'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "\"header\" | \"accordion\" | \"buttons\" | \"menu\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "activeFilterKey",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "sortDir",
+                    "defaultValue": "'asc'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"asc\" | \"desc\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 46
+                },
+                {
+                    "name": "sortKey",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 45
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "closeAllMenus",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 103,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click'"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ]
+                },
+                {
+                    "name": "getRowStatus",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "\"good\" | \"bad\" | \"progress\" | \"neutral\"",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onDelete",
+                    "args": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 94,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onEdit",
+                    "args": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 90,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSort",
+                    "args": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onTrack",
+                    "args": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 98,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "openFilter",
+                    "args": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 68,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sortRows",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggle",
+                    "args": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleMenu",
+                    "args": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 83,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "row",
+                            "type": "TableRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [],
+                    "argsDecorator": [],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 103
+                }
+            ],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "Accordion"
+                },
+                {
+                    "name": "InputField"
+                },
+                {
+                    "name": "StatusChips"
+                },
+                {
+                    "name": "Buttons"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, HostListener, Input } from '@angular/core';\r\nimport { Accordion } from '../accordion/accordion';\r\nimport { InputField } from '../input-field/input-field';\r\nimport { StatusChips } from '../status-chips/status-chips';\r\nimport { Buttons } from \"../buttons/buttons\";\r\nimport { StatusBadge } from \"../status-badge/status-badge\";\r\nexport interface TableColumn {\r\n  key: string;\r\n  label: string;\r\n}\r\n\r\nexport interface TableRow {\r\n  id: number;\r\n  link: string;\r\n  date: string;\r\n  v1: string;\r\n  v2: string;\r\n  status: string;\r\n  expanded?: boolean;\r\n  showDetails?: boolean;\r\n  menuOpen?: boolean;\r\n}\r\n@Component({\r\n  selector: 'app-table',\r\n  imports: [CommonModule, Accordion, InputField, StatusChips, Buttons],\r\n  templateUrl: './table.html',\r\n  styleUrl: './table.scss',\r\n})\r\nexport class Table {\r\n  @Input()\r\n  variant: 'header' | 'accordion' | 'buttons' | 'menu' = 'header';\r\n  @Input() columns: TableColumn[] = [];\r\n  @Input() headerColumns: TableColumn[] = [];\r\n  @Input() rows: TableRow[] = [];\r\n  @Input() showSearch = true;\r\n  @Input() showSort = true;\r\n  @Input() expandableHeader = false;\r\n  @Input() headerExpanded = false;\r\n  @Input()\r\n  headerMode: 'default' | 'search-sort' = 'default';\r\n  toggle(row: TableRow) {\r\n    row.expanded = !row.expanded;\r\n  }\r\n  sortKey: string | null = null;\r\n  sortDir: 'asc' | 'desc' = 'asc';\r\n  onSort(key: string) {\r\n    if (this.sortKey === key) {\r\n      this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';\r\n    } else {\r\n      this.sortKey = key;\r\n      this.sortDir = 'asc';\r\n    }\r\n    this.sortRows();\r\n  }\r\n  sortRows() {\r\n    if (!this.sortKey) return;\r\n    const key = this.sortKey;\r\n    this.rows = [...this.rows].sort((a: any, b: any) => {\r\n      const v1 = a[key];\r\n      const v2 = b[key];\r\n      if (v1 < v2) return this.sortDir === 'asc' ? -1 : 1;\r\n      if (v1 > v2) return this.sortDir === 'asc' ? 1 : -1;\r\n      return 0;\r\n    });\r\n  }\r\n  activeFilterKey: string | null = null;\r\n  openFilter(key: string) {\r\n    if (this.activeFilterKey === key) {\r\n      this.activeFilterKey = null;\r\n    } else {\r\n      this.activeFilterKey = key; \r\n    }\r\n  }\r\n  getRowStatus(value: string): 'good' | 'bad' | 'progress' | 'neutral' {\r\n    if (!value) return 'neutral';\r\n    const v = value.toLowerCase();\r\n    if (v.includes('good')) return 'good';\r\n    if (v.includes('bad')) return 'bad';\r\n    if (v.includes('progress')) return 'progress';\r\n    return 'neutral';\r\n  }\r\n  toggleMenu(row: TableRow, event: Event) {\r\n    event.stopPropagation();\r\n    this.rows.forEach(r => {\r\n      if (r !== row) r.menuOpen = false;\r\n    });\r\n    row.menuOpen = !row.menuOpen;\r\n  }\r\n  onEdit(row: TableRow) {\r\n    console.log('Edit:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onDelete(row: TableRow) {\r\n    console.log('Delete:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  onTrack(row: TableRow) {\r\n    console.log('Track:', row);\r\n    row.menuOpen = false;\r\n  }\r\n  @HostListener('document:click')\r\n  closeAllMenus() {\r\n    this.rows.forEach(row => {\r\n      row.menuOpen = false;\r\n    });\r\n  }\r\n}\r\n",
+            "styleUrl": "./table.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "@if (variant === 'header') {\r\n<div class=\"table-header-wrapper\">\r\n\r\n    <div class=\"table-header\">\r\n\r\n        @for (col of columns; track col.key || col.label) {\r\n        <div class=\"header-cell\">\r\n            <span>{{ col.label }}</span>\r\n\r\n            @if (headerMode === 'search-sort') {\r\n\r\n            @if (\r\n            showSort &&\r\n            (col.label === 'Labels' || col.label === 'Date')\r\n            ) {\r\n\r\n            <span class=\"sort-icon\" (click)=\"onSort(col.key)\">\r\n\r\n                @if (sortKey !== col.key) {\r\n\r\n                <svg class=\"sort-svg\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'asc') {\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'desc') {\r\n\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n            </span>\r\n            }\r\n            }\r\n        </div>\r\n        }\r\n    </div>\r\n    @if (\r\n    headerMode === 'search-sort' &&\r\n    showSearch\r\n    ) {\r\n    <div class=\"header-filters\">\r\n        @for (col of columns; track col.key) {\r\n        <div class=\"filter-cell\">\r\n            @if (col.label === 'Date') {\r\n            @if (activeFilterKey !== col.key) {\r\n            <span class=\"calendar-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/calendar-icon.svg\" />\r\n            </span>\r\n            }\r\n            @else {\r\n\r\n            <input type=\"date\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n\r\n            }\r\n\r\n            }\r\n\r\n            @else {\r\n\r\n            @if (activeFilterKey !== col.key) {\r\n\r\n            <span class=\"search-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/search.svg\" />\r\n            </span>\r\n\r\n            }\r\n            @else {\r\n\r\n            <input type=\"text\" placeholder=\"Search\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n\r\n            }\r\n\r\n            }\r\n\r\n        </div>\r\n\r\n        }\r\n\r\n        <div class=\"filter-cell expand\">\r\n            <span class=\"chevron\" [class.open]=\"headerExpanded\">\r\n                <img src=\"/assets/icons/dropdown.svg\" />\r\n            </span>\r\n        </div>\r\n\r\n    </div>\r\n    }\r\n\r\n</div>\r\n}\r\n@if (variant === 'accordion') {\r\n\r\n<div class=\"table-body\">\r\n\r\n    @for (row of rows; track row.id) {\r\n\r\n    <div class=\"table-row\" (click)=\"row.expanded = !row.expanded\" [class.expanded]=\"row.expanded\">\r\n\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n\r\n        <div class=\"cell status\">\r\n\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n\r\n        </div>\r\n\r\n\r\n        <div class=\"cell expand-icon\">\r\n            <img src=\"/assets/icons/dropdown.svg\" [class.open]=\"row.expanded\" />\r\n        </div>\r\n\r\n    </div>\r\n\r\n    @if (row.expanded) {\r\n\r\n    <div class=\"accordion-row\">\r\n\r\n        <app-accordion [title]=\"'Details'\" type=\"secondary\" [expanded]=\"row.expanded\">\r\n            @if (row.expanded) {\r\n            <div class=\"table-accordion-content\" (click)=\"$event.stopPropagation()\" #projected>\r\n\r\n                <!-- Grid -->\r\n                <div class=\"details-grid\">\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                        <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                        </app-input-field>\r\n                </div>\r\n\r\n                <div class=\"details-desc\">\r\n\r\n                    <div>\r\n                        <h4>Additional details</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n\r\n\r\n                    <div>\r\n                        <h4>Description</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"details-actions\">\r\n                    <app-buttons buttonType=\"secondary\" label=\"Edit Details\"></app-buttons>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            }\r\n        </app-accordion>\r\n\r\n    </div>\r\n\r\n    }\r\n    }\r\n\r\n</div>\r\n}\r\n@if (variant === 'buttons') {\r\n\r\n<div class=\"table-body\">\r\n\r\n    @for (row of rows; track row.id) {\r\n\r\n    <div class=\"table-row buttons-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell actions\">\r\n            <button class=\"icon-btn edit\">\r\n                <img src=\"/assets/icons/edit.svg\" />\r\n            </button>\r\n            <button class=\"icon-btn delete\">\r\n                <img src=\"/assets/icons/delete.svg\" />\r\n            </button>\r\n\r\n        </div>\r\n\r\n    </div>\r\n\r\n    }\r\n\r\n</div>\r\n\r\n}\r\n@if (variant === 'menu') {\r\n\r\n<div class=\"table-body\">\r\n\r\n    @for (row of rows; track row.id) {\r\n\r\n    <div class=\"table-row menu-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell menu\">\r\n            <button class=\"menu-btn\" (click)=\"toggleMenu(row, $event)\">\r\n                <img src=\"/assets/icons/breadcrumb.svg\" />\r\n            </button>\r\n            @if (row.menuOpen) {\r\n\r\n            <div class=\"menu-dropdown\">\r\n\r\n                <div class=\"menu-item\" (click)=\"onEdit(row)\">\r\n                    Edit\r\n                </div>\r\n\r\n                <div class=\"menu-item danger\" (click)=\"onDelete(row)\">\r\n                    Delete\r\n                </div>\r\n\r\n                <div class=\"menu-item\" (click)=\"onTrack(row)\">\r\n                    Track\r\n                </div>\r\n\r\n            </div>\r\n\r\n            }\r\n\r\n        </div>\r\n\r\n    </div>\r\n\r\n    }\r\n\r\n</div>\r\n\r\n}"
+        },
+        {
             "name": "Tabs",
             "id": "component-Tabs-e9117c19392baf5e3d2413db062dfd12237c5a7bb47ce62bb29497fa810b4759664063a053044f99235fff354eb7f8f2bce422dde25fc32f0dfc0b6e06983485",
             "file": "src/shared/tabs/tabs.ts",
@@ -6931,7 +7763,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"tabs\" [ngClass]=\"'tabs-' + variant\">\r\n    @for (tab of tabs; track tab.label; let i = $index) {\r\n    <button class=\"tab\" [class.active]=\"activeIndex === i\" (click)=\"selectTab(i)\">\r\n        <!-- Icon -->\r\n        @if (showIcon && tab.icon) {\r\n        <span class=\"icon\" [style.mask-image]=\"'url(' + tab.icon + ')'\"></span>\r\n        }\r\n        <!-- Label -->\r\n        <span class=\"tab-label\">\r\n            {{ tab.label }}\r\n        </span>\r\n    </button>\r\n    } @empty {\r\n    <p>No tabs available.</p>\r\n    }\r\n</div>"
+            "templateData": "<div class=\"tabs\" [ngClass]=\"'tabs-' + variant\">\r\n    @for (tab of tabs; track tab.label; let i = $index) {\r\n    <button class=\"tab\" [class.active]=\"activeIndex === i\" (click)=\"selectTab(i)\">\r\n        @if (showIcon && tab.icon) {\r\n        <span class=\"icon\" [style.mask-image]=\"'url(' + tab.icon + ')'\"></span>\r\n        }\r\n        <span class=\"tab-label\">\r\n            {{ tab.label }}\r\n        </span>\r\n    </button>\r\n    } @empty {\r\n    <p>No tabs available.</p>\r\n    }\r\n</div>"
         },
         {
             "name": "Toast",
@@ -7976,7 +8808,7 @@
                 "linktype": "component",
                 "name": "Accordion",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -7985,7 +8817,7 @@
                 "linktype": "component",
                 "name": "BarChart",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/17",
                 "status": "low"
             },
             {
@@ -8021,7 +8853,7 @@
                 "linktype": "component",
                 "name": "DatePicker",
                 "coveragePercent": 0,
-                "coverageCount": "0/36",
+                "coverageCount": "0/34",
                 "status": "low"
             },
             {
@@ -8057,7 +8889,7 @@
                 "linktype": "component",
                 "name": "InputField",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -8075,7 +8907,7 @@
                 "linktype": "component",
                 "name": "Navigation",
                 "coveragePercent": 0,
-                "coverageCount": "0/18",
+                "coverageCount": "0/19",
                 "status": "low"
             },
             {
@@ -8160,6 +8992,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/shared/status-badge/status-badge.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StatusBadge",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
                 "filePath": "src/shared/status-chips/status-chips.ts",
                 "type": "component",
                 "linktype": "component",
@@ -8186,6 +9027,33 @@
                 "name": "StyleType",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/table/table.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Table",
+                "coveragePercent": 0,
+                "coverageCount": "0/24",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/table/table.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TableColumn",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/shared/table/table.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TableRow",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {

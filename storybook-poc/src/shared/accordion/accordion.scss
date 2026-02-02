@@ -137,9 +137,7 @@ $border-color: #D0D0CE;
   max-width: 500px;
   height: 48px;
 }
-/* ===============================
-   📱 Mobile (0 - 480px)
-================================ */
+/* ====== Mobile ===== */
 
 @media (max-width: 480px) {
 
@@ -179,9 +177,7 @@ $border-color: #D0D0CE;
   }
 }
 
-/* ===============================
-   📲 Tablet (481px - 768px)
-================================ */
+/* ===== Tablet ===== */
 
 @media (min-width: 481px) and (max-width: 768px) {
 
@@ -206,9 +202,7 @@ $border-color: #D0D0CE;
   }
 }
 
-/* ===============================
-   💻 Large Screens (1200px+)
-================================ */
+/* ===== Large Screens ===== */
 
 @media (min-width: 1200px) {
 
