@@ -12,7 +12,6 @@ export default {
     },
   },
 } as Meta<Tooltip>;
-
 type Story = StoryObj<Tooltip>;
 
 export const Default: Story = {

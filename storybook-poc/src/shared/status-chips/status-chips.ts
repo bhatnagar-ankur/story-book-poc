@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 /**Supported status types */
 export type StatusType = 'good' | 'bad' | 'progress' | 'neutral';
 /**Supported status variants */
-export type StyleType = 'style1' | 'style2' | 'style3';
+export type StyleType = 'DotStyle' | 'ButtonStyle' | 'GradientStyle';
 @Component({
   selector: 'app-status-chips',
   imports: [CommonModule],
@@ -24,7 +24,7 @@ export class StatusChips {
   /**Selected chip identifier */
   @Input() selectedChip: string = '';
   /**Visual style type */
-  @Input() styleType: StyleType = 'style1';
+  @Input() styleType: StyleType = 'DotStyle';
   /**Active status filter */
   @Input() activeStatus: StatusType | 'all' = 'all';
   /**Comma separated labels */

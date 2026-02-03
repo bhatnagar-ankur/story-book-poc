@@ -4,7 +4,7 @@ import { Tabs } from './tabs';
 const meta: Meta<Tabs> = {
     title: 'Design System/Tabs',
     component: Tabs,
-
+    tags: ['autodocs'],
     argTypes: {
         showIcon: {
             control: 'boolean',
@@ -14,11 +14,11 @@ const meta: Meta<Tabs> = {
         variant: {
             control: 'select',
             options: [
-                'style-1',
-                'style-2',
-                'style-3',
-                'style-4',
-                'style-5',
+                'ButtonTab',
+                'IconNavigationTab',
+                'UnderlineTab',
+                'RoundedTab',
+                'PillTab',
             ],
         },
     },
@@ -27,9 +27,9 @@ const meta: Meta<Tabs> = {
 export default meta;
 type Story = StoryObj<Tabs>;
 
-export const Style1: Story = {
+export const ButtonTab: Story = {
     args: {
-        variant: 'style-1',
+        variant: 'ButtonTab',
         showIcon: true,
 
         tabs: [
@@ -49,9 +49,9 @@ export const Style1: Story = {
     },
 };
 
-export const Style2: Story = {
+export const IconNavigationTab: Story = {
     args: {
-        variant: 'style-2',
+        variant: 'IconNavigationTab',
         showIcon: true,
 
         tabs: [
@@ -64,9 +64,9 @@ export const Style2: Story = {
     },
 };
 
-export const Style3: Story = {
+export const UnderlineTab: Story = {
     args: {
-        variant: 'style-3',
+        variant: 'UnderlineTab',
 
         tabs: [
             { label: 'Overview', icon: '/assets/icons/scores.svg' },
@@ -76,9 +76,9 @@ export const Style3: Story = {
     },
 };
 
-export const Style4: Story = {
+export const RoundedTab: Story = {
     args: {
-        variant: 'style-4',
+        variant: 'RoundedTab',
         showIcon: false,
         tabs: [
             { label: 'All', icon: '/assets/icons/scores.svg' },
@@ -88,9 +88,9 @@ export const Style4: Story = {
     },
 };
 
-export const Style5: Story = {
+export const PillTab: Story = {
     args: {
-        variant: 'style-5',
+        variant: 'PillTab',
         showIcon: false,
         tabs: [
             { label: 'Personal Details', icon: '/assets/icons/scores.svg' },

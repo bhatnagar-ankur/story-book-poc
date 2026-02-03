@@ -61,12 +61,12 @@ $purple-2: #8D79F6;
     font-weight: 600;
 }
 
-.style3 {
+.countries {
     width: 320px;
     font-family: Inter, Arial, sans-serif;
 }
 
-.style3 .rank-header {
+.countries .rank-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 14px;
@@ -75,16 +75,16 @@ $purple-2: #8D79F6;
     font-weight: 500;
 }
 
-.style3 .title {
+.countries .title {
     color: $delta;
 }
 
-.style3 .rank-list {
+.countries .rank-list {
     display: flex;
     flex-direction: column;
 }
 
-.style3 .rank-bar {
+.countries .rank-bar {
     height: 34px;
     border-radius: 0;
     color: $default-bg;
@@ -98,30 +98,30 @@ $purple-2: #8D79F6;
     overflow: hidden;
 }
 
-.style3 .rank-bar:hover {
+.countries .rank-bar:hover {
     filter: brightness(1.1);
     cursor: pointer;
 }
 
-.style3 .rank-bar:first-child {
+.countries .rank-bar:first-child {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 }
 
-.style3 .rank-bar:not(:first-child):not(:last-child) {
+.countries .rank-bar:not(:first-child):not(:last-child) {
     border-bottom-right-radius: 6px;
 }
 
-.style3 .rank-bar:last-child {
+.countries .rank-bar:last-child {
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.style4 .chart {
+.doubleValue .chart {
     gap: 26px;
 }
 
-.style4 .track {
+.doubleValue .track {
     height: 360px;
     width: 35px;
     background: $track;
@@ -131,12 +131,12 @@ $purple-2: #8D79F6;
     overflow: hidden;
 }
 
-.style4 .stack {
+.doubleValue .stack {
     width: 100%;
     transition: height 0.4s ease;
 }
 
-.style4 .yellow {
+.doubleValue .yellow {
     background: linear-gradient($yellow-1, $yellow-2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -144,7 +144,7 @@ $purple-2: #8D79F6;
     border-top-right-radius: 0;
 }
 
-.style4 .purple {
+.doubleValue .purple {
     background: linear-gradient($purple-1, $purple-2);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -152,7 +152,7 @@ $purple-2: #8D79F6;
     border-bottom-right-radius: 0;
 }
 
-.style4 .x-label {
+.doubleValue .x-label {
     margin-top: 10px;
     font-size: 12px;
     color: $rank-header;

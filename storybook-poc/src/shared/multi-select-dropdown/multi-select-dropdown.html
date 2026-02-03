@@ -29,7 +29,6 @@
                 <img src="/assets/icons/close-button.svg" />
             </div>
             }
-
             @if (selected.length > 2) {
             <div class="selected-item extra">
                 +{{ selected.length - 2 }}
@@ -37,24 +36,20 @@
             }
             }
         </div>
-
         @if (!readonly) {
         <div class="arrow">
             <img class="icon" [src]="dropdownIcon" [class.rotate]="mode === 'dropdown' && isOpen" alt=""
                 aria-hidden="true" />
         </div>
-
         }
     </div>
     @if (isOpen && !disabled && !readonly) {
     <div class="dropdown" (click)="$event.stopPropagation()">
-
         @if (mode === 'search') {
         <div class="search-box">
             <input type="text" class="search-input" placeholder="Search" (input)="filterOptions($event)" autofocus />
         </div>
         }
-
         @for (opt of filteredOptions; track opt) {
         <div class="option" (click)="toggleSelect(opt); $event.stopPropagation()"
             [ngClass]="{ checked: selected.includes(opt) }">
@@ -65,12 +60,10 @@
                     {{ truncate(opt) }}
                 </span>
             </app-tooltip>
-
         </div>
         } @empty {
         <div class="no-options">No results found</div>
         }
-
     </div>
     }
 </div>

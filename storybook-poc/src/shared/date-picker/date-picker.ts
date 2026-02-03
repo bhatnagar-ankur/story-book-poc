@@ -154,18 +154,18 @@ export class DatePicker implements OnInit, OnChanges {
     }
     //Current month days
     for (let i = 1; i <= totalDays; i++) {
-      const d = new Date(year, month, i);
+      const dates = new Date(year, month, i);
       const isStart =
         this.startDate &&
-        d.toDateString() === this.startDate.toDateString();
+        dates.toDateString() === this.startDate.toDateString();
       const isEnd =
         this.endDate &&
-        d.toDateString() === this.endDate.toDateString();
+        dates.toDateString() === this.endDate.toDateString();
       this.days.push({
-        date: d,
+        date: dates,
         currentMonth: true,
-        selected: this.isSelected(d),
-        inRange: this.isInRange(d),
+        selected: this.isSelected(dates),
+        inRange: this.isInRange(dates),
         rangeStart: !!isStart,
         rangeEnd: !!isEnd,
       });
@@ -300,7 +300,7 @@ export class DatePicker implements OnInit, OnChanges {
     }
     //Reset invalid year
     const valid = this.years.find(
-      y => y.value === this.tempYear && !y.disabled
+      year => year.value === this.tempYear && !year.disabled
     );
     if (!valid) {
       this.tempYear = current;
@@ -327,7 +327,7 @@ export class DatePicker implements OnInit, OnChanges {
       );
     if (!items || !items.length) return;
     const index = this.years.findIndex(
-      y => y.value === current
+      year => year.value === current
     );
     if (index === -1) return;
     const el = items[index] as HTMLElement;
@@ -344,7 +344,7 @@ export class DatePicker implements OnInit, OnChanges {
   /**Apply selected year */
   selectYear() {
     const selected = this.years.find(
-      y => y.value === this.tempYear
+      year => year.value === this.tempYear
     );
     if (!selected || selected.disabled) return;
     this.currentMonth = new Date(

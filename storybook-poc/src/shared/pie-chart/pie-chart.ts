@@ -95,24 +95,24 @@ export class PieChart {
     const rOuter = this.size / 2;
     const rInner = rOuter - 100;
     const cx = this.size / 2;
-    const cy = this.size / 2;
+    const centerY = this.size / 2;
     const toRad = (deg: number) => (deg * Math.PI) / 180;
     const start = toRad(startAngle - 90);
     const end = toRad(startAngle + angle - 90);
-    const x1 = cx + rOuter * Math.cos(start);
-    const y1 = cy + rOuter * Math.sin(start);
-    const x2 = cx + rOuter * Math.cos(end);
-    const y2 = cy + rOuter * Math.sin(end);
-    const x3 = cx + rInner * Math.cos(end);
-    const y3 = cy + rInner * Math.sin(end);
-    const x4 = cx + rInner * Math.cos(start);
-    const y4 = cy + rInner * Math.sin(start);
+    const startX = cx + rOuter * Math.cos(start);
+    const startY = centerY + rOuter * Math.sin(start);
+    const endX = cx + rOuter * Math.cos(end);
+    const endY = centerY + rOuter * Math.sin(end);
+    const innerEndX = cx + rInner * Math.cos(end);
+    const innerEndY = centerY + rInner * Math.sin(end);
+    const innerStartX = cx + rInner * Math.cos(start);
+    const innerStartY = centerY + rInner * Math.sin(start);
     const largeArc = angle > 180 ? 1 : 0;
     return `
-    M ${x1} ${y1}
-    A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${x2} ${y2}
-    L ${x3} ${y3}
-    A ${rInner} ${rInner} 0 ${largeArc} 0 ${x4} ${y4}
+    M ${startX} ${startY}
+    A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${endX} ${endY}
+    L ${innerEndX} ${innerEndY}
+    A ${rInner} ${rInner} 0 ${largeArc} 0 ${innerStartX} ${innerStartY}
     Z
   `;
   }
@@ -126,63 +126,61 @@ export class PieChart {
   }
   /**Get temperature arc */
   getTempArc(angle: number): string {
-    const cx = this.centerX;
-    const cy = this.centerY;
-    const r = this.size / 2 - 40;
+    const cx = this.cx;
+    const centerY = this.centerY;
+    const radius = this.size / 2 - 40;
     const toRad = (d: number) => (d * Math.PI) / 180;
     const start = toRad(-180);
     const end = toRad(angle - 180);
-    const x1 = cx + r * Math.cos(start);
-    const y1 = cy + r * Math.sin(start);
-    const x2 = cx + r * Math.cos(end);
-    const y2 = cy + r * Math.sin(end);
-    return `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`;
+    const startX = cx + radius * Math.cos(start);
+    const startY = centerY + radius * Math.sin(start);
+    const endX = cx + radius * Math.cos(end);
+    const endY = centerY + radius * Math.sin(end);
+    return `M ${startX} ${startY} A ${radius} ${radius} 0 0 1 ${endX} ${endY}`;
   }
   /**Get dotted temperature arc */
   getTempDottedArc(): string {
-    const cx = this.centerX;
-    const cy = this.centerY;
-    const r = this.size / 2 - 100;
+    const cx = this.cx;
+    const centerY = this.centerY;
+    const radius = this.size / 2 - 100;
     const toRad = (d: number) => (d * Math.PI) / 180;
-    const x1 = cx + r * Math.cos(toRad(-180));
-    const y1 = cy + r * Math.sin(toRad(-180));
-    const x2 = cx + r * Math.cos(toRad(0));
-    const y2 = cy + r * Math.sin(toRad(0));
-    return `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`;
+    const startX = cx + radius * Math.cos(toRad(-180));
+    const startY = centerY + radius * Math.sin(toRad(-180));
+    const endX = cx + radius * Math.cos(toRad(0));
+    const endY = centerY + radius * Math.sin(toRad(0));
+    return `M ${startX} ${startY} A ${radius} ${radius} 0 0 1 ${endX} ${endY}`;
   }
   get divider() {
     const angle = (this.temperature / 100) * 180 - 180;
     const r1 = this.size / 2 - 8;
     const r2 = r1 - 66;
     const rad = (angle * Math.PI) / 180;
-    const cx = this.centerX;
-    const cy = this.centerY;
+    const cx = this.cx;
+    const centerY = this.centerY;
     return {
-      x1: cx + r1 * Math.cos(rad),
-      y1: cy + r1 * Math.sin(rad),
-      x2: cx + r2 * Math.cos(rad),
-      y2: cy + r2 * Math.sin(rad)
+      startX: cx + r1 * Math.cos(rad),
+      startY: centerY + r1 * Math.sin(rad),
+      endX: cx + r2 * Math.cos(rad),
+      endY: centerY + r2 * Math.sin(rad)
     };
   }
-
-
   get dividerX() {
-    return this.centerX + this.size * 0.20;
+    return this.cx + this.size * 0.20;
   }
 
   get dividerY() {
     return this.centerY - this.size * 0.43;
   }
 
-  get dividerX2() {
-    return this.centerX + this.size * 0.17;
+  get dividerendX() {
+    return this.cx + this.size * 0.17;
   }
 
-  get dividerY2() {
+  get dividerendY() {
     return this.centerY - this.size * 0.35;
   }
 
-  get centerX() {
+  get cx() {
     return this.CENTER;
   }
 
@@ -191,8 +189,8 @@ export class PieChart {
   }
 
   get arcLength(): number {
-    const r = this.size / 2 - 40;
-    return Math.PI * r;
+    const radius = this.size / 2 - 40;
+    return Math.PI * radius;
   }
   get dashOffset(): number {
 
@@ -261,12 +259,12 @@ export class PieChart {
     const rad = (angle * Math.PI) / 180;
 
     const cx = this.size / 2;
-    const cy = this.size / 2;
-    const r = this.circularRadius;
+    const centerY = this.size / 2;
+    const radius = this.circularRadius;
 
     return {
-      x: cx + r * Math.cos(rad),
-      y: cy + r * Math.sin(rad)
+      x: cx + radius * Math.cos(rad),
+      y: centerY + radius * Math.sin(rad)
     };
   }
 
@@ -300,12 +298,12 @@ export class PieChart {
     const rad = (angle * Math.PI) / 180;
 
     const cx = this.size / 2;
-    const cy = this.size / 2;
-    const r = this.sliderRadius;
+    const centerY = this.size / 2;
+    const radius = this.sliderRadius;
 
     return {
-      x: cx + r * Math.cos(rad),
-      y: cy + r * Math.sin(rad)
+      x: cx + radius * Math.cos(rad),
+      y: centerY + radius * Math.sin(rad)
     };
   }
   /**Start slider drag */
@@ -317,10 +315,10 @@ export class PieChart {
     if (!this.isDragging) return;
     const rect = (e.target as HTMLElement).getBoundingClientRect();
     const cx = rect.left + this.size / 2;
-    const cy = rect.top + this.size / 2;
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
-    let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    const centerY = rect.top + this.size / 2;
+    const deltaX = e.clientX - cx;
+    const deltaY = e.clientY - centerY;
+    let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
     angle = (angle + 360 + 210) % 360;
     if (angle <= 300) {
       this.sliderValue =
@@ -331,13 +329,11 @@ export class PieChart {
   onCircleUp() {
     this.isDragging = false;
   }
-
   get activeSegments() {
     const range = this.maxTemp - this.minTemp;
     const value = this.currentTemp - this.minTemp;
     return Math.round((value / range) * this.segmentsCount);
   }
-
   get segmentArray() {
     return Array(this.segmentsCount).fill(0);
   }
@@ -367,20 +363,20 @@ export class PieChart {
   /**Generate radial slice SVG path */
   private getRadialSlicePath(index: number, scale: number): string {
     const cx = this.size / 2;
-    const cy = this.size / 2;
+    const centerY = this.size / 2;
     const maxR = this.size / 2;
-    const r = maxR * scale;
+    const radius = maxR * scale;
     const angle = 360 / this.radialData.length;
     const start = (index * angle - 90) * Math.PI / 180;
     const end = ((index + 1) * angle - 90) * Math.PI / 180;
-    const x1 = cx + r * Math.cos(start);
-    const y1 = cy + r * Math.sin(start);
-    const x2 = cx + r * Math.cos(end);
-    const y2 = cy + r * Math.sin(end);
+    const startX = cx + radius * Math.cos(start);
+    const startY = centerY + radius * Math.sin(start);
+    const endX = cx + radius * Math.cos(end);
+    const endY = centerY + radius * Math.sin(end);
     return `
-    M ${cx} ${cy}
-    L ${x1} ${y1}
-    A ${r} ${r} 0 0 1 ${x2} ${y2}
+    M ${cx} ${centerY}
+    L ${startX} ${startY}
+    A ${radius} ${radius} 0 0 1 ${endX} ${endY}
     Z
   `;
   }

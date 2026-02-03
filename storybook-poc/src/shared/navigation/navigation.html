@@ -20,54 +20,38 @@
           @if (showParentIcons) {
           <img class="icon" [src]="item.icon" />
           }
-
-
           @if (expanded) {
           <span class="label">{{ item.label }}</span>
           }
-
           @if (item.children?.length && expanded) {
           <img src="assets/icons/dropdown.svg" class="dropdown-icon" [class.open]="openIndex === i" />
           }
         </div>
         @if (!expanded && hoveredIndex === i && item.children?.length) {
         <div class="hover-panel" [style.top.px]="panelTop">
-
-          <!-- <div class="hover-title">
-            {{ item.label }}
-          </div> -->
-
           @if (item.children?.length) {
           <ul class="hover-children">
             @for (child of item.children; track child; let ci = $index) {
-
             <li class="hover-child-item">
               @if (showChildIcons && child.icon) {
               <img class="sub-icon" [src]="child.icon" />
               }
-
-
               <span class="sub-text">{{ child.label }}</span>
             </li>
             }
           </ul>
           }
-
         </div>
         }
         @if (expanded && item.children?.length && openIndex === i) {
         <ul class="sub-list">
           @for (child of item.children; track child; let ci = $index) {
-          <li class="sub-item" (click)="selectChild(i, ci)" [class.active-child]="
-    activeChild?.parent === i &&
-    activeChild?.index === ci
-  ">
+          <li class="sub-item" (click)="selectChild(i, ci)" [class.active-child]=" activeChild?.parent === i && activeChild?.index === ci">
             @if (showChildIcons && expanded && child.icon) {
             <img class="sub-icon" [src]="child.icon" />
             }
             <span class="sub-text">{{ child.label }}</span>
           </li>
-
           }
         </ul>
         }
@@ -81,5 +65,4 @@
     @if (!expanded){<span>&gt;&gt;</span>}
   </div>
   }
-
 </nav>

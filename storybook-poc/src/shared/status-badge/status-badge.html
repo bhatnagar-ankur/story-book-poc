@@ -6,15 +6,10 @@
     </div>
     }
     @if (variant === 'status') {
-    @if (status === 'warning' || status === 'both') {
     <div class="icon" [ngClass]="color" [style.background-color]="color === 'custom' ? customColor : null">
-        <img src="/assets/icons/warning-badge.svg" />
+        @if (customIcon) {
+        <img [src]="customIcon" alt="status icon" />
+        }
     </div>
-    }
-    @if (status === 'success' || status === 'both') {
-    <div class="icon" [ngClass]="color" [style.background-color]="color === 'custom' ? customColor : null">
-        <img src="/assets/icons/tick-icon.svg" />
-    </div>
-    }
     }
 </div>

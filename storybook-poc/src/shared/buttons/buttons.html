@@ -44,38 +44,26 @@
     }
     }
     <!-- DEFAULT -->
-   @else {
-
-  @if (buttonType === 'cart') {
-
+    @else {
+    @if (buttonType === 'cart') {
     <span class="cart-text">
       {{ label }}
     </span>
-
-  } @else if (buttonType === 'stack-orange') {
-
+    } @else if (buttonType === 'stack-orange') {
     <span class="btn-text-wrapper">
       <span class="btn-text default-text">{{ label }}</span>
       <span class="btn-text hover-text">{{ label }}</span>
     </span>
-
-  } @else {
-
+    } @else {
     <span class="normal-label">{{ label }}</span>
-
-  }
-
-}
-
-
-    <!-- Right Icon -->
+    }
+    }
     @if (showIcon && icon && iconPosition === 'right') {
     <span class="icon" [style]="{'mask-image': 'url(' + icon + ')'}">
     </span>
     }
   </button>
   }
-  <!-- DOWNLOAD MESSAGE -->
   @if (buttonType === 'download' && downloadState === 'done') {
   <div class="download-complete-text">
     Downloading completed successfully

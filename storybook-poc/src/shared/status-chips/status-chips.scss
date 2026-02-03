@@ -43,18 +43,18 @@ $color:#3F4443;
   white-space: nowrap;
 }
 
-.style1 {
+.DotStyle {
   background: transparent;
 }
 
-.style1 .dot {
+.DotStyle .dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
   color: $color;
 }
 
-.style2 {
+.ButtonStyle {
   color: $background-color;
   padding: 6px 12px;
   border-radius: 30px;
@@ -63,7 +63,7 @@ $color:#3F4443;
   font-weight: 600;
 }
 
-.style3 {
+.GradientStyle {
   background: $background-color;
   border: 1px solid var(--c);
   border-left: 11px solid var(--c);
@@ -80,15 +80,15 @@ $color:#3F4443;
 
 .chip {
 
-  &.style1 .dot {
+  &.DotStyle .dot {
     background: var(--c);
   }
 
-  &.style2 {
+  &.ButtonStyle {
     background: var(--c);
   }
 
-  &.style3 {
+  &.GradientStyle {
     border-color: var(--c);
     border-left-color: var(--c);
   }

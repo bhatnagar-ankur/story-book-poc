@@ -64,10 +64,10 @@
         </div>
         <div class="year-panel">
             <div class="year-grid" #yearGrid>
-                @for (y of years; track y.value) {
-                <div class="year-item" [class.active]="y.value === tempYear" [class.disabled]="y.disabled"
-                    (click)="!y.disabled && (tempYear = y.value)">
-                    {{ y.value }}
+                @for (year of years; track year.value) {
+                <div class="year-item" [class.active]="year.value === tempYear" [class.disabled]="year.disabled"
+                    (click)="!year.disabled && (tempYear = year.value)">
+                    {{ year.value }}
                 </div>
                 }
             </div>

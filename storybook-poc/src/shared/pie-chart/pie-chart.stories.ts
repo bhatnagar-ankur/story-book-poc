@@ -4,13 +4,14 @@ import { PieChart } from './pie-chart';
 const meta: Meta<PieChart> = {
   title: 'Design System/PieChart',
   component: PieChart,
+  tags: ['autodocs'],
 };
 
 export default meta;
 
 type Story = StoryObj<PieChart>;
 
-export const Style1: Story = {
+export const Gradient: Story = {
   args: {
     variant: 'gradient',
     percentage: 50,
@@ -18,7 +19,7 @@ export const Style1: Story = {
   },
 };
 
-export const Style2: Story = {
+export const Donut: Story = {
   args: {
     variant: 'default',
     size: 432,
@@ -40,7 +41,7 @@ export const Style2: Story = {
 //   }
 // };
 
-export const Style4: Story = {
+export const MultiRing: Story = {
 
   args: {
     variant: 'multi-ring',
@@ -63,7 +64,7 @@ export const Style4: Story = {
 //     size: 280
 //   }
 // };
-export const Style6: Story = {
+export const CircularSlider: Story = {
 
   args: {
     variant: 'circular-slider',
@@ -72,7 +73,7 @@ export const Style6: Story = {
     max: 100
   }
 };
-export const Style7: Story = {
+export const Temperature: Story = {
   args: {
     variant: 'segmented-temp',
     size: 280,

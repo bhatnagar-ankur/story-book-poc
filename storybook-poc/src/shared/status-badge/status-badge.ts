@@ -19,6 +19,6 @@ export class StatusBadge {
   @Input() color: 'blue' | 'green' | 'red' | 'orange' | 'gray' | 'custom' = 'blue';
   /**Custom color value */
   @Input() customColor = '#1f7db8';
-  /**Status display type */
-  @Input() status: 'warning' | 'success' | 'both' | 'none' = 'both';
+  /**Custom Icon */
+  @Input() customIcon = '';
 }

@@ -1,10 +1,8 @@
 <div class="card" [ngClass]="variant">
-
   @if (variant === 'promo') {
   <div class="promo-left">
     <img [src]="image" alt="" />
   </div>
-
   <div class="promo-right">
     <h2 class="promo-title">{{ title }}</h2>
     <div class="promo-divider"></div>
@@ -12,10 +10,8 @@
     <app-buttons class="cta" label="LEARN MORE" buttonType="text" size="medium" icon="assets/icons/dropdown.svg"
       iconPosition="right">
     </app-buttons>
-
   </div>
   }
-
   @else if (variant === 'product') {
   <div class="product-image" (mouseover)="showHover = true" (mouseleave)="showHover = false">
     <div class="image-progress-bar">
@@ -24,22 +20,17 @@
     @if (tag) {
     <span class="tag">{{ tag }}</span>
     }
-
     <img [src]="currentImage" alt="" />
-
     @if (showHover) {
     <span class="nav-arrow left" (click)="prevImage($event)"></span>
     <span class="nav-arrow right" (click)="nextImage($event)"></span>
     }
   </div>
-
   @if (!showSwatches) {
   <div class="color-link" (click)="toggleSwatches()">
-    <a>{{ colors.length }} Colours</a>
+    <a>{{ colors.length }} Colors</a>
   </div>
   }
-
-
   @if (showSwatches) {
   <div class="swatch-row">
     @for (color of colors; let i = $index; track color) {
@@ -49,16 +40,12 @@
     }
   </div>
   }
-
   <div class="product-info">
     <div class="product-title-row">
       <h3>{{ title }}</h3>
-
       <span class="wishlist" [ngClass]="{ active: wishlist }" (click)="toggleWishlist()"></span>
     </div>
-
     <p>{{ truncate(description) }}</p>
-
     <div class="price-row">
       <span class="price">₹{{ price }}</span>
       @if (strikePrice) {
@@ -66,21 +53,16 @@
       }
       <span class="offer">{{ offer }}</span>
     </div>
-
     @if (moreOffers) {
     <a href="#" class="extra-offers" (click)="$event.preventDefault()">+{{ moreOffers }} Offers</a>
     }
   </div>
-
   }
-
   @else if (variant === 'stats') {
   <div class="stats-left">
     <img [src]="image" />
   </div>
-
   <div class="stats-divider"></div>
-
   <div class="stats-right">
     <h3>{{ title }}</h3>
     <div class="stats-row-container">
@@ -88,7 +70,6 @@
         <span class="completed">Completed</span>
         <span class="completed-content">{{ completed }}</span>
       </div>
-
       <div class="stats-row">
         <span class="completed">Incomplete</span>
         <span class="completed-content">{{ incomplete }}</span>

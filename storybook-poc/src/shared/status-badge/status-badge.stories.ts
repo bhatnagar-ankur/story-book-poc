@@ -4,7 +4,7 @@ import { StatusBadge } from './status-badge';
 const meta: Meta<StatusBadge> = {
     title: 'Design System/Badge Card',
     component: StatusBadge,
-
+    tags: ['autodocs'],
     argTypes: {
 
         variant: {
@@ -30,9 +30,9 @@ const meta: Meta<StatusBadge> = {
             control: 'color',
         },
 
-        status: {
-            control: 'select',
-            options: ['warning', 'success', 'both', 'none'],
+        customIcon: {
+            control: 'text',
+            description: 'Path to custom icon',
         },
     },
 
@@ -53,7 +53,7 @@ export const Counter: Story = {
 export const Status: Story = {
     args: {
         variant: 'status',
-        status: 'success',
+        customIcon: '/assets/icons/tick-icon.svg',
         size: "medium",
         color: "green",
         customColor: "#000000"

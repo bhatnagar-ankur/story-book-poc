@@ -4,6 +4,7 @@ import { Table } from './table';
 const meta: Meta<Table> = {
   title: 'Design System/Table',
   component: Table,
+  tags: ['autodocs'],
   argTypes: {
     headerMode: {
       control: 'select',

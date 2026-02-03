@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class BarChart {
   //Input for different variants
-  @Input() variant: 'style1' | 'style2' | 'style3' | 'style4' = 'style1';
+  @Input() variant: 'singleValue' | 'countries' | 'doubleValue'  = 'singleValue';
   //Input for labels present in bar chart
   @Input() labels: string[] = ['1', '2', '3', '4', '5', '6', '7'];
   // Input for values assigned
@@ -18,15 +18,15 @@ export class BarChart {
   @Input() max = 10;
   // Input for title of the chart
   @Input() title = 'List of countries';
-  // Input for values in style4
+  // Input for values in doubleValue
   @Input() stackA: number[] = [30, 45, 25, 40, 50, 15, 35];
-  // Input for values in style4
+  // Input for values in doubleValue
   @Input() stackB: number[] = [20, 35, 18, 30, 42, 10, 25];
-  // Input for maximum values in style4
+  // Input for maximum values in doubleValue
   @Input() maxStack = 100;
-  // Input for showing count for number of countries in style3
+  // Input for showing count for number of countries in countries
   @Input() showCount = true;
-  // Input for array of label and values for style3
+  // Input for array of label and values for countries
   @Input() items: { label: string; value: number }[] = [
     { label: 'Noruega', value: 95 },
     { label: 'Australia', value: 85 },
@@ -38,7 +38,7 @@ export class BarChart {
     { label: 'Canadá', value: 50 },
   ];
   /**
-   * Function to get the height of style1 bar chart
+   * Function to get the height of singleValue bar chart
    * @param val 
    */
   public getHeight(val: number) {
@@ -79,7 +79,7 @@ export class BarChart {
     return shades[index] || '#dbeafe';
   }
   /**
-   * Function for height of the style4 bar chart
+   * Function for height of the doubleValue bar chart
    * @param val 
    */
   public getStackHeight(val: number) {

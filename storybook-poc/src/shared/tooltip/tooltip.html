@@ -1,6 +1,5 @@
 <div class="tooltip">
   {{ label }}
-
   <span class="tooltiptext" [ngClass]="[position, expanded ? 'expanded' : 'collapsed']"
     (click)="$event.stopPropagation()">
     <span class="tooltip-content">

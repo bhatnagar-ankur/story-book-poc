@@ -1,5 +1,5 @@
-@if (variant === 'style1') {
-<div class="chart-card style1">
+@if (variant === 'singleValue') {
+<div class="chart-card singleValue">
     <div class="chart">
         @for (val of values; track $index) {
         <div class="bar-wrapper">
@@ -19,8 +19,8 @@
 </div>
 }
 
-@if (variant === 'style3') {
-<div class="chart-card style3">
+@if (variant === 'countries') {
+<div class="chart-card countries">
     <div class="rank-header">
         <span class="title">
             {{ title }}
@@ -41,8 +41,8 @@
 </div>
 }
 
-@if (variant === 'style4') {
-<div class="chart-card style4">
+@if (variant === 'doubleValue') {
+<div class="chart-card doubleValue">
     <div class="chart">
         @for (day of labels; track $index) {
         <div class="bar-wrapper">

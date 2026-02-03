@@ -1,37 +1,27 @@
 @if (variant === 'header') {
 <div class="table-header-wrapper">
-
     <div class="table-header">
-
         @for (col of columns; track col.key || col.label) {
         <div class="header-cell">
             <span>{{ col.label }}</span>
-
             @if (headerMode === 'search-sort') {
-
             @if (
             showSort &&
             (col.label === 'Labels' || col.label === 'Date')
             ) {
-
             <span class="sort-icon" (click)="onSort(col.key)">
-
                 @if (sortKey !== col.key) {
-
                 <svg class="sort-svg" viewBox="0 0 12 16" width="12" height="16">
                     <path d="M6 1 L2 5 H10 Z" fill="currentColor" />
                     <path d="M6 15 L2 11 H10 Z" fill="currentColor" />
                 </svg>
-
                 }
                 @if (sortKey === col.key && sortDir === 'asc') {
                 <svg class="sort-svg active" viewBox="0 0 12 16" width="12" height="16">
                     <path d="M6 1 L2 5 H10 Z" fill="currentColor" />
                 </svg>
-
                 }
                 @if (sortKey === col.key && sortDir === 'desc') {
-
                 <svg class="sort-svg active" viewBox="0 0 12 16" width="12" height="16">
                     <path d="M6 15 L2 11 H10 Z" fill="currentColor" />
                 </svg>
@@ -56,57 +46,37 @@
             </span>
             }
             @else {
-
             <input type="date" class="filter-input" (blur)="activeFilterKey = null" />
-
             }
-
             }
-
             @else {
-
             @if (activeFilterKey !== col.key) {
-
             <span class="search-icon" (click)="openFilter(col.key)">
                 <img src="/assets/icons/search.svg" />
             </span>
-
             }
             @else {
-
             <input type="text" placeholder="Search" class="filter-input" (blur)="activeFilterKey = null" />
-
             }
-
             }
-
         </div>
-
         }
-
         <div class="filter-cell expand">
             <span class="chevron" [class.open]="headerExpanded">
                 <img src="/assets/icons/dropdown.svg" />
             </span>
         </div>
-
     </div>
     }
-
 </div>
 }
 @if (variant === 'accordion') {
-
 <div class="table-body">
-
     @for (row of rows; track row.id) {
-
     <div class="table-row" (click)="row.expanded = !row.expanded" [class.expanded]="row.expanded">
-
         <div class="cell link">
             <a href="#">{{ row.link }}</a>
         </div>
-
         <div class="cell">{{ row.date }}</div>
         <div class="cell">{{ row.v1 }}</div>
         <div class="cell">{{ row.date }}</div>
@@ -114,52 +84,38 @@
         <div class="cell">{{ row.v1 }}</div>
         <div class="cell">{{ row.date }}</div>
         <div class="cell">{{ row.v2 }}</div>
-
         <div class="cell status">
-
             <app-status-chips mode="single" [label]="row.status" [status]="getRowStatus(row.status)" styleType="style1">
             </app-status-chips>
-
         </div>
-
-
         <div class="cell expand-icon">
             <img src="/assets/icons/dropdown.svg" [class.open]="row.expanded" />
         </div>
-
     </div>
-
     @if (row.expanded) {
-
     <div class="accordion-row">
-
         <app-accordion [title]="'Details'" type="secondary" [expanded]="row.expanded">
             @if (row.expanded) {
             <div class="table-accordion-content" (click)="$event.stopPropagation()" #projected>
-
-                <!-- Grid -->
                 <div class="details-grid">
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
-                        <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
-                        </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
+                    <app-input-field size="sm" label="Country" value="India" [required]="true" [readonly]="true">
+                    </app-input-field>
                 </div>
-
                 <div class="details-desc">
-
                     <div>
                         <h4>Additional details</h4>
                         <p>
@@ -169,8 +125,6 @@
                             risus.
                         </p>
                     </div>
-
-
                     <div>
                         <h4>Description</h4>
                         <p>
@@ -180,30 +134,21 @@
                             risus.
                         </p>
                     </div>
-
                 </div>
                 <div class="details-actions">
                     <app-buttons buttonType="secondary" label="Edit Details"></app-buttons>
                 </div>
-
             </div>
-
             }
         </app-accordion>
-
     </div>
-
     }
     }
-
 </div>
 }
 @if (variant === 'buttons') {
-
 <div class="table-body">
-
     @for (row of rows; track row.id) {
-
     <div class="table-row buttons-row">
         <div class="cell link">
             <a href="#">{{ row.link }}</a>
@@ -226,27 +171,18 @@
             <button class="icon-btn delete">
                 <img src="/assets/icons/delete.svg" />
             </button>
-
         </div>
-
     </div>
-
     }
-
 </div>
-
 }
 @if (variant === 'menu') {
-
 <div class="table-body">
-
     @for (row of rows; track row.id) {
-
     <div class="table-row menu-row">
         <div class="cell link">
             <a href="#">{{ row.link }}</a>
         </div>
-
         <div class="cell">{{ row.date }}</div>
         <div class="cell">{{ row.v1 }}</div>
         <div class="cell">{{ row.date }}</div>
@@ -263,31 +199,20 @@
                 <img src="/assets/icons/breadcrumb.svg" />
             </button>
             @if (row.menuOpen) {
-
             <div class="menu-dropdown">
-
                 <div class="menu-item" (click)="onEdit(row)">
                     Edit
                 </div>
-
                 <div class="menu-item danger" (click)="onDelete(row)">
                     Delete
                 </div>
-
                 <div class="menu-item" (click)="onTrack(row)">
                     Track
                 </div>
-
             </div>
-
             }
-
         </div>
-
     </div>
-
     }
-
 </div>
-
 }

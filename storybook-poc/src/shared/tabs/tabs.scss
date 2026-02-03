@@ -49,7 +49,7 @@ $style5-active: #710000;
 }
 
 /* ===== STYLE 1 ===== */
-.tabs-style-1 {
+.tabs-ButtonTab {
     border: 1px solid $border;
     border-radius: 4px;
     font-family: 'Myriad Pro';
@@ -57,16 +57,16 @@ $style5-active: #710000;
     box-shadow: 1px 1px 2px 0px #0000000D;
 }
 
-.tabs-style-1 .tab {
+.tabs-ButtonTab .tab {
     border-right: 0.5px solid $border;
     color: $border;
 }
 
-.tabs-style-1 .tab:last-child {
+.tabs-ButtonTab .tab:last-child {
     border-right: none;
 }
 
-.tabs-style-1 .tab.active {
+.tabs-ButtonTab .tab.active {
     background: $border;
     color: $white;
 }
@@ -74,13 +74,13 @@ $style5-active: #710000;
 
 /* ===== STYLE 2 ===== */
 
-.tabs-style-2 {
+.tabs-IconNavigationTab {
     gap: 28px;
     border-bottom: 1px solid transparent;
     padding-bottom: 6px;
 }
 
-.tabs-style-2 .tab {
+.tabs-IconNavigationTab .tab {
     gap: 8px;
     color: $tab-col;
     position: relative;
@@ -89,12 +89,12 @@ $style5-active: #710000;
     font-weight: 400;
 }
 
-.tabs-style-2 .tab.active {
+.tabs-IconNavigationTab .tab.active {
     color: $tab-active;
     font-weight: 600;
 }
 
-.tabs-style-2 .tab.active::after {
+.tabs-IconNavigationTab .tab.active::after {
     content: "";
     position: absolute;
     bottom: -7px;
@@ -108,7 +108,7 @@ $style5-active: #710000;
 
 /* ===== STYLE 3 ===== */
 
-.tabs-style-3 {
+.tabs-UnderlineTab {
     background: $white;
     padding: 4px 4px 0 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
@@ -117,19 +117,19 @@ $style5-active: #710000;
     overflow: visible;
 }
 
-.tabs-style-3 .tab {
+.tabs-UnderlineTab .tab {
     position: relative;
     color: $black;
     font-weight: 400;
 
 }
 
-.tabs-style-3 .tab.active {
+.tabs-UnderlineTab .tab.active {
     color: $tab-bg;
     font-weight: 700;
 }
 
-.tabs-style-3 .tab.active::after {
+.tabs-UnderlineTab .tab.active::after {
     content: "";
     position: absolute;
     left: 4px;
@@ -142,7 +142,7 @@ $style5-active: #710000;
 
 /* ===== STYLE 4 ===== */
 
-.tabs-style-4 {
+.tabs-RoundedTab {
     background: $white;
     border: 2px solid $tab-border;
     border-radius: 24px;
@@ -152,7 +152,7 @@ $style5-active: #710000;
     overflow: hidden;
 }
 
-.tabs-style-4 .tab {
+.tabs-RoundedTab .tab {
     border-radius: 0;
     color: $tab-color;
     padding: 8px 22px;
@@ -163,34 +163,34 @@ $style5-active: #710000;
     transition: all 0.25s ease;
 }
 
-.tabs-style-4 .tab:last-child {
+.tabs-RoundedTab .tab:last-child {
     border-right: none;
 }
 
-.tabs-style-4 .tab:first-child {
+.tabs-RoundedTab .tab:first-child {
     border-radius: 24px 0 0 24px;
 }
 
-.tabs-style-4 .tab:last-child {
+.tabs-RoundedTab .tab:last-child {
     border-radius: 0 24px 24px 0;
 }
 
-.tabs-style-4 .tab.active {
+.tabs-RoundedTab .tab.active {
     background: $style4-bg;
     color: $white;
 
     z-index: 2;
 }
 
-.tabs-style-4 .tab.active+.tab {
+.tabs-RoundedTab .tab.active+.tab {
     border-left: none;
 }
 
-.tabs-style-4 .tab.active {
+.tabs-RoundedTab .tab.active {
     border-right: none;
 }
 
-.tabs-style-5 {
+.tabs-PillTab {
     background: $style5-bg;
     border-radius: 24px;
     padding: 4px;
@@ -202,7 +202,7 @@ $style5-active: #710000;
     width: fit-content;
 }
 
-.tabs-style-5 .tab {
+.tabs-PillTab .tab {
     width: 100%;
     padding: 8px 20px;
     border-radius: 20px;
@@ -216,12 +216,12 @@ $style5-active: #710000;
     transition: all 0.25s ease;
 }
 
-.tabs-style-5 .tab.active {
+.tabs-PillTab .tab.active {
     background: $style5-active;
     color: $white;
 }
 
-.tabs-style-5 .icon {
+.tabs-PillTab .icon {
     flex-shrink: 0;
 }
 

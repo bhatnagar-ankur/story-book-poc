@@ -9,7 +9,7 @@ const meta: Meta<StatusChips> = {
     argTypes: {
         styleType: {
             control: 'select',
-            options: ['style1', 'style2', 'style3'],
+            options: ['DotStyle', 'ButtonStyle', 'GradientStyle'],
         },
         activeStatus: {
             control: 'select',
@@ -36,9 +36,9 @@ const meta: Meta<StatusChips> = {
 export default meta;
 type Story = StoryObj<StatusChips>;
 
-export const Style1: Story = {
+export const DotStyle: Story = {
     args: {
-        styleType: 'style1',
+        styleType: 'DotStyle',
         activeStatus: 'all',
 
         goodLabelsText: 'Good 1,Good 2,Good 3',
@@ -48,9 +48,9 @@ export const Style1: Story = {
     },
 };
 
-export const Style2: Story = {
+export const ButtonStyle: Story = {
     args: {
-        styleType: 'style2',
+        styleType: 'ButtonStyle',
         activeStatus: 'all',
         goodLabelsText: 'Good 1,Good 2,Good 3',
         badLabelsText: 'Bad 1,Bad 2,Bad 3',
@@ -59,9 +59,9 @@ export const Style2: Story = {
     },
 };
 
-export const Style3: Story = {
+export const GradientStyle: Story = {
     args: {
-        styleType: 'style3',
+        styleType: 'GradientStyle',
         activeStatus: 'all',
         goodLabelsText: 'Good 1,Good 2,Good 3',
         badLabelsText: 'Bad 1,Bad 2,Bad 3',
