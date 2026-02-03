@@ -15,7 +15,7 @@ const meta: Meta<Accordion> = {
 
 export default meta;
 type Story = StoryObj<Accordion>;
-
+// Primary Story
 export const Primary: Story = {
   args: {
     title: 'Accordion Title',
@@ -23,7 +23,7 @@ export const Primary: Story = {
     expanded: false,
   }
 };
-
+// Secondary Story
 export const Secondary: Story = {
   args: {
     title: 'Accordion Title',

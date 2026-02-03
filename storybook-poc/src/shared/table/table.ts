@@ -4,12 +4,12 @@ import { Accordion } from '../accordion/accordion';
 import { InputField } from '../input-field/input-field';
 import { StatusChips } from '../status-chips/status-chips';
 import { Buttons } from "../buttons/buttons";
-import { StatusBadge } from "../status-badge/status-badge";
+/**Table column definition */
 export interface TableColumn {
   key: string;
   label: string;
 }
-
+/**Table row data model */
 export interface TableRow {
   id: number;
   link: string;
@@ -28,22 +28,36 @@ export interface TableRow {
   styleUrl: './table.scss',
 })
 export class Table {
-  @Input()
-  variant: 'header' | 'accordion' | 'buttons' | 'menu' = 'header';
+  /* ----- Inputs ----- */
+  /**Table layout variant */
+  @Input() variant: 'header' | 'accordion' | 'buttons' | 'menu' = 'header';
+  /**Main Table columns */
   @Input() columns: TableColumn[] = [];
+  /**Header only column */
   @Input() headerColumns: TableColumn[] = [];
+  /**Table data row */
   @Input() rows: TableRow[] = [];
+  /**Show search field */
   @Input() showSearch = true;
+  /**Show sorting controls */
   @Input() showSort = true;
+  /**Enable expandable header */
   @Input() expandableHeader = false;
+  /**Header expanded state */
   @Input() headerExpanded = false;
-  @Input()
-  headerMode: 'default' | 'search-sort' = 'default';
+  /**Header display mode */
+  @Input() headerMode: 'default' | 'search-sort' = 'default';
+  /**Active sort key */
+  sortKey: string | null = null;
+  /**Sort direction */
+  sortDir: 'asc' | 'desc' = 'asc';
+  /**Currently active filter key */
+  activeFilterKey: string | null = null;
+  /**Toggle row expansion */
   toggle(row: TableRow) {
     row.expanded = !row.expanded;
   }
-  sortKey: string | null = null;
-  sortDir: 'asc' | 'desc' = 'asc';
+  /**Handle sort click */
   onSort(key: string) {
     if (this.sortKey === key) {
       this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
@@ -53,6 +67,7 @@ export class Table {
     }
     this.sortRows();
   }
+  /**Sort rows based on active key */
   sortRows() {
     if (!this.sortKey) return;
     const key = this.sortKey;
@@ -64,14 +79,15 @@ export class Table {
       return 0;
     });
   }
-  activeFilterKey: string | null = null;
+  /**Toggle filter dropdown */
   openFilter(key: string) {
     if (this.activeFilterKey === key) {
       this.activeFilterKey = null;
     } else {
-      this.activeFilterKey = key; 
+      this.activeFilterKey = key;
     }
   }
+  /**Map status string to chip type */
   getRowStatus(value: string): 'good' | 'bad' | 'progress' | 'neutral' {
     if (!value) return 'neutral';
     const v = value.toLowerCase();
@@ -80,6 +96,7 @@ export class Table {
     if (v.includes('progress')) return 'progress';
     return 'neutral';
   }
+  /**Toggle row action menu */
   toggleMenu(row: TableRow, event: Event) {
     event.stopPropagation();
     this.rows.forEach(r => {
@@ -87,18 +104,22 @@ export class Table {
     });
     row.menuOpen = !row.menuOpen;
   }
+  /**Edit action */
   onEdit(row: TableRow) {
     console.log('Edit:', row);
     row.menuOpen = false;
   }
+  /**Delete action */
   onDelete(row: TableRow) {
     console.log('Delete:', row);
     row.menuOpen = false;
   }
+  /**Track action */
   onTrack(row: TableRow) {
     console.log('Track:', row);
     row.menuOpen = false;
   }
+  /**close all menus on outside click */
   @HostListener('document:click')
   closeAllMenus() {
     this.rows.forEach(row => {

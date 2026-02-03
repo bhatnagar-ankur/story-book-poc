@@ -7,17 +7,14 @@ const meta: Meta<StatusChips> = {
     tags: ['autodocs'],
 
     argTypes: {
-
         styleType: {
             control: 'select',
             options: ['style1', 'style2', 'style3'],
         },
-
         activeStatus: {
             control: 'select',
             options: ['all', 'good', 'bad', 'progress', 'neutral'],
         },
-
         goodLabelsText: { control: 'text' },
         badLabelsText: { control: 'text' },
         progressLabelsText: { control: 'text' },

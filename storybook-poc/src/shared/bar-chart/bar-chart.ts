@@ -8,16 +8,25 @@ import { Component, Input } from '@angular/core';
   styleUrl: './bar-chart.scss',
 })
 export class BarChart {
-  @Input()
-  variant: 'style1' | 'style2' | 'style3' | 'style4' = 'style1';
+  //Input for different variants
+  @Input() variant: 'style1' | 'style2' | 'style3' | 'style4' = 'style1';
+  //Input for labels present in bar chart
   @Input() labels: string[] = ['1', '2', '3', '4', '5', '6', '7'];
+  // Input for values assigned
   @Input() values: number[] = [2, 1, 4, 5, 2, 0, 0];
+  //Input for maximum number of values that can be assigned
   @Input() max = 10;
+  // Input for title of the chart
   @Input() title = 'List of countries';
+  // Input for values in style4
   @Input() stackA: number[] = [30, 45, 25, 40, 50, 15, 35];
+  // Input for values in style4
   @Input() stackB: number[] = [20, 35, 18, 30, 42, 10, 25];
+  // Input for maximum values in style4
   @Input() maxStack = 100;
+  // Input for showing count for number of countries in style3
   @Input() showCount = true;
+  // Input for array of label and values for style3
   @Input() items: { label: string; value: number }[] = [
     { label: 'Noruega', value: 95 },
     { label: 'Australia', value: 85 },
@@ -28,20 +37,35 @@ export class BarChart {
     { label: 'Nueva Zelanda', value: 55 },
     { label: 'Canadá', value: 50 },
   ];
-  getHeight(val: number) {
+  /**
+   * Function to get the height of style1 bar chart
+   * @param val 
+   */
+  public getHeight(val: number) {
     return (val / this.max) * 100 + '%';
   }
-  getDelta(val: number) {
+  /**
+   * Function to get the current track value
+   * @param val 
+   */
+  public getDelta(val: number) {
     return val > 0 ? `+${val} kg` : '';
   }
-  getSortedItems() {
+  /**
+   * Function to get the countries sorted based on the rank
+   */
+  public getSortedItems() {
     return [...this.items].sort((a, b) => b.value - a.value);
   }
-  getRankWidth(val: number) {
+  /**
+   * Calculating the percentage of the rank based on values
+   * @param val 
+   */
+  public getRankWidth(val: number) {
     const max = Math.max(...this.items.map(i => i.value));
     return (val / max) * 100 + '%';
   }
-  getShade(index: number) {
+  public getShade(index: number) {
     const shades = [
       '#020066',
       '#0b2a88',
@@ -54,7 +78,11 @@ export class BarChart {
     ];
     return shades[index] || '#dbeafe';
   }
-  getStackHeight(val: number) {
+  /**
+   * Function for height of the style4 bar chart
+   * @param val 
+   */
+  public getStackHeight(val: number) {
     return (val / this.maxStack) * 100 + '%';
   }
 

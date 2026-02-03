@@ -38,8 +38,8 @@ const meta: Meta<StatusBadge> = {
 
 };
 export default meta;
-
 type Story = StoryObj<StatusBadge>;
+/* ----- Counter story ----- */
 export const Counter: Story = {
     args: {
         variant: 'counter',
@@ -49,6 +49,7 @@ export const Counter: Story = {
         customColor: '#1f7db8',
     },
 };
+/* ----- Status story ----- */
 export const Status: Story = {
     args: {
         variant: 'status',

@@ -85,6 +85,7 @@ export const OrderComplete: Story = {
         showIcon: true,
     }
 };
+/** SLIDE ANIMATION */
 export const SlideAnimation: Story = {
     args: {
         label: 'Button',
@@ -93,7 +94,7 @@ export const SlideAnimation: Story = {
         buttonType: 'stack-orange',
     },
 };
-
+/** CIRCULATION ANIMATION */
 export const CircularAnimation: Story = {
     args: {
         label: 'Button',
@@ -102,7 +103,7 @@ export const CircularAnimation: Story = {
         buttonType: 'stack-pink',
     },
 };
-
+/** ROTATION ANIMATION */
 export const RotateAnimation: Story = {
     args: {
         label: 'Button',

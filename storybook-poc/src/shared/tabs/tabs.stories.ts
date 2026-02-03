@@ -25,7 +25,6 @@ const meta: Meta<Tabs> = {
 };
 
 export default meta;
-
 type Story = StoryObj<Tabs>;
 
 export const Style1: Story = {

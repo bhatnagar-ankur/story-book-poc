@@ -8,14 +8,17 @@ import { Component, Input } from '@angular/core';
   styleUrl: './status-badge.scss',
 })
 export class StatusBadge {
+  /* ----- Inputs ----- */
+  /**Badge display variant */
   @Input() variant: 'counter' | 'status' = 'counter';
-
-  /* Counter */
+  /* Counter value*/
   @Input() count = 1;
+  /**Badge size */
   @Input() size: 'small' | 'medium' = 'small';
-  @Input()
-  color: 'blue' | 'green' | 'red' | 'orange' | 'gray' | 'custom' = 'blue';
+  /**Badge color preset */
+  @Input() color: 'blue' | 'green' | 'red' | 'orange' | 'gray' | 'custom' = 'blue';
+  /**Custom color value */
   @Input() customColor = '#1f7db8';
-  @Input()
-  status: 'warning' | 'success' | 'both' | 'none' = 'both';
+  /**Status display type */
+  @Input() status: 'warning' | 'success' | 'both' | 'none' = 'both';
 }

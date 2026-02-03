@@ -26,7 +26,7 @@ export default {
 
 
 type Story = StoryObj<Toast>;
-
+/* ----- Progress Story ----- */
 export const Progress: Story = {
     args: {
         variant: 'progress',
@@ -35,7 +35,7 @@ export const Progress: Story = {
         message: 'is in progress.',
     },
 };
-
+/* ----- Success Story ----- */
 export const Success: Story = {
     args: {
         variant: 'success',
@@ -44,7 +44,7 @@ export const Success: Story = {
         message: 'is in hold because of this reason.',
     },
 };
-
+/* ----- Warning Story ----- */
 export const Warning: Story = {
     args: {
         variant: 'warning',
@@ -53,7 +53,7 @@ export const Warning: Story = {
         message: 'is in hold because of this reason.',
     },
 };
-
+/* ----- Error story ----- */
 export const Error: Story = {
     args: {
         variant: 'error',

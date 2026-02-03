@@ -17,7 +17,6 @@ const meta: Meta<BarChart> = {
 };
 
 export default meta;
-
 type Story = StoryObj<BarChart>;
 
 export const Style1: Story = {

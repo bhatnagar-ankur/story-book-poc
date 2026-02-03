@@ -11,8 +11,11 @@ import { Search } from '../search/search';
   styleUrl: './accordion.scss',
 })
 export class Accordion implements AfterContentInit {
+  // Input for title 
   @Input() title!: string;
+  // Input for types of variants
   @Input() type: 'primary' | 'secondary' = 'primary';
+  //Input for expanded true or false
   @Input() expanded = false;
   hasProjectedContent = false;
   @ContentChild('projected', { read: ElementRef })
@@ -20,7 +23,10 @@ export class Accordion implements AfterContentInit {
   ngAfterContentInit() {
     this.hasProjectedContent = !!this.projectedContent;
   }
-  toggle() {
+  /**
+   * Toggle function to expand or collapse accordion
+   */
+  public toggle(): void {
     this.expanded = !this.expanded;
   }
 }

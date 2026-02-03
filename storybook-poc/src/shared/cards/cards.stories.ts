@@ -11,7 +11,7 @@ export default {
 } as Meta<Cards>;
 
 type Story = StoryObj<Cards>;
-
+// Story for promo card
 export const Promo: Story = {
   args: {
     variant: 'promo',
@@ -20,7 +20,7 @@ export const Promo: Story = {
     image: '/assets/icons/promo.svg'
   }
 };
-
+// Story for Product card 
 export const Product: Story = {
   args: {
     variant: 'product',
@@ -39,7 +39,7 @@ export const Product: Story = {
     moreOffers: 3
   }
 };
-
+// Story for stats card
 export const Stats: Story = {
   args: {
     variant: 'stats',

@@ -26,6 +26,7 @@ const meta: Meta<DatePicker> = {
 
 export default meta;
 type Story = StoryObj<DatePicker>;
+// Single datepicker
 export const Single: Story = {
     args: {
         type: 'single',
@@ -36,7 +37,7 @@ export const Single: Story = {
         pastYearLimit: 5
     },
 };
-
+// Range datepicker
 export const Range: Story = {
     args: {
         type: 'range',

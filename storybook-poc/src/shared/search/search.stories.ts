@@ -20,7 +20,7 @@ const options = [
   'Germany',
   'France',
 ];
-
+/* ----- Default story ----- */
 export const Default: Story = {
   args: {
     label: 'Country',
@@ -28,7 +28,7 @@ export const Default: Story = {
     required: true,
   },
 };
-
+/* ----- With value story ----- */
 export const WithValue: Story = {
   args: {
     label: 'Country',
@@ -37,7 +37,7 @@ export const WithValue: Story = {
     required: true,
   },
 };
-
+/* ----- Disabled story ----- */
 export const Disabled: Story = {
   args: {
     label: 'Country',
@@ -47,7 +47,7 @@ export const Disabled: Story = {
     required: true,
   },
 };
-
+/* ----- Readonly story ----- */
 export const ReadOnly: Story = {
   args: {
     label: 'Country',
@@ -57,13 +57,13 @@ export const ReadOnly: Story = {
     required: true,
   },
 };
-
+/* ----- Error state Story ----- */
 export const ErrorState: Story = {
   args: {
     label: 'Country',
     options,
     selected: 'India',
     error: "Error message goes here",
-    required: true, 
+    required: true,
   },
 };

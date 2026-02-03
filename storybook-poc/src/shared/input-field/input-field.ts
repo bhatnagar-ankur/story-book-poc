@@ -12,14 +12,33 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './input-field.scss',
 })
 export class InputField {
+  /* ----- Inputs ----- */
+  /**Input field label text */
   @Input() label = '';
+  /**Placeholder text */
   @Input() placeholder = '';
+  /**Current Input value */
   @Input() value = '';
+  /**Disable input interaction */
   @Input() disabled = false;
+  /**
+   * Error message text
+   * Displayed when validation fails
+   */
   @Input() error = '';
+  /**Mark field as required */
   @Input() required = false;
+  /**Makes input readOnly */
   @Input() readonly = false;
-@Input() size: 'sm' | 'md' = 'md';
-
+  /**
+   * Input field size
+   * sm -> small
+   * md -> medium
+   */
+  @Input() size: 'sm' | 'md' = 'md';
+  /* ----- Internal state ----- */
+  /**
+   * Tracks focused state
+   */
   isFocused = false;
 }

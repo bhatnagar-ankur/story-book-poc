@@ -15,14 +15,14 @@ const meta: Meta<InputField> = {
 
 export default meta;
 type Story = StoryObj<InputField>;
-
+/* ----- Default Story ----- */
 export const Default: Story = {
   args: {
     label: 'Country',
     required: true,
   },
 };
-
+/* ----- With value Story ----- */
 export const WithValue: Story = {
   args: {
     label: 'Country',
@@ -30,7 +30,7 @@ export const WithValue: Story = {
     required: true,
   },
 };
-
+/* -----  Disabled Story ----- */
 export const Disabled: Story = {
   args: {
     label: 'Country',
@@ -39,7 +39,7 @@ export const Disabled: Story = {
     required: true,
   },
 };
-
+/* ------ Readonly Story ----- */
 export const ReadOnly: Story = {
   args: {
     label: 'Country',
@@ -48,7 +48,7 @@ export const ReadOnly: Story = {
     readonly: true,
   },
 };
-
+/* ----- Error state Story ----- */
 export const ErrorState: Story = {
   args: {
     label: 'Country',
