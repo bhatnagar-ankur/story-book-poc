@@ -4,6 +4,7 @@ import { DatePicker } from './date-picker';
 const meta: Meta<DatePicker> = {
     title: 'Design System/Date Picker',
     component: DatePicker,
+    tags: ['autodocs'],
     argTypes: {
         type: {
             control: 'radio',
