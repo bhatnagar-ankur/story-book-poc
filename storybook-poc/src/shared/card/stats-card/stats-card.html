@@ -1,0 +1,22 @@
+<div class="stats-card">
+    <div class="stats-left">
+        <img [src]="image" />
+    </div>
+    <div class="stats-divider"></div>
+    <div class="stats-right">
+        <h3>{{ title }}</h3>
+        <div class="stats-row-container">
+            <div class="stats-row">
+                <span class="completed">Completed</span>
+                <span class="completed-content">{{ completed }}</span>
+            </div>
+            <div class="stats-row">
+                <span class="completed">Incomplete</span>
+                <span class="completed-content">{{ incomplete }}</span>
+            </div>
+        </div>
+        <app-buttons class="stats-cta" label="UPDATE DETAILS" buttonType="iconic" size="medium"
+            icon="assets/icons/dropdown.svg" iconPosition="right">
+        </app-buttons>
+    </div>
+</div>

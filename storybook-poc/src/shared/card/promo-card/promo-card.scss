@@ -1,0 +1,99 @@
+@use '../styles/card-variables' as *;
+
+.promo-card {
+    display: flex;
+    width: 100%;
+    max-width: 508px;
+    min-height: 249px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    background: $card-bg;
+}
+
+.promo-left {
+    width: 50%;
+    min-height: 249px;
+    background-color: $promo-left;
+    border-top-right-radius: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.promo-left img {
+    width: 180px;
+    min-height: 120px;
+    object-fit: contain;
+}
+
+.promo-right {
+    width: 50%;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.promo-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+    color: $promo-color;
+    font-family: 'Montserrat';
+    line-height: 100%;
+}
+
+.promo-right p {
+    font-size: 14px;
+    font-weight: 400;
+    color: $promo-color;
+    line-height: 1.2;
+}
+
+.promo-divider {
+    width: 24px;
+    border-top: 2px solid $promo-divider;
+    align-self: flex-start;
+}
+
+
+.promo-right app-buttons.cta {
+    --btn-color: #00A3E0;
+    --icon-rotate: -90deg;
+    --btn-justify: flex-start;
+    margin-left: -8px;
+}
+
+.promo-right app-buttons.cta:hover {
+    color: $promo-hover;
+}
+
+@media (max-width: 480px) {
+    .promo-card {
+        flex-direction: column;
+    }
+
+    .promo-left,
+    .promo-right {
+        width: 100%;
+    }
+
+    .promo-left {
+        border-top-right-radius: 0;
+        min-height: auto;
+        padding: 16px;
+    }
+
+    .promo-left img {
+        width: 140px;
+    }
+
+    .promo-right {
+        padding: 16px;
+    }
+}

@@ -1,0 +1,32 @@
+<!-- Promo -->
+<app-promo-card
+  *ngIf="type === 'promo'"
+  [title]="data.title"
+  [description]="data.description"
+  [image]="data.image">
+</app-promo-card>
+
+
+<!-- Product -->
+<app-product-card
+  *ngIf="type === 'product'"
+  [title]="data.title"
+  [description]="data.description"
+  [image]="data.image"
+  [tag]="data.tag"
+  [price]="data.price"
+  [strikePrice]="data.strikePrice"
+  [offer]="data.offer"
+  [colors]="data.colors"
+  [moreOffers]="data.moreOffers">
+</app-product-card>
+
+
+<!-- Stats -->
+<app-stats-card
+  *ngIf="type === 'stats'"
+  [title]="data.title"
+  [image]="data.image"
+  [completed]="data.completed"
+  [incomplete]="data.incomplete">
+</app-stats-card>

@@ -1,94 +1,5 @@
-$card-bg: #FFF;
-$promo-left: #183650;
-$promo-color: #3F4443;
-$promo-divider: #212529;
-$promo-btn: #00A3E0;
-$promo-hover: #000;
-$arrow-bg: #ffffffd9;
-$swatch: #ddd;
-$prod-title: #1D1D1D;
-$offer: #E4312C;
-$prod-link: #A3A4A4;
-$stats-divider: #E0E0E0;
-$stats-row: #6C757D;
-$link: #007DBA;
-
-/*PROMO */
-.card {
-    display: flex;
-    width: 100%;
-    max-width: 508px;
-    min-height: 249px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-    background: $card-bg;
-}
-
-.promo-left {
-    width: 50%;
-    min-height: 249px;
-    background-color: $promo-left;
-    border-top-right-radius: 110px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.promo-left img {
-    width: 180px;
-    min-height: 120px;
-    object-fit: contain;
-}
-
-.promo-right {
-    width: 50%;
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
-    white-space: normal;
-}
-
-.promo-title {
-    margin: 0;
-    font-weight: 700;
-    font-size: 18px;
-    color: $promo-color;
-    font-family: 'Montserrat';
-    line-height: 100%;
-}
-
-.promo-right p {
-    font-size: 14px;
-    font-weight: 400;
-    color: $promo-color;
-    line-height: 1.2;
-}
-
-.promo-divider {
-    width: 24px;
-    border-top: 2px solid $promo-divider;
-    align-self: flex-start;
-}
-
-
-.promo-right app-buttons.cta {
-    --btn-color: #00A3E0;
-    --icon-rotate: -90deg;
-    --btn-justify: flex-start;
-    margin-left: -8px;
-}
-
-.promo-right app-buttons.cta:hover {
-    color: $promo-hover;
-}
-
-/* Product */
-.card.product {
+@use '../styles/card-variables' as *;
+.product-card{
     display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -101,9 +12,8 @@ $link: #007DBA;
     box-shadow: none;
     background: $card-bg;
     overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
-
 .product-image {
     position: relative;
     width: 100%;
@@ -229,7 +139,7 @@ $link: #007DBA;
 .product-title-row h3 {
     color: var(--DarkTone, $prod-title);
     font-feature-settings: 'liga' off, 'clig' off;
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -254,7 +164,7 @@ $link: #007DBA;
     width: 196px;
     color: var(--DarkTone-60, rgba(29, 29, 29, 0.60));
     font-feature-settings: 'liga' off, 'clig' off;
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -272,7 +182,7 @@ $link: #007DBA;
 
 .price {
     color: var(--DarkTone, $prod-title);
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -281,7 +191,7 @@ $link: #007DBA;
 
 .strike {
     color: var(--DarkTone-60, rgba(29, 29, 29, 0.60));
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -291,7 +201,7 @@ $link: #007DBA;
 
 .offer {
     color: var(--RedTone, $offer);
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -319,7 +229,7 @@ $link: #007DBA;
     width: 170px;
     color: var(--DarkTone-70, rgba(29, 29, 29, 0.70));
     font-feature-settings: 'liga' off, 'clig' off;
-    font-family: "Maison Neue";
+    font-family: "Inter";
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -345,7 +255,7 @@ $link: #007DBA;
     justify-content: center;
     cursor: pointer;
 
-    background-image: url('../../assets/icons/dropdown.svg');
+    background-image: url('/assets/icons/dropdown.svg');
     background-size: 14px;
     background-position: center;
     background-repeat: no-repeat;
@@ -359,164 +269,4 @@ $link: #007DBA;
 .nav-arrow.right {
     right: 10px;
     transform: translateY(-50%) rotate(-90deg);
-}
-
-/*STATS*/
-.card.stats {
-    width: 100%;
-    max-width: 374px;
-    min-height: 153px;
-    border-radius: 16px;
-    background: $card-bg;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.10);
-    display: flex;
-    padding: 20px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.stats-left {
-    flex: 0 0 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 16px;
-}
-
-.stats-left img {
-    width: 79.004px;
-    min-height: 80px;
-    object-fit: contain;
-}
-
-.stats-divider {
-    width: 1px;
-    min-height: 137px;
-    background: $stats-divider;
-    margin-right: 20px;
-}
-
-.stats-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-left: 0;
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
-    white-space: normal;
-}
-
-.stats-right h3 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 18px;
-    color: $promo-divider;
-    font-family: 'Montserrat';
-}
-
-.stats-right h3::after {
-    content: "";
-    display: block;
-    margin: 16px 0;
-    width: 20px;
-    min-height: 1px;
-    background: $promo-divider;
-}
-
-.stats-row-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px 0;
-    justify-content: space-between;
-    align-content: space-between;
-}
-
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-}
-
-.completed {
-    color: $stats-row;
-}
-
-.completed-content {
-    color: $promo-divider;
-}
-
-.stats-right app-buttons.stats-cta {
-    --btn-color: #00A3E0;
-    --icon-rotate: -90deg;
-    --btn-justify: flex-start;
-    margin-left: -8px;
-}
-
-.stats-right app-buttons.stats-cta:hover {
-    color: $promo-hover;
-}
-
-/* ================= MOBILE STACK FIX ================= */
-
-@media (max-width: 480px) {
-
-    /* PROMO CARD */
-    .card {
-        flex-direction: column;
-    }
-
-    .promo-left,
-    .promo-right {
-        width: 100%;
-    }
-
-    .promo-left {
-        border-top-right-radius: 0;
-        min-height: auto;
-        padding: 16px;
-    }
-
-    .promo-left img {
-        width: 140px;
-    }
-
-    .promo-right {
-        padding: 16px;
-    }
-
-    .card.stats {
-        width: 100%;
-        max-width: 100%;
-        padding: 16px;
-        box-sizing: border-box;
-        overflow-x: hidden;
-    }
-
-    .stats-left {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-    }
-
-    .stats-left img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .stats-right {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-    }
-
-    .stats-divider {
-        display: none;
-    }
-
-    .stats-row {
-        flex-wrap: wrap;
-    }
 }

@@ -1,86 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Buttons } from '../buttons/buttons';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-cards',
-  imports: [CommonModule, Buttons],
-  templateUrl: './cards.html',
-  styleUrl: './cards.scss',
+  selector: 'app-product-card',
+  imports: [CommonModule],
+  templateUrl: './product-card.html',
+  styleUrl: './product-card.scss',
 })
-export class Cards {
-  /* ----- Inputs ----- */
-  /**
-   * Card variant types
-   * Controls layout and behavior
-   */
-  @Input() variant: 'promo' | 'product' | 'stats' = 'promo';
-  /**
-   * Main card title
-   */
+export class ProductCard implements OnInit {
   @Input() title = '';
-  /**
-   * Card description
-   */
   @Input() description = '';
-  /**
-   * Image URL
-   */
   @Input() image = '';
-  /**
-   * Tag text
-   */
   @Input() tag = '';
-  /**
-   * Product price
-   */
   @Input() price = 0;
-  /**
-   * Original / strike-through price
-   */
   @Input() strikePrice = 0;
-  /**
-   * Product color images
-   * Used for carousel 
-   */
-  @Input() colors: string[] = [];
-  /**
-   * Number of additional offers
-   */
-  @Input() moreOffers = 0;
-  /**
-   * Offer / discount text
-   */
   @Input() offer = '';
-  /**
-   * Completed stats value
-   */
-  @Input() completed = '';
-  /**
-   * Incomplete stats value
-   */
-  @Input() incomplete = '';
-  /**
-   * Currently displayed image
-   */
-  @Input() currentImage = '';
-  /**
-   * Current image index
-   */
-  @Input() currentIndex = 0;
-  /**
-   * Progress bar width(Percentage)
-   */
-  @Input() progressWidth = 0;
-  /* ----- Internal States ----- */
-  /**
-   * Progress bar CSS class
-   */
-  progressClass = 'progress-1';
-  /**
-   * Show hover overlay
-   */
-  showHover = false;
+  @Input() colors: string[] = [];
+  @Input() moreOffers = 0;
   /**
    * Toggle color swatches
    */
@@ -89,6 +25,10 @@ export class Cards {
    * Wishlist state
    */
   wishlist = false;
+  currentIndex = 0;
+  currentImage = '';
+  progressWidth = 0;
+
   /* ----- User Interactions ----- */
   /**
    * Toggle wishlist status
@@ -108,10 +48,8 @@ export class Cards {
    * Sets default image for product cards
    */
   ngOnInit() {
-    if (this.variant === 'product') {
-      this.currentImage = this.image;
-      this.updateProgress();
-    }
+    this.currentImage = this.image;
+    this.updateProgress();
   }
   /**
    * Select image by index

@@ -1,0 +1,133 @@
+@use '../styles/card-variables' as *;
+
+.stats-card {
+  width: 100%;
+    max-width: 374px;
+    min-height: 153px;
+    border-radius: 16px;
+    background: $card-bg;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.10);
+    display: flex;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+.stats-left {
+    flex: 0 0 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 16px;
+}
+
+.stats-left img {
+    width: 79.004px;
+    min-height: 80px;
+    object-fit: contain;
+}
+
+.stats-divider {
+    width: 1px;
+    min-height: 137px;
+    background: $stats-divider;
+    margin-right: 20px;
+}
+
+.stats-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 0;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.stats-right h3 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+    color: $promo-divider;
+    font-family: 'Montserrat';
+}
+
+.stats-right h3::after {
+    content: "";
+    display: block;
+    margin: 16px 0;
+    width: 20px;
+    min-height: 1px;
+    background: $promo-divider;
+}
+
+.stats-row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.completed {
+    color: $stats-row;
+}
+
+.completed-content {
+    color: $promo-divider;
+}
+
+.stats-right app-buttons.stats-cta {
+    --btn-color: #00A3E0;
+    --icon-rotate: -90deg;
+    --btn-justify: flex-start;
+    margin-left: -8px;
+}
+
+.stats-right app-buttons.stats-cta:hover {
+    color: $promo-hover;
+}
+
+@media (max-width: 480px) {
+    .stats-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        flex-direction: column;
+    }
+
+    .stats-left {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .stats-left img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .stats-right {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .stats-divider {
+        display: none;
+    }
+
+    .stats-row {
+        flex-wrap: wrap;
+    }
+}
