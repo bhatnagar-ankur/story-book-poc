@@ -1,0 +1,72 @@
+@use '../styles/pie-variables' as *;
+
+.main-gradient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.gradient-ring {
+    --size: 180px;
+    width: var(--size);
+    height: var(--size);
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.outer-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 12px;
+
+    background: conic-gradient(from -130deg,
+            #3F5FBF 0%,
+            #7A8CE6 18%,
+            #5A63B8 35%,
+            #7B3F8C 50%,
+            #7B3F8C 50%,
+            #B84A7A 65%,
+            #C1123D 82%,
+            #E45C82 92%,
+            #7B3F8C 100%);
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.inner-ring {
+    position: absolute;
+    inset: 24px;
+    border-radius: 50%;
+    padding: 50px;
+
+    background: conic-gradient(from 0deg,
+            #3F468A 0deg,
+            #BD0F3E calc(var(--percent) * 3.6deg),
+            transparent calc(var(--percent) * 3.6deg));
+
+    -webkit-mask:
+        linear-gradient($black 0 0) content-box,
+        linear-gradient($black 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: all 0.6s ease;
+}
+
+.center-text {
+    position: relative;
+    z-index: 2;
+    font-size: 50px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #3F468A, #BD0F3E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

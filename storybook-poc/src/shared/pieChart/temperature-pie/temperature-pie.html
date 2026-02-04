@@ -1,0 +1,32 @@
+<div class="main-temperature">
+    <div class="segmented-temp-wrapper">
+        <div class="segmented-chart">
+            <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 ' + size + ' ' + size">
+                <g [attr.transform]="'translate(' + size/2 + ',' + size/2 + ')'">
+                    @for (seg of segmentArray; track $index) {
+                    <rect x="-3" [attr.y]="-(size/2 - 20)" width="6" height="16" rx="2" [attr.fill]="
+            $index < activeSegments && isPowerOn
+              ? '#2563EB'
+              : '#E5EDF5'
+          " [attr.transform]="
+            'rotate(' + (-150 + ($index * 300 / segmentsCount)) + ')'
+          " />
+                    }
+                </g>
+            </svg>
+            <!-- Center text -->
+            <div class="segmented-center">
+                <div class="seg-label">Temperature</div>
+                <div class="seg-value">{{ currentTemp }}°</div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <div class="seg-controls">
+            <button (click)="decreaseTemp()">−</button>
+            <button class="power-btn" [class.off]="!isPowerOn" (click)="togglePower()">
+                ⏻
+            </button>
+            <button (click)="increaseTemp()">+</button>
+        </div>
+    </div>
+</div>

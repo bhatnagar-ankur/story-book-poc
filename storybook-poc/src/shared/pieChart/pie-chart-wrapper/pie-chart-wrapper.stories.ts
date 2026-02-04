@@ -1,48 +1,36 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { PieChart } from './pie-chart';
+import { PieChartWrapper } from './pie-chart-wrapper';
 
-const meta: Meta<PieChart> = {
+const meta: Meta<PieChartWrapper> = {
   title: 'Design System/PieChart',
-  component: PieChart,
-  tags: ['autodocs'],
+  component: PieChartWrapper,
+  tags: ['autodocs']
 };
 
 export default meta;
 
-type Story = StoryObj<PieChart>;
-
+type Story = StoryObj<PieChartWrapper>;
 export const Gradient: Story = {
   args: {
     variant: 'gradient',
-    percentage: 50,
-    size: 408,
-  },
+    percentage: 55,
+    size: 360
+  }
 };
-
 export const Donut: Story = {
   args: {
-    variant: 'default',
-    size: 432,
+    variant: 'donut',
+    size: 350,
 
     segments: [
       { value: 25, color: '#6B5BFF' },
       { value: 25, color: '#FFB703' },
       { value: 25, color: '#7CFF9B' },
       { value: 25, color: '#FF8C5A' },
-    ],
-  },
+    ]
+  }
 };
-
-// export const Style3: Story = {
-//   args: {
-//     variant: 'temperature',
-//     temperature: 70,
-//     size: 458
-//   }
-// };
-
 export const MultiRing: Story = {
-
   args: {
     variant: 'multi-ring',
     size: 400,
@@ -56,14 +44,6 @@ export const MultiRing: Story = {
     ]
   }
 };
-
-// export const Style5: Story = {
-//   args: {
-//     variant: 'circular-temp',
-//     temperature: 65,
-//     size: 280
-//   }
-// };
 export const CircularSlider: Story = {
 
   args: {
@@ -75,26 +55,9 @@ export const CircularSlider: Story = {
 };
 export const Temperature: Story = {
   args: {
-    variant: 'segmented-temp',
+    variant: 'temperature',
     size: 280,
     minTemp: 10,
     maxTemp: 30
   }
 };
-// export const Style8: Story = {
-//   args: {
-//     variant: 'radial-pie',
-//     size: 220,
-
-//     radialValues: [20, 20, 20, 20, 20, 20],
-
-//     radialColors: [
-//       '#0B1F66',
-//       '#003B8F',
-//       '#005FB8',
-//       '#0096C7',
-//       '#48CAE4',
-//       '#E0FBFC'
-//     ]
-//   }
-// };

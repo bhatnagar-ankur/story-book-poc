@@ -1,0 +1,74 @@
+@use '../styles/pie-variables' as *;
+
+.main-temperature{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.segmented-temp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.segmented-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.segmented-chart {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.seg-controls {
+  margin-top: -10px; 
+}
+
+.seg-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #8aa0b8;
+}
+
+.seg-value {
+  font-size: 42px;
+  font-weight: 600;
+  color: #111;
+}
+.seg-controls {
+  display: flex;
+  gap: 22px;
+}
+
+.seg-controls button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #555;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.seg-controls button:hover {
+  background: #e2e8f0;
+}
+
+.power-btn {
+  background: #2563eb ;
+  color: $white ;
+}
+
+.power-btn.off {
+  background: #cbd5e1;
+  color: #555 ;
+}

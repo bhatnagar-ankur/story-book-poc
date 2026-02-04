@@ -1,0 +1,35 @@
+<div class="pie-wrapper">
+
+  @switch (variant) {
+
+    @case ('gradient') {
+      <app-gradient-pie
+        [percentage]="percentage"
+        [size]="size" />
+    }
+
+    @case ('donut') {
+      <app-donut-pie
+        [segments]="segments"
+        [size]="size" />
+    }
+
+    @case ('multi-ring') {
+      <app-multi-ring-pie
+        [rings]="rings"
+        [size]="size" />
+    }
+
+    @case ('circular-slider') {
+      <app-circular-slider
+        [size]="size" />
+    }
+
+    @case ('temperature') {
+      <app-temperature-pie
+        [size]="size" />
+    }
+
+  }
+
+</div>
