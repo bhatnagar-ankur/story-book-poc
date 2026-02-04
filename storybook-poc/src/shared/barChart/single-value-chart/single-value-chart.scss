@@ -1,0 +1,53 @@
+@use '../styles/chart-variables' as *;
+
+.chart-card {
+    background: $default-bg;
+    padding: 24px 28px;
+    width: fit-content;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    font-family: Inter, Arial, sans-serif;
+}
+
+.chart {
+    display: flex;
+    gap: 22px;
+    align-items: flex-end;
+}
+
+.bar-wrapper {
+    width: 48px;
+    text-align: center;
+    position: relative;
+}
+
+.delta {
+    font-size: 12px;
+    font-weight: 500;
+    color: $delta;
+    margin-bottom: 6px;
+    height: 16px;
+}
+
+.track {
+    height: 280px;
+    width: 90%;
+    background: $track;
+    border-radius: 14px 14px 0 0;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.fill {
+    width: 100%;
+    background: $fill;
+    border-radius: 14px 14px 0 0;
+    transition: height 0.5s ease;
+}
+
+.x-label {
+    font-size: 13px;
+    color: $x-label;
+    margin-top: 8px;
+    font-weight: 600;
+}

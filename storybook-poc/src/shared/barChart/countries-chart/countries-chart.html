@@ -1,0 +1,18 @@
+<div class="chart-card countries">
+    <div class="rank-header">
+        <span class="title">{{ title }}</span>
+        @if (showCount) {
+        <span class="count">
+            {{ items.length }} countries
+        </span>
+        }
+    </div>
+
+    <div class="rank-list">
+        @for (item of getSortedItems(); track item.label; let i = $index) {
+        <div class="rank-bar" [style.width]="getRankWidth(item.value)" [style.background]="getShade(i)">
+            {{ item.label }}
+        </div>
+        }
+    </div>
+</div>

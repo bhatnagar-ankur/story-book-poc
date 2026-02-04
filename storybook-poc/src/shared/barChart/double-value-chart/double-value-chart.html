@@ -1,0 +1,15 @@
+<div class="chart-card doubleValue">
+    <div class="chart">
+        @for (day of labels; track $index) {
+        <div class="bar-wrapper">
+            <div class="track">
+                <div class="stack yellow" [style.height]="getStackHeight(stackA[$index])"></div>
+                <div class="stack purple" [style.height]="getStackHeight(stackB[$index])"></div>
+            </div>
+            <div class="x-label">
+                {{ day }}
+            </div>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,11 @@
+@if (variant === 'singleValue') {
+<app-single-value-chart [labels]="labels" [values]="values" [max]="max" />
+}
+
+@if (variant === 'countries') {
+<app-countries-chart [title]="title" [showCount]="showCount" [items]="items" />
+}
+
+@if (variant === 'doubleValue') {
+<app-double-value-chart [labels]="labels" [stackA]="stackA" [stackB]="stackB" [maxStack]="maxStack" />
+}
