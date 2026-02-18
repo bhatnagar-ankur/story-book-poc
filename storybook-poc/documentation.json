@@ -170,12 +170,12 @@
         },
         {
             "name": "MultiRingItem",
-            "id": "interface-MultiRingItem-3092c9b9dc731816c166e865e71a73c2f65f7a9c3219fe8d522b671e80606b7f0a5c8380e4afb9fc903c771386b4eb7026832d42ee36275c3d2d17c96453e33a",
+            "id": "interface-MultiRingItem-974d3c1b3f9ac923d068bc4880345b44b5505dc1cecba5ec011a603a5991aa3e12b620fbbd572913c209ef3951006ca63c3d339424638f62a9273fd76613a858",
             "file": "src/shared/pieChart/multi-ring-pie/multi-ring-pie.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface MultiRingItem {\r\n  label: string;\r\n  value: number;\r\n  color: string;\r\n}\r\n@Component({\r\n  selector: 'app-multi-ring-pie',\r\n  imports: [],\r\n  templateUrl: './multi-ring-pie.html',\r\n  styleUrl: './multi-ring-pie.scss',\r\n})\r\nexport class MultiRingPie {\r\n /** Chart size */\r\n  @Input() size = 300;\r\n\r\n  /** Rings data */\r\n  @Input() rings: MultiRingItem[] = [];\r\n\r\n  /** Selected ring */\r\n  selectedIndex: number | null = null;\r\n  getRingRadius(index: number): number {\r\n    const base = this.size / 2 - 30;\r\n    return base - index * 28;\r\n  }\r\n\r\n  getRingCircumference(r: number): number {\r\n    return 2 * Math.PI * r;\r\n  }\r\n\r\n  getRingOffset(value: number, r: number): number {\r\n    const c = this.getRingCircumference(r);\r\n    return c * (1 - value / 100);\r\n  }\r\n\r\n  selectRing(index: number) {\r\n    this.selectedIndex = index;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface MultiRingItem {\r\n  label: string;\r\n  value: number;\r\n  color: string;\r\n}\r\n@Component({\r\n  selector: 'app-multi-ring-pie',\r\n  imports: [],\r\n  templateUrl: './multi-ring-pie.html',\r\n  styleUrl: './multi-ring-pie.scss',\r\n})\r\nexport class MultiRingPie {\r\n  /** Chart size */\r\n  @Input() size = 300;\r\n\r\n  /** Rings data */\r\n  @Input() rings: MultiRingItem[] = [];\r\n  tooltipVisible = false;\r\n  tooltipX = 0;\r\n  tooltipY = 0;\r\n  tooltipData: any = null;\r\n  /** Selected ring */\r\n  selectedIndex: number | null = null;\r\n  getRingRadius(index: number): number {\r\n    const base = this.size / 2 - 30;\r\n    return base - index * 28;\r\n  }\r\n\r\n  getRingCircumference(r: number): number {\r\n    return 2 * Math.PI * r;\r\n  }\r\n\r\n  getRingOffset(value: number, r: number): number {\r\n    const c = this.getRingCircumference(r);\r\n    return c * (1 - value / 100);\r\n  }\r\n\r\n  selectRing(index: number) {\r\n    this.selectedIndex = index;\r\n  }\r\n  // Show tooltip\r\n  showTooltip(event: MouseEvent, ring: any) {\r\n    this.tooltipVisible = true;\r\n    this.tooltipX = event.clientX;\r\n    this.tooltipY = event.clientY;\r\n    this.tooltipData = ring;\r\n  }\r\n\r\n  // Hide tooltip\r\n  hideTooltip() {\r\n    this.tooltipVisible = false;\r\n  }\r\n}",
             "properties": [
                 {
                     "name": "color",
@@ -1074,7 +1074,7 @@
         },
         {
             "name": "App",
-            "id": "component-App-be0e9c67bed1831a23b164cf1d821628cb4e6e3622794cbf86021b07d63e687366bdfeec343230ea0e19fb7411ea086f5b0fa1212ce2e5db852acf9184bb6b0d",
+            "id": "component-App-6100b140599d17b9e3e6069e8ceff874a74bb6ca4901c75977eb6d8bcafad05a7c3ef74d1218dc0107b7e2a4a6bc3ca380f4bd8b75208f740abcb1db307b03dd",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1101,7 +1101,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 12,
                     "modifierKind": [
                         124,
                         148
@@ -1116,9 +1116,6 @@
             "standalone": false,
             "imports": [
                 {
-                    "name": "RouterOutlet"
-                },
-                {
                     "name": "Alert"
                 },
                 {
@@ -1128,7 +1125,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, signal } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport { Alert } from '../components/alert/alert.component';\r\nimport { Badge } from '../components/badge/badge';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [RouterOutlet,Alert,Badge],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.scss'\r\n})\r\nexport class App {\r\n  protected readonly title = signal('storybook-poc');\r\n}\r\n",
+            "sourceCode": "import { Component, signal } from '@angular/core';\r\nimport { Alert } from '../components/alert/alert.component';\r\nimport { Badge } from '../components/badge/badge';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [Alert,Badge],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.scss'\r\n})\r\nexport class App {\r\n  protected readonly title = signal('storybook-poc');\r\n}\r\n",
             "styleUrl": "./app.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -4495,7 +4492,7 @@
         },
         {
             "name": "MultiRingPie",
-            "id": "component-MultiRingPie-3092c9b9dc731816c166e865e71a73c2f65f7a9c3219fe8d522b671e80606b7f0a5c8380e4afb9fc903c771386b4eb7026832d42ee36275c3d2d17c96453e33a",
+            "id": "component-MultiRingPie-974d3c1b3f9ac923d068bc4880345b44b5505dc1cecba5ec011a603a5991aa3e12b620fbbd572913c209ef3951006ca63c3d339424638f62a9273fd76613a858",
             "file": "src/shared/pieChart/multi-ring-pie/multi-ring-pie.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4545,8 +4542,52 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Selected ring</p>\n",
-                    "line": 21,
+                    "line": 24,
                     "rawdescription": "\nSelected ring"
+                },
+                {
+                    "name": "tooltipData",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "tooltipVisible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "tooltipX",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "tooltipY",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
                 }
             ],
             "methodsClass": [
@@ -4563,7 +4604,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4597,7 +4638,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4634,7 +4675,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4650,6 +4691,16 @@
                     ]
                 },
                 {
+                    "name": "hideTooltip",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "selectRing",
                     "args": [
                         {
@@ -4662,13 +4713,56 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "index",
                             "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "showTooltip",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "ring",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "ring",
+                            "type": "any",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -4687,7 +4781,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface MultiRingItem {\r\n  label: string;\r\n  value: number;\r\n  color: string;\r\n}\r\n@Component({\r\n  selector: 'app-multi-ring-pie',\r\n  imports: [],\r\n  templateUrl: './multi-ring-pie.html',\r\n  styleUrl: './multi-ring-pie.scss',\r\n})\r\nexport class MultiRingPie {\r\n /** Chart size */\r\n  @Input() size = 300;\r\n\r\n  /** Rings data */\r\n  @Input() rings: MultiRingItem[] = [];\r\n\r\n  /** Selected ring */\r\n  selectedIndex: number | null = null;\r\n  getRingRadius(index: number): number {\r\n    const base = this.size / 2 - 30;\r\n    return base - index * 28;\r\n  }\r\n\r\n  getRingCircumference(r: number): number {\r\n    return 2 * Math.PI * r;\r\n  }\r\n\r\n  getRingOffset(value: number, r: number): number {\r\n    const c = this.getRingCircumference(r);\r\n    return c * (1 - value / 100);\r\n  }\r\n\r\n  selectRing(index: number) {\r\n    this.selectedIndex = index;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nexport interface MultiRingItem {\r\n  label: string;\r\n  value: number;\r\n  color: string;\r\n}\r\n@Component({\r\n  selector: 'app-multi-ring-pie',\r\n  imports: [],\r\n  templateUrl: './multi-ring-pie.html',\r\n  styleUrl: './multi-ring-pie.scss',\r\n})\r\nexport class MultiRingPie {\r\n  /** Chart size */\r\n  @Input() size = 300;\r\n\r\n  /** Rings data */\r\n  @Input() rings: MultiRingItem[] = [];\r\n  tooltipVisible = false;\r\n  tooltipX = 0;\r\n  tooltipY = 0;\r\n  tooltipData: any = null;\r\n  /** Selected ring */\r\n  selectedIndex: number | null = null;\r\n  getRingRadius(index: number): number {\r\n    const base = this.size / 2 - 30;\r\n    return base - index * 28;\r\n  }\r\n\r\n  getRingCircumference(r: number): number {\r\n    return 2 * Math.PI * r;\r\n  }\r\n\r\n  getRingOffset(value: number, r: number): number {\r\n    const c = this.getRingCircumference(r);\r\n    return c * (1 - value / 100);\r\n  }\r\n\r\n  selectRing(index: number) {\r\n    this.selectedIndex = index;\r\n  }\r\n  // Show tooltip\r\n  showTooltip(event: MouseEvent, ring: any) {\r\n    this.tooltipVisible = true;\r\n    this.tooltipX = event.clientX;\r\n    this.tooltipY = event.clientY;\r\n    this.tooltipData = ring;\r\n  }\r\n\r\n  // Hide tooltip\r\n  hideTooltip() {\r\n    this.tooltipVisible = false;\r\n  }\r\n}",
             "styleUrl": "./multi-ring-pie.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -5838,7 +5932,7 @@
         },
         {
             "name": "ProductCard",
-            "id": "component-ProductCard-83e7a4ffc3d08a18cafdf28f0294902362a2964e9bdefcd32f386df169837c1b2015d2d7620b338a939a307fc2551c671555d20b72aefef3dbf517ccc6566683",
+            "id": "component-ProductCard-f2ae82d558dbf9fa0e4493beddde6b64eb46918a94b8646589550dc676d1b8a4a837bce4ccf488a7032ba34d7f94eaf97a42607b60c3472e35b45ea8c9712738",
             "file": "src/shared/card/product-card/product-card.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5972,6 +6066,17 @@
                     "line": 30
                 },
                 {
+                    "name": "showHover",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                },
+                {
                     "name": "showSwatches",
                     "defaultValue": "false",
                     "deprecated": false,
@@ -6010,7 +6115,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 92,
+                    "line": 93,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nNavigate to next image\n",
@@ -6018,8 +6123,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1986,
-                                "end": 1991,
+                                "pos": 2017,
+                                "end": 2022,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6030,8 +6135,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1980,
-                                "end": 1985,
+                                "pos": 2011,
+                                "end": 2016,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6042,8 +6147,8 @@
                         },
                         {
                             "tagName": {
-                                "pos": 2000,
-                                "end": 2007,
+                                "pos": 2031,
+                                "end": 2038,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6060,7 +6165,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInitialize component\nSets default image for product cards\n",
@@ -6079,7 +6184,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 75,
+                    "line": 76,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nNavigate to previous event\n",
@@ -6087,8 +6192,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1650,
-                                "end": 1655,
+                                "pos": 1681,
+                                "end": 1686,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6099,8 +6204,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1644,
-                                "end": 1649,
+                                "pos": 1675,
+                                "end": 1680,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6111,8 +6216,8 @@
                         },
                         {
                             "tagName": {
-                                "pos": 1664,
-                                "end": 1671,
+                                "pos": 1695,
+                                "end": 1702,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6136,7 +6241,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 58,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect image by index\n",
@@ -6144,8 +6249,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1257,
-                                "end": 1262,
+                                "pos": 1288,
+                                "end": 1293,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6156,8 +6261,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1251,
-                                "end": 1256,
+                                "pos": 1282,
+                                "end": 1287,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6174,7 +6279,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nToggle color swatch panel\n",
@@ -6186,7 +6291,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nToggle wishlist status\n",
@@ -6212,7 +6317,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 118,
+                    "line": 119,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTruncate long text\nAdds ellipsis if text exceeds limit\n",
@@ -6220,8 +6325,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2515,
-                                "end": 2520,
+                                "pos": 2546,
+                                "end": 2551,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6232,8 +6337,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2509,
-                                "end": 2514,
+                                "pos": 2540,
+                                "end": 2545,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6244,8 +6349,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2535,
-                                "end": 2540,
+                                "pos": 2566,
+                                "end": 2571,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6257,8 +6362,8 @@
                             "deprecationMessage": "",
                             "defaultValue": "26",
                             "tagName": {
-                                "pos": 2529,
-                                "end": 2534,
+                                "pos": 2560,
+                                "end": 2565,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6269,8 +6374,8 @@
                         },
                         {
                             "tagName": {
-                                "pos": 2549,
-                                "end": 2556,
+                                "pos": 2580,
+                                "end": 2587,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -6287,7 +6392,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate image and progress\n",
@@ -6299,7 +6404,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 66,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate progress bar width\n",
@@ -6320,7 +6425,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-product-card',\r\n  imports: [CommonModule],\r\n  templateUrl: './product-card.html',\r\n  styleUrl: './product-card.scss',\r\n})\r\nexport class ProductCard implements OnInit {\r\n  @Input() title = '';\r\n  @Input() description = '';\r\n  @Input() image = '';\r\n  @Input() tag = '';\r\n  @Input() price = 0;\r\n  @Input() strikePrice = 0;\r\n  @Input() offer = '';\r\n  @Input() colors: string[] = [];\r\n  @Input() moreOffers = 0;\r\n  /**\r\n   * Toggle color swatches\r\n   */\r\n  showSwatches = false;\r\n  /**\r\n   * Wishlist state\r\n   */\r\n  wishlist = false;\r\n  currentIndex = 0;\r\n  currentImage = '';\r\n  progressWidth = 0;\r\n\r\n  /* ----- User Interactions ----- */\r\n  /**\r\n   * Toggle wishlist status\r\n   */\r\n  toggleWishlist() {\r\n    this.wishlist = !this.wishlist;\r\n  }\r\n  /**\r\n   * Toggle color swatch panel\r\n   */\r\n  toggleSwatches() {\r\n    this.showSwatches = !this.showSwatches;\r\n  }\r\n  /* ----- Lifecycle hooks ----- */\r\n  /**\r\n   * Initialize component\r\n   * Sets default image for product cards\r\n   */\r\n  ngOnInit() {\r\n    this.currentImage = this.image;\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Select image by index\r\n   * @param index \r\n   */\r\n  selectImage(index: number) {\r\n    this.currentIndex = index;\r\n    this.currentImage = this.colors[index];\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Update progress bar width\r\n   */\r\n  updateProgress() {\r\n    const total = this.colors.length || 1;\r\n    this.progressWidth = ((this.currentIndex + 1) / total) * 100;\r\n  }\r\n  /**\r\n   * Navigate to previous event\r\n   * @param event \r\n   * @returns \r\n   */\r\n  prevImage(event: Event) {\r\n    event.stopPropagation();\r\n\r\n    if (!this.colors.length) return;\r\n\r\n    this.currentIndex =\r\n      this.currentIndex === 0\r\n        ? this.colors.length - 1\r\n        : this.currentIndex - 1;\r\n\r\n    this.updateImage();\r\n  }\r\n  /**\r\n   * Navigate to next image\r\n   * @param event \r\n   * @returns \r\n   */\r\n  nextImage(event: Event) {\r\n    event.stopPropagation();\r\n\r\n    if (!this.colors.length) return;\r\n\r\n    this.currentIndex =\r\n      this.currentIndex === this.colors.length - 1\r\n        ? 0\r\n        : this.currentIndex + 1;\r\n\r\n    this.updateImage();\r\n  }\r\n  /**\r\n   * Update image and progress\r\n   */\r\n  updateImage() {\r\n    this.currentImage = this.colors[this.currentIndex];\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Truncate long text\r\n   * Adds ellipsis if text exceeds limit\r\n   * @param value \r\n   * @param limit \r\n   * @returns \r\n   */\r\n  truncate(value: string, limit = 26): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n}",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-product-card',\r\n  imports: [CommonModule],\r\n  templateUrl: './product-card.html',\r\n  styleUrl: './product-card.scss',\r\n})\r\nexport class ProductCard implements OnInit {\r\n  @Input() title = '';\r\n  @Input() description = '';\r\n  @Input() image = '';\r\n  @Input() tag = '';\r\n  @Input() price = 0;\r\n  @Input() strikePrice = 0;\r\n  @Input() offer = '';\r\n  @Input() colors: string[] = [];\r\n  @Input() moreOffers = 0;\r\n  /**\r\n   * Toggle color swatches\r\n   */\r\n  showSwatches = false;\r\n  /**\r\n   * Wishlist state\r\n   */\r\n  wishlist = false;\r\n  currentIndex = 0;\r\n  currentImage = '';\r\n  progressWidth = 0;\r\n  showHover: boolean = false;\r\n\r\n  /* ----- User Interactions ----- */\r\n  /**\r\n   * Toggle wishlist status\r\n   */\r\n  toggleWishlist() {\r\n    this.wishlist = !this.wishlist;\r\n  }\r\n  /**\r\n   * Toggle color swatch panel\r\n   */\r\n  toggleSwatches() {\r\n    this.showSwatches = !this.showSwatches;\r\n  }\r\n  /* ----- Lifecycle hooks ----- */\r\n  /**\r\n   * Initialize component\r\n   * Sets default image for product cards\r\n   */\r\n  ngOnInit() {\r\n    this.currentImage = this.image;\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Select image by index\r\n   * @param index \r\n   */\r\n  selectImage(index: number) {\r\n    this.currentIndex = index;\r\n    this.currentImage = this.colors[index];\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Update progress bar width\r\n   */\r\n  updateProgress() {\r\n    const total = this.colors.length || 1;\r\n    this.progressWidth = ((this.currentIndex + 1) / total) * 100;\r\n  }\r\n  /**\r\n   * Navigate to previous event\r\n   * @param event \r\n   * @returns \r\n   */\r\n  prevImage(event: Event) {\r\n    event.stopPropagation();\r\n\r\n    if (!this.colors.length) return;\r\n\r\n    this.currentIndex =\r\n      this.currentIndex === 0\r\n        ? this.colors.length - 1\r\n        : this.currentIndex - 1;\r\n\r\n    this.updateImage();\r\n  }\r\n  /**\r\n   * Navigate to next image\r\n   * @param event \r\n   * @returns \r\n   */\r\n  nextImage(event: Event) {\r\n    event.stopPropagation();\r\n\r\n    if (!this.colors.length) return;\r\n\r\n    this.currentIndex =\r\n      this.currentIndex === this.colors.length - 1\r\n        ? 0\r\n        : this.currentIndex + 1;\r\n\r\n    this.updateImage();\r\n  }\r\n  /**\r\n   * Update image and progress\r\n   */\r\n  updateImage() {\r\n    this.currentImage = this.colors[this.currentIndex];\r\n    this.updateProgress();\r\n  }\r\n  /**\r\n   * Truncate long text\r\n   * Adds ellipsis if text exceeds limit\r\n   * @param value \r\n   * @param limit \r\n   * @returns \r\n   */\r\n  truncate(value: string, limit = 26): string {\r\n    return value.length > limit\r\n      ? value.slice(0, limit) + '…'\r\n      : value;\r\n  }\r\n}",
             "styleUrl": "./product-card.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -8367,7 +8472,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "@if (variant === 'header') {\r\n<div class=\"table-header-wrapper\">\r\n    <div class=\"table-header\">\r\n        @for (col of columns; track col.key || col.label) {\r\n        <div class=\"header-cell\">\r\n            <span>{{ col.label }}</span>\r\n            @if (headerMode === 'search-sort') {\r\n            @if (\r\n            showSort &&\r\n            (col.label === 'Labels' || col.label === 'Date')\r\n            ) {\r\n            <span class=\"sort-icon\" (click)=\"onSort(col.key)\">\r\n                @if (sortKey !== col.key) {\r\n                <svg class=\"sort-svg\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'asc') {\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'desc') {\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n            </span>\r\n            }\r\n            }\r\n        </div>\r\n        }\r\n    </div>\r\n    @if (\r\n    headerMode === 'search-sort' &&\r\n    showSearch\r\n    ) {\r\n    <div class=\"header-filters\">\r\n        @for (col of columns; track col.key) {\r\n        <div class=\"filter-cell\">\r\n            @if (col.label === 'Date') {\r\n            @if (activeFilterKey !== col.key) {\r\n            <span class=\"calendar-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/calendar-icon.svg\" />\r\n            </span>\r\n            }\r\n            @else {\r\n            <input type=\"date\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n            }\r\n            }\r\n            @else {\r\n            @if (activeFilterKey !== col.key) {\r\n            <span class=\"search-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/search.svg\" />\r\n            </span>\r\n            }\r\n            @else {\r\n            <input type=\"text\" placeholder=\"Search\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n            }\r\n            }\r\n        </div>\r\n        }\r\n        <div class=\"filter-cell expand\">\r\n            <span class=\"chevron\" [class.open]=\"headerExpanded\">\r\n                <img src=\"/assets/icons/dropdown.svg\" />\r\n            </span>\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'accordion') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row\" (click)=\"row.expanded = !row.expanded\" [class.expanded]=\"row.expanded\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell expand-icon\">\r\n            <img src=\"/assets/icons/dropdown.svg\" [class.open]=\"row.expanded\" />\r\n        </div>\r\n    </div>\r\n    @if (row.expanded) {\r\n    <div class=\"accordion-row\">\r\n        <app-accordion [title]=\"'Details'\" type=\"secondary\" [expanded]=\"row.expanded\">\r\n            @if (row.expanded) {\r\n            <div class=\"table-accordion-content\" (click)=\"$event.stopPropagation()\" #projected>\r\n                <div class=\"details-grid\">\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                </div>\r\n                <div class=\"details-desc\">\r\n                    <div>\r\n                        <h4>Additional details</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n                    <div>\r\n                        <h4>Description</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"details-actions\">\r\n                    <app-buttons buttonType=\"secondary\" label=\"Edit Details\"></app-buttons>\r\n                </div>\r\n            </div>\r\n            }\r\n        </app-accordion>\r\n    </div>\r\n    }\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'buttons') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row buttons-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell actions\">\r\n            <button class=\"icon-btn edit\">\r\n                <img src=\"/assets/icons/edit.svg\" />\r\n            </button>\r\n            <button class=\"icon-btn delete\">\r\n                <img src=\"/assets/icons/delete.svg\" />\r\n            </button>\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'menu') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row menu-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"style1\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell menu\">\r\n            <button class=\"menu-btn\" (click)=\"toggleMenu(row, $event)\">\r\n                <img src=\"/assets/icons/breadcrumb.svg\" />\r\n            </button>\r\n            @if (row.menuOpen) {\r\n            <div class=\"menu-dropdown\">\r\n                <div class=\"menu-item\" (click)=\"onEdit(row)\">\r\n                    Edit\r\n                </div>\r\n                <div class=\"menu-item danger\" (click)=\"onDelete(row)\">\r\n                    Delete\r\n                </div>\r\n                <div class=\"menu-item\" (click)=\"onTrack(row)\">\r\n                    Track\r\n                </div>\r\n            </div>\r\n            }\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}"
+            "templateData": "@if (variant === 'header') {\r\n<div class=\"table-header-wrapper\">\r\n    <div class=\"table-header\">\r\n        @for (col of columns; track col.key || col.label) {\r\n        <div class=\"header-cell\">\r\n            <span>{{ col.label }}</span>\r\n            @if (headerMode === 'search-sort') {\r\n            @if (\r\n            showSort &&\r\n            (col.label === 'Labels' || col.label === 'Date')\r\n            ) {\r\n            <span class=\"sort-icon\" (click)=\"onSort(col.key)\">\r\n                @if (sortKey !== col.key) {\r\n                <svg class=\"sort-svg\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'asc') {\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 1 L2 5 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n                @if (sortKey === col.key && sortDir === 'desc') {\r\n                <svg class=\"sort-svg active\" viewBox=\"0 0 12 16\" width=\"12\" height=\"16\">\r\n                    <path d=\"M6 15 L2 11 H10 Z\" fill=\"currentColor\" />\r\n                </svg>\r\n                }\r\n            </span>\r\n            }\r\n            }\r\n        </div>\r\n        }\r\n    </div>\r\n    @if (\r\n    headerMode === 'search-sort' &&\r\n    showSearch\r\n    ) {\r\n    <div class=\"header-filters\">\r\n        @for (col of columns; track col.key) {\r\n        <div class=\"filter-cell\">\r\n            @if (col.label === 'Date') {\r\n            @if (activeFilterKey !== col.key) {\r\n            <span class=\"calendar-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/calendar-icon.svg\" />\r\n            </span>\r\n            }\r\n            @else {\r\n            <input type=\"date\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n            }\r\n            }\r\n            @else {\r\n            @if (activeFilterKey !== col.key) {\r\n            <span class=\"search-icon\" (click)=\"openFilter(col.key)\">\r\n                <img src=\"/assets/icons/search.svg\" />\r\n            </span>\r\n            }\r\n            @else {\r\n            <input type=\"text\" placeholder=\"Search\" class=\"filter-input\" (blur)=\"activeFilterKey = null\" />\r\n            }\r\n            }\r\n        </div>\r\n        }\r\n        <div class=\"filter-cell expand\">\r\n            <span class=\"chevron\" [class.open]=\"headerExpanded\">\r\n                <img src=\"/assets/icons/dropdown.svg\" />\r\n            </span>\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'accordion') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row\" (click)=\"row.expanded = !row.expanded\" [class.expanded]=\"row.expanded\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"DotStyle\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell expand-icon\">\r\n            <img src=\"/assets/icons/dropdown.svg\" [class.open]=\"row.expanded\" />\r\n        </div>\r\n    </div>\r\n    @if (row.expanded) {\r\n    <div class=\"accordion-row\">\r\n        <app-accordion [title]=\"'Details'\" type=\"secondary\" [expanded]=\"row.expanded\">\r\n            @if (row.expanded) {\r\n            <div class=\"table-accordion-content\" (click)=\"$event.stopPropagation()\" #projected>\r\n                <div class=\"details-grid\">\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                    <app-input-field size=\"sm\" label=\"Country\" value=\"India\" [required]=\"true\" [readonly]=\"true\">\r\n                    </app-input-field>\r\n                </div>\r\n                <div class=\"details-desc\">\r\n                    <div>\r\n                        <h4>Additional details</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n                    <div>\r\n                        <h4>Description</h4>\r\n                        <p>\r\n                            Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus. Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.Lorem ipsum dolor sit amet consectetur. Faucibus gravida tempor aliquet\r\n                            risus.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"details-actions\">\r\n                    <app-buttons buttonType=\"secondary\" label=\"Edit Details\"></app-buttons>\r\n                </div>\r\n            </div>\r\n            }\r\n        </app-accordion>\r\n    </div>\r\n    }\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'buttons') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row buttons-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"DotStyle\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell actions\">\r\n            <button class=\"icon-btn edit\">\r\n                <img src=\"/assets/icons/edit.svg\" />\r\n            </button>\r\n            <button class=\"icon-btn delete\">\r\n                <img src=\"/assets/icons/delete.svg\" />\r\n            </button>\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}\r\n@if (variant === 'menu') {\r\n<div class=\"table-body\">\r\n    @for (row of rows; track row.id) {\r\n    <div class=\"table-row menu-row\">\r\n        <div class=\"cell link\">\r\n            <a href=\"#\">{{ row.link }}</a>\r\n        </div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell\">{{ row.v1 }}</div>\r\n        <div class=\"cell\">{{ row.date }}</div>\r\n        <div class=\"cell\">{{ row.v2 }}</div>\r\n        <div class=\"cell status\">\r\n            <app-status-chips mode=\"single\" [label]=\"row.status\" [status]=\"getRowStatus(row.status)\" styleType=\"DotStyle\">\r\n            </app-status-chips>\r\n        </div>\r\n        <div class=\"cell menu\">\r\n            <button class=\"menu-btn\" (click)=\"toggleMenu(row, $event)\">\r\n                <img src=\"/assets/icons/breadcrumb.svg\" />\r\n            </button>\r\n            @if (row.menuOpen) {\r\n            <div class=\"menu-dropdown\">\r\n                <div class=\"menu-item\" (click)=\"onEdit(row)\">\r\n                    Edit\r\n                </div>\r\n                <div class=\"menu-item danger\" (click)=\"onDelete(row)\">\r\n                    Delete\r\n                </div>\r\n                <div class=\"menu-item\" (click)=\"onTrack(row)\">\r\n                    Track\r\n                </div>\r\n            </div>\r\n            }\r\n        </div>\r\n    </div>\r\n    }\r\n</div>\r\n}"
         },
         {
             "name": "Tabs",
@@ -9813,8 +9918,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ProductCard",
-                "coveragePercent": 45,
-                "coverageCount": "11/24",
+                "coveragePercent": 44,
+                "coverageCount": "11/25",
                 "status": "medium"
             },
             {
@@ -9966,9 +10071,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "MultiRingPie",
-                "coveragePercent": 37,
-                "coverageCount": "3/8",
-                "status": "medium"
+                "coveragePercent": 21,
+                "coverageCount": "3/14",
+                "status": "low"
             },
             {
                 "filePath": "src/shared/pieChart/multi-ring-pie/multi-ring-pie.ts",
