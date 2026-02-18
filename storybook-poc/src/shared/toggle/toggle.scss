@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $field-fill-dot: #FFF;
 $field-fill-rectangle: #BABEC3;
 $field-fill-rectangle-on: #212529;
@@ -117,7 +119,7 @@ $toggle-border: #01A2E0;
   gap: 4px;
   cursor: pointer;
   transition: background 0.2s ease;
-  background-color: lighten($toggle-border, 50%);
+  background-color: color.adjust($toggle-border, $lightness: 50%);
 
   img {
     width: 18px;
@@ -189,7 +191,7 @@ $toggle-border: #01A2E0;
   font-family: 'Myriad Pro';
   color: $field-fill-rectangle-on;
   transition: all 0.2s ease;
-  background-color: lighten($toggle-border, 50%);
+  background-color: color.adjust($toggle-border, $lightness: 50%);
 
   &:not(:last-child) {
     border-right: 1px solid $toggle-border;

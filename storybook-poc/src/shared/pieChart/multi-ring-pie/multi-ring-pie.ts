@@ -11,12 +11,15 @@ export interface MultiRingItem {
   styleUrl: './multi-ring-pie.scss',
 })
 export class MultiRingPie {
- /** Chart size */
+  /** Chart size */
   @Input() size = 300;
 
   /** Rings data */
   @Input() rings: MultiRingItem[] = [];
-
+  tooltipVisible = false;
+  tooltipX = 0;
+  tooltipY = 0;
+  tooltipData: any = null;
   /** Selected ring */
   selectedIndex: number | null = null;
   getRingRadius(index: number): number {
@@ -35,5 +38,17 @@ export class MultiRingPie {
 
   selectRing(index: number) {
     this.selectedIndex = index;
+  }
+  // Show tooltip
+  showTooltip(event: MouseEvent, ring: any) {
+    this.tooltipVisible = true;
+    this.tooltipX = event.clientX;
+    this.tooltipY = event.clientY;
+    this.tooltipData = ring;
+  }
+
+  // Hide tooltip
+  hideTooltip() {
+    this.tooltipVisible = false;
   }
 }

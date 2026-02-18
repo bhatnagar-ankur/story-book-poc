@@ -28,6 +28,7 @@ export class ProductCard implements OnInit {
   currentIndex = 0;
   currentImage = '';
   progressWidth = 0;
+  showHover: boolean = false;
 
   /* ----- User Interactions ----- */
   /**
