@@ -26,7 +26,7 @@
             @for (item of selected | slice:0:2; track item) {
             <div class="selected-item" (click)="removeSelected(item); $event.stopPropagation()">
                 {{ truncate(item) }}
-                <img src="/assets/icons/close-button.svg" />
+                <img src="assets/icons/close-button.svg" />
             </div>
             }
             @if (selected.length > 2) {

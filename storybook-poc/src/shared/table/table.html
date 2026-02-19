@@ -42,7 +42,7 @@
             @if (col.label === 'Date') {
             @if (activeFilterKey !== col.key) {
             <span class="calendar-icon" (click)="openFilter(col.key)">
-                <img src="/assets/icons/calendar-icon.svg" />
+                <img src="assets/icons/calendar-icon.svg" />
             </span>
             }
             @else {
@@ -52,7 +52,7 @@
             @else {
             @if (activeFilterKey !== col.key) {
             <span class="search-icon" (click)="openFilter(col.key)">
-                <img src="/assets/icons/search.svg" />
+                <img src="assets/icons/search.svg" />
             </span>
             }
             @else {
@@ -63,7 +63,7 @@
         }
         <div class="filter-cell expand">
             <span class="chevron" [class.open]="headerExpanded">
-                <img src="/assets/icons/dropdown.svg" />
+                <img src="assets/icons/dropdown.svg" />
             </span>
         </div>
     </div>
@@ -89,7 +89,7 @@
             </app-status-chips>
         </div>
         <div class="cell expand-icon">
-            <img src="/assets/icons/dropdown.svg" [class.open]="row.expanded" />
+            <img src="assets/icons/dropdown.svg" [class.open]="row.expanded" />
         </div>
     </div>
     @if (row.expanded) {
@@ -166,10 +166,10 @@
         </div>
         <div class="cell actions">
             <button class="icon-btn edit">
-                <img src="/assets/icons/edit.svg" />
+                <img src="assets/icons/edit.svg" />
             </button>
             <button class="icon-btn delete">
-                <img src="/assets/icons/delete.svg" />
+                <img src="assets/icons/delete.svg" />
             </button>
         </div>
     </div>
@@ -196,7 +196,7 @@
         </div>
         <div class="cell menu">
             <button class="menu-btn" (click)="toggleMenu(row, $event)">
-                <img src="/assets/icons/breadcrumb.svg" />
+                <img src="assets/icons/breadcrumb.svg" />
             </button>
             @if (row.menuOpen) {
             <div class="menu-dropdown">

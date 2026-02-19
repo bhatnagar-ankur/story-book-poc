@@ -1,7 +1,7 @@
 <div class="btn-wrapper">
   @if (buttonType === 'order' && orderState === 'progress') {
   <div class="order-progress-area">
-    <img src="/assets/icons/placeOrder.svg" class="order-image" [style.left.%]="orderProgress" />
+    <img src="assets/icons/placeOrder.svg" class="order-image" [style.left.%]="orderProgress" />
     <div class="order-bar">
       <div class="order-bar-fill" [style.width.%]="orderProgress"></div>
     </div>

@@ -21,7 +21,7 @@ export const PromoCard: Story = {
       title: 'Key Account Management',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: '/assets/icons/promo.svg'
+      image: './assets/icons/promo.svg'
     }
   }
 };
@@ -35,11 +35,11 @@ export const ProductCard: Story = {
       price: 9375,
       strikePrice: 12500,
       offer: '20% OFF',
-      image: '/assets/icons/product.png',
+      image: './assets/icons/product.png',
       colors: [
-        '/assets/icons/product.png',
-        '/assets/icons/card2.webp',
-        '/assets/icons/card3.webp'
+        './assets/icons/product.png',
+        './assets/icons/card2.webp',
+        './assets/icons/card3.webp'
       ],
       moreOffers: 3
     }
@@ -50,7 +50,7 @@ export const StatsCard: Story = {
     type: 'stats',
     data: {
       title: 'Triple E',
-      image: '/assets/icons/stats.svg',
+      image: './assets/icons/stats.svg',
       completed: '60237 (90%)',
       incomplete: '1123 (10%)'
     }
