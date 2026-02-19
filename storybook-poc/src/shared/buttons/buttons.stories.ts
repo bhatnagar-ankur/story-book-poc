@@ -81,7 +81,7 @@ export const OrderComplete: Story = {
     args: {
         buttonType: 'order',
         disabled: false,
-        orderSuccessIcon: '/assets/icons/tick-icon.svg',
+        orderSuccessIcon: './assets/icons/tick-icon.svg',
         showIcon: true,
     }
 };

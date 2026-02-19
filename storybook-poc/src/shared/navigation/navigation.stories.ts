@@ -53,71 +53,71 @@ export const SideNavigation: Story = {
     showLogo: true,
     navItems: [
       {
-        icon: 'assets/icons/home-icon.svg',
+        icon: './assets/icons/home-icon.svg',
         label: 'Home',
       },
       {
-        icon: 'assets/icons/analytics-icon.svg',
+        icon: './assets/icons/analytics-icon.svg',
         label: 'Analytics Dashboard',
       },
       {
-        icon: 'assets/icons/home-icon.svg',
+        icon: './assets/icons/home-icon.svg',
         label: 'Shipment',
         children: [
-          { label: 'Create Shipments', icon: 'assets/icons/home-icon.svg' },
-          { label: 'Shipments', icon: 'assets/icons/reports-icon.svg' }
+          { label: 'Create Shipments', icon: './assets/icons/home-icon.svg' },
+          { label: 'Shipments', icon: './assets/icons/reports-icon.svg' }
         ],
       },
       {
-        icon: 'assets/icons/miller-coors-icon.svg',
+        icon: './assets/icons/miller-coors-icon.svg',
         label: 'Miller Coors',
       },
       {
-        icon: 'assets/icons/marketplace-icon.svg',
+        icon: './assets/icons/marketplace-icon.svg',
         label: 'Marketplace',
       },
       {
-        icon: 'assets/icons/booking-icon.svg',
+        icon: './assets/icons/booking-icon.svg',
         label: 'Booking',
       },
       {
-        icon: 'assets/icons/rates-icon.svg',
+        icon: './assets/icons/rates-icon.svg',
         label: 'Rates',
       },
       {
-        icon: 'assets/icons/reports-icon.svg',
+        icon: './assets/icons/reports-icon.svg',
         label: 'Reports',
       },
       {
-        icon: 'assets/icons/rail-car-schedular-icon.svg',
+        icon: './assets/icons/rail-car-schedular-icon.svg',
         label: 'Rail Car Schedular',
       },
       {
-        icon: 'assets/icons/accounts-icon.svg',
+        icon: './assets/icons/accounts-icon.svg',
         label: 'Account',
       },
       {
-        icon: 'assets/icons/resources-icon.svg',
+        icon: './assets/icons/resources-icon.svg',
         label: 'Resources',
       },
       {
-        icon: 'assets/icons/help-icon.svg',
+        icon: './assets/icons/help-icon.svg',
         label: 'Help',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Load',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'History',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Service Center',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Admin',
       },
     ],
@@ -134,71 +134,71 @@ export const SideNavigation2: Story = {
 
     navItems: [
       {
-        icon: 'assets/icons/home-icon.svg',
+        icon: './assets/icons/home-icon.svg',
         label: 'Home',
       },
       {
-        icon: 'assets/icons/analytics-icon.svg',
+        icon: './assets/icons/analytics-icon.svg',
         label: 'Analytics Dashboard',
       },
       {
-        icon: 'assets/icons/home-icon.svg',
+        icon: './assets/icons/home-icon.svg',
         label: 'Shipment',
         children: [
-          { label: 'Create Shipments', icon: 'assets/icons/home-icon.svg' },
-          { label: 'Shipments', icon: 'assets/icons/reports-icon.svg' }
+          { label: 'Create Shipments', icon: './assets/icons/home-icon.svg' },
+          { label: 'Shipments', icon: './assets/icons/reports-icon.svg' }
         ],
       },
       {
-        icon: 'assets/icons/miller-coors-icon.svg',
+        icon: './assets/icons/miller-coors-icon.svg',
         label: 'Miller Coors',
       },
       {
-        icon: 'assets/icons/marketplace-icon.svg',
+        icon: './assets/icons/marketplace-icon.svg',
         label: 'Marketplace',
       },
       {
-        icon: 'assets/icons/booking-icon.svg',
+        icon: './assets/icons/booking-icon.svg',
         label: 'Booking',
       },
       {
-        icon: 'assets/icons/rates-icon.svg',
+        icon: './assets/icons/rates-icon.svg',
         label: 'Rates',
       },
       {
-        icon: 'assets/icons/reports-icon.svg',
+        icon: './assets/icons/reports-icon.svg',
         label: 'Reports',
       },
       {
-        icon: 'assets/icons/rail-car-schedular-icon.svg',
+        icon: './assets/icons/rail-car-schedular-icon.svg',
         label: 'Rail Car Schedular',
       },
       {
-        icon: 'assets/icons/accounts-icon.svg',
+        icon: './assets/icons/accounts-icon.svg',
         label: 'Account',
       },
       {
-        icon: 'assets/icons/resources-icon.svg',
+        icon: './assets/icons/resources-icon.svg',
         label: 'Resources',
       },
       {
-        icon: 'assets/icons/help-icon.svg',
+        icon: './assets/icons/help-icon.svg',
         label: 'Help',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Load',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'History',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Service Center',
       },
       {
-        icon: 'assets/icons/load-icon.svg',
+        icon: './assets/icons/load-icon.svg',
         label: 'Admin',
       },
     ],

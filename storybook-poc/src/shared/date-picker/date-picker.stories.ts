@@ -31,7 +31,7 @@ type Story = StoryObj<DatePicker>;
 export const Single: Story = {
     args: {
         type: 'single',
-        icon: 'assets/icons/calendar-icon.svg',
+        icon: './assets/icons/calendar-icon.svg',
         noPastYears: false,
         noFutureYears: false,
         futureYearLimit: 5,
@@ -42,7 +42,7 @@ export const Single: Story = {
 export const Range: Story = {
     args: {
         type: 'range',
-        icon: 'assets/icons/calendar-icon.svg',
+        icon: './assets/icons/calendar-icon.svg',
         noPastYears: false,
         noFutureYears: false,
         pastYearLimit: null,

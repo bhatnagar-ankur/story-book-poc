@@ -53,7 +53,7 @@ export const Counter: Story = {
 export const Status: Story = {
     args: {
         variant: 'status',
-        customIcon: '/assets/icons/tick-icon.svg',
+        customIcon: './assets/icons/tick-icon.svg',
         size: "medium",
         color: "green",
         customColor: "#000000"
