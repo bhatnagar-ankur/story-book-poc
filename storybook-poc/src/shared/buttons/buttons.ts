@@ -50,7 +50,7 @@ export class Buttons {
   /**
    * Success icon for order button
    */
-  @Input() orderSuccessIcon: string = './assets/icons/tick-icon.svg';
+  @Input() orderSuccessIcon: string = '/assets/icons/tick-icon.svg';
   /* ----- Internal States(Runtime) ----- */
   /**
    * Download animation states

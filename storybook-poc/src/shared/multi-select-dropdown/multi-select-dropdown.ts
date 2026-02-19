@@ -29,7 +29,7 @@ export class MultiSelectDropdown implements OnInit, OnChanges {
   /**Placeholder text */
   @Input() placeholder = 'Select Items';
   /**Dropdown icon path */
-  @Input() dropdownIcon: string = './assets/icons/dropdown.svg';
+  @Input() dropdownIcon: string = 'assets/icons/dropdown.svg';
   /**Dropdown behavior mode
    * dropdown -> normal
    * search -> searchable
